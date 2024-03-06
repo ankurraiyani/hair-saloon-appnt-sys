@@ -1,14 +1,22 @@
-package com.salonsphereserver.entity;
+package com.SalonSphereServer.entity;
 
 
-import com.salonsphereserver.common.Role;
+import java.util.Collection;
+
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsAwareConfigurer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.SalonSphereServer.common.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Users {
+@Table(name = "user_information")
+public class Users implements UserDetails{
 
 	@Id
 	@Column(name = "user_id")
@@ -41,15 +49,19 @@ public class Users {
 	@Column(name="isdeleted")
 	private boolean isdeleted;
 
-	//non-parameterized Constructor
-	public Users() {
-		
+	@Column(name="email")
+	private String email;
+
+	public String getEmail() {
+		return email;
 	}
-	
-	//Parameterized Constructor
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public Users(String user_Id, String first_name, String last_name, String password, String contact_number, Role role,
-			String gender, String created_date, String modify_date, boolean isdeleted) {
+			String gender, String created_date, String modify_date, boolean isdeleted, String email) {
 		this.user_Id = user_Id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -60,8 +72,23 @@ public class Users {
 		this.created_date = created_date;
 		this.modify_date = modify_date;
 		this.isdeleted = isdeleted;
+		this.email = email;
 	}
 
+	//non-parameterized Constructor
+	public Users() {
+		
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Users [user_Id=" + user_Id + ", first_name=" + first_name + ", last_name=" + last_name + ", password="
+				+ password + ", contact_number=" + contact_number + ", role=" + role + ", gender=" + gender
+				+ ", created_date=" + created_date + ", modify_date=" + modify_date + ", isdeleted=" + isdeleted
+				+ ", email=" + email + "]";
+	}
 
 	public String getUser_Id() {
 		return user_Id;
@@ -143,11 +170,36 @@ public class Users {
 		this.isdeleted = isdeleted;
 	}
 
+	
+
 	@Override
-	public String toString() {
-		return "Users [user_Id=" + user_Id + ", first_name=" + first_name + ", last_name=" + last_name + ", password="
-				+ password + ", contact_number=" + contact_number + ", role=" + role + ", gender=" + gender
-				+ ", created_date=" + created_date + ", modify_date=" + modify_date + ", isdeleted=" + isdeleted + "]";
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		throw new UnsupportedOperationException("Unimplemented method 'getAuthorities'");
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 	
 }

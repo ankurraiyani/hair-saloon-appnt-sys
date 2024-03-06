@@ -1,5 +1,7 @@
 package com.salonsphereserver.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,14 +16,10 @@ public class CustomUserDetailsServices  implements UserDetailsService{
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Override
-	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		Users user = userRepository.findByUserId(userId);
-		if(user==null) {
-			throw new RuntimeException("user not found");
-		}
-		return (UserDetails) user;
-	}
 
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		Users user=userRepository.findByEmail(email);
+		return user;		
+	}
 }
