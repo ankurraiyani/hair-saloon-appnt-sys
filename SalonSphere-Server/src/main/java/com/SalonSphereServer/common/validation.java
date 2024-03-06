@@ -1,4 +1,4 @@
-package com.salonsphereserver.common;
+package com.SalonSphereServer.common;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
