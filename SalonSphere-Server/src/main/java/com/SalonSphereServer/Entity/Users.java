@@ -1,6 +1,8 @@
 package com.SalonSphereServer.Entity;
 
 
+import com.SalonSphereServer.common.Role;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
