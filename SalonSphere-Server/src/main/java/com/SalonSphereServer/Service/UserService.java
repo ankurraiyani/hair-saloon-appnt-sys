@@ -1,15 +1,13 @@
-package com.salonsphereserver.service;
+package com.SalonSphereServer.service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.salonsphereserver.entity.Users;
-import com.salonsphereserver.repository.UserRepository;
+import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.UserRepository;
 
 @Service
 public class UserService {

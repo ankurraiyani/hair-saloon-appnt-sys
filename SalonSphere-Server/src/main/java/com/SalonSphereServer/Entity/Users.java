@@ -3,7 +3,6 @@ package com.SalonSphereServer.entity;
 
 import java.util.Collection;
 
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsAwareConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
