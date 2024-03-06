@@ -3,7 +3,7 @@ package com.SalonSphereServer.common;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class validation {
+public class Validation {
 
     //validate the Email 
     public static boolean emailValidation(String email){
@@ -20,7 +20,7 @@ public class validation {
     }
 
     //validate contact Number
-    public static boolean ContactNumberValidation(String contact_number){
+    public static boolean contactNumberValidation(String contact_number){
         String phoneRegex = "[0-9]{10}";
 		Pattern p = Pattern.compile(phoneRegex);
 		Matcher matcher2 = p.matcher(contact_number);
@@ -58,13 +58,13 @@ public class validation {
 
     //validate password
     public static boolean passwordValidation(String password){
+    	
+//        String passwordregex = "^(?=.*[!@#$%^&*()-+=])(?=\\S+$).{6,}$";
+//
+//        Pattern pattern = Pattern.compile(passwordregex);
+//        Matcher matcher3 = pattern.matcher(password);
 
-        String passwordregex = "^(?=.*[!@#$%^&*()-+=])(?=\\S+$).{6,}$";
-
-        Pattern pattern = Pattern.compile(passwordregex);
-        Matcher matcher3 = pattern.matcher(password);
-
-        if(password.length()>6 && matcher3.matches()){
+        if(password.length()>=6 && password.length() <=16){
             return true;
         }
         else{

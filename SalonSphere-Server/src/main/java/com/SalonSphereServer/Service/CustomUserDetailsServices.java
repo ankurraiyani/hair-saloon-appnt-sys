@@ -1,7 +1,5 @@
 package com.SalonSphereServer.Service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,14 +10,14 @@ import com.SalonSphereServer.Entity.Users;
 import com.SalonSphereServer.Repository.UserRepository;
 
 @Service
-public class CustomUserDetailsServices  implements UserDetailsService{
+public class CustomUserDetailsServices implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Users user=userRepository.findByEmail(email);
-		return user;		
+		Users user = userRepository.findByEmail(email);
+		return user;
 	}
 }
