@@ -1,0 +1,121 @@
+<section class="container">
+  <header>Registration Form</header>
+  <form
+    [formGroup]="register"
+    (ngSubmit)="doSubmit()"
+    method="post"
+    class="form"
+  >
+    <div class="input-box">
+      <label>First Name</label>
+      <input
+        type="text"
+        placeholder="Enter First Name"
+        formControlName="firstName"
+        required
+      />
+    </div>
+    <div class="input-box">
+      <label>Last Name</label>
+      <input
+        type="text"
+        placeholder="Enter Last Name"
+        formControlName="lastName"
+        required
+      />
+    </div>
+    <div class="input-box">
+      <label>Email Address</label>
+      <input
+        type="text"
+        placeholder="Enter email address"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="column">
+      <div class="input-box">
+        <label>Phone Number</label>
+        <input
+          type="number"
+          placeholder="Enter phone number"
+          formControlName="contactNumber"
+          required
+        />
+      </div>
+    </div>
+    <div class="gender-box">
+      <h3>Gender</h3>
+      <div class="gender-option">
+        <div class="gender">
+          <input
+            type="radio"
+            id="check-male"
+            name="gender"
+            value="male"
+            checked
+            formControlName="gender"
+          />
+          <label for="check-male">male</label>
+        </div>
+        <div class="gender">
+          <input
+            type="radio"
+            id="check-female"
+            name="gender"
+            value="female"
+            formControlName="gender"
+          />
+          <label for="check-female">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="role-box">
+      <h3>Role</h3>
+      <div class="role-option">
+        <div class="role">
+          <input
+            type="radio"
+            id="check-customer"
+            name="role"
+            checked
+            value="customer"
+            formControlName="role"
+          />
+          <label for="check-customer">Customer</label>
+        </div>
+        <div class="role">
+          <input
+            type="radio"
+            id="check-shopkeeper"
+            name="role"
+            value="shopkeeper"
+            formControlName="role"
+          />
+          <label for="check-shopkeeper">Shop Keeper</label>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="input-box">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter Your Password"
+          formControlName="password"
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Retype Password</label>
+        <input
+          type="password"
+          placeholder="Retype Password"
+          formControlName="confirmPassword"
+          required
+        />
+      </div>
+    </div>
+    <button>Submit</button>
+  </form>
+</section>
