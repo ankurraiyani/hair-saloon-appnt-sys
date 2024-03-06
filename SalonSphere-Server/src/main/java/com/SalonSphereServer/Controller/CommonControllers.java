@@ -23,7 +23,7 @@ public class CommonControllers {
 	@PostMapping("/login")
 	public String login(@RequestBody Users user) {
 		
-		// write the logic for login
+		
 		
 		return "done";
 	}
