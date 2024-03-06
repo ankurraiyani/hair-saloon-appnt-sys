@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms
 import Swal from 'sweetalert2';
 import { RegisterService } from '../services/register/register.service';
 import { Router } from '@angular/router';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-register',
