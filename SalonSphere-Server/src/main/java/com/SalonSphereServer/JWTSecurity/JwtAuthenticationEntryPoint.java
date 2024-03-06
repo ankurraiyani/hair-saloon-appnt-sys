@@ -1,4 +1,4 @@
-package com.SalonSphereServer.JWTSecurity;
+package com.salonsphereserver.jwtSecurity;
 
 import java.io.IOException;
 import java.io.PrintWriter;

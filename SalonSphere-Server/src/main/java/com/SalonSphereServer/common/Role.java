@@ -1,4 +1,4 @@
-package com.SalonSphereServer.common;
+package com.salonsphereserver.common;
 
 public enum Role {
 

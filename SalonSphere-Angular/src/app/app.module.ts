@@ -8,10 +8,19 @@ import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { CustomerRegisterComponent } from './components/modules/register/component/customer-register/customer-register.component';
 import { ServiceComponent } from './components/service/service.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+//Material Imports
+
+import {MatCardModule} from '@angular/material/card';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,10 +36,15 @@ import { AboutComponent } from './components/about/about.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    // Material Imports
+
+    MatCardModule,
+    
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

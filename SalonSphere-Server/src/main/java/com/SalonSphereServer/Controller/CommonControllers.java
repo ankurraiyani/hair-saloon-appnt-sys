@@ -1,8 +1,8 @@
-package com.SalonSphereServer.Controller;
+package com.salonsphereserver.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.SalonSphereServer.Entity.Users;
+import com.salonsphereserver.entity.Users;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.SalonSphereServer;
+package com.salonsphereserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

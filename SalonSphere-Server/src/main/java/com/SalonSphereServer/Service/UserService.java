@@ -1,12 +1,12 @@
-package com.SalonSphereServer.Service;
+package com.salonsphereserver.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.Entity.Users;
-import com.SalonSphereServer.Repository.UserRepository;
+import com.salonsphereserver.entity.Users;
+import com.salonsphereserver.repository.UserRepository;
 
 
 

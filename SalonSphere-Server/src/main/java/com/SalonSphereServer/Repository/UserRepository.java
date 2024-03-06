@@ -1,8 +1,8 @@
-package com.SalonSphereServer.Repository;
+package com.salonsphereserver.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.SalonSphereServer.Entity.Users;
+import com.salonsphereserver.entity.Users;
 
 public interface UserRepository extends JpaRepository<Users, String>{
 	
