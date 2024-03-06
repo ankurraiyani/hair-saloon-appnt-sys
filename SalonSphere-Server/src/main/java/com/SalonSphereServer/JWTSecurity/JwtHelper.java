@@ -1,4 +1,4 @@
-package com.salonsphereserver.jwtSecurity;
+package com.SalonSphereServer.JWTSecurity;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.salonsphereserver.configuration;
+package com.SalonSphereServer.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

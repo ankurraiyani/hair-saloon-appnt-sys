@@ -1,4 +1,4 @@
-package com.SalonSphereServer.service;
+package com.SalonSphereServer.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -6,8 +6,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.entity.Users;
-import com.SalonSphereServer.repository.UserRepository;
+import com.SalonSphereServer.Entity.Users;
+import com.SalonSphereServer.Repository.UserRepository;
 
 @Service
 public class UserService {
@@ -25,10 +25,10 @@ public class UserService {
 			// Write code for validation
 
 			// Setting default values
-			user.setUser_Id(UUID.randomUUID().toString());
+			user.setuserId(UUID.randomUUID().toString());
 			user.setIsdeleted(false);
-			user.setCreated_date(LocalDateTime.now().toString());
-			user.setModify_date(LocalDateTime.now().toString());
+			user.setcreatedDate(LocalDateTime.now().toString());
+			user.setmodifyDate(LocalDateTime.now().toString());
 
 			// Save in the database
 			findUser = userRepository.save(user);

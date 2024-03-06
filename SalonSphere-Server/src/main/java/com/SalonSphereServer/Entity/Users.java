@@ -1,4 +1,4 @@
-package com.SalonSphereServer.entity;
+package com.SalonSphereServer.Entity;
 
 
 import java.util.Collection;
@@ -18,20 +18,20 @@ import jakarta.persistence.Table;
 public class Users implements UserDetails{
 
 	@Id
-	@Column(name = "user_id")
-	private String user_Id;
+	@Column(name = "userId")
+	private String userId;
 	
 	@Column(name="first_name")
-	private String first_name;
+	private String firstName;
 	
 	@Column(name="last_name")
-	private String last_name;
+	private String lastName;
 
 	@Column(name = "password")
 	private String password;
 	
 	@Column(name="contact_number")
-	private String contact_number;
+	private String contactNumber;
 
 	@Column(name = "user_role")
 	private Role role;
@@ -40,10 +40,10 @@ public class Users implements UserDetails{
 	private String gender;
 
 	@Column(name="created_date")
-	private String created_date;
+	private String createdDate;
 
 	@Column(name="modify_date")
-	private String modify_date;
+	private String modifyDate;
 
 	@Column(name="isdeleted")
 	private boolean isdeleted;
@@ -59,17 +59,17 @@ public class Users implements UserDetails{
 		this.email = email;
 	}
 
-	public Users(String user_Id, String first_name, String last_name, String password, String contact_number, Role role,
-			String gender, String created_date, String modify_date, boolean isdeleted, String email) {
-		this.user_Id = user_Id;
-		this.first_name = first_name;
-		this.last_name = last_name;
+	public Users(String userId, String firstName, String lastName, String password, String contactNumber, Role role,
+			String gender, String createdDate, String modifyDate, boolean isdeleted, String email) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.password = password;
-		this.contact_number = contact_number;
+		this.contactNumber = contactNumber;
 		this.role = role;
 		this.gender = gender;
-		this.created_date = created_date;
-		this.modify_date = modify_date;
+		this.createdDate = createdDate;
+		this.modifyDate = modifyDate;
 		this.isdeleted = isdeleted;
 		this.email = email;
 	}
@@ -83,34 +83,34 @@ public class Users implements UserDetails{
 
 	@Override
 	public String toString() {
-		return "Users [user_Id=" + user_Id + ", first_name=" + first_name + ", last_name=" + last_name + ", password="
-				+ password + ", contact_number=" + contact_number + ", role=" + role + ", gender=" + gender
-				+ ", created_date=" + created_date + ", modify_date=" + modify_date + ", isdeleted=" + isdeleted
+		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+				+ password + ", contactNumber=" + contactNumber + ", role=" + role + ", gender=" + gender
+				+ ", createdDate=" + createdDate + ", modifyDate=" + modifyDate + ", isdeleted=" + isdeleted
 				+ ", email=" + email + "]";
 	}
 
-	public String getUser_Id() {
-		return user_Id;
+	public String getuserId() {
+		return userId;
 	}
 
-	public void setUser_Id(String user_Id) {
-		this.user_Id = user_Id;
+	public void setuserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getfirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setfirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getlastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setlastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -121,12 +121,12 @@ public class Users implements UserDetails{
 		this.password = password;
 	}
 
-	public String getContact_number() {
-		return contact_number;
+	public String getcontactNumber() {
+		return contactNumber;
 	}
 
-	public void setContact_number(String contact_number) {
-		this.contact_number = contact_number;
+	public void setcontactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
 	}
 
 	public Role getRole() {
@@ -145,20 +145,20 @@ public class Users implements UserDetails{
 		this.gender = gender;
 	}
 
-	public String getCreated_date() {
-		return created_date;
+	public String getcreatedDate() {
+		return createdDate;
 	}
 
-	public void setCreated_date(String created_date) {
-		this.created_date = created_date;
+	public void setcreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 
-	public String getModify_date() {
-		return modify_date;
+	public String getmodifyDate() {
+		return modifyDate;
 	}
 
-	public void setModify_date(String modify_date) {
-		this.modify_date = modify_date;
+	public void setmodifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	public boolean getIsdeleted() {
