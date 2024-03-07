@@ -99,13 +99,13 @@ export class RegisterComponent {
     }
 
     //if everything is okey then call the service method
-    this.registerService.registerUser(this.register.value).subscribe(response => {
+    this.registerService.registerUser(this.register.value).subscribe((response) => {
       console.log('Response from server : ', response);
       Swal.fire({
         title: "Register Successfully!!",
         text: "You can login now",
         icon: "success"
-      })
+      });
 
       //and Navigate to the login page
       this.router.navigate(["/login"]);
@@ -115,7 +115,7 @@ export class RegisterComponent {
       Swal.fire({
         title: "Server Error",
         text: "There is something wrong please try again",
-        icon: "error"
+        icon: "success"
       });
     })
   }
