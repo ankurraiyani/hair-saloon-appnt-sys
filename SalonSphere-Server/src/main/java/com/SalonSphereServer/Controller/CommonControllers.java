@@ -6,14 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.Entity.Users;
 import com.SalonSphereServer.JWTSecurity.JwtHelper;
-import com.SalonSphereServer.Repository.UserRepository;
 import com.SalonSphereServer.Service.UserService;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
