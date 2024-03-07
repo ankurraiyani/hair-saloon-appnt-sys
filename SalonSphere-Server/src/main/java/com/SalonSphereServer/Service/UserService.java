@@ -61,19 +61,23 @@ public class UserService {
 	public LoginResponse loginUser(LoginRequest loginRequest){
 
 		Users findUser1 = userRepository.findByEmail(loginRequest.getEmail());
+		LoginResponse loginResponse = new LoginResponse();
 
+		//user finding loop
 		if(findUser1!=null){
 
 			if(findUser1.getPassword().equals(loginRequest.getPassword())){
-				LoginResponse loginResponse = new LoginResponse();
+				
 				loginResponse.setname(findUser1.getFirstName()+" "+findUser1.getLastName());
 				loginResponse.setRole(findUser1.getRole());
 				return loginResponse;
 			}
+			//password not match this else run
 			else{
 				return null;
 			}
 		}
+		//user not found
 		return null;
 
 	}
