@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.Entity.Users;
+import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.common.Validation;
 
