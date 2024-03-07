@@ -40,10 +40,10 @@ public class Users implements UserDetails{
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "data_created")
+	@Column(name = "date_created")
 	private Date CreatedDate;
 	
-	@Column(name = "data_modify")
+	@Column(name = "date_modify")
 	private Date CreatedModify;
 	
 	@Column(name = "isdeleted")
