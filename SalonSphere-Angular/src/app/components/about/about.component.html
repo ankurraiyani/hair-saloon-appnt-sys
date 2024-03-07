@@ -48,7 +48,8 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="push">
+  <!-- Keep it as [fixedInViewport]="false" , otherwise on scrolling the sidenav won' scroll -->
+  <mat-sidenav #sidenav [fixedInViewport]="false" [fixedTopGap]="70" mode="push">
     <div>
       <a mat-button [matMenuTriggerFor]="menu" class="side-menu-item"
         ><mat-icon>add_photo_alternate</mat-icon>Shop Owner</a
@@ -96,16 +97,47 @@
 
   <mat-sidenav-content>
     <div class="container">
-      <mat-card>
-        <mat-card-content> 
-          <h1>Total Bookings</h1>
+      <mat-card class="dashboardCards">
+        <mat-card-content>
+          <h2><mat-icon>app_registration</mat-icon> Total Bookings</h2>
         </mat-card-content>
       </mat-card>
-      <mat-card>
-        <mat-card-content> 
-          <h1>Total Earnings</h1>
+      <mat-card class="dashboardCards">
+        <mat-card-content>
+          <h2><mat-icon>currency_rupee</mat-icon> Total Earnings</h2>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="dashboardCards">
+        <mat-card-content>
+          <h2><mat-icon>trending_up</mat-icon> Overall Rating</h2>
         </mat-card-content>
       </mat-card>
     </div>
+
+    <div class="shopContainer">
+      <mat-card class="shopCard">
+        <h2>No Data Available</h2>
+      </mat-card>
+    </div>
+
+
+    <div class="reviews">
+      <mat-card class="reviewCard">
+        <h2>Review</h2>
+      </mat-card>
+      <mat-card class="reviewCard">
+        <h2>Review</h2>
+      </mat-card>
+      <mat-card class="reviewCard">
+        <h2>Review</h2>
+      </mat-card>
+    </div>
+
+    <div class="postReview">
+      
+    </div>
+
+
+
   </mat-sidenav-content>
 </mat-sidenav-container>
