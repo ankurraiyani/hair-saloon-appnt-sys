@@ -25,16 +25,17 @@ public class UserService {
 			// Write code for validation
 
 			// Setting default values
-			user.setUser_Id(UUID.randomUUID().toString());
-			user.setIsdeleted(false);
-			user.setCreated_date(LocalDateTime.now().toString());
-			user.setModify_date(LocalDateTime.now().toString());
+			System.out.println("come inside it");
+			System.out.println(user);
+			user.setUserId("1");
+			user.setDeleted(false);
+//			user.setCreatedDate();
+//			user.setModifyDate();
 
 			// Save in the database
 			findUser = userRepository.save(user);
 			return true;
-		} else {
-			return false;
-		}
+		} 
+		return false;
 	}
 }

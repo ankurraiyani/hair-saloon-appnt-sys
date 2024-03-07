@@ -42,7 +42,7 @@ export class RegisterComponent {
 
   //Validate the data of the form and send the data to the service
   doSubmit() {
-    alert('values comes');
+    // alert('values comes');
     console.log(this.register.value);
 
     //check first name and last name
@@ -99,7 +99,7 @@ export class RegisterComponent {
     }
 
     //if everything is okey then call the service method
-    this.registerService.registerUser(this.register.value).subscribe((response) => {
+    this.registerService.registerUser(this.register.value).subscribe(response => {
       console.log('Response from server : ', response);
       Swal.fire({
         title: "Register Successfully!!",
@@ -115,7 +115,7 @@ export class RegisterComponent {
       Swal.fire({
         title: "Server Error",
         text: "There is something wrong please try again",
-        icon: "success"
+        icon: "error"
       });
     })
   }

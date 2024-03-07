@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.SalonSphereServer.jwtSecurity.JwtAuthenticationEntryPoint;
-import com.SalonSphereServer.jwtSecurity.JwtAuthenticationFilter;
+import com.SalonSphereServer.jwtsecurity.JwtAuthenticationEntryPoint;
+import com.SalonSphereServer.jwtsecurity.JwtAuthenticationFilter;
 
 @Configuration
 public class SecurityConfiguration {
