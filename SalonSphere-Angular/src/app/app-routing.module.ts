@@ -18,7 +18,10 @@ const routes: Routes = [
   {path:"about", component: AboutComponent},
   {path:"contact",component:ContactComponent},
   {path:"register", component: RegisterComponent},
-  {path:"", component: HomeComponent}
+  {path:"", component: HomeComponent},
+  {path:"admin", loadChildren: () => import('./components/modules/admin/admin.module').then((m)=> m.AdminModule)},
+  {path:"customer", loadChildren: () => import('./components/modules/customer/customer.module').then((m)=> m.CustomerModule)},
+  {path:"shopkeeper", loadChildren: () => import('./components/modules/shopkeeper/shopkeeper.module').then((m)=> m.ShopkeeperModule)}
 
 ];
 
