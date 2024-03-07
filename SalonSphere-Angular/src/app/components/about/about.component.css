@@ -1,0 +1,35 @@
+.mat-toolbar{
+    height: 70px;
+}
+.side-menu-item{
+    margin: 10px;
+}
+.mat-sidenav{
+    width: 250px;
+}
+.nav-buttons{
+    margin-left: 50%;
+    display: flex;
+}
+.nav-buttons a{
+    margin: 5px;
+}
+#menuTitle{
+    margin-right: 200px;
+    margin-left: 10px;
+}
+.navicons{
+    margin: 20px;
+}
+.searchbox{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    height: 30px;
+    outline: none;
+    width: 150px;
+    background-color: transparent;
+}
+/* 
+.container{
+    
+} */

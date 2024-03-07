@@ -1,1 +1,100 @@
-<p>about works!</p>
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()" id="menuIcon">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span id="menuTitle">Salon Sphere</span>
+  <div class="nav-buttons">
+    <mat-icon
+      class="navicons"
+      matTooltip="Search"
+      [matMenuTriggerFor]="belowMenu"
+      >search</mat-icon
+    >
+    <mat-menu #belowMenu="matMenu" xPosition="before">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
+    <input type="search" class="searchbox" id="searchbox" placeholder="Search"/>
+
+    <mat-icon
+      class="navicons"
+      matTooltip="Notifications"
+      [matMenuTriggerFor]="notification"
+      >notifications</mat-icon
+    >
+    <mat-menu #notification="matMenu" yPosition="below">
+      <button mat-menu-item>👉Hi, Your Appointment is Confirmed</button>
+      <button mat-menu-item>👉Appointment Initiated</button>
+    </mat-menu>
+
+    <mat-icon
+      class="navicons"
+      matTooltip="Account"
+      [matMenuTriggerFor]="account"
+      >account_circle</mat-icon
+    >
+    <mat-menu #account="matMenu" yPosition="below">
+      <button mat-menu-item>My Account</button>
+      <button mat-menu-item>LogOut</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container >
+  <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="push">
+    <div>
+      <a mat-button [matMenuTriggerFor]="menu" class="side-menu-item"
+        ><mat-icon>add_photo_alternate</mat-icon>Shop Owner</a
+      >
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>My Profile</button>
+        <button mat-menu-item>Edit Profile</button>
+        <button mat-menu-item>Settings</button>
+      </mat-menu>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/admin/services"
+        class="side-menu-item"
+        ><mat-icon>settings</mat-icon>Services</a
+      >
+    </div>
+
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/admin/about"
+        class="side-menu-item"
+        ><mat-icon>search</mat-icon>About Us</a
+      >
+    </div>
+
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/admin/contact"
+        class="side-menu-item"
+        ><mat-icon>contact_support</mat-icon>Contact Us</a
+      >
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+<div class="container">
+
+ 
+
+</div>

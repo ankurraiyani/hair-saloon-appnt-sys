@@ -16,6 +16,18 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 //Material Imports
 
 import {MatCardModule} from '@angular/material/card';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
+
+
+
 
 
 
@@ -38,8 +50,21 @@ import {MatCardModule} from '@angular/material/card';
     AppRoutingModule,
     NgbModule,
     // Material Imports
-
+    MatTooltipModule,
+    MatButtonModule,  
     MatCardModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatTableModule,
+    
+
+
+
+
     
   ],
   providers: [
