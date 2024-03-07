@@ -2,7 +2,7 @@ package com.SalonSphereServer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.SalonSphereServer.Entity.Users;
+import com.SalonSphereServer.entity.Users;
 
 
 

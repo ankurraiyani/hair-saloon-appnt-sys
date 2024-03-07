@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.Entity.Users;
+import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.UserRepository;
 
 @Service
