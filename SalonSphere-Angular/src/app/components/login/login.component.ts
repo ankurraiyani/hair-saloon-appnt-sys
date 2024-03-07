@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LoginService } from '../services/login/login.service';
-import { response } from 'express';
-import { error } from 'console';
 
 @Component({
   selector: 'app-login',
