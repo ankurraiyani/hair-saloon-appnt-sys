@@ -16,7 +16,12 @@
       <button mat-menu-item>Item 2</button>
     </mat-menu>
 
-    <input type="search" class="searchbox" id="searchbox" placeholder="Search"/>
+    <input
+      type="search"
+      class="searchbox"
+      id="searchbox"
+      placeholder="Search"
+    />
 
     <mat-icon
       class="navicons"
@@ -42,7 +47,7 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container >
+<mat-sidenav-container>
   <mat-sidenav #sidenav [fixedInViewport]="true" [fixedTopGap]="70" mode="push">
     <div>
       <a mat-button [matMenuTriggerFor]="menu" class="side-menu-item"
@@ -86,15 +91,21 @@
       >
     </div>
   </mat-sidenav>
+
+  <!-- All The Content goes here -->
+
   <mat-sidenav-content>
-    <router-outlet> </router-outlet>
+    <div class="container">
+      <mat-card>
+        <mat-card-content> 
+          <h1>Total Bookings</h1>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-content> 
+          <h1>Total Earnings</h1>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-
-<div class="container">
-
- 
-
-</div>

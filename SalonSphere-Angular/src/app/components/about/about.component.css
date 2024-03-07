@@ -29,7 +29,24 @@
     width: 150px;
     background-color: transparent;
 }
-/* 
 .container{
+    margin-top: 50px;
+    background-color: grey;
+}
+
+mat-expansion-panel{
+    width: 500px;
+    /* display: inline-block; */
+    margin-top: 5%;
+    margin-left: 10%;
+    /* margin-right: 50px; */
     
-} */
+}
+
+.expansion-card{
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+
+    margin-left: 10px;
+}

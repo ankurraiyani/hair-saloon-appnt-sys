@@ -25,6 +25,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatAccordion } from '@angular/material/expansion';
+
 
 
 
@@ -60,6 +63,10 @@ import {MatTableModule} from '@angular/material/table';
     MatFormFieldModule,
     MatDividerModule,
     MatTableModule,
+    MatExpansionModule,
+    MatAccordion
+    
+
     
 
 
