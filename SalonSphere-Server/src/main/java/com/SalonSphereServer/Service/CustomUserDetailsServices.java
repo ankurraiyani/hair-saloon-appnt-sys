@@ -10,14 +10,14 @@ import com.SalonSphereServer.Entity.Users;
 import com.SalonSphereServer.Repository.UserRepository;
 
 @Service
-public class CustomUserDetailsServices  implements UserDetailsService{
+public class CustomUserDetailsServices implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Users user=userRepository.findByEmail(email);
-		return user;		
+		Users user = userRepository.findByEmail(email);
+		return user;
 	}
 }
