@@ -1,6 +1,5 @@
 package com.SalonSphereServer.Entity;
 
-import java.sql.Date;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -39,13 +38,28 @@ public class Users implements UserDetails {
 	private String gender;
 
 	@Column(name = "created_date")
-	private Date createdDate;
+	private String createdDate;
 
 	@Column(name = "modify_date")
-	private Date modifyDate;
+	private String modifyDate;
 
 	@Column(name = "isdeleted")
 	private boolean isDeleted;
+
+	public Users(String userId, String firstName, String lastName, String password, String contactNumber, String role,
+			String gender, String createdDate, String modifyDate, boolean isDeleted, String email) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.contactNumber = contactNumber;
+		this.role = role;
+		this.gender = gender;
+		this.createdDate = createdDate;
+		this.modifyDate = modifyDate;
+		this.isDeleted = isDeleted;
+		this.email = email;
+	}
 
 	@Column(name = "email")
 	private String email;
@@ -53,116 +67,92 @@ public class Users implements UserDetails {
 	public Users() {
 	}
 
-	public Users(String userId, String firstName, String lastName, String password, String contactNumber, String role,
-			String gender, Date createdDate, Date modifyDate, boolean isDeleted, String email) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.contactNumber = contactNumber;
-		this.role = role;
-		this.gender = gender;
-		this.createdDate = createdDate;
-		this.modifyDate = modifyDate;
-		this.isDeleted = isDeleted;
-		this.email = email;
-	}
-
 	public String getUserId() {
 		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getLastName() {
 		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getContactNumber() {
 		return contactNumber;
-	}
-
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
 	}
 
 	public String getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getGender() {
 		return gender;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public String getModifyDate() {
+		return modifyDate;
+	}
+
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public String getEmail(){
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getModifyDate() {
-		return modifyDate;
-	}
-
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
-	}
-
-	public boolean isDeleted() {
-		return isDeleted;
 	}
 
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
-	}
-
-	@Override
-	public String toString() {
-		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", contactNumber=" + contactNumber + ", role=" + role + ", gender=" + gender
-				+ ", createdDate=" + createdDate + ", modifyDate=" + modifyDate + ", isDeleted=" + isDeleted
-				+ ", email=" + email + "]";
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	@Override
