@@ -1,66 +1,61 @@
 package com.SalonSphereServer.Entity;
 
-
+import java.sql.Date;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.SalonSphereServer.common.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "user_information")
-public class Users implements UserDetails{
+public class Users implements UserDetails {
 
 	@Id
-	@Column(name = "userId")
+	@Column(name = "user_id")
 	private String userId;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Column(name = "password")
 	private String password;
-	
-	@Column(name="contact_number")
+
+	@Column(name = "contact_number")
 	private String contactNumber;
 
 	@Column(name = "user_role")
-	private Role role;
+	private String role;
 
-	@Column(name="gender")
+	@Column(name = "gender")
 	private String gender;
 
-	@Column(name="created_date")
-	private String createdDate;
+	@Column(name = "created_date")
+	private Date createdDate;
 
-	@Column(name="modify_date")
-	private String modifyDate;
+	@Column(name = "modify_date")
+	private Date modifyDate;
 
-	@Column(name="isdeleted")
-	private boolean isdeleted;
+	@Column(name = "isdeleted")
+	private boolean isDeleted;
 
-	@Column(name="email")
+	@Column(name = "email")
 	private String email;
 
-	public String getEmail() {
-		return email;
+	public Users() {
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Users(String userId, String firstName, String lastName, String password, String contactNumber, Role role,
-			String gender, String createdDate, String modifyDate, boolean isdeleted, String email) {
+	public Users(String userId, String firstName, String lastName, String password, String contactNumber, String role,
+			String gender, Date createdDate, Date modifyDate, boolean isDeleted, String email) {
+		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -70,46 +65,31 @@ public class Users implements UserDetails{
 		this.gender = gender;
 		this.createdDate = createdDate;
 		this.modifyDate = modifyDate;
-		this.isdeleted = isdeleted;
+		this.isDeleted = isDeleted;
 		this.email = email;
 	}
 
-	//non-parameterized Constructor
-	public Users() {
-		
-	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
-				+ password + ", contactNumber=" + contactNumber + ", role=" + role + ", gender=" + gender
-				+ ", createdDate=" + createdDate + ", modifyDate=" + modifyDate + ", isdeleted=" + isdeleted
-				+ ", email=" + email + "]";
-	}
-
-	public String getuserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setuserId(String userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getfirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setfirstName(String firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getlastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setlastName(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -121,19 +101,19 @@ public class Users implements UserDetails{
 		this.password = password;
 	}
 
-	public String getcontactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setcontactNumber(String contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
@@ -145,31 +125,45 @@ public class Users implements UserDetails{
 		this.gender = gender;
 	}
 
-	public String getcreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setcreatedDate(String createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public String getmodifyDate() {
+	public Date getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setmodifyDate(String modifyDate) {
+	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 
-	public boolean getIsdeleted() {
-		return isdeleted;
+	public boolean isDeleted() {
+		return isDeleted;
 	}
 
-	public void setIsdeleted(boolean isdeleted) {
-		this.isdeleted = isdeleted;
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", password="
+				+ password + ", contactNumber=" + contactNumber + ", role=" + role + ", gender=" + gender
+				+ ", createdDate=" + createdDate + ", modifyDate=" + modifyDate + ", isDeleted=" + isDeleted
+				+ ", email=" + email + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -187,7 +181,7 @@ public class Users implements UserDetails{
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {		
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
@@ -200,5 +194,5 @@ public class Users implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-	
+
 }

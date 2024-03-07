@@ -11,16 +11,11 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ServiceComponent } from './components/service/service.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { AboutComponent } from './components/about/about.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterService } from './components/services/register/register.service';
+import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
-//Material Imports
-
-import {MatCardModule} from '@angular/material/card';
-
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -31,19 +26,19 @@ import {MatCardModule} from '@angular/material/card';
     ForgotPasswordComponent,
     ServiceComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    // Material Imports
-
-    MatCardModule,
-    
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(),
+    RegisterService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
