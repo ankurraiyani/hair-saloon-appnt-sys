@@ -1,7 +1,6 @@
 // package com.SalonSphereServer.Service;
 package com.SalonSphereServer.Service;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +40,15 @@ public class UserService {
 				user.setUserId(UUID.randomUUID().toString());
 				user.setIsDeleted(false);
 				user.setPassword(passwordEncoder.encode(user.getPassword()));
-				user.setCreatedDate(LocalDateTime.now().toString());
-				user.setModifyDate(LocalDateTime.now().toString());
+
+				// Create a java.util.Date object
+				java.util.Date utilDate = new java.util.Date();
+				
+				// Convert java.util.Date to java.sql.Date
+				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+				
+				user.setCreatedDate(sqlDate);
+				user.setModifyDate(sqlDate);
 
 				// Save in the database
 				findUser = userRepository.save(user);

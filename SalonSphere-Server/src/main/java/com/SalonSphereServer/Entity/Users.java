@@ -1,5 +1,6 @@
 package com.SalonSphereServer.Entity;
 
+import java.sql.Date;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -38,16 +39,16 @@ public class Users implements UserDetails {
 	private String gender;
 
 	@Column(name = "created_date")
-	private String createdDate;
+	private Date createdDate;
 
 	@Column(name = "modify_date")
-	private String modifyDate;
+	private Date modifyDate;
 
 	@Column(name = "isdeleted")
 	private boolean isDeleted;
 
 	public Users(String userId, String firstName, String lastName, String password, String contactNumber, String role,
-			String gender, String createdDate, String modifyDate, boolean isDeleted, String email) {
+			String gender, Date createdDate, Date modifyDate, boolean isDeleted, String email) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -95,11 +96,11 @@ public class Users implements UserDetails {
 		return gender;
 	}
 
-	public String getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public String getModifyDate() {
+	public Date getModifyDate() {
 		return modifyDate;
 	}
 
@@ -143,12 +144,12 @@ public class Users implements UserDetails {
 		this.gender = gender;
 	}
 
-	public void setCreatedDate(String createdDate) {
-		this.createdDate = createdDate;
+	public void setCreatedDate(Date sqlDate) {
+		this.createdDate = sqlDate;
 	}
 
-	public void setModifyDate(String modifyDate) {
-		this.modifyDate = modifyDate;
+	public void setModifyDate(Date sqlDate) {
+		this.modifyDate = sqlDate;
 	}
 
 	public void setIsDeleted(boolean isDeleted) {
