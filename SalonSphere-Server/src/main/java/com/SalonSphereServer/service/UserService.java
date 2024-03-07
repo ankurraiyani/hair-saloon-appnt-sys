@@ -1,5 +1,4 @@
-// package com.SalonSphereServer.Service;
-package com.SalonSphereServer.Service;
+package com.SalonSphereServer.service;
 
 import java.util.UUID;
 
@@ -7,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.Entity.Users;
-import com.SalonSphereServer.Repository.UserRepository;
+import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;

@@ -1,4 +1,5 @@
-package com.SalonSphereServer.Controller;
+
+package com.SalonSphereServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.SalonSphereServer.Entity.Users;
-import com.SalonSphereServer.JWTSecurity.JwtHelper;
-import com.SalonSphereServer.Service.UserService;
+import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.jwtsecurity.JwtHelper;
 import com.SalonSphereServer.request.LoginRequest;
+import com.SalonSphereServer.service.UserService;
 import com.SalonSphereServer.response.LoginResponse;
 import com.SalonSphereServer.response.RegisterResponse;
 

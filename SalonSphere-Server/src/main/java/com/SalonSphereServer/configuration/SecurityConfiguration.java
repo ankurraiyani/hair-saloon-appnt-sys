@@ -1,4 +1,4 @@
-package com.SalonSphereServer.Configuration;
+package com.SalonSphereServer.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.SalonSphereServer.JWTSecurity.JwtAuthenticationEntryPoint;
-import com.SalonSphereServer.JWTSecurity.JwtAuthenticationFilter;
+import com.SalonSphereServer.jwtsecurity.JwtAuthenticationEntryPoint;
+import com.SalonSphereServer.jwtsecurity.JwtAuthenticationFilter;
 
 @Configuration
 public class SecurityConfiguration {

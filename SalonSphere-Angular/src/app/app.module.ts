@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterService } from './components/services/register/register.service';
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LoginService } from './components/services/login/login.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   providers: [
     provideClientHydration(),
     RegisterService,
+    LoginService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

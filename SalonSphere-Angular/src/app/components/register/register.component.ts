@@ -42,7 +42,11 @@ export class RegisterComponent {
 
   //Validate the data of the form and send the data to the service
   doSubmit() {
+<<<<<<< HEAD
     alert('values comes');
+=======
+    // alert('values comes');
+>>>>>>> origin/rahul
     console.log(this.register.value);
 
     //check first name and last name

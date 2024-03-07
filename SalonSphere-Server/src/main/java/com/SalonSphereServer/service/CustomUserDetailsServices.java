@@ -1,4 +1,4 @@
-package com.SalonSphereServer.Service;
+package com.SalonSphereServer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.Entity.Users;
-import com.SalonSphereServer.Repository.UserRepository;
+import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.UserRepository;
 
 @Service
 public class CustomUserDetailsServices implements UserDetailsService {

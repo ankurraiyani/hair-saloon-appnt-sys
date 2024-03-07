@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
  <section class="container">
       <header>Login Form</header>
-      <form action="#" class="form">
+      <form [formGroup]="loginData" (ngSubmit)="doSubmit()" class="form">
         <div class="input-box">
           <label>Username or Email</label>
-          <input type="text" placeholder="Enter full name" required />
+          <input type="text" placeholder="Enter full name" formControlName="email" required />
         </div>
         <div class="input-box">
           <label>Password</label>
-          <input type="password" placeholder="Enter your password" required />
+          <input type="password" placeholder="Enter your password"  formControlName="password" required />
         </div>
         <button>Submit</button>
       </form>
