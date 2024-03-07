@@ -40,18 +40,13 @@ public class UserService {
 
 				// Create a java.util.Date object
 				java.util.Date utilDate = new java.util.Date();
-				System.out.println("printinfg Date=============");
 
 				// Convert java.util.Date to java.sql.Date
 				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-				
-				
-				System.out.println("printinfg Date="+sqlDate);
 
 				user.setCreatedDate(sqlDate);
 				user.setModifyDate(sqlDate);
-
-				System.out.println("printinfg Date=============");
+				
 				// Save in the database
 				findUser = userRepository.save(user);
 				return true;
