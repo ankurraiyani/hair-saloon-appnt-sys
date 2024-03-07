@@ -35,6 +35,7 @@ public class UserService {
 					&& Validation.firstNameValidation(user.getFirstName())
 					&& Validation.lastNameValidation(user.getLastName())
 					&& Validation.passwordValidation(user.getPassword())) {
+				
 				// Setting default values
 				user.setUserId(UUID.randomUUID().toString());
 				user.setIsDeleted(false);
@@ -63,20 +64,13 @@ public class UserService {
 		LoginResponse loginResponse = new LoginResponse();
 
 		//user finding loop
-		if(findUser1!=null){
-
-			if(findUser1.getPassword().equals(loginRequest.getPassword())){
-				
+		if(findUser1!=null) {
 				loginResponse.setname(findUser1.getFirstName()+" "+findUser1.getLastName());
 				loginResponse.setRole(findUser1.getRole());
 				return loginResponse;
-			}
 			//password not match this else run
-			else{
-				return null;
-			}
+			
 		}
-		//user not found
 		return null;
 
 	}
