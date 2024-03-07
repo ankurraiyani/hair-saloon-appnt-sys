@@ -8,7 +8,7 @@ export class RegisterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseURL:string = 'http://localhost:8081/register';
+  baseURL:string = 'http://localhost:8080/register';
 
   registerUser(userData:any){
     console.log("come inside the service method");
