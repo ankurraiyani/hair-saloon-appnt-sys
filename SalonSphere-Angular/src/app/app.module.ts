@@ -29,7 +29,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -41,6 +40,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './components/services/login/login.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    RegisterService
+    RegisterService,
+    LoginService,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })
