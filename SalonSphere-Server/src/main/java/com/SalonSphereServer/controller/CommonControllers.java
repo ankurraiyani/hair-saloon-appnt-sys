@@ -27,14 +27,13 @@ public class CommonControllers {
 	private UserService userService;
 
 	@Autowired
-    private UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Autowired
-    private JwtHelper helper;
-	
+	private JwtHelper helper;
+
 	@Autowired
 	private AuthenticationManager manager;
-	
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/register")
@@ -58,25 +57,23 @@ public class CommonControllers {
 
 		this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 		LoginResponse loginResponse = userService.loginUser(loginRequest);
-		System.out.println(loginRequest);
-		System.out.println("aman==================="+loginResponse);
-		if(loginResponse != null){
-			
+		if (loginResponse != null) {
+
 			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
-        	String token = this.helper.generateToken(userDetails);
+			String token = this.helper.generateToken(userDetails);
 
 			loginResponse.setJwtToken(token);
 			return new ResponseEntity<>(loginResponse, HttpStatus.OK);
 
-		}
-		else{
+		} else {
 			return new ResponseEntity<>(loginResponse, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	private void doAuthenticate(String email, String password) {
-		
-		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
+
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,
+				password);
 		try {
 			manager.authenticate(authenticationToken);
 		} catch (BadCredentialsException ex) {
