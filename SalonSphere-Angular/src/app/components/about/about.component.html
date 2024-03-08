@@ -71,6 +71,24 @@
         ><mat-icon>settings</mat-icon>Services</a
       >
     </div>
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/admin/services"
+        class="side-menu-item"
+        ><mat-icon>storefront</mat-icon>Add Shop</a
+      >
+    </div>
+    <div>
+      <a
+        (click)="sidenav.close()"
+        mat-button
+        routerLink="/admin/services"
+        class="side-menu-item"
+        ><mat-icon>edit</mat-icon>Update Shop</a
+      >
+    </div>
 
     <div>
       <a
@@ -132,12 +150,5 @@
         <h2>Review</h2>
       </mat-card>
     </div>
-
-    <div class="postReview">
-      
-    </div>
-
-
-
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -73,14 +73,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatExpansionModule,
     MatAccordion
-    
-
-    
-
-
-
-
-    
   ],
   providers: [
     provideClientHydration(),
