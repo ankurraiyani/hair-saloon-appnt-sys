@@ -42,8 +42,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		if (requestHeader != null && requestHeader.startsWith("Bearer")) {
 			// looking good
 			token = requestHeader.substring(7);
+			System.out.println("++++++++++++++++++++++++++++++++++");
+			System.out.println(token);
 			try {
 				username = this.jwtHelper.getUsernameFromToken(token);
+				System.out.println("+JwtAuthenticationFilter class+++++"+username);
 			} catch (IllegalArgumentException e) {
 				logger.info("Illegal Argument while fetching the username !!");
 				e.printStackTrace();
@@ -63,8 +66,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
 			// fetch user detail from username
+			System.out.println("in side if condition");
 			UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+			System.out.println(userDetails);
 			Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
+			System.out.println(validateToken);
 			if (validateToken) {
 
 				// set the authentication

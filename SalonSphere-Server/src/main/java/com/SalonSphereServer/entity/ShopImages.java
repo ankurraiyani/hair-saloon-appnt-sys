@@ -5,6 +5,7 @@ import java.sql.Blob;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +19,7 @@ public class ShopImages {
     @Column(name = "shop_id")
     private String shopId;
 
+    @Lob
     @Column(name = "image")
     private Blob image;
 
