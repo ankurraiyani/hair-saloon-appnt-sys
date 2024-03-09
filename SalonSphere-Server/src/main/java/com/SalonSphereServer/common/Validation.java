@@ -75,7 +75,7 @@ public class Validation {
 
 		if (address == null)
 			return false;
-		else if (address.length() >= 10)
+		else if (address.length() >= 8)
 			return true;
 		return false;
 	}
