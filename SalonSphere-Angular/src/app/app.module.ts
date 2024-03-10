@@ -17,6 +17,10 @@ import { RegisterService } from './components/services/register/register.service
 import { HttpClientModule } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LoginService } from './components/services/login/login.service';
+import { AuthserviceService } from './components/services/common/authservice.service';
+import { ShopRequestsService } from './components/services/fetch-shop-requests/shop-requests.service';
+import { ShowShopOwnerService } from './components/services/show-shop-owner/show-shop-owner.service';
+import { ShowCustomerService } from './components/services/show-customer/show-customer.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,10 @@ import { LoginService } from './components/services/login/login.service';
     provideClientHydration(),
     RegisterService,
     LoginService,
+    AuthserviceService,
+    ShopRequestsService,
+    ShowShopOwnerService,
+    ShowCustomerService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

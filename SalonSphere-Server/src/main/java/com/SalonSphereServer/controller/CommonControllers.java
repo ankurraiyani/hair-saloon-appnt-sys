@@ -60,8 +60,6 @@ public class CommonControllers {
 
 		this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 		LoginResponse loginResponse = userService.loginUser(loginRequest);
-		System.out.println(loginRequest);
-		System.out.println("aman==================="+loginResponse);
 		if(loginResponse != null){
 
 			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());

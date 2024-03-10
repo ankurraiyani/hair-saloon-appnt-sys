@@ -1,18 +1,17 @@
 package com.SalonSphereServer.entity;
 
 
-import java.util.Date;
 import java.util.Collection;
-
+import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "user_information")
@@ -40,11 +39,11 @@ public class Users implements UserDetails{
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "data_created")
-	private Date CreatedDate;
+	@Column(name = "date_created")
+	private Date createdDate;
 	
-	@Column(name = "data_modify")
-	private Date CreatedModify;
+	@Column(name = "date_modify")
+	private Date modifyDate;
 	
 	@Column(name = "isdeleted")
 	private boolean isDeleted;
@@ -78,7 +77,7 @@ public class Users implements UserDetails{
 
 
 	public Users(String userId, String firstName, String lastName, String contactNumber, String email, String password,
-			Date CreatedDate, Date CreatedModify, boolean isDeleted,String role) {
+			Date createdDate, Date modifyDate, boolean isDeleted,String role) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -86,8 +85,8 @@ public class Users implements UserDetails{
 		this.contactNumber = contactNumber;
 		this.email = email;
 		this.password = password;
-		this.CreatedDate = CreatedDate;
-		this.CreatedModify = CreatedModify;
+		this.createdDate = createdDate;
+		this.modifyDate = modifyDate;
 		this.isDeleted = isDeleted;
 		this.role= role;
 	}
@@ -139,22 +138,22 @@ public class Users implements UserDetails{
 
 
 	public Date getCreatedDate() {
-		return CreatedDate;
+		return createdDate;
 	}
 
 
-	public void setCreatedDate(Date CreatedDate) {
-		this.CreatedDate = CreatedDate;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
 
 	public Date getModifyDate() {
-		return CreatedModify;
+		return modifyDate;
 	}
 
 
-	public void setModifyDate(Date CreatedModify) {
-		this.CreatedModify = CreatedModify;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 
@@ -171,8 +170,8 @@ public class Users implements UserDetails{
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", contactNumber="
-				+ contactNumber + ", email=" + email + ", password=" + password + ", CreatedDate=" + CreatedDate
-				+ ", CreatedModify=" + CreatedModify + ", isDeleted=" + isDeleted + ", role =" + role + "]";
+				+ contactNumber + ", email=" + email + ", password=" + password + ", createdDate=" + createdDate
+				+ ", modifyDate=" + modifyDate + ", isDeleted=" + isDeleted + ", role =" + role + "]";
 	}
 
 

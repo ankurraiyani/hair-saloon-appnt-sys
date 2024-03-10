@@ -4,8 +4,11 @@ import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/
 import { shopGuardGuard } from '../../guards/shopkeeper/shop-guard.guard';
 
 const routes: Routes = [
-  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent},
-  {path: 'shopkeepr-dashboard', component: ShopkeeperDashboardComponent}
+  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent,
+  children: [
+  {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent}
+  ],
+}
 ];
 
 @NgModule({
