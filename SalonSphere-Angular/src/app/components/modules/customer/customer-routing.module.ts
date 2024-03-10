@@ -4,8 +4,11 @@ import { CustomerDashboardComponent } from './components/customer-dashboard/cust
 import { customerGuardGuard } from '../../guards/customer/customer-guard.guard';
 
 const routes: Routes = [
-  {path:'', canActivate:[customerGuardGuard], component: CustomerDashboardComponent},
+  {path:'', canActivate:[customerGuardGuard], component: CustomerDashboardComponent,
+  children :[
   {path:'customer-dashboard', component: CustomerDashboardComponent}
+  ],
+}
 ];
 
 @NgModule({
