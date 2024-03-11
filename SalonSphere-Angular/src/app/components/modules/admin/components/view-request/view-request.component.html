@@ -76,7 +76,6 @@
             <tbody>
                 @for (shop of shops; track shop.ownerName) {
                     <tr>
-                        <th scope="row">{{counter()}}</th>
                         <td scope="row">{{shop.ownerName}}</td>
                         <td>
                             {{ shop.shopName }}
@@ -84,6 +83,7 @@
                         <td>{{ shop.contactNumber }}</td>
                         <td>{{ shop.email }}</td>
                         <td>{{ shop.location }}</td>
+                        <th class="approve-btn">Approve</th>
                     </tr>
                 }
             </tbody>

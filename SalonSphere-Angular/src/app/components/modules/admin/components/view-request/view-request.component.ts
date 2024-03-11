@@ -23,7 +23,13 @@ export class ViewRequestComponent implements OnInit {
   count:Number=0;
   constructor(private shopRequest: ShopRequestsService){}
   
-  public shops: pandingShop[] = [];
+  public shops: pandingShop[] = [{
+    ownerName: "aman",
+    shopName: "shop",
+    contactNumber: "7024859152",
+    email: "d;sljkasj",
+    location: "ahemdabad"
+  }];
 
   ngOnInit(): void {
       this.getAllShopRequests();
@@ -32,8 +38,9 @@ export class ViewRequestComponent implements OnInit {
 
   public getAllShopRequests(){ 
     console.log("method run");
-    this.shopRequest.getShopRequests().subscribe(response=>{
+    this.shopRequest.getShopRequests().subscribe((response:any)=>{
       console.log(response);
+      this.shops = response;
     },
     error=>{
       console.log("error occure");

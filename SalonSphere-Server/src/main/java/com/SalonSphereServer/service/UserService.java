@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.UserRepository;
-import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
 
@@ -35,7 +35,7 @@ public class UserService {
 					&& Validation.firstNameValidation(user.getFirstName())
 					&& Validation.lastNameValidation(user.getLastName())
 					&& Validation.passwordValidation(user.getPassword())) {
-				
+
 				// Setting default values
 				user.setUserId(UUID.randomUUID().toString());
 				user.setIsDeleted(false);
@@ -43,10 +43,10 @@ public class UserService {
 
 				// Create a java.util.Date object
 				java.util.Date utilDate = new java.util.Date();
-				
+
 				// Convert java.util.Date to java.sql.Date
 				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-				
+
 				user.setCreatedDate(sqlDate);
 				user.setModifyDate(sqlDate);
 
@@ -58,18 +58,19 @@ public class UserService {
 		return false;
 	}
 
-	public LoginResponse loginUser(LoginRequest loginRequest){
+	public LoginResponse loginUser(LoginRequest loginRequest) {
 
 		Users findUser1 = userRepository.findByEmail(loginRequest.getEmail());
 		LoginResponse loginResponse = new LoginResponse();
 
-		//user finding loop
-		if(findUser1!=null) {
-				loginResponse.setname(findUser1.getFirstName()+" "+findUser1.getLastName());
-				loginResponse.setRole(findUser1.getRole());
-				return loginResponse;
-			//password not match this else run
-			
+		// user finding loop
+		if (findUser1 != null) {
+			loginResponse.setName(findUser1.getFirstName() + " " + findUser1.getLastName());
+			loginResponse.setUserId(findUser1.getUserId());
+			loginResponse.setRole(findUser1.getRole());
+			return loginResponse;
+			// password not match this else run
+
 		}
 		return null;
 

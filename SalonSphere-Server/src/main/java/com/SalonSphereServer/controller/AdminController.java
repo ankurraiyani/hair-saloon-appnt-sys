@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.service.CustomerService;
-
+import com.SalonSphereServer.service.ShopkeeperService;
 
 @RestController
 @RequestMapping("/admin")
@@ -21,7 +21,9 @@ public class AdminController {
 	
 	@Autowired
 	private CustomerService customerService;
-
+	
+	@Autowired
+	private ShopkeeperService shopKeeperService;
 	
 	@GetMapping("/view-customer")
 	@CrossOrigin(origins = "http://localhost:4200")

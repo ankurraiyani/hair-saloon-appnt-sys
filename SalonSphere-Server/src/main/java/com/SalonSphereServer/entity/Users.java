@@ -1,10 +1,13 @@
 package com.SalonSphereServer.entity;
 
 
+
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
@@ -12,30 +15,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "user_information")
-public class Users implements UserDetails{
+public class Users implements UserDetails {
 
 	@Id
 	@Column(name = "user_id")
 	private String userId;
-	
+
 	@Column(name = "first_name")
-	private  String firstName;
-	
+	private String firstName;
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "contact_number")
 	private String contactNumber;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "user_role")
 	private String role;
-	
+
 	@Column(name = "password")
 	private String password;
 	
@@ -49,32 +52,28 @@ public class Users implements UserDetails{
 	private boolean isDeleted;
 
 	public Users() {
-		
+
 	}
-	
-	
+
 	public String getUserId() {
 		return userId;
 	}
-
 
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	public String getRole() {
 		return role;
 	}
-	
-	public void setRole(String role) {
-		this.role=role;
-	}
 
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public Users(String userId, String firstName, String lastName, String contactNumber, String email, String password,
 			Date createdDate, Date modifyDate, boolean isDeleted,String role) {
@@ -88,54 +87,44 @@ public class Users implements UserDetails{
 		this.createdDate = createdDate;
 		this.modifyDate = modifyDate;
 		this.isDeleted = isDeleted;
-		this.role= role;
+		this.role = role;
 	}
-
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-
 	public String getLastName() {
 		return lastName;
 	}
-
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-
 	public String getContactNumber() {
 		return contactNumber;
 	}
-
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
 
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 
 	public Date getCreatedDate() {
 		return createdDate;
@@ -146,7 +135,6 @@ public class Users implements UserDetails{
 		this.createdDate = createdDate;
 	}
 
-
 	public Date getModifyDate() {
 		return modifyDate;
 	}
@@ -156,16 +144,13 @@ public class Users implements UserDetails{
 		this.modifyDate = modifyDate;
 	}
 
-
 	public boolean getIsDeleted() {
 		return isDeleted;
 	}
 
-
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
 
 	@Override
 	public String toString() {
@@ -174,10 +159,12 @@ public class Users implements UserDetails{
 				+ ", modifyDate=" + modifyDate + ", isDeleted=" + isDeleted + ", role =" + role + "]";
 	}
 
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+
+		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.role);
+
+		return Arrays.asList(simpleGrantedAuthority);
 	}
 
 	@Override
@@ -191,7 +178,7 @@ public class Users implements UserDetails{
 	}
 
 	@Override
-	public boolean isAccountNonLocked() {		
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
@@ -204,5 +191,5 @@ public class Users implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-	
+
 }
