@@ -59,6 +59,7 @@ public class ShopkeeperController {
 		}
 	}
 
+	//Through show-shop api we can show all salons of perticular user
 	@CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/show-shop/{userId}")
     public ResponseEntity<List<ShowShopDto>> showShops(@PathVariable String userId) {

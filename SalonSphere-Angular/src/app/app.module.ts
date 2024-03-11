@@ -40,15 +40,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
-<<<<<<< HEAD
-=======
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
 import { AuthserviceService } from './components/services/common/authservice.service';
 import { ShopRequestsService } from './components/services/fetch-shop-requests/shop-requests.service';
 import { ShowShopOwnerService } from './components/services/show-shop-owner/show-shop-owner.service';
 import { ShowCustomerService } from './components/services/show-customer/show-customer.service';
->>>>>>> 90e2da00271d5e8960e6c96cc9c82436fd03c578
 
 @NgModule({
   declarations: [
@@ -93,9 +90,6 @@ import { ShowCustomerService } from './components/services/show-customer/show-cu
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-<<<<<<< HEAD
-    RegisterService
-=======
     RegisterService,
     LoginService,
     AuthserviceService,
@@ -103,7 +97,6 @@ import { ShowCustomerService } from './components/services/show-customer/show-cu
     ShowShopOwnerService,
     ShowCustomerService,
     provideAnimationsAsync()
->>>>>>> 90e2da00271d5e8960e6c96cc9c82436fd03c578
   ],
   bootstrap: [AppComponent]
 })

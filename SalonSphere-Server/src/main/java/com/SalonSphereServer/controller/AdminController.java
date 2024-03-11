@@ -7,10 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
+import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.service.CustomerService;
 import com.SalonSphereServer.service.ShopkeeperService;
 import com.SalonSphereServer.service.UserService;
@@ -28,6 +32,9 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+    private UserRepository userRepository;
+
 	@GetMapping("/view-customer")
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<CustomerDTO>> getAllCutomers() {
@@ -42,5 +49,12 @@ public class AdminController {
 
 		System.out.println("come inside the contoller");
 		return new ResponseEntity<>(userService.getAllShopKeepers(), HttpStatus.OK);
+	}
+
+	@SuppressWarnings("null")
+	@PostMapping("/deleteuser/{userId}")
+	public ResponseEntity<String> deleteUser(@PathVariable String userId){
+		userRepository.deleteById(userId);
+		return ResponseEntity.status(HttpStatus.OK).body("delete succesfully");
 	}
 }
