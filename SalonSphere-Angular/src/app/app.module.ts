@@ -12,8 +12,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ServiceComponent } from './components/service/service.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ServiceComponent } from './components/service/service.component';
 import { RegisterService } from './components/services/register/register.service';
 
 //Material Imports
@@ -34,14 +34,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
-
-
-
-
-
-
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
+import { AuthserviceService } from './components/services/common/authservice.service';
+import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +49,8 @@ import { LoginService } from './components/services/login/login.service';
     ServiceComponent,
     ContactComponent,
     AboutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShopregisterComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +77,7 @@ import { LoginService } from './components/services/login/login.service';
     provideAnimationsAsync(),
     RegisterService,
     LoginService,
+    AuthserviceService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
