@@ -71,12 +71,17 @@ public class ShopInformation {
     @Column(name = "shop_cover_image")
     private String coverImage;
 
-    @Column(name = "shop_email")
+    @Column(name = "shop_email",unique = true)
     private String shopEmail;
 
-    @Column(name = "shop_contact_no")
+    @Column(name = "shop_contact_no",unique = true)
     private String shopContactNo;
-    
-    @Column(name="shop_city")
+
+    @Column(name = "shop_city")
     private String shopCity;
+
+    // through this cloum shop owner check yourself shop is accepted by admin or
+    // not. chencges according to Aman
+    @Column(name = "status")
+    private String status;
 }

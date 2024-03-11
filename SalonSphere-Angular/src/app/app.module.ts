@@ -29,7 +29,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -41,6 +40,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
+<<<<<<< HEAD
+=======
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './components/services/login/login.service';
+import { AuthserviceService } from './components/services/common/authservice.service';
+import { ShopRequestsService } from './components/services/fetch-shop-requests/shop-requests.service';
+import { ShowShopOwnerService } from './components/services/show-shop-owner/show-shop-owner.service';
+import { ShowCustomerService } from './components/services/show-customer/show-customer.service';
+>>>>>>> 90e2da00271d5e8960e6c96cc9c82436fd03c578
 
 @NgModule({
   declarations: [
@@ -85,7 +93,17 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
+<<<<<<< HEAD
     RegisterService
+=======
+    RegisterService,
+    LoginService,
+    AuthserviceService,
+    ShopRequestsService,
+    ShowShopOwnerService,
+    ShowCustomerService,
+    provideAnimationsAsync()
+>>>>>>> 90e2da00271d5e8960e6c96cc9c82436fd03c578
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,5 @@
 package com.SalonSphereServer.entity;
 
-import java.sql.Blob;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,7 +17,7 @@ public class ShopImages {
     private String shopId;
 
     @Column(name = "image")
-    private Blob image;
+    private String image;
 
     public ShopImages() {
     }
@@ -32,7 +30,7 @@ public class ShopImages {
         this.shopId = shopId;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -49,11 +47,11 @@ public class ShopImages {
         return "ShopImages [imageId=" + imageId + ", shopId=" + shopId + ", image=" + image + "]";
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public ShopImages(String imageId, String shopId, Blob image) {
+    public ShopImages(String imageId, String shopId, String image) {
         this.imageId = imageId;
         this.shopId = shopId;
         this.image = image;
