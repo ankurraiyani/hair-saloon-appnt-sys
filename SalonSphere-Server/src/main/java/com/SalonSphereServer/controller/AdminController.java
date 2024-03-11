@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.repository.UserRepository;
@@ -51,6 +51,7 @@ public class AdminController {
 		return new ResponseEntity<>(userService.getAllShopKeepers(), HttpStatus.OK);
 	}
 
+	// this delete API for delete the user
 	@SuppressWarnings("null")
 	@PostMapping("/deleteuser/{userId}")
 	public ResponseEntity<String> deleteUser(@PathVariable String userId){

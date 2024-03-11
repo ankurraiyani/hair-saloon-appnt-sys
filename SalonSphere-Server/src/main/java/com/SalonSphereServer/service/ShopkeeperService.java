@@ -21,6 +21,7 @@ public class ShopkeeperService {
     @Autowired
     private ShopkeeperRepository shopkeeperRepository;
 
+    //through this method we get all shop for particular shopkeeper User 
     public List<ShowShopDto> getAllShops(String userId){
         
         List<ShopInformation> shopInfo = shopkeeperRepository.findByUserId(userId);
