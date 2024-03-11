@@ -6,14 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
-import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.UserRepository;
 
 @Service
-public class ShopkeeperService {
+public class ShopKeeperService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -34,10 +32,6 @@ public class ShopkeeperService {
 			shopkeepers.add(new ShopOwnerDTO(user.getFirstName()+" "+user.getLastName(), user.getEmail(),user.getContactNumber(),numberOfShops));
 		}
 		return shopkeepers;
-	}
-
-	public boolean addShopInformation(ShopInformation shopInformation){
-		return true;
 	}
 
 }
