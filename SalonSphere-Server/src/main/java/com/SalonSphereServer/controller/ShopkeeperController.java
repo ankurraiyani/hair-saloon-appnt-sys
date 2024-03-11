@@ -1,5 +1,9 @@
 package com.SalonSphereServer.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
@@ -93,5 +98,18 @@ public class ShopkeeperController {
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP METHOD=======");
 		shopkeeperService.deleteShopById(shopId);
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
+	}
+
+	public static String uploadDirectory = "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/storeimage")
+	public ResponseEntity<String> storeImage(@RequestParam("image") MultipartFile file) throws IOException{
+		String originalFileName = file.getOriginalFilename();
+		Path dir = Paths.get(uploadDirectory);
+		System.out.println(dir);
+		Path fileNameAndPath = Paths.get(uploadDirectory ,originalFileName);
+		Files.write(fileNameAndPath, file.getBytes()); 
+		return ResponseEntity.ok().body("Image uploded successfully");
 	}
 }
