@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.service.CustomerService;
-import com.SalonSphereServer.service.ShopKeeperService;
+
 
 @RestController
 @RequestMapping("/admin")
@@ -21,9 +21,7 @@ public class AdminController {
 	
 	@Autowired
 	private CustomerService customerService;
-	
-	@Autowired
-	private ShopKeeperService shopKeeperService;
+
 	
 	@GetMapping("/view-customer")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -34,11 +32,5 @@ public class AdminController {
 		return new ResponseEntity<>(customerService.getAllCustomers(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/view-shopkeeper")
-	public ResponseEntity<List<ShopOwnerDTO>> getAllShopkeepers(){
-		
-		System.out.println("come inside the contoller");
-		
-		return new ResponseEntity<>(shopKeeperService.getAllShopKeepers(), HttpStatus.OK);
-	}
+	
 }
