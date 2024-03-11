@@ -1,5 +1,7 @@
 package com.SalonSphereServer.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SalonSphereServer.common.Validation;
+import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
 
@@ -47,8 +50,8 @@ public class ShopkeeperService {
 			shopInformation.setStatus("Pending");
 
 			// Set Cover image name and lincense document name
-			shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
-			shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
+			shopInformation.setCoverImage(shopInformation.getShopId() +"_"+ shopInformation.getCoverImage());
+			shopInformation.setLicenseDocument(shopInformation.getShopId() +"_"+ shopInformation.getLicenseDocument());
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -59,8 +62,8 @@ public class ShopkeeperService {
 
 	// Through this method we find shopInformation through shopid
 	public Optional<ShopInformation> getShopDetailsByShopId(@NonNull String shopId) {
-		Optional<ShopInformation> shopIndormation = shopkeeperRepository.findById(shopId);
-		return shopIndormation;
+		Optional<ShopInformation> shopInformation = shopkeeperRepository.findById(shopId);
+		return shopInformation;
 	}
 
 	// Through this method we upadte shopInformation to the database
@@ -92,8 +95,10 @@ public class ShopkeeperService {
 			} else if (shopInformation.getLicenseDocument() == null) {
 				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
 			} else {
+				
+				
 				ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
-				// shopIndormation equal to null that means shop not add successfull if it is
+				// shopInformation equal to null that means shop not add successfull if it is
 				// not null then shop added successfully
 				return shopInformation2 != null;
 			}
@@ -107,5 +112,24 @@ public class ShopkeeperService {
 	public void deleteShopById(String shopId) {
 		shopkeeperRepository.updateIsDeleteById(shopId, true);
 		return;
+	}
+
+	// Through this method we get all pending Shop Details who are not verify by
+	// admin yet
+	public List<PendingShopsDetailsDTO> findPendingShopsDetails() {
+		List<Object[]> results = (List<Object[]>) shopkeeperRepository.findPendingShopsDetails();
+		List<PendingShopsDetailsDTO> pendingShops = new ArrayList<>();
+
+		for (Object[] result : results) {
+			PendingShopsDetailsDTO pDetailsDTO = new PendingShopsDetailsDTO();
+			pDetailsDTO.setShopOwnerName((String) result[3] +" "+ (String) result[4]);
+			pDetailsDTO.setShopOwnerEmail((String) result[5]);
+			pDetailsDTO.setShopOwnerContactNumber((String) result[6]);
+			pDetailsDTO.setShopName((String) result[2]);
+			pDetailsDTO.setShopLocation((String) result[0] +" "+ (String) result[1]);
+
+			pendingShops.add(pDetailsDTO);
+		}
+		return pendingShops;
 	}
 }
