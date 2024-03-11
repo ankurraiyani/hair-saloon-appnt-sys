@@ -2,12 +2,10 @@ package com.SalonSphereServer.service;
 
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
@@ -109,5 +107,4 @@ public class ShopkeeperService {
 		shopkeeperRepository.updateIsDeleteById(shopId, true);
 		return;
 	}
-
 }

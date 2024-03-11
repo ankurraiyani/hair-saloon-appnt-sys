@@ -42,6 +42,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
+import { AuthserviceService } from './components/services/common/authservice.service';
+import { ShopRequestsService } from './components/services/fetch-shop-requests/shop-requests.service';
+import { ShowShopOwnerService } from './components/services/show-shop-owner/show-shop-owner.service';
+import { ShowCustomerService } from './components/services/show-customer/show-customer.service';
 
 @NgModule({
   declarations: [
@@ -88,6 +92,10 @@ import { LoginService } from './components/services/login/login.service';
     provideAnimationsAsync(),
     RegisterService,
     LoginService,
+    AuthserviceService,
+    ShopRequestsService,
+    ShowShopOwnerService,
+    ShowCustomerService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
