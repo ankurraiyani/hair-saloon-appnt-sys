@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.dto.CustomerDTO;
+import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.service.CustomerService;
@@ -40,11 +41,9 @@ public class AdminController {
 	public ResponseEntity<List<CustomerDTO>> getAllCutomers() {
 
 		System.out.println("come inside the controller");
-
 		return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
 	}
 
-	@GetMapping("/view-shopkeeper")
 	public ResponseEntity<List<ShopOwnerDTO>> getAllShopkeepers() {
 
 		System.out.println("come inside the contoller");
@@ -58,4 +57,15 @@ public class AdminController {
 		userRepository.deleteById(userId);
 		return ResponseEntity.status(HttpStatus.OK).body("delete succesfully");
 	}
+	// Through this api , we can fetch all request of shop request Details
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/shop-requests")
+	public ResponseEntity<List<PendingShopsDetailsDTO>> getShopRequestDetails() {
+		List<PendingShopsDetailsDTO> pendingShopsDetailsDTOs = shopKeeperService.findPendingShopsDetails();
+		System.out.println("iN SIDE ADMIN pENDINGSHOPDETAILS====");
+		if (pendingShopsDetailsDTOs != null)
+			return new ResponseEntity<>(pendingShopsDetailsDTOs, HttpStatus.OK);
+		return new ResponseEntity<>(pendingShopsDetailsDTOs, HttpStatus.NOT_FOUND);
+	}
+
 }
