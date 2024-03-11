@@ -11,7 +11,7 @@ import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.UserRepository;
 
 @Service
-public class ShopKeeperService {
+public class ShopkeeperService {
 	
 	@Autowired
 	private UserRepository userRepository;

@@ -24,17 +24,17 @@ public class ShopkeeperController {
 	private ShopkeeperService shopkeeperService;
 
 	//Through addshop API we can add new salons in the system
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/addshop")
-	@Secured("shopkeeper")
-	public ResponseEntity<String> addShop(@RequestBody ShopInformation shop) {
+	// @CrossOrigin(origins = "http://localhost:4200")
+	// @PostMapping("/addshop")
+	// @Secured("shopkeeper")
+	// public ResponseEntity<String> addShop(@RequestBody ShopInformation shop) {
 
-		// Call service method to add shop
-		System.out.println("cm===============================");
-		boolean isAdd = shopkeeperService.addShopInformation(shop);
-		if (isAdd)
-			return ResponseEntity.status(HttpStatus.CREATED).body("success");
-		else
-			return ResponseEntity.status(HttpStatus.CREATED).body("failer");
-	}
+	// 	// Call service method to add shop
+	// 	System.out.println("cm===============================");
+	// 	boolean isAdd = shopkeeperService.addShopInformation(shop);
+	// 	if (isAdd)
+	// 		return ResponseEntity.status(HttpStatus.CREATED).body("success");
+	// 	else
+	// 		return ResponseEntity.status(HttpStatus.CREATED).body("failer");
+	// }
 }
