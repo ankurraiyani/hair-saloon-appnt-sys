@@ -1,6 +1,5 @@
 package com.SalonSphereServer.entity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -158,9 +157,9 @@ public class Users implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
+
 		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.role);
-		
+
 		return Arrays.asList(simpleGrantedAuthority);
 	}
 

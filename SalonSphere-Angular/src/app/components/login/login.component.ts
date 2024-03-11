@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { LoginService } from '../services/login/login.service';
+import { Cookie } from 'ng2-cookies';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent {
     password: new FormControl('')
   })
 
-  constructor(private loginSevice: LoginService){}
+  constructor(private loginSevice: LoginService,private router:Router){}
   doSubmit(){
 
     console.log("data come");
@@ -50,6 +52,7 @@ export class LoginComponent {
     this.loginSevice.loginUser(this.loginData.value).subscribe(response =>
       {
         console.log(response);
+        this.setToken(response);
         Swal.fire({
           title: 'Good Job!',
           text: 'Login Successfully',
@@ -93,5 +96,23 @@ export class LoginComponent {
       message += 'The Password must be at least 6 characters.\n';
     }
     return message;
+  }
+
+  setToken(response:any) {
+      Cookie.set('token', response.jwtToken);
+      Cookie.set('name',response.name);
+      Cookie.set('role',response.role);
+      //Cookie.set('userId', response.userId);
+
+      //according to the usertype or role navigate the corresponding deshborad
+      if(response.role == 'admin'){
+        this.router.navigate(['/admin']);
+      }
+      else if(response.role == 'shopkeeper'){
+        this.router.navigate(['/shopkeeper']);
+      }
+      else{
+        this.router.navigate(['/customer']);
+      }
   }
 }
