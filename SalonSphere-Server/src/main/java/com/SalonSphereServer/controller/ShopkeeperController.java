@@ -102,7 +102,7 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-	public static String uploadDirectory = "D:\\";
+	public static String uploadDirectory ="D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
