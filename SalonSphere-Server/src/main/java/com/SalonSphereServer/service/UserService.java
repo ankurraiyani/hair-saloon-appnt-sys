@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
@@ -23,6 +24,9 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ShopkeeperRepository shopkeeperRepository;
 
 	// Registring new user in database
 	public boolean registerUser(Users user) {
@@ -78,22 +82,4 @@ public class UserService {
 		return null;
 	}
 
-	// call the userRepository method and fetch all the Shopkeepers data from
-	// database
-	public List<ShopOwnerDTO> getAllShopKeepers() {
-
-		System.out.println("come inside the services  getAllShopKeepers method");
-		List<Users> users = userRepository.findByRole("shopkeeper");
-
-		List<ShopOwnerDTO> shopkeepers = new ArrayList<ShopOwnerDTO>();
-
-		for (int i = 0; i < users.size(); i++) {
-
-			Users user = users.get(i);
-			int numberOfShops = userRepository.findNumberOfShopsByUserId(user.getUserId());
-			shopkeepers.add(new ShopOwnerDTO(user.getFirstName() + " " + user.getLastName(), user.getEmail(),
-					user.getContactNumber(), numberOfShops));
-		}
-		return shopkeepers;
-	}
 }

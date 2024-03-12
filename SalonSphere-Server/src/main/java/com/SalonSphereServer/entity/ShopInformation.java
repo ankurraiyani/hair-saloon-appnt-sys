@@ -79,9 +79,7 @@ public class ShopInformation {
 
     @Column(name = "shop_city")
     private String shopCity;
-
-    // through this cloum shop owner check yourself shop is accepted by admin or
-    // not. chencges according to Aman
-    @Column(name = "status")
+    
+    @Column(name="status")
     private String status;
 }

@@ -62,10 +62,60 @@
         </nav> 
     </div> 
 
+    <div class="right">
     <div class="button-container">
     <button (click)="showCustomer()" class="button">View Cutomers</button>
     <button (click)="showShopOwner()" class="button">View Shop Owner</button>
     </div>
+
+    <div class="table-container customer-table " *ngIf="customers && customers.length">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (customer of customers; track customer.fullName) {
+                    <tr>
+                        <td scope="row">{{customer.fullName}}</td>
+                        <td>{{ customer.contactNumber }}</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+
+        <div class="table-container owner-table" *ngIf="shopOwners && shopOwners.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Owner Name</th>
+                        <th scope="col">Contact Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Number of shops</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (shopOwner of shopOwners; track shopOwner.fullName) {
+                        <tr>
+                            <td scope="row">{{shopOwner.fullName}}</td>
+                            <td>{{ shopOwner.contactNumber }}</td>
+                            <td>{{ shopOwner.email }}</td>
+                            <td>{{ shopOwner.numberOfShops }}</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+            
+    
+        
+</div>
     
     
 

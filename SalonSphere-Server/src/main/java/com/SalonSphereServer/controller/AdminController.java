@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,14 +41,17 @@ public class AdminController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<CustomerDTO>> getAllCutomers() {
 
-		System.out.println("come inside the controller");
+		System.out.println("come inside the controller getAllCustomer");
 		return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/view-shopkeeper")
 	public ResponseEntity<List<ShopOwnerDTO>> getAllShopkeepers() {
 
-		System.out.println("come inside the contoller");
-		return new ResponseEntity<>(userService.getAllShopKeepers(), HttpStatus.OK);
+		System.out.println("come inside the contoller shopKeepers");
+		List<ShopOwnerDTO> shopOwnerList = shopKeeperService.getAllShopKeepers();
+		return new ResponseEntity<>(shopOwnerList, HttpStatus.OK);
 	}
 
 	// this delete API for delete the user
