@@ -79,9 +79,10 @@ public class AdminController {
 	// @Secured("admin")
 	@PostMapping("/view-requests/review-shop")
 	public ResponseEntity<ShopInformation> getShopById(@RequestParam @NonNull String shopEmail) {
-		Optional<ShopInformation> shopOptional = shopKeeperService.getShopDetailsByShopId(shopEmail);
-		if (shopOptional.isPresent()) {
-			return new ResponseEntity<>(shopOptional.get(), HttpStatus.OK);
+		System.out.println("getShopinformation by email=============>"+shopEmail);
+		ShopInformation shopOptional = shopKeeperService.getShopDetailsByShopEmail(shopEmail);
+		if (shopOptional!=null) {
+			return new ResponseEntity<>(shopOptional, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

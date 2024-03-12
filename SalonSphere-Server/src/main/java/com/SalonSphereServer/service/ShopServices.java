@@ -12,6 +12,9 @@ import com.SalonSphereServer.repository.ShopServicesRepository;
 public class ShopServices {
     @Autowired
     private ShopServicesRepository servicesRepository;
+    
+    
+    
 
     public boolean addShopServices(ServiceInformation serviceInformation) {
 
@@ -67,7 +70,7 @@ public class ShopServices {
 
     @Transactional
     public void deleteService(int id) {
-        servicesRepository.updateIsDeleteById(id, true);
+        servicesRepository.updateIsDeleteById(true,id);
         return;
     }
 }

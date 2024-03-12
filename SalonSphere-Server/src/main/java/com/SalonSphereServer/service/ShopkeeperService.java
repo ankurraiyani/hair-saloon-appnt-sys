@@ -103,7 +103,9 @@ public class ShopkeeperService {
 
 	// Through this method we get shop infromation details by shopEmail.
 	public ShopInformation getShopDetailsByShopEmail(@NonNull String shopEmail) {
+		System.out.println("*******************************");
 		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+		System.out.println("============>"+shopInformation);
 		return shopInformation;
 	}
 
