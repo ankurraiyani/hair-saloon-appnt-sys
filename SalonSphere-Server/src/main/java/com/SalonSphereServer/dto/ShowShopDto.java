@@ -14,16 +14,15 @@ public class ShowShopDto {
         private String shopName;
         private String shopAddress;
         private String shopEmail;
-        private String contactNumber;
-        private String city;
-        private boolean status;
-        public ShowShopDto(String shopName, String shopAddress, String shopEmail, String contactNumber, String city,
-                        boolean status) {
+        private String shopContactNo;
+        private String shopCity;
+        private String status;
+        public ShowShopDto(String shopName, String shopAddress, String shopEmail, String shopContactNo, String shopCity,String status) {
                 this.shopName = shopName;
                 this.shopAddress = shopAddress;
                 this.shopEmail = shopEmail;
-                this.contactNumber = contactNumber;
-                this.city = city;
+                this.shopContactNo = shopContactNo;
+                this.shopCity = shopCity;
                 this.status = status;
         }
 

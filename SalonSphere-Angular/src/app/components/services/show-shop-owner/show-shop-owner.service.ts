@@ -8,7 +8,7 @@ export class ShowShopOwnerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseURL:string = "https://localhost:8081/view-shopkeeper";
+  baseURL:string = "http://localhost:8081/view-shopkeeper";
 
   public getAllShopkeeper(){
     return this.httpClient.get(`${this.baseURL}`);

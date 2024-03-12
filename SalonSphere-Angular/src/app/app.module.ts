@@ -12,8 +12,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { ServiceComponent } from './components/service/service.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ServiceComponent } from './components/service/service.component';
 import { RegisterService } from './components/services/register/register.service';
 
 //Material Imports
@@ -34,18 +34,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
-
-
-
-
-
-
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
-import { AuthserviceService } from './components/services/common/authservice.service';
-import { ShopRequestsService } from './components/services/fetch-shop-requests/shop-requests.service';
-import { ShowShopOwnerService } from './components/services/show-shop-owner/show-shop-owner.service';
-import { ShowCustomerService } from './components/services/show-customer/show-customer.service';
+import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +48,8 @@ import { ShowCustomerService } from './components/services/show-customer/show-cu
     ServiceComponent,
     ContactComponent,
     AboutComponent,
-    RegisterComponent
+    RegisterComponent,
+    ShopregisterComponent
   ],
   imports: [
     BrowserModule,
@@ -78,24 +70,12 @@ import { ShowCustomerService } from './components/services/show-customer/show-cu
     MatTableModule,
     MatExpansionModule,
     MatAccordion
-    
-
-    
-
-
-
-
-    
   ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
     RegisterService,
     LoginService,
-    AuthserviceService,
-    ShopRequestsService,
-    ShowShopOwnerService,
-    ShowCustomerService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

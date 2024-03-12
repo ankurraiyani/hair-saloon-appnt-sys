@@ -13,7 +13,7 @@ import com.SalonSphereServer.entity.ShopInformation;
 @Repository
 public interface ShopkeeperRepository extends JpaRepository<ShopInformation,String> {
     
-    @Query(value = "SELECT * FROM salonsphere.shop_informaton where user_id=? and isdelete=0;", nativeQuery = true)
+    @Query(value = "SELECT * FROM salonsphere.shop_information where user_id=? and isdelete=0;", nativeQuery = true)
     public List<ShopInformation> findByUserId(String userId);
 	@Modifying
 	@Query("UPDATE ShopInformation s SET s.isDelete = :isDelete WHERE s.shopId = :shopId")

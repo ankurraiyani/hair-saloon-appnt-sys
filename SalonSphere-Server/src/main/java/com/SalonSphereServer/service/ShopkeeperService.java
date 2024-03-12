@@ -31,11 +31,26 @@ public class ShopkeeperService {
         List<ShopInformation> shopInfo = shopkeeperRepository.findByUserId(userId);
         List<ShowShopDto> shops = new ArrayList<ShowShopDto>();
 
-        for(int i=0;i<shopInfo.size();i++) {
-            ShopInformation shopInformation = shopInfo.get(i);
-            shops.add(new ShowShopDto(shopInformation.getShopName(), shopInformation.getAddress(), shopInformation.getShopCity(), shopInformation.getShopEmail(), shopInformation.getShopContactNo(), shopInformation.isShopStatus()));
-        }
-        return shops;
+        // for(int i=0;i<shopInfo.size();i++) {
+        //     ShopInformation shopInformation = shopInfo.get(i);
+        //     shops.add(new ShowShopDto(shopInformation.getShopName(), shopInformation.getAddress(), shopInformation.getShopCity(), shopInformation.getShopEmail(), shopInformation.getShopContactNo(), shopInformation.isShopStatus()));
+			
+        // }
+		// System.out.println(shops);
+        // return shops;
+
+		for(ShopInformation s:shopInfo){
+			ShowShopDto dto = new ShowShopDto();
+
+			dto.setShopName(s.getShopName());
+			dto.setShopAddress(s.getAddress());
+			dto.setShopEmail(s.getShopEmail());
+			dto.setShopCity(s.getShopCity());
+			dto.setShopContactNo(s.getShopContactNo());
+			dto.setStatus(s.getStatus());
+			shops.add(dto);
+		}
+		return shops;
     }
 
 	
