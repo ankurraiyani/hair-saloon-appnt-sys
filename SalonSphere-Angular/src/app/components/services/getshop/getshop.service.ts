@@ -7,12 +7,12 @@ import { Injectable } from '@angular/core';
 export class GetshopService {
 
   // Url Subject to change
-  private baseURL: String = 'http://localhost:8080';
+  private baseURL: String = 'http://localhost:8081';
 
   constructor(private http : HttpClient) {}
 
   getshop(data:any){
-    return this.http.get(`${this.baseURL}/shopkeeper/view-shop`,data);
+    return this.http.get(`${this.baseURL}/shopkeeper/show-shop`,data);
   }
 
 }

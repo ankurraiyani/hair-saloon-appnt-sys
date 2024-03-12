@@ -9,6 +9,7 @@ export class ImageService {
   constructor(private http:HttpClient) { }
 
   uploadImage(data:any){
-    return this.http.post("http://localhost:8080/uploadDocument",data);
+
+    return this.http.post("http://localhost:8081/shopkeeper/uploadDocument",data);
   }
 }

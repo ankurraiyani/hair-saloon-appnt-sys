@@ -11,6 +11,7 @@ import { ShopregisterService } from '../services/shopregister/shopregister.servi
 import { PincodeService } from '../services/common/pincode.service';
 import { ImageService } from '../services/common/image.service';
 import { error } from 'console';
+import { Cookie } from 'ng2-cookies';
 
 @Component({
   selector: 'app-shopregister',
@@ -30,36 +31,38 @@ export class ShopregisterComponent {
   file: any;
 
   register = new FormGroup({
+    userId: new FormControl(Cookie.get('userId')),
     shopName: new FormControl('',Validators.required),
-    licence: new FormControl('',Validators.required),
-    licenceDocument: new FormControl('',Validators.required),
-    coverDocument: new FormControl('',Validators.required),
-    email: new FormControl('',Validators.required),
-    contactNumber: new FormControl('',Validators.required),
+    licenceNo: new FormControl('',Validators.required),
+    licenceDocument: new FormControl(''),
+    coverImage: new FormControl(''),
+    shopEmail: new FormControl('',Validators.required),
+    shopContactNo: new FormControl('',Validators.required),
     address: new FormControl('',Validators.required),
     landmark: new FormControl('',Validators.required),
     pincode: new FormControl('',Validators.required),
     city: new FormControl('',Validators.required),
     district: new FormControl('',Validators.required),
     state: new FormControl('',Validators.required),
-    country: new FormControl('',Validators.required),
+    // country: new FormControl('',Validators.required),
   });
 
   ngOnInit(): void {
     this.register = this.formBuilder.group({
+      userId:[Cookie.get('userId')],
       shopName: [''],
-      licence: [''],
+      licenceNo: [''],
       licenceDocument: [''],
-      coverDocument: [''],
-      email: [''],
-      contactNumber: [''],
+      coverImage: [''],
+      shopEmail: [''],
+      shopContactNo: [''],
       address: [''],
       landmark: [''],
       pincode: [''],
       city: [''],
       district: [''],
       state: [''],
-      country: [''],
+      // country: [''],
     });
   }
   onPincodeChange(pincode: string) {
@@ -72,7 +75,7 @@ export class ShopregisterComponent {
             city: postOffice.Name,
             district: postOffice.District,
             state: postOffice.State,
-            country: postOffice.Country,
+            // country: postOffice.Country,
           });
         });
       } else {
@@ -90,6 +93,21 @@ export class ShopregisterComponent {
   uploadFile(event: any): void {
     this.file = event.target.files[0];
     console.log('file', this.file);
+    
+    if (!this.isImageFile(this.file)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
+        icon: 'error',
+      });
+      return;
+    }
+
+    
+  }
+  isImageFile(file: File): boolean {
+    const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
+    return allowedFormats.includes(file.type);
   }
 
   //Validate the data of the form and send the data to the service
@@ -110,7 +128,7 @@ export class ShopregisterComponent {
     }
 
     //Check email
-    message = this.validateEmail(this.register.value.email);
+    message = this.validateEmail(this.register.value.shopEmail);
 
     if (message != '') {
       Swal.fire({
@@ -122,7 +140,7 @@ export class ShopregisterComponent {
     }
 
     //check contact number
-    message = this.validateContactNumber(this.register.value.contactNumber);
+    message = this.validateContactNumber(this.register.value.shopContactNo);
 
     if (message != '') {
       Swal.fire({
@@ -141,10 +159,26 @@ export class ShopregisterComponent {
       });
       return;
     }
+
+
+    // creating formdata to send image to backend for storing in folder structure
+    let formData = new FormData();
+    formData.set('file', this.file);
+
+    this.upload.uploadImage(formData).subscribe(
+      (data: any) => {
+        Swal.fire({
+          title: 'Good job!',
+          text: 'Image Uploaded Successfully',
+          icon: 'success',
+        });
+      }
+    );
+
 
     //if everything is okey then call the service method
-
-    this.shopregisterService.registerShop(this.register.value).subscribe(
+console.log("API CAlling", this.register.value);
+    this.shopregisterService.registerShop(this.register).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({
@@ -168,26 +202,7 @@ export class ShopregisterComponent {
       }
     );
 
-    // creating formdata to send image to backend for storing in folder structure
-    let formData = new FormData();
-    formData.set('file', this.file);
-
-    this.upload.uploadImage(formData).subscribe(
-      (data: any) => {
-        Swal.fire({
-          title: 'Good job!',
-          text: 'Image  Uploaded Successfully',
-          icon: 'success',
-        });
-      },
-      (error: any) => {
-        Swal.fire({
-          title: 'OOPS!!!🫣',
-          text: 'Unexpected Input',
-          icon: 'error',
-        });
-      }
-    );
+    
   }
 
   //Validate the name fields

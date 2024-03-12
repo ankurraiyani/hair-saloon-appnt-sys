@@ -36,7 +36,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
-import { AuthserviceService } from './components/services/common/authservice.service';
 import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 
 @NgModule({
@@ -77,7 +76,6 @@ import { ShopregisterComponent } from './components/shopregister/shopregister.co
     provideAnimationsAsync(),
     RegisterService,
     LoginService,
-    AuthserviceService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

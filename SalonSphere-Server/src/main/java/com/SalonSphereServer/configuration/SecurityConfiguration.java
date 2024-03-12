@@ -1,5 +1,7 @@
 package com.SalonSphereServer.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,24 +19,27 @@ import com.SalonSphereServer.jwtsecurity.JwtAuthenticationFilter;
 @Configuration
 public class SecurityConfiguration {
 
-	
 	@Autowired
 	private JwtAuthenticationEntryPoint point;
-	
+
 	@Autowired
 	private JwtAuthenticationFilter filter;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@SuppressWarnings("unused")
+	private Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable())
-				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll().requestMatchers("/register").permitAll()
+				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll().requestMatchers("/shopkeeper/**").permitAll()
+						.requestMatchers("/register").permitAll()//.requestMatchers("/shop-requests").permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
