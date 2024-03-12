@@ -25,18 +25,9 @@ export class ViewUserComponent {
 
   constructor(private customerService: ShowCustomerService, private  shopOwnerService :ShowShopOwnerService) {}
 
-  public shopOwners: showOwner[] =[{
-    fullName: "aman",
-    contactNumber: "7024859152",
-    email: "guasjdg;oj",
-    numberOfShops: 4
-  }];
+  public shopOwners: showOwner[] =[];
 
-  public customers: customer[] = [{
-    fullName: "aman",
-    contactNumber: "70248591520",
-    email:"aman@gmail.com"
-  }];
+  public customers: customer[] = [];
 
   //show all the customer details to the admin
   public showCustomer() {
@@ -68,8 +59,8 @@ export class ViewUserComponent {
       //add and remove the disable class from the tables
       const customerTable = document.querySelector('.customer-table');
       const ownerTable = document.querySelector('.owner-table');
-      customerTable?.classList.add('disable');
       ownerTable?.classList.remove('disable');
+      customerTable?.classList.add('disable');
       this.shopOwners=response;
     },
     error=>{

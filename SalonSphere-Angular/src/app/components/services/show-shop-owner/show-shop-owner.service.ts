@@ -9,7 +9,7 @@ export class ShowShopOwnerService {
 
   constructor(private httpClient: HttpClient) { }
 
-  baseURL:string = "https://localhost:8081/admin/view-shopkeeper";
+  baseURL:string = "http://localhost:8081/admin/view-shopkeeper";
 
   public getAllShopkeeper(){
     const token = Cookie.get('token');

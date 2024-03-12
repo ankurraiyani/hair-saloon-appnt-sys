@@ -312,8 +312,13 @@
     background-color:  #07cb83;
   }
 
+  .right{
+    width: 80%;
+    margin: 0 auto;
+  }
+
   .table-container {
-    width: 70%;
+    width: 100%;
     margin: auto auto;
     margin-top: 40px;
     height: 400px;
@@ -333,11 +338,6 @@
   th,td {
     font-size: 15px;
     padding: 20px;
-  }
-
-  .right{
-    width: 60%;
-    margin: 0 auto;
   }
 
   .disable{

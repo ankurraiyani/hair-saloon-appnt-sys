@@ -5,11 +5,11 @@ public class ShopOwnerDTO {
 	private String fullName;
 	private String email;
 	private String contactNumber;
-	private int numberOfShops;
+	private long numberOfShops;
 	
 	
 	//parameterized constructor
-	public ShopOwnerDTO(String fullName, String email, String contactNumber, int numberOfShops) {
+	public ShopOwnerDTO(String fullName, String email, String contactNumber, long numberOfShops) {
 		super();
 		this.fullName = fullName;
 		this.email = email;
@@ -46,10 +46,10 @@ public class ShopOwnerDTO {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	public int getNumberOfShops() {
+	public long getNumberOfShops() {
 		return numberOfShops;
 	}
-	public void setNumberOfShops(int numberOfShops) {
+	public void setNumberOfShops(long numberOfShops) {
 		this.numberOfShops = numberOfShops;
 	}
 	

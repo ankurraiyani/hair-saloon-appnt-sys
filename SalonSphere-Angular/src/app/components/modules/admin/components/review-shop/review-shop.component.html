@@ -62,34 +62,62 @@
         </nav> 
     </div> 
 
-    <div class="table-container" *ngIf="shops && shops.length">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Owner Name</th>
-                    <th scope="col">Shop Name</th>
-                    <th scope="col">Shop Email</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (shop of shops; track shop.shopOwnerName) {
-                    <tr>
-                        <td scope="row">{{shop.shopOwnerName}}</td>
-                        <td>
-                            {{ shop.shopName }}
-                        </td>
-                        <td>{{ shop.shopEmail }}</td>
-                        <td>{{ shop.shopOwnerEmail }}</td>
-                        <td>{{ shop.shopLocation }}</td>
-                        <th (click)="getShopInformation(shop)" class="approve-btn">Review</th>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="card text-center">
+        <div class="card-header">
+          Review Shop
         </div>
-        
-        <h2 *ngIf="!shops || !shops.length">There is no any shop pending.</h2>
-
-   
+        <div class="card-body">
+          <!-- <h5 class="card-title">Special title treatment</h5> -->
+          <!-- <p class="card-text">This is all the information About the shop</p> -->
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+          <!-- <h2>Shop Name</h2>-->
+          <table class="table table-hover" *ngIf="shops">
+            <tbody *ngFor="let shop of shops">
+              <tr>
+                <th scope="row">Owner Name - </th>
+                <td>{{ shop.ownerName }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Owner Email -</th>
+                <td>{{ shop.ownerEmail }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Shop Name -</th>
+                <td>{{ shop.shopName }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Shop Email - </th>
+                <td>{{ shop.shopEmail }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Contact Number - </th>
+                <td>{{ shop.shopContactNumber }}</td>
+              </tr>
+              <tr>
+                <th scope="row">State - </th>
+                <td>{{ shop.state }}</td>
+              </tr>
+              <tr>
+                <th scope="row">District -</th>
+                <td>{{ shop.district }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Landmark -</th>
+                <td>{{ shop.landmark }}</td>
+              </tr>
+              <tr>
+                <th scope="row">Licence -</th>
+                <td>{{ shop.licence }}</td> <!-- You might want to replace this with {{ shop.licence }} if you have this property -->
+              </tr>
+            </tbody>
+          </table>
+          <div class="btn-div">
+          <button class="button approve">Approve</button>
+          <button class="button reject">Reject</button>
+          </div>
+        </div>
+        <div class="card-footer text-muted">
+          2 days ago
+        </div>
+      </div>
+</div>

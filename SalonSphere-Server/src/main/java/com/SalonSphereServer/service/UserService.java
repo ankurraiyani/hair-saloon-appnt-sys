@@ -1,5 +1,7 @@
 package com.SalonSphereServer.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.SalonSphereServer.common.Validation;
+import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
@@ -20,6 +24,9 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ShopkeeperRepository shopkeeperRepository;
 
 	// Registring new user in database
 	public boolean registerUser(Users user) {
@@ -73,7 +80,6 @@ public class UserService {
 
 		}
 		return null;
-
 	}
 
 }
