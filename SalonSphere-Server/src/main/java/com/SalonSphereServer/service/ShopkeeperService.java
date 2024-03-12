@@ -1,5 +1,8 @@
 package com.SalonSphereServer.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -148,4 +151,22 @@ public class ShopkeeperService {
 		}
 		return pendingShops;
 	}
+
+	private String imageDirectory= "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+    public List<byte[]> getImagesByShopId(String shopId) throws IOException {
+        List<byte[]> images = new ArrayList<>();
+        File folder = new File(imageDirectory);
+
+        // Filter images by shopId
+        File[] files = folder.listFiles((dir, name) -> name.startsWith(shopId));
+
+        if (files != null) {
+            for (File file : files) {
+                images.add(Files.readAllBytes(file.toPath()));
+            }
+        }
+
+        return images;
+    }
 }
