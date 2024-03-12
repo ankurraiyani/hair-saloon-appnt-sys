@@ -94,11 +94,19 @@ public class ShopkeeperService {
 		return false;
 	}
 
-	// Through this method we find shopInformation through shopid
+	// Through this method we find shopInformation through shopid     
 	public Optional<ShopInformation> getShopDetailsByShopId(@NonNull String shopId) {
 		Optional<ShopInformation> shopInformation = shopkeeperRepository.findById(shopId);
 		return shopInformation;
 	}
+
+
+	// Through this method we get shop infromation details by shopEmail.
+	public ShopInformation getShopDetailsByShopEmail(@NonNull String shopEmail) {
+		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+		return shopInformation;
+	}
+
 
 	// Through this method we upadte shopInformation to the database
 	public boolean updateShopInformation(ShopInformation shopInformation) {

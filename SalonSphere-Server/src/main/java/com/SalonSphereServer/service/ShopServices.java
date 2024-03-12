@@ -32,4 +32,38 @@ public class ShopServices {
         }
         return false;
     }
+
+    public boolean updateService(ServiceInformation serviceInformation) {
+        // Retrieve the service from the database
+        ServiceInformation existingService = servicesRepository.findById(serviceInformation.getServiceId())
+                .orElse(null);
+
+        // Update the service fields excluding serviceId
+        if (existingService != null && (Validation.firstNameValidation(serviceInformation.getServiceName())
+                && (serviceInformation.getServicePrice() > 0))) {
+
+            existingService.setServiceName(serviceInformation.getServiceName());
+            existingService.setServicePrice(serviceInformation.getServicePrice());
+            existingService.setShopId(serviceInformation.getShopId());
+            existingService.setCreateDate(serviceInformation.getCreateDate());
+
+            // Create a java.util.Date object
+            java.util.Date utilDate = new java.util.Date();
+
+            // Convert java.util.Date to java.sql.Date
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+            existingService.setModifyDate(sqlDate);
+
+            // Save the updated service
+            servicesRepository.save(existingService);
+            return true;
+        }
+        return false;
+    }
+
+    public void deleteService(int id) {
+        servicesRepository.updateIsDeleteById(id, true);
+        return;
+    }
 }
