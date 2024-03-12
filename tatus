@@ -1,0 +1,438 @@
+[33mcommit 5b4d39b1b3dd3bc4ee1f7ebc6299e89b27d46cbe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mrahul[m[33m, [m[1;31morigin/rahul[m[33m)[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Mon Mar 11 15:32:10 2024 +0530
+
+    Create a API which find pending request
+
+[33mcommit 90e2da00271d5e8960e6c96cc9c82436fd03c578[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Mon Mar 11 11:53:44 2024 +0530
+
+    Fixed the conflicts
+
+[33mcommit f68107ef5be7288751c8f0e2972591cddb6a8dfb[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Mon Mar 11 11:00:37 2024 +0530
+
+    Adding ShopkeeperService
+
+[33mcommit 5de7d10045f2fb599875ee35d5cab75919ee7b2c[m
+Merge: 382ace8 4af381b
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Mon Mar 11 10:49:00 2024 +0530
+
+    Conflict fix
+
+[33mcommit 382ace8b42fbd7ea33b5781459953ca6f6b9068d[m
+Merge: ae97967 85a6c76
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Mon Mar 11 10:09:04 2024 +0530
+
+    Merging
+
+[33mcommit 4af381ba3af025f2adc779076a0fcee26676074c[m[33m ([m[1;31morigin/dev[m[33m)[m
+Merge: 85a6c76 3587a30
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Sun Mar 10 13:03:48 2024 +0530
+
+    add admin dashboard and it service, set header, create getCustomer and getShopkeeper API from backend
+
+[33mcommit 3587a302dde95dc95e2422ece26cdb260e52ec4a[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Sun Mar 10 12:50:40 2024 +0530
+
+    add admin dashboard and it service, set header, create getCustomer and getShopkeeper API from backend
+
+[33mcommit ae97967aa9d4e5d13e34927bf4af19119842bbbf[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Sun Mar 10 00:32:19 2024 +0530
+
+    Creating updateShop,deleteShop, getShopById API's With proper Valtidation
+
+[33mcommit 85a6c7680a64402780aab83590a0ef78aa53fa59[m[33m ([m[1;32mdev[m[33m)[m
+Merge: 9da9fab 8bed796
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Fri Mar 8 19:49:17 2024 +0530
+
+    Create add shop api with proper validation
+
+[33mcommit 8bed796909de939c1c2400d80aa2fcadb3110c84[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Fri Mar 8 19:43:43 2024 +0530
+
+    Create add shop api with proper validation
+
+[33mcommit 54aa124289685171330511017ba14f77112d32c6[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Fri Mar 8 10:34:31 2024 +0530
+
+    Create retaionship between user_information and shop_information like mantToOne
+
+[33mcommit 9da9fabddeadcb0735bb15169216fabe33f1c57b[m
+Merge: 7ff3fc2 3728c65
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 19:40:44 2024 +0530
+
+    add auth-guard for admin, cutomer, and shopkeeper
+
+[33mcommit 3728c65feeeb96161beed2e79342d4db82e75778[m[33m ([m[1;31morigin/aman[m[33m)[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 19:33:08 2024 +0530
+
+    add auth-guard in admin, shopkeeper and customer
+
+[33mcommit 5159ee4e474222a4cdee505798c71a8f5422623f[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 19:32:06 2024 +0530
+
+    Created shop_Information and shop_images Entities
+
+[33mcommit d2ecbc94c7c452adb38cd3dfafbfd14c085f897f[m
+Merge: 93e1548 a977519
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 17:18:35 2024 +0530
+
+    get the code for login and registration
+
+[33mcommit 93e1548e6e3331fb64cfea16f31b94b6fbd9892b[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 17:14:53 2024 +0530
+
+    just check
+
+[33mcommit a97751922499de233eea82bf6b022e4d3ef580ae[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 17:12:21 2024 +0530
+
+    solve the issue for login
+
+[33mcommit 3edac039ae085c6bc43c868bf8369a08a9aef30c[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 16:22:40 2024 +0530
+
+    marge to krunal
+
+[33mcommit f50d176295950d7e2f4877d3c49827f3a8be274f[m
+Merge: 5c910cd 48702dd
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 15:56:45 2024 +0530
+
+    Fronted login and Backend login connected
+
+[33mcommit 48702ddaacc1ce7814f546f641826c1ab0d9b145[m[33m ([m[1;32maman[m[33m)[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 15:39:54 2024 +0530
+
+    chenge the port number
+
+[33mcommit 7ff3fc2bbfb7d0c6331cb36b76606bcf02f1ef8b[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Thu Mar 7 15:38:35 2024 +0530
+
+    Altered Database Schema
+
+[33mcommit 8c0924d1036c9e35401ea44edf985389442cd4e4[m
+Merge: 03e44bb 69a9c4b
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 15:36:50 2024 +0530
+
+    Merge branch 'rahul' into aman
+
+[33mcommit 5c910cdb85432939779707bccf6808f49b32d065[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 15:30:36 2024 +0530
+
+    Merge the login and register api
+
+[33mcommit 03e44bbe222c828d5746441100989f79d421afe7[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 14:44:38 2024 +0530
+
+    add Login page with proper validataion and create the login service
+
+[33mcommit 8477da4429f42330aa9ac9cd0c28c5008ca5d934[m[33m ([m[1;32mkrunal[m[33m)[m
+Merge: cb9722e 994a4fa
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 14:41:28 2024 +0530
+
+    Merge the login and register api
+
+[33mcommit cb9722e016a0a847625bfecae80e3d468e6f0116[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 13:17:32 2024 +0530
+
+    Just Checking
+
+[33mcommit 69a9c4b18ebe2c35548c088042425116b60f00ed[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 13:06:37 2024 +0530
+
+    Removed Accidental whiteSpaces
+
+[33mcommit 994a4fa4d730d8763e34e1aa2b93d5726f12346a[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Thu Mar 7 12:50:02 2024 +0530
+
+    Removed Accidental whiteSpaces
+
+[33mcommit ad6a3f31d5ad557c6d722fc103f5e477948b771f[m
+Merge: f19db06 739e714
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Thu Mar 7 12:42:32 2024 +0530
+
+    Merge branch 'dev' of github.com:ankurraiyani/hair-saloon-appnt-sys into dev
+    Pulling the Commits
+
+[33mcommit f19db06e2feb1feda59cb8a021136be894526fb7[m
+Merge: b2c3fcf 08211bc
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Thu Mar 7 12:40:40 2024 +0530
+
+    Adding the Shop Admin Dashboard
+
+[33mcommit 739e714b9ad134e02ee946903143d1dcd40a657b[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 12:36:15 2024 +0530
+
+    modify packages name
+
+[33mcommit b2c3fcf25ec31434aa99c788034ee61e5a308594[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Thu Mar 7 12:34:37 2024 +0530
+
+    Message
+
+[33mcommit 08211bc82719456945093867e9de9c556f7647de[m
+Merge: baa0ded 5a5e711
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 12:17:28 2024 +0530
+
+    fix all the conflicts
+
+[33mcommit 29668e7b0dee04b97d53733b814db76137ec2687[m
+Merge: 5a06bc7 51a31f5
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 11:56:22 2024 +0530
+
+    Login Backend API Done git merge krunal!
+
+[33mcommit ba932df4ed506eb029dbe679f38613549dd39d41[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Thu Mar 7 11:00:20 2024 +0530
+
+    Added Components and updated About Page
+
+[33mcommit 5a06bc73262d32933d548ff9887799a3f095c29a[m
+Merge: 8a12b18 baa0ded
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 10:27:09 2024 +0530
+
+    Package resolve
+
+[33mcommit 5a5e71115b406e45475768502d43c13796b5beb7[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Thu Mar 7 10:16:53 2024 +0530
+
+    Comitting the Changes
+
+[33mcommit 51a31f5c2032f8e7289a54bee9486bee4bd80a62[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Thu Mar 7 10:12:59 2024 +0530
+
+    login task upload
+
+[33mcommit baa0dedaabbc83bbf6b3187cc43a44d823a1f436[m
+Merge: 4290b5e d713b54
+Author: Rahul Kumar <89861653+Rahulkumar394@users.noreply.github.com>
+Date:   Wed Mar 6 19:23:23 2024 +0530
+
+    Merge pull request #5 from ankurraiyani/rahul
+    
+    Registration Done
+
+[33mcommit d713b54e7fa18da5d3606c795d24ef4986cd2b1b[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 19:13:58 2024 +0530
+
+    Fix the issue of Registration
+
+[33mcommit 4290b5e20716ce3507f3ba6f524f3d0649659e2b[m
+Merge: 4017abc 2729423
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 16:27:58 2024 +0530
+
+    Registeration API is create with proper validation
+
+[33mcommit 4017abcd4cd599a47fb0a2e50234bdd9f246f297[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 16:18:07 2024 +0530
+
+    Registeration API is create with proper validation
+
+[33mcommit 272942367fe69d659ab03854055ea4b93a1a873b[m
+Merge: 96f2c4e 4441c57
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Wed Mar 6 16:05:39 2024 +0530
+
+    create the register page and add all the validation also create the register service which send the data to the server
+
+[33mcommit bba15436c14348543807d3ce959c10ddbee2aab3[m
+Merge: c544998 8a12b18
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 15:48:09 2024 +0530
+
+    Merge branch 'dev' into krunal
+
+[33mcommit 8a12b18558763a236b9b93df8b2010e09326a754[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 15:45:15 2024 +0530
+
+    Naming Convention
+
+[33mcommit 96f2c4e417da4f02f4a7d362fe25bd19a41c5f3f[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Wed Mar 6 15:44:08 2024 +0530
+
+    create the register page and add all the validation also create the register service which send the data to the server
+
+[33mcommit 4441c57ac750860981bd2a1c8b184ecbcfd6da99[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Wed Mar 6 15:36:27 2024 +0530
+
+    Final Commit
+
+[33mcommit c5449985100debbd4c429434ee4144a3edf33ad2[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 15:18:53 2024 +0530
+
+    Hello
+
+[33mcommit 03a20650c799d773e107ae9e641a602cd8dd982c[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Wed Mar 6 15:12:47 2024 +0530
+
+    Resolved the Naming
+
+[33mcommit 028e3cf8ccbb518a35ea6ba00673a10e92d47ec0[m
+Merge: cb25fca c152966
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Wed Mar 6 15:06:18 2024 +0530
+
+    Resolve Conflict
+
+[33mcommit 1b02e05d3aa521287b8854c7560bb50b63b484e0[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Wed Mar 6 15:05:51 2024 +0530
+
+    create the register page and add all the validation also create the register service which send the data to the server
+
+[33mcommit cb25fcad285a3f12287aa23d6b697ba680dc470e[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Wed Mar 6 14:53:58 2024 +0530
+
+    Components
+
+[33mcommit 27ec87e655cdb710894757c12b3c0e8043d2088a[m
+Author: ajay15codes <dawandey15aj@gmail.com>
+Date:   Wed Mar 6 14:44:15 2024 +0530
+
+    Added Components
+
+[33mcommit c152966382451205109dca09c9e339b990c935bb[m
+Merge: c940c52 bcca1bf
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 14:36:35 2024 +0530
+
+    Merge branch 'dev' of github.com:ankurraiyani/hair-saloon-appnt-sys into dev
+
+[33mcommit c940c52eab5ecf0799f91cce7ddb2ef388129980[m
+Merge: e1345f8 752f689
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 14:33:41 2024 +0530
+
+    Merge branch 'rahul' into dev
+    Merging Registration
+
+[33mcommit bcca1bf7784f54af23e218b22d882bc81b785aba[m
+Merge: 213a33a a0fabce
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 14:30:27 2024 +0530
+
+    Merge branch 'krunal' into dev
+    Merge Validation
+
+[33mcommit a0fabceeb1be21fef67edd1cbab4e9740fce181a[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 14:15:10 2024 +0530
+
+    Create validation class in common folder for User.
+
+[33mcommit e1345f8cb9691c074b27eeb05a36d2d71fc4aeed[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 14:05:29 2024 +0530
+
+    Registeration API w/o Validation
+
+[33mcommit 213a33a853c4862f77ab73a427d32d44ed9de0b2[m
+Merge: 321fa5a 7533bf5
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 11:43:36 2024 +0530
+
+    Merge branch 'dev' of github.com:ankurraiyani/hair-saloon-appnt-sys into dev
+
+[33mcommit 321fa5afe6b6e8d976a8f24ceee528accc3a1218[m
+Author: Krunal <krunal7022110@gmail.com>
+Date:   Wed Mar 6 11:36:18 2024 +0530
+
+    Changed the entities
+
+[33mcommit 752f6895429bd391dfe977af87da89ff3306307a[m
+Merge: d947ad8 7533bf5
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 11:32:51 2024 +0530
+
+    Merge branch 'dev' into rahul
+    
+    Merging Dev to Rahul(Branch)
+
+[33mcommit 7533bf5b60316a8ac383fa6af96df2e54e833c7c[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 11:30:31 2024 +0530
+
+    Changes in File Structure
+
+[33mcommit d947ad893c29601fcbe7a252d8aec47b37de3a77[m
+Author: Rahul Kumar <rahulkumar5522550@gmail.com>
+Date:   Wed Mar 6 10:46:24 2024 +0530
+
+    Updated Database Schema
+
+[33mcommit 83ce7f17c18e5502ab255f0dc8881f2fc96325f6[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Tue Mar 5 17:35:52 2024 +0530
+
+    Updated Title of the Page
+
+[33mcommit 164955ccf5dc7817df1ed28ce5f9faaf92ba8074[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Tue Mar 5 17:27:38 2024 +0530
+
+    Initial Project Setup
+
+[33mcommit fa751495451cf0864aceb101c1545bd4110c3ab6[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Tue Mar 5 17:16:52 2024 +0530
+
+    Initial Project Setup
+
+[33mcommit 85eeb0186ebc3088da5181a81adb96bed9d4961f[m
+Author: Aman Gupta <guptaaman6264@gmail.com>
+Date:   Tue Mar 5 17:08:36 2024 +0530
+
+    Initial Project Setup
+
+[33mcommit a9cb2ee4c7113a71ddc2ec3fbbb99e5e14dffcf2[m
+Author: Ankur Raiyani <ankur.raiyani@ymail.com>
+Date:   Thu Feb 15 16:18:21 2024 +0530
+
+    Initial commit

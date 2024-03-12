@@ -18,8 +18,8 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	
 
 	
-	 @Query(value="SELECT si.state, si.district, si.shop_name, u.first_name, u.last_name, u.email, u.contact_number FROM salon_sphere.shop_informaton si \r\n"
-	 		+ "	         JOIN salon_sphere.user_information u ON si.user_id = u.user_id \r\n"
+	 @Query(value="SELECT si.state, si.district, si.shop_name, u.first_name, u.last_name, u.email, u.contact_number FROM shop_informaton si \r\n"
+	 		+ "	         JOIN user_information u ON si.user_id = u.user_id \r\n"
 	 		+ "	         WHERE si.status = 'Pending'" , nativeQuery = true)
 	    List<Object[]> findPendingShopsDetails();
 

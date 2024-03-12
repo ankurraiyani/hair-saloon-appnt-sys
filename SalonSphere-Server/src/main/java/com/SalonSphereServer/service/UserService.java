@@ -84,16 +84,20 @@ public class UserService {
 
 		System.out.println("come inside the services  getAllShopKeepers method");
 		List<Users> users = userRepository.findByRole("shopkeeper");
-
+		System.err.println("repositry call"+users);
 		List<ShopOwnerDTO> shopkeepers = new ArrayList<ShopOwnerDTO>();
 
 		for (int i = 0; i < users.size(); i++) {
 
+			System.out.println("inside for.....");
 			Users user = users.get(i);
+			System.out.println(user);
 			int numberOfShops = userRepository.findNumberOfShopsByUserId(user.getUserId());
+			System.out.println(numberOfShops);
 			shopkeepers.add(new ShopOwnerDTO(user.getFirstName() + " " + user.getLastName(), user.getEmail(),
 					user.getContactNumber(), numberOfShops));
 		}
+		System.out.println("==============================="+shopkeepers);
 		return shopkeepers;
 	}
 }
