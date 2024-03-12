@@ -36,6 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			throws ServletException, IOException, java.io.IOException {
 
 		String requestHeader = request.getHeader("Authorization");
+		System.out.println("Backend ka header print ho raha=====> "+requestHeader);
 		// Bearer 2352345235sdfrsfgsdfsdf
 		logger.info(" Header :  {}", requestHeader);
 		String username = null;

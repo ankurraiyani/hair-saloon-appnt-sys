@@ -1,4 +1,3 @@
-
 package com.SalonSphereServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +57,7 @@ public class CommonControllers {
 
 		this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 		LoginResponse loginResponse = userService.loginUser(loginRequest);
+		System.out.println("This============================="+loginResponse);
 		if (loginResponse != null) {
 
 			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());

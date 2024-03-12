@@ -1,5 +1,6 @@
 package com.SalonSphereServer.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,14 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.SalonSphereServer.entity.ServiceInformation;
+import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.service.ShopkeeperService;
 
@@ -58,6 +59,14 @@ public class ShopkeeperController {
 		}
 	}
 
+	// Through show-shop api we can show all salons of perticular user
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/show-shop/{userId}")
+	public ResponseEntity<List<ShowShopDto>> showShops(@PathVariable String userId) {
+		System.out.println(userId);
+		return new ResponseEntity<>(shopkeeperService.getAllShops(userId), HttpStatus.OK);
+	}
+
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updateshop")
@@ -84,25 +93,4 @@ public class ShopkeeperController {
 		shopkeeperService.deleteShopById(shopId);
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
-
-	// ===API's FOR SALON KEEPER PERFORM OPERATION ON SERVICES INFORMATION HERE=======
-
-	// Through addshop API we can delete salons in the system
-	@CrossOrigin(origins = "http://localhost:4200")
-	@Secured("shopkeeper")
-	@PostMapping("/add-service")
-	public ResponseEntity<String> addService(@RequestBody ServiceInformation serviceInformation) {
-
-		return null; // ResponseEntity.ok().body(serviceInformation
-	}
-	
-	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@Secured("shopkeeper")
-	@PostMapping("/uploadDocument")
-	public ResponseEntity<Boolean> uploadDocumnet(@RequestParam("file") MultipartFile file) {
-		System.out.println("=======inside uploadDocument======");
-		return new ResponseEntity<>(true,HttpStatus.OK);
-	}
-
 }
