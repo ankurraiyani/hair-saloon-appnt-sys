@@ -1,11 +1,14 @@
 package com.SalonSphereServer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.repository.ShopServicesRepository;
 
+@Service
 public class ShopServices {
     @Autowired
     private ShopServicesRepository servicesRepository;
@@ -62,6 +65,7 @@ public class ShopServices {
         return false;
     }
 
+    @Transactional
     public void deleteService(int id) {
         servicesRepository.updateIsDeleteById(id, true);
         return;
