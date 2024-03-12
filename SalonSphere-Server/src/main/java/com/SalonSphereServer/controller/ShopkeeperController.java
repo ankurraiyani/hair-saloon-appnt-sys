@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.security.access.annotation.Secured;
@@ -103,13 +106,25 @@ public class ShopkeeperController {
 	public static String uploadDirectory = "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/storeimage")
-	public ResponseEntity<String> storeImage(@RequestParam("image") MultipartFile file) throws IOException{
-		String originalFileName = file.getOriginalFilename();
-		Path dir = Paths.get(uploadDirectory);
-		System.out.println(dir);
-		Path fileNameAndPath = Paths.get(uploadDirectory ,originalFileName);
-		Files.write(fileNameAndPath, file.getBytes()); 
-		return ResponseEntity.ok().body("Image uploded successfully");
+	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
+    	try {
+        	String originalFileName = file.getOriginalFilename();
+        	Path dir = Paths.get(uploadDirectory);
+        	Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
+        	Files.write(fileNameAndPath, file.getBytes());
+
+        	Map<String, String> response = new HashMap<>();
+        	response.put("status", "success");
+        	response.put("message", "Image uploaded successfully");
+
+        	return ResponseEntity.status(HttpStatus.OK).body(response);
+    	} catch (Exception e) {
+        	Map<String, String> response = new HashMap<>();
+        	response.put("status", "error");
+        	response.put("message", "Image upload failed");
+
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    	}
 	}
 }
