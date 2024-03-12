@@ -35,6 +35,7 @@ public class CommonControllers {
 	@Autowired
 	private AuthenticationManager manager;
 
+	//this API for registration with validation
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/register")
 	public ResponseEntity<RegisterResponse> register(@RequestBody Users user) {
@@ -51,6 +52,7 @@ public class CommonControllers {
 		}
 	}
 
+	//this api for login with jwt token
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
