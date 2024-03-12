@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
 import com.SalonSphereServer.entity.ShopInformation;
 
 @Repository
-public interface ShopkeeperRepository extends JpaRepository<ShopInformation, String> {
+public interface ShopkeeperRepository extends JpaRepository<ShopInformation,String> {
+    
+    @Query(value = "SELECT * FROM salonsphere.shop_information where user_id=? and isdelete=0;", nativeQuery = true)
+    public List<ShopInformation> findByUserId(String userId);
 	@Modifying
 	@Query("UPDATE ShopInformation s SET s.isDelete = :isDelete WHERE s.shopId = :shopId")
 	void updateIsDeleteById(@Param("shopId") String shopId, @Param("isDelete") boolean isDelete);
@@ -24,5 +27,6 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	    List<Object[]> findPendingShopsDetails();
 
 }
+
 
 

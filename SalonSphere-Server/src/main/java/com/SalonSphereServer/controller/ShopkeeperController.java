@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.service.ShopkeeperService;
 
@@ -64,6 +67,14 @@ public class ShopkeeperController {
 		}
 	}
 
+	// Through show-shop api we can show all salons of perticular user
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/show-shop/{userId}")
+	public ResponseEntity<List<ShowShopDto>> showShops(@PathVariable String userId) {
+		System.out.println(userId);
+		return new ResponseEntity<>(shopkeeperService.getAllShops(userId), HttpStatus.OK);
+	}
+
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updateshop")
@@ -91,32 +102,34 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-
 	public static String uploadDirectory = "D:\\";
 
 	@CrossOrigin(origins = "http://localhost:4200")
-@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
-public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
-    try {
-        String originalFileName = file.getOriginalFilename();
-        Path dir = Paths.get(uploadDirectory);
-        Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
-        Files.write(fileNameAndPath, file.getBytes());
+	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
+			throws IOException {
+		try {
+			String originalFileName = file.getOriginalFilename();
+			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
+			Files.write(fileNameAndPath, file.getBytes());
 
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "success");
-        response.put("message", "Image uploaded successfully");
+			Map<String, String> response = new HashMap<>();
+			response.put("status", "success");
+			response.put("message", "Image uploaded successfully");
 
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    } catch (Exception e) {
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "error");
-        response.put("message", "Image upload failed");
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} catch (Exception e) {
+			Map<String, String> response = new HashMap<>();
+			response.put("status", "error");
+			response.put("message", "Image upload failed");
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-    }
-}
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
 
-
+	@GetMapping("/fetchDocument/{shopId}")
+	public List<byte[]> getImagesByShopId(@PathVariable String shopId) throws IOException {
+		return shopkeeperService.getImagesByShopId(shopId);
+	}
 
 }

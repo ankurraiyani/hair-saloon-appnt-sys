@@ -12,7 +12,7 @@ export class GetshopService {
   constructor(private http : HttpClient) {}
 
   getshop(data:any){
-    return this.http.get(`${this.baseURL}/shopkeeper/show-shop`,data);
+    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`,data);
   }
 
 }

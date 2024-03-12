@@ -1,5 +1,8 @@
 package com.SalonSphereServer.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,15 +14,46 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SalonSphereServer.common.Validation;
+import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
 
 @Service
 public class ShopkeeperService {
+    
+    @Autowired
+    private ShopkeeperRepository shopkeeperRepository;
 
-	@Autowired
-	private ShopkeeperRepository shopkeeperRepository;
+    //through this method we get all shop for particular shopkeeper User 
+    public List<ShowShopDto> getAllShops(String userId){
+        
+        List<ShopInformation> shopInfo = shopkeeperRepository.findByUserId(userId);
+        List<ShowShopDto> shops = new ArrayList<ShowShopDto>();
+
+        // for(int i=0;i<shopInfo.size();i++) {
+        //     ShopInformation shopInformation = shopInfo.get(i);
+        //     shops.add(new ShowShopDto(shopInformation.getShopName(), shopInformation.getAddress(), shopInformation.getShopCity(), shopInformation.getShopEmail(), shopInformation.getShopContactNo(), shopInformation.isShopStatus()));
+			
+        // }
+		// System.out.println(shops);
+        // return shops;
+
+		for(ShopInformation s:shopInfo){
+			ShowShopDto dto = new ShowShopDto();
+
+			dto.setShopName(s.getShopName());
+			dto.setShopAddress(s.getAddress());
+			dto.setShopEmail(s.getShopEmail());
+			dto.setShopCity(s.getShopCity());
+			dto.setShopContactNo(s.getShopContactNo());
+			dto.setStatus(s.getStatus());
+			shops.add(dto);
+		}
+		return shops;
+    }
+
+	
 
 	// Through this method we add shopInformation to the database
 	public boolean addShopInformation(ShopInformation shopInformation) {
@@ -132,4 +166,22 @@ public class ShopkeeperService {
 		}
 		return pendingShops;
 	}
+
+	private String imageDirectory= "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+    public List<byte[]> getImagesByShopId(String shopId) throws IOException {
+        List<byte[]> images = new ArrayList<>();
+        File folder = new File(imageDirectory);
+
+        // Filter images by shopId
+        File[] files = folder.listFiles((dir, name) -> name.startsWith(shopId));
+
+        if (files != null) {
+            for (File file : files) {
+                images.add(Files.readAllBytes(file.toPath()));
+            }
+        }
+
+        return images;
+    }
 }

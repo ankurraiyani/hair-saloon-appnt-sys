@@ -32,24 +32,24 @@ export class ShopregisterComponent {
 
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
-    shopName: new FormControl('',Validators.required),
-    licenceNo: new FormControl('',Validators.required),
+    shopName: new FormControl('', Validators.required),
+    licenceNo: new FormControl('', Validators.required),
     licenceDocument: new FormControl(''),
     coverImage: new FormControl(''),
-    shopEmail: new FormControl('',Validators.required),
-    shopContactNo: new FormControl('',Validators.required),
-    address: new FormControl('',Validators.required),
-    landmark: new FormControl('',Validators.required),
-    pincode: new FormControl('',Validators.required),
-    city: new FormControl('',Validators.required),
-    district: new FormControl('',Validators.required),
-    state: new FormControl('',Validators.required),
+    shopEmail: new FormControl('', Validators.required),
+    shopContactNo: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    landmark: new FormControl('', Validators.required),
+    pincode: new FormControl('', Validators.required),
+    shopCity: new FormControl('', Validators.required),
+    district: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
     // country: new FormControl('',Validators.required),
   });
 
   ngOnInit(): void {
     this.register = this.formBuilder.group({
-      userId:[Cookie.get('userId')],
+      userId: [Cookie.get('userId')],
       shopName: [''],
       licenceNo: [''],
       licenceDocument: [''],
@@ -59,7 +59,7 @@ export class ShopregisterComponent {
       address: [''],
       landmark: [''],
       pincode: [''],
-      city: [''],
+      shopCity: [''],
       district: [''],
       state: [''],
       // country: [''],
@@ -72,7 +72,7 @@ export class ShopregisterComponent {
       if (data && data[0] && data[0].PostOffice) {
         data[0].PostOffice.forEach((postOffice: any) => {
           this.register.patchValue({
-            city: postOffice.Name,
+            shopCity: postOffice.Name,
             district: postOffice.District,
             state: postOffice.State,
             // country: postOffice.Country,
@@ -93,7 +93,7 @@ export class ShopregisterComponent {
   uploadFile(event: any): void {
     this.file = event.target.files[0];
     console.log('file', this.file);
-    
+
     if (!this.isImageFile(this.file)) {
       Swal.fire({
         title: 'Error!',
@@ -102,8 +102,6 @@ export class ShopregisterComponent {
       });
       return;
     }
-
-    
   }
   isImageFile(file: File): boolean {
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -160,25 +158,21 @@ export class ShopregisterComponent {
       return;
     }
 
-
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
     formData.set('file', this.file);
 
-    this.upload.uploadImage(formData).subscribe(
-      (data: any) => {
-        Swal.fire({
-          title: 'Good job!',
-          text: 'Image Uploaded Successfully',
-          icon: 'success',
-        });
-      }
-    );
-
+    this.upload.uploadImage(formData).subscribe((data: any) => {
+      Swal.fire({
+        title: 'Good job!',
+        text: 'Image Uploaded Successfully',
+        icon: 'success',
+      });
+    });
 
     //if everything is okey then call the service method
-console.log("API CAlling", this.register.value);
-    this.shopregisterService.registerShop(this.register).subscribe(
+    console.log('API CAlling', this.register.value);
+    this.shopregisterService.registerShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({
@@ -201,8 +195,6 @@ console.log("API CAlling", this.register.value);
         });
       }
     );
-
-    
   }
 
   //Validate the name fields

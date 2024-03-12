@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetshopService } from '../../../../services/getshop/getshop.service';
+import { Cookie } from 'ng2-cookies';
 
 @Component({
   selector: 'app-shopkeeper-dashboard',
@@ -17,9 +18,13 @@ export class ShopkeeperDashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getshop.getshop(this.data.values).subscribe(data=>
-      console.log(data))
-  }
+    this.getshop.getshop(Cookie.get('userId')).subscribe((data:any)=>
+     { console.log(data)
+      this.data = data;
+
+      }
+      )
+    }
 
 
 }
