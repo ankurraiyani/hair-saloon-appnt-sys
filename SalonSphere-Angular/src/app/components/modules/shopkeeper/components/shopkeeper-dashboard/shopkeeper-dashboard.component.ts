@@ -9,7 +9,6 @@ import { Cookie } from 'ng2-cookies';
 })
 export class ShopkeeperDashboardComponent implements OnInit {
 
-
   data:any[]=[]
 
   constructor(private getshop:GetshopService,){
@@ -25,6 +24,5 @@ export class ShopkeeperDashboardComponent implements OnInit {
       }
       )
     }
-
 
 }
