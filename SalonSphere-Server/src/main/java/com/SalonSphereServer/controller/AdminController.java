@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.service.CustomerService;
 import com.SalonSphereServer.service.ShopkeeperService;
-import com.SalonSphereServer.service.UserService;
 
 @RestController
 @RequestMapping("/admin")
@@ -30,9 +28,6 @@ public class AdminController {
 
 	@Autowired
 	private ShopkeeperService shopKeeperService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
     private UserRepository userRepository;

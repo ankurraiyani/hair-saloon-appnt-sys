@@ -1,3 +1,73 @@
+.shopContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: rgb(250, 250, 250);
+}
+.shopCard {
+  height: 400px;
+  width: 30vw;
+  margin: 50px;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  background-color: #4b4b52af;
+  color: #000;
+}
+/* **************************** */
+
+.button {
+  position: relative;
+  overflow: hidden;
+  height: 3rem;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  background-size: 400%;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+  transition: all 0.475s;
+}
+
+
+.noshopCard {
+  height: 200px;
+  width: 20vw;
+  margin: 50px;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #e40d0daf; */
+  color: #000;
+}
+
 header {
   height: 70px;
   width: 100vw;
@@ -10,7 +80,6 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-
 
 .logo {
   font-size: 27px;

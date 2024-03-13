@@ -40,19 +40,22 @@
     </div>
   </div>
 </header>
+<!-- -------------------------------------------------------------------------------------------------- -->
 
 <div class="main-container">
   <div class="navcontainer">
     <nav class="nav">
       <div class="nav-upper-options">
-        <div class="nav-option option1" >
+        <div
+          class="nav-option option1"
+          routerLink="/shopkeeper/shopkeeper-dashboard"
+        >
           <img
             src="https://cdn-icons-png.flaticon.com/128/4116/4116414.png"
             class="nav-img"
             alt="dashboard"
-            
           />
-          <h3><a routerLink="/shopkeeper/shopkeeper-dashboard">Home</a></h3>
+          <h3>Home</h3>
         </div>
 
         <div class="option2 nav-option" routerLink="/shopkeeper/addshop">
@@ -64,7 +67,7 @@
           <h3><a>Add Shop</a></h3>
         </div>
 
-        <div class="nav-option option3" >
+        <div class="nav-option option3">
           <img
             src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
             class="nav-img"
@@ -79,7 +82,7 @@
             class="nav-img"
             alt="institution"
           />
-          <h3><a routerLink="/admin/view-request">Update Shop</a></h3>
+          <h3><a routerLink="">Update Shop</a></h3>
         </div>
 
         <div class="nav-option option5">
@@ -172,6 +175,29 @@
           alt="published"
         />
       </div>
+    </div>
+    <div class="shopContainer">
+      <ng-container *ngIf="data && data.length > 0; else noShops">
+        <mat-card class="shopCard" *ngFor="let shop of data">
+          <img [src]="shop.coverImage" alt="Cover Image" />
+          <h2>{{ shop.shopName }}</h2>
+          <h3>{{ shop.shopAddress }}</h3>
+          <h3>{{ shop.shopCity }}</h3>
+          <h3>{{ shop.shopEmail }}</h3>
+          <h3>{{ shop.shopContactNo }}</h3>
+          <h3>{{ shop.status }}</h3>
+        </mat-card>
+      </ng-container>
+
+      <ng-template #noShops>
+        <div class="noshopCard">
+          <h2>No Shops Added</h2>
+          <br />
+          <button class="button"routerLink="/shopkeeper/addshop">
+            <span class="button-content">Add Shop</span>
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

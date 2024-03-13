@@ -49,9 +49,9 @@ public class ShopkeeperController {
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
-			return ResponseEntity.status(HttpStatus.CREATED).body("success");
+			return ResponseEntity.status(HttpStatus.OK).body("Successfully Registered the Shop");
 		else
-			return ResponseEntity.status(HttpStatus.CREATED).body("failer");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while registering the shop");
 	}
 
 	// Through this api we will get shops information through id
@@ -102,7 +102,7 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-	public static String uploadDirectory ="D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+	public static String uploadDirectory ="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
