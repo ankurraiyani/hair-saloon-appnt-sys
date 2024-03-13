@@ -103,7 +103,7 @@ public class ShopkeeperController {
 	}
 
 	public static String uploadDirectory ="D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
-
+	//this Api used for upload the files or images
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
@@ -127,6 +127,7 @@ public class ShopkeeperController {
 		}
 	}
 
+	//this Api used for fetch the files or images
 	@GetMapping("/fetchDocument/{shopId}")
 	public List<byte[]> getImagesByShopId(@PathVariable String shopId) throws IOException {
 		return shopkeeperService.getImagesByShopId(shopId);
