@@ -182,17 +182,7 @@ export class ShopregisterComponent {
         });
 
         //and Navigate to the login page
-        this.router.navigate(['/login']);
-      },
-      (
-        // if any  error occured while registering user
-        error: any
-      ) => {
-        Swal.fire({
-          title: 'Server Error',
-          text: 'There is something wrong please try again🫣',
-          icon: 'error',
-        });
+        this.router.navigate(['/shopkeeper/view-shop']);
       }
     );
   }

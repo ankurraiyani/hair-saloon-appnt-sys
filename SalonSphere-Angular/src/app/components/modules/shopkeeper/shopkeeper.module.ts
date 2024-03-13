@@ -22,13 +22,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
+import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
 
 
 
 @NgModule({
   declarations: [
     ShopkeeperDashboardComponent,
-    ViewshopsComponent
+    ViewshopsComponent,
+    ShopkeeperprofileComponent
   ],
   imports: [
     CommonModule,
