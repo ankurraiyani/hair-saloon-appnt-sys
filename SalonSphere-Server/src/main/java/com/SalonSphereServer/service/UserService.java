@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.entity.Users;
-import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
@@ -21,9 +20,6 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private ShopkeeperRepository shopkeeperRepository;
 
 	// Registring new user in database
 	public boolean registerUser(Users user) {
