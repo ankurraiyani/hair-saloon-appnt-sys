@@ -182,7 +182,7 @@ export class ShopregisterComponent {
         });
 
         //and Navigate to the login page
-        this.router.navigate(['/login']);
+        this.router.navigate(['/shopkeeper/view-shop']);
       }
     );
   }
