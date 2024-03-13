@@ -1,4 +1,3 @@
-
 package com.SalonSphereServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ public class CommonControllers {
 	@Autowired
 	private AuthenticationManager manager;
 
+	//this API for registration with validation
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/register")
 	public ResponseEntity<RegisterResponse> register(@RequestBody Users user) {
@@ -52,12 +52,14 @@ public class CommonControllers {
 		}
 	}
 
+	//this api for login with jwt token
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 
 		this.doAuthenticate(loginRequest.getEmail(), loginRequest.getPassword());
 		LoginResponse loginResponse = userService.loginUser(loginRequest);
+		System.out.println("This============================="+loginResponse);
 		if (loginResponse != null) {
 
 			UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());

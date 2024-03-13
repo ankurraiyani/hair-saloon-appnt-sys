@@ -102,7 +102,7 @@ export class LoginComponent {
       Cookie.set('token', response.jwtToken);
       Cookie.set('name',response.name);
       Cookie.set('role',response.role);
-      //Cookie.set('userId', response.userId);
+      Cookie.set('userId', response.userId);
 
       //according to the usertype or role navigate the corresponding deshborad
       if(response.role == 'admin'){

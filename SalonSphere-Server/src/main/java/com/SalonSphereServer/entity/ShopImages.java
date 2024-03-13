@@ -4,7 +4,19 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
 @Entity
 @Table(name = "shop_images")
 public class ShopImages {
@@ -18,43 +30,4 @@ public class ShopImages {
 
     @Column(name = "image")
     private String image;
-
-    public ShopImages() {
-    }
-
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getImageId() {
-        return imageId;
-    }
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    @Override
-    public String toString() {
-        return "ShopImages [imageId=" + imageId + ", shopId=" + shopId + ", image=" + image + "]";
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public ShopImages(String imageId, String shopId, String image) {
-        this.imageId = imageId;
-        this.shopId = shopId;
-        this.image = image;
-    }
-
 }

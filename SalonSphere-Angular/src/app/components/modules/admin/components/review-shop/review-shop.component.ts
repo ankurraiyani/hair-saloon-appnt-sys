@@ -4,17 +4,6 @@ import { ShopReviewService } from '../../../../services/shop-review/shop-review.
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-interface shopInformation {
-  ownerName: string;
-  ownerEmail: string;
-  shopName: string;
-  shopEmail: string;
-  shopContactNumber: string;
-  state: string;
-  district: string;
-  landmark: string;
-  licence: string;
-}
 
 @Component({
   selector: 'app-review-shop',
@@ -28,21 +17,22 @@ export class ReviewShopComponent implements OnInit {
     private router: Router
   ) {}
 
-  public shops: shopInformation[] = [
-    {
-      ownerName: 'Aman Gupta',
-      ownerEmail: 'guptaaman6264@gmail.com',
-      shopName: 'Ajay Hair Salon',
-      shopEmail: 'ajayhairsalon@salon.com',
-      shopContactNumber: '7024859152',
-      state: 'Madhya Pradesh',
-      district: 'Bhopal',
-      landmark: 'Ashoka garden',
-      licence: 'rahulsalon.jpg',
-    },
-  ];
 
-  name: string = 'aman';
+  
+
+  ownerName:string|null= localStorage.getItem('ownerName');
+  ownerEmail:string|null= localStorage.getItem('ownerEmail');
+  shopEmail: string|null = localStorage.getItem('shopEmail');
+  shopName: string|null = '';
+  shopContactNo:string|null='';
+  state:string|null = '';
+  district:string|null = '';
+  landmark: string|null= '';
+  licenseDocument:string|null='';
+
+
+
+
 
   ngOnInit(): void {
     console.log('come inside the oninit');
@@ -63,15 +53,19 @@ export class ReviewShopComponent implements OnInit {
     }
 
     //else call the service which  will fetch shop information using the shopEmail
-    this.shopReviewService.getReviewShop(shopEmail).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.shops = response;
-      },
-      (error) => {
-        console.log('error occured' + error);
-      }
-    );
+    this.shopReviewService.getReviewShop(shopEmail).subscribe((response:any)=>{
+      console.log(response);
+      this.shopName= response.shopName;
+      this.shopContactNo= response.shopContactNo;
+      this.state= response.state;
+      this.district = response.district;
+      this.landmark = response.landmark;
+      this.licenseDocument = response.licenseDocument;
+      
+    },
+    error=>{
+      console.log("error occured"+ error);
+    });
   }
 
   //approve the shop
@@ -80,11 +74,8 @@ export class ReviewShopComponent implements OnInit {
     const spinner = document.querySelector('.spinner');
     spinner?.classList.remove('disable');
 
-    console.log('come inside the approve');
-
-    //call the service
-    this.shopReviewService.approveRequest().subscribe(
-      (response) => {
+      //call the service
+      this.shopReviewService.approveRequest(this.shopEmail).subscribe(response=>{
         console.log(response);
         spinner?.classList.add('disable');
         Swal.fire({
@@ -125,7 +116,7 @@ export class ReviewShopComponent implements OnInit {
         spinner?.classList.remove('disable');
 
         //call the service
-        this.shopReviewService.rejectRequest().subscribe(
+        this.shopReviewService.rejectRequest(this.shopEmail).subscribe(
           (response) => {
             console.log(response);
             spinner?.classList.add('disable');
@@ -157,7 +148,7 @@ export class ReviewShopComponent implements OnInit {
 
   public viewLicence() {
     //get image URL which has been come from backend
-    const imgURL = this.shops[0].licence;
+    const imgURL = this.licenseDocument;
     console.log(imgURL);
     Swal.fire({
       imageUrl: `../../../../../../assets/images/${imgURL}`,

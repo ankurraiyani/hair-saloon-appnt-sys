@@ -1,5 +1,8 @@
 package com.SalonSphereServer.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,41 +14,63 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SalonSphereServer.common.Validation;
+import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
+import com.SalonSphereServer.dto.ShopReviewDTO;
+import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
-import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
-
 
 @Service
 public class ShopkeeperService {
 
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private ShopkeeperRepository shopkeeperRepository;
-	
-	//call the userRepository method and fetch all the Shopkeepers data from database
-	public List<ShopOwnerDTO> getAllShopKeepers(){
-		
-		System.out.println("come inside the services method");
+
+	@Autowired
+	private UserRepository userRepository;
+
+	// through this method we get all shop for particular shopkeeper User
+	public List<ShowShopDto> getAllShops(String userId) {
+
+		List<ShopInformation> shopInfo = shopkeeperRepository.findByUserId(userId);
+		List<ShowShopDto> shops = new ArrayList<ShowShopDto>();
+
+		for (ShopInformation s : shopInfo) {
+			ShowShopDto dto = new ShowShopDto();
+
+			dto.setShopName(s.getShopName());
+			dto.setShopAddress(s.getAddress());
+			dto.setShopEmail(s.getShopEmail());
+			dto.setShopCity(s.getShopCity());
+			dto.setShopContactNo(s.getShopContactNo());
+			dto.setStatus(s.getStatus());
+			shops.add(dto);
+		}
+		return shops;
+	}
+
+	// call the userRepository method and fetch all the Shopkeepers data from
+	// database
+	public List<ShopOwnerDTO> getAllShopKeepers() {
+
+		System.out.println("come inside the services  getAllShopKeepers() method");
 		List<Users> users = userRepository.findByRole("shopkeeper");
-	
-		
-		List<ShopOwnerDTO> shopkeepers =new ArrayList<ShopOwnerDTO>();
-		
-		for(int i=0;i<users.size();i++) {
-			
+
+		List<ShopOwnerDTO> shopkeepers = new ArrayList<ShopOwnerDTO>();
+
+		for (int i = 0; i < users.size(); i++) {
+
 			Users user = users.get(i);
-			long numberOfShops = shopkeeperRepository.countByUserId(user.getUserId());
-			shopkeepers.add(new ShopOwnerDTO(user.getFirstName()+" "+user.getLastName(), user.getEmail(),user.getContactNumber(),numberOfShops));
+			long numberOfShops = shopkeeperRepository.countByUserIdAndStatusAndIsDelete(user.getUserId(), "accepted",
+					false);
+			shopkeepers.add(new ShopOwnerDTO(user.getFirstName() + " " + user.getLastName(), user.getEmail(),
+					user.getContactNumber(), numberOfShops));
 		}
 		return shopkeepers;
 	}
-
 
 	// Through this method we add shopInformation to the database
 	public boolean addShopInformation(ShopInformation shopInformation) {
@@ -76,8 +101,9 @@ public class ShopkeeperService {
 			shopInformation.setStatus("Pending");
 
 			// Set Cover image name and lincense document name
-			shopInformation.setCoverImage(shopInformation.getShopId() +"_"+ shopInformation.getCoverImage());
-			shopInformation.setLicenseDocument(shopInformation.getShopId() +"_"+ shopInformation.getLicenseDocument());
+			shopInformation.setCoverImage(shopInformation.getShopId() + "_" + shopInformation.getCoverImage());
+			shopInformation
+					.setLicenseDocument(shopInformation.getShopId() + "_" + shopInformation.getLicenseDocument());
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -85,11 +111,26 @@ public class ShopkeeperService {
 		}
 		return false;
 	}
-	
+
 	// Through this method we find shopInformation through shopid
 	public Optional<ShopInformation> getShopDetailsByShopId(@NonNull String shopId) {
 		Optional<ShopInformation> shopInformation = shopkeeperRepository.findById(shopId);
 		return shopInformation;
+	}
+
+	// Through this method we get shop infromation details by shopEmail.
+	public ShopReviewDTO getShopDetailsByShopEmail(@NonNull String shopEmail) {
+		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+
+		ShopReviewDTO shopReviewDTO = new ShopReviewDTO();
+		shopReviewDTO.setShopName(shopInformation.getShopName());
+		shopReviewDTO.setShopContactNo(shopInformation.getShopContactNo());
+		shopReviewDTO.setState(shopInformation.getState());
+		shopReviewDTO.setDistrict(shopInformation.getDistrict());
+		shopReviewDTO.setLandmark(shopInformation.getLandmark());
+		shopReviewDTO.setLicenseDocument(shopInformation.getLicenseDocument());
+
+		return shopReviewDTO;
 	}
 
 	// Through this method we upadte shopInformation to the database
@@ -121,8 +162,7 @@ public class ShopkeeperService {
 			} else if (shopInformation.getLicenseDocument() == null) {
 				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
 			} else {
-				
-				
+
 				ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 				// shopInformation equal to null that means shop not add successfull if it is
 				// not null then shop added successfully
@@ -147,15 +187,39 @@ public class ShopkeeperService {
 
 		for (Object[] result : results) {
 			PendingShopsDetailsDTO pendingShopDetailDTO = new PendingShopsDetailsDTO();
-			pendingShopDetailDTO.setShopOwnerName((String) result[4] +" "+ (String) result[5]);
+			pendingShopDetailDTO.setShopOwnerName((String) result[4] + " " + (String) result[5]);
 			pendingShopDetailDTO.setShopOwnerEmail((String) result[6]);
 			pendingShopDetailDTO.setShopEmail((String) result[3]);
 			pendingShopDetailDTO.setShopName((String) result[2]);
-			pendingShopDetailDTO.setShopLocation((String) result[0] +" "+ (String) result[1]);
+			pendingShopDetailDTO.setShopLocation((String) result[0] + " " + (String) result[1]);
 
 			pendingShops.add(pendingShopDetailDTO);
 		}
 		return pendingShops;
 	}
-}
 
+	private String imageDirectory = "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+	public List<byte[]> getImagesByShopId(String shopId) throws IOException {
+		List<byte[]> images = new ArrayList<>();
+		File folder = new File(imageDirectory);
+
+		// Filter images by shopId
+		File[] files = folder.listFiles((dir, name) -> name.startsWith(shopId));
+
+		if (files != null) {
+			for (File file : files) {
+				images.add(Files.readAllBytes(file.toPath()));
+			}
+		}
+		return images;
+	}
+
+	// Through this method we can update status  
+	@Transactional
+	public void updateStatus(String shopEmail, String status) {
+
+		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
+		return;
+	}
+}

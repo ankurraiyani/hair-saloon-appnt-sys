@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "shop_informaton")
+@Table(name = "shop_information")
 public class ShopInformation {
 
     @Id
@@ -50,7 +50,7 @@ public class ShopInformation {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "lincence_no")
+    @Column(name = "licence_no")
     private String licenceNo;
 
     @Column(name = "create_date")
