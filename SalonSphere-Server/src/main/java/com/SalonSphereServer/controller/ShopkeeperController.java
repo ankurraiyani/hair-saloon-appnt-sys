@@ -41,17 +41,27 @@ public class ShopkeeperController {
 
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/addshop")
+	@PostMapping(value = "/addshop", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured("shopkeeper")
-	public ResponseEntity<String> addShop(@RequestBody ShopInformation shop) {
-
+	public ResponseEntity<Map<String, String>> addShop(@RequestBody ShopInformation shop) {
+		// ljjsgkufsjbajfgaweeg
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
-		boolean isAdd = shopkeeperService.addShopInformation(shop);
-		if (isAdd)
-			return ResponseEntity.status(HttpStatus.OK).body("Successfully Registered the Shop");
-		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while registering the shop");
+		try {
+			boolean isAdd = shopkeeperService.addShopInformation(shop);
+			Map<String, String> response = new HashMap<>();
+			response.put("status", "success");
+			response.put("message", "Shop Added successfully");
+
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		} catch (Exception e) {
+			Map<String, String> response = new HashMap<>();
+			response.put("status", "error");
+			response.put("message", "Error while adding shop");
+
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+
 	}
 
 	// Through this api we will get shops information through id
@@ -102,7 +112,7 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-	public static String uploadDirectory ="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
