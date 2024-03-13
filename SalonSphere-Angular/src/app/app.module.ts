@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ServiceComponent } from './components/service/service.component';
 import { RegisterService } from './components/services/register/register.service';
 
 //Material Imports
@@ -36,7 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
-import { ShopregisterComponent } from './components/shopregister/shopregister.component';
+import { ShopregisterComponent } from './components/modules/shopkeeper/components/shopregister/shopregister.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { ShopregisterComponent } from './components/shopregister/shopregister.co
     HomeComponent,
     NavbarComponent,
     ForgotPasswordComponent,
-    ServiceComponent,
     ContactComponent,
     AboutComponent,
     RegisterComponent,
