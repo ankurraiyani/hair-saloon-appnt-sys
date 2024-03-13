@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
+import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.service.ShopkeeperService;
 
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
@@ -38,6 +39,9 @@ public class ShopkeeperController {
 
 	@Autowired
 	private ShopkeeperService shopkeeperService;
+
+	@Autowired
+	private ShopkeeperRepository shopkeeperRepository;
 
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -133,4 +137,8 @@ public class ShopkeeperController {
 		return shopkeeperService.getImagesByShopId(shopId);
 	}
 
+	@GetMapping("/search/{userId}/{keyword}")
+	public List<ShowShopDto> searchShops(@PathVariable String userId,@RequestParam String keyword) {
+        return shopkeeperRepository.search(keyword);
+    }
 }
