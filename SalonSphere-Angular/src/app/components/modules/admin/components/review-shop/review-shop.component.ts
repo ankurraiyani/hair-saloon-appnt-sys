@@ -5,17 +5,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import Swal from 'sweetalert2';
 
-interface shopInformation{
-  ownerName:string,
-  ownerEmail:string,
-  shopName: string,
-  shopEmail: string,
-  shopContactNumber: string,
-  state: string,
-  district: string,
-  landmark: string,
-  licence: string
-}
+
 
 @Component({
   selector: 'app-review-shop',
@@ -26,19 +16,21 @@ export class ReviewShopComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,private shopReviewService: ShopReviewService, private router:Router){}
 
-  public shops: shopInformation []= [{
-    ownerName: "Aman Gupta",
-    ownerEmail: "guptaaman6264@gmail.com",
-    shopName: "Ajay Hair Salon",
-    shopEmail: "ajayhairsalon@salon.com",
-    shopContactNumber: "7024859152",
-    state: "Madhya Pradesh",
-    district: "Bhopal",
-    landmark: 'Ashoka garden',
-    licence: 'licence'
-  }];
+  
 
-  name:string ='aman';
+  ownerName:string|null= localStorage.getItem('ownerName');
+  ownerEmail:string|null= localStorage.getItem('ownerEmail');
+  shopEmail: string|null = localStorage.getItem('shopEmail');
+  shopName: string|null = '';
+  shopContactNo:string|null='';
+  state:string|null = '';
+  district:string|null = '';
+  landmark: string|null= '';
+  licenseDocument:string|null='';
+
+
+
+
 
   ngOnInit(): void {
     console.log("come inside the oninit");
@@ -60,7 +52,13 @@ export class ReviewShopComponent implements OnInit{
     //else call the service which  will fetch shop information using the shopEmail
     this.shopReviewService.getReviewShop(shopEmail).subscribe((response:any)=>{
       console.log(response);
-      this.shops= response;
+      this.shopName= response.shopName;
+      this.shopContactNo= response.shopContactNo;
+      this.state= response.state;
+      this.district = response.district;
+      this.landmark = response.landmark;
+      this.licenseDocument = response.licenseDocument;
+      
     },
     error=>{
       console.log("error occured"+ error);
@@ -72,7 +70,7 @@ export class ReviewShopComponent implements OnInit{
       console.log("come inside the approve");
 
       //call the service
-      this.shopReviewService.approveRequest().subscribe(response=>{
+      this.shopReviewService.approveRequest(this.shopEmail).subscribe(response=>{
         console.log(response);
         Swal.fire({
           title: 'Good Job!',
@@ -95,7 +93,7 @@ export class ReviewShopComponent implements OnInit{
     console.log("come inside the reject");
     
     //call the service
-    this.shopReviewService.rejectRequest().subscribe(response=>{
+    this.shopReviewService.rejectRequest(this.shopEmail).subscribe(response=>{
       console.log(response);
       Swal.fire({
         title: 'Good Job!',

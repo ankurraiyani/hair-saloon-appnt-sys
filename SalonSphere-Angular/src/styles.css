@@ -9,7 +9,7 @@
   body {
     background: rgb(250, 250, 250);
     font-family: Lato, Helvetica, Arial, sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
 html, body { height: 100%; }

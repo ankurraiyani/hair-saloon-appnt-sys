@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
+import com.SalonSphereServer.dto.ShopReviewDTO;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
@@ -51,12 +52,11 @@ public class ShopkeeperService {
 		return shops;
 	}
 
-	// call the userRepository and shopkeeperRepository method and fetch all the
-	// Shopkeepers data from
+	// call the userRepository method and fetch all the Shopkeepers data from
 	// database
 	public List<ShopOwnerDTO> getAllShopKeepers() {
 
-		System.out.println("come inside the services method");
+		System.out.println("come inside the services  getAllShopKeepers() method");
 		List<Users> users = userRepository.findByRole("shopkeeper");
 
 		List<ShopOwnerDTO> shopkeepers = new ArrayList<ShopOwnerDTO>();
@@ -64,7 +64,8 @@ public class ShopkeeperService {
 		for (int i = 0; i < users.size(); i++) {
 
 			Users user = users.get(i);
-			long numberOfShops = shopkeeperRepository.countByUserId(user.getUserId());
+			long numberOfShops = shopkeeperRepository.countByUserIdAndStatusAndIsDelete(user.getUserId(), "accepted",
+					false);
 			shopkeepers.add(new ShopOwnerDTO(user.getFirstName() + " " + user.getLastName(), user.getEmail(),
 					user.getContactNumber(), numberOfShops));
 		}
@@ -118,9 +119,18 @@ public class ShopkeeperService {
 	}
 
 	// Through this method we get shop infromation details by shopEmail.
-	public ShopInformation getShopDetailsByShopEmail(@NonNull String shopEmail) {
+	public ShopReviewDTO getShopDetailsByShopEmail(@NonNull String shopEmail) {
 		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
-		return shopInformation;
+
+		ShopReviewDTO shopReviewDTO = new ShopReviewDTO();
+		shopReviewDTO.setShopName(shopInformation.getShopName());
+		shopReviewDTO.setShopContactNo(shopInformation.getShopContactNo());
+		shopReviewDTO.setState(shopInformation.getState());
+		shopReviewDTO.setDistrict(shopInformation.getDistrict());
+		shopReviewDTO.setLandmark(shopInformation.getLandmark());
+		shopReviewDTO.setLicenseDocument(shopInformation.getLicenseDocument());
+
+		return shopReviewDTO;
 	}
 
 	// Through this method we upadte shopInformation to the database
@@ -205,4 +215,11 @@ public class ShopkeeperService {
 		return images;
 	}
 
+	// Through this method we can update status  
+	@Transactional
+	public void updateStatus(String shopEmail, String status) {
+
+		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
+		return;
+	}
 }

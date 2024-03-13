@@ -64,53 +64,59 @@
 
     <div class="card text-center">
         <div class="card-header">
-          Review Shop
+         <h2>Review Shop</h2> 
         </div>
         <div class="card-body">
           <!-- <h5 class="card-title">Special title treatment</h5> -->
           <!-- <p class="card-text">This is all the information About the shop</p> -->
           <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
           <!-- <h2>Shop Name</h2>-->
-          <table class="table table-hover" *ngIf="shops">
-            <tbody *ngFor="let shop of shops">
+          <table class="table" *ngIf="shopName && shopName.length">
+
+            
+
+            <tbody>
+
               <tr>
                 <th scope="row">Owner Name - </th>
-                <td>{{ shop.ownerName }}</td>
+                <td>{{ownerName}}</td>
               </tr>
               <tr>
                 <th scope="row">Owner Email -</th>
-                <td>{{ shop.ownerEmail }}</td>
+                <td>{{ownerEmail}}</td>
               </tr>
               <tr>
                 <th scope="row">Shop Name -</th>
-                <td>{{ shop.shopName }}</td>
+                <td>{{shopName}}</td>
               </tr>
               <tr>
                 <th scope="row">Shop Email - </th>
-                <td>{{ shop.shopEmail }}</td>
+                <td>{{shopEmail}}</td>
               </tr>
               <tr>
                 <th scope="row">Contact Number - </th>
-                <td>{{ shop.shopContactNumber }}</td>
+                <td>{{shopContactNo}}</td>
               </tr>
               <tr>
                 <th scope="row">State - </th>
-                <td>{{ shop.state }}</td>
+                <td>{{state}}</td>
               </tr>
               <tr>
                 <th scope="row">District -</th>
-                <td>{{ shop.district }}</td>
+                <td>{{district}}</td>
               </tr>
               <tr>
                 <th scope="row">Landmark -</th>
-                <td>{{ shop.landmark }}</td>
+                <td>{{landmark}}</td>
               </tr>
               <tr>
                 <th scope="row">Licence -</th>
-                <td>{{ shop.licence }}</td> <!-- You might want to replace this with {{ shop.licence }} if you have this property -->
+                <td>licence</td> <!-- You might want to replace this with {{ shop.licence }} if you have this property -->
               </tr>
             </tbody>
           </table>
+
+
           <div class="btn-div">
           <button class="button approve" (click)="approveShop()">Approve</button>
           <button class="button reject" (click)="rejectShop()">Reject</button>

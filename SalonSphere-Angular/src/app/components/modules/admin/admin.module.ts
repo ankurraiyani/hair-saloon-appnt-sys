@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -10,7 +10,6 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ReviewShopComponent } from './components/review-shop/review-shop.component';
 
 
-
 @NgModule({
   declarations: [
     AdminDashboardComponent,
@@ -18,7 +17,7 @@ import { ReviewShopComponent } from './components/review-shop/review-shop.compon
     ViewRequestComponent,
     HomeComponent,
     ViewUserComponent,
-    ReviewShopComponent,
+    ReviewShopComponent
   ],
   imports: [
     CommonModule,

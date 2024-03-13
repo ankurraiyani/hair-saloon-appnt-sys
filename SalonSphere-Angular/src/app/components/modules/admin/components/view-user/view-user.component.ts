@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ShowCustomerService } from '../../../../services/show-customer/show-customer.service';
+
 import { response } from 'express';
 import { error } from 'console';
 import { ShowShopOwnerService } from '../../../../services/show-shop-owner/show-shop-owner.service';
+import { ShowCustomerService } from '../../../../services/show-customer/show-customer.service';
 
 interface customer{
   fullName:string,

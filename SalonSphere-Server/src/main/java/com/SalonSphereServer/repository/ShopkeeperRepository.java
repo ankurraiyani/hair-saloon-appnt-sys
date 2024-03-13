@@ -14,7 +14,7 @@ import com.SalonSphereServer.entity.ShopInformation;
 @Repository
 public interface ShopkeeperRepository extends JpaRepository<ShopInformation, String> {
 
-	@Query(value = "SELECT * FROM salonsphere.shop_information where user_id=? and isdelete=0;", nativeQuery = true)
+	@Query(value = "SELECT * FROM shop_information where user_id=? and isdelete=0;", nativeQuery = true)
 	public List<ShopInformation> findByUserId(String userId);
 
 	@Transactional
@@ -30,7 +30,12 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 			+ "	         WHERE si.status = 'Pending'", nativeQuery = true)
 	List<Object[]> findPendingShopsDetails();
 
-	@Query(name = "SELECT Count(user_id) from shop_informaton where user_id=? and isdelete = 0 and status = 'accepted'", nativeQuery = true)
-	long countByUserId(String userId);
+	// Through this method we get all the shops count which status is accepted
+	long countByUserIdAndStatusAndIsDelete(String userId, String status, boolean isDelete);
+
+	@Modifying
+	@Transactional
+	@Query("UPDATE ShopInformation e SET e.status = :status WHERE e.shopEmail = :shopEmail")
+	void updateStatusByShopEmail(String shopEmail, String status);
 
 }
