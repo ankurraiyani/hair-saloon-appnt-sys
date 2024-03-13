@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetshopService } from '../../../../services/getshop/getshop.service';
 import { Cookie } from 'ng2-cookies';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-shopkeeper-dashboard',
@@ -10,6 +11,7 @@ import { Cookie } from 'ng2-cookies';
 export class ShopkeeperDashboardComponent implements OnInit {
 
   data:any[]=[]
+  
 
   constructor(private getshop:GetshopService,){
 
@@ -24,5 +26,6 @@ export class ShopkeeperDashboardComponent implements OnInit {
       }
       )
     }
+
 
 }

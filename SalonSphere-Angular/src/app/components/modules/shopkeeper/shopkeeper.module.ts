@@ -21,7 +21,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -47,7 +47,8 @@ import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/
     MatTableModule,
     MatExpansionModule,
     MatAccordion,
-    MatDialogModule
+    MatDialogModule,
+    
   ]
 })
 export class ShopkeeperModule { }
