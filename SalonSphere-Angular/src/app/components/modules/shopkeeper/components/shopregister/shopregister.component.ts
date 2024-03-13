@@ -172,7 +172,7 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-    this.shopregisterService.registerShop(this.register).subscribe(
+    this.shopregisterService.registerShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({

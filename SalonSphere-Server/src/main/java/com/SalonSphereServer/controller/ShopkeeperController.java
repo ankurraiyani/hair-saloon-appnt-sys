@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopInformation;
+import com.SalonSphereServer.response.Response;
 import com.SalonSphereServer.service.ShopServices;
 import com.SalonSphereServer.service.ShopkeeperService;
 
@@ -53,15 +54,15 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/addshop")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> addShop(@RequestBody ShopInformation shop) {
+	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
-			return ResponseEntity.status(HttpStatus.OK).body("Successfully Registered the Shop");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("sucess"));
 		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while registering the shop");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("failer"));
 	}
 
 
