@@ -302,16 +302,46 @@
 
   .button-container{
     margin-top: 7%;
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 50px;
+    justify-content: space-around;
     
   }
 
   .button:hover{
     background-color:  #07cb83;
+  }
+
+  .right{
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .table-container {
+    width: 100%;
+    margin: auto auto;
+    margin-top: 40px;
+    height: 400px;
+    overflow-y: auto;
+    table-layout: fixed;
+  }
+  h2 {
+    text-align: center;
+    margin: auto;
+  }
+  tbody {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100px;
+  }
+  
+  th,td {
+    font-size: 15px;
+    padding: 20px;
+  }
+
+  .disable{
+    display: none;
   }
 
 

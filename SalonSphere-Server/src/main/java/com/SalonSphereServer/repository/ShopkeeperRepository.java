@@ -17,22 +17,20 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query(value = "SELECT * FROM salonsphere.shop_information where user_id=? and isdelete=0;", nativeQuery = true)
 	public List<ShopInformation> findByUserId(String userId);
 
-
-
 	@Transactional
 	@Modifying
 	@Query("UPDATE ShopInformation s SET s.isDelete = :isDelete WHERE s.shopId = :shopId")
 	void updateIsDeleteById(@Param("shopId") String shopId, @Param("isDelete") boolean isDelete);
 
+	// Through this method we get shop Infromation by shop email
+	public ShopInformation findByShopEmail(String shopEmail);
 
-
-	@Query(value = "SELECT si.state, si.district, si.shop_name, u.first_name, u.last_name, u.email, u.contact_number FROM shop_informaton si \r\n"
+	@Query(value = "SELECT si.state, si.district, si.shop_name, si.shop_email, u.first_name, u.last_name, u.email FROM shop_information si \r\n"
 			+ "	         JOIN user_information u ON si.user_id = u.user_id \r\n"
 			+ "	         WHERE si.status = 'Pending'", nativeQuery = true)
 	List<Object[]> findPendingShopsDetails();
 
-
-	//Through this method we get shop Infromation  by shop email
-	public ShopInformation findByShopEmail(String shopEmail);
+	@Query(name = "SELECT Count(user_id) from shop_informaton where user_id=? and isdelete = 0 and status = 'accepted'", nativeQuery = true)
+	long countByUserId(String userId);
 
 }

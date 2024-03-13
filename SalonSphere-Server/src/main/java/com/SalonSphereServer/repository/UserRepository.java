@@ -15,7 +15,8 @@ public interface UserRepository extends JpaRepository<Users, String> {
 
     public List<Users> findByRole(String role);
 
-    @Query(name = "SELECT Count(*) from shop_informaton where user_id= ? and isdelete = 0 and status = 'accepted' ", nativeQuery = true)
+    @Query(name = "SELECT Count(*) from shop_information where user_id= ? and isdelete = 0 and status = 'accepted' ", nativeQuery = true)
     public int findNumberOfShopsByUserId(String userId);
+    
 
 }

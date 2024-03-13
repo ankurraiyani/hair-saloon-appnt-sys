@@ -17,7 +17,7 @@ public class PendingShopsDetailsDTO {
 
 	private String shopOwnerName;
 	private String shopOwnerEmail;
-	private String shopOwnerContactNumber;
+	private String shopEmail;
 	private String shopName;
 	private String shopLocation;
 

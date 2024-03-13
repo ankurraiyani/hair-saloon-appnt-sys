@@ -7,6 +7,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ViewRequestComponent } from './components/view-request/view-request.component';
 import { HomeComponent } from './components/home/home.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
+import { ReviewShopComponent } from './components/review-shop/review-shop.component';
 
 
 
@@ -17,6 +18,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
     ViewRequestComponent,
     HomeComponent,
     ViewUserComponent,
+    ReviewShopComponent,
   ],
   imports: [
     CommonModule,

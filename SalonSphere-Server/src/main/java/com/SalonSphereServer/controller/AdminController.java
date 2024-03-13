@@ -1,7 +1,6 @@
 package com.SalonSphereServer.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,16 +42,17 @@ public class AdminController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<CustomerDTO>> getAllCutomers() {
 
-		System.out.println("come inside the controller");
+		System.out.println("come inside the controller getAllCustomer");
 		return new ResponseEntity<>(customerService.getAllCustomers(), HttpStatus.OK);
 	}
 
-	@GetMapping("/view-shopkeeper")
 	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/view-shopkeeper")
 	public ResponseEntity<List<ShopOwnerDTO>> getAllShopkeepers() {
 
-		System.out.println("come inside the contoller");
-		return new ResponseEntity<>(userService.getAllShopKeepers(), HttpStatus.OK);
+		System.out.println("come inside the contoller shopKeepers");
+		List<ShopOwnerDTO> shopOwnerList = shopKeeperService.getAllShopKeepers();
+		return new ResponseEntity<>(shopOwnerList, HttpStatus.OK);
 	}
 
 	// this delete API for delete the user
@@ -79,9 +79,9 @@ public class AdminController {
 	// @Secured("admin")
 	@PostMapping("/view-requests/review-shop")
 	public ResponseEntity<ShopInformation> getShopById(@RequestParam @NonNull String shopEmail) {
-		System.out.println("getShopinformation by email=============>"+shopEmail);
+		System.out.println("getShopinformation by email=============>" + shopEmail);
 		ShopInformation shopOptional = shopKeeperService.getShopDetailsByShopEmail(shopEmail);
-		if (shopOptional!=null) {
+		if (shopOptional != null) {
 			return new ResponseEntity<>(shopOptional, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
