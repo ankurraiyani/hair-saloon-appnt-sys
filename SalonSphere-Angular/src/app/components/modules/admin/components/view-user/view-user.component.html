@@ -1,121 +1,64 @@
-<div class="main-container"> 
-    <div class="navcontainer"> 
-        <nav class="nav"> 
-            <div class="nav-upper-options"> 
-                <div class="nav-option option1 background-hover"> 
-                    <img src= 
-"https://cdn-icons-png.flaticon.com/128/4116/4116414.png"
-                        class="nav-img" 
-                        alt="dashboard"> 
-                    <a routerLink="/admin/home"><h3>Home</h3></a>
-                </div> 
-
-                <div class="option2 nav-option background-hover"> 
-                    <img src= 
-"https://cdn-icons-png.flaticon.com/128/13884/13884427.png"
-                        class="nav-img" 
-                        alt="articles"> 
-                    <h3><a routerLink="/admin/view-users">View Users</a></h3> 
-                </div> 
-
-                <div class="nav-option option3 background-hover"> 
-                    <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
-                        class="nav-img" 
-                        alt="report"> 
-                    <h3> Report</h3> 
-                </div> 
-
-                <div class="nav-option option4 background-hover"> 
-                    <img src= 
-"https://cdn-icons-png.flaticon.com/128/1436/1436756.png"
-                        class="nav-img" 
-                        alt="institution"> 
-                    <a routerLink="/admin/view-request"><h3>View Request</h3></a>
-                </div> 
-
-                <div class="nav-option option5 background-hover"> 
-                    <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-                        class="nav-img" 
-                        alt="blog"> 
-                    <h3> Profile</h3> 
-                </div> 
-
-                <div class="nav-option option6 background-hover"> 
-                    <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
-                        class="nav-img" 
-                        alt="settings"> 
-                    <h3> Settings</h3> 
-                </div> 
-
-                <div class="nav-option logout background-hover"> 
-                    <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-                        class="nav-img" 
-                        alt="logout"> 
-                    <h3>Logout</h3> 
-                </div> 
-
-            </div> 
-        </nav> 
-    </div> 
-
-    <div class="right">
-    <div class="button-container">
+<div class="right">
+    
+  <div class="button-container">
     <button (click)="showCustomer()" class="button">View Cutomers</button>
     <button (click)="showShopOwner()" class="button">View Shop Owner</button>
-    </div>
+  </div>
 
-    <div class="table-container customer-table " *ngIf="customers && customers.length">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (customer of customers; track customer.fullName) {
-                    <tr>
-                        <td scope="row">{{customer.fullName}}</td>
-                        <td>{{ customer.contactNumber }}</td>
-                        <td>{{ customer.email }}</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        </div>
+  <div
+    class="table-container customer-table"
+    *ngIf="customers && customers.length"
+  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Customer Name</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (customer of customers; track customer.fullName) {
+        <tr>
+          <td scope="row">{{ customer.fullName }}</td>
+          <td>{{ customer.contactNumber }}</td>
+          <td>{{ customer.email }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 
-        <div class="table-container owner-table" *ngIf="shopOwners && shopOwners.length">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Owner Name</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Number of shops</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (shopOwner of shopOwners; track shopOwner.fullName) {
-                        <tr>
-                            <td scope="row">{{shopOwner.fullName}}</td>
-                            <td>{{ shopOwner.contactNumber }}</td>
-                            <td>{{ shopOwner.email }}</td>
-                            <td>{{ shopOwner.numberOfShops }}</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            </div>
-        </div>
-            
-    
-        
+  <div
+    class="table-container owner-table"
+    *ngIf="shopOwners && shopOwners.length"
+  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Owner Name</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Number of shops</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (shopOwner of shopOwners; track shopOwner.fullName) {
+        <tr>
+          <td scope="row">{{ shopOwner.fullName }}</td>
+          <td>{{ shopOwner.contactNumber }}</td>
+          <td>{{ shopOwner.email }}</td>
+          <td>{{ shopOwner.numberOfShops }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <h2 *ngIf="!customers.length && !shopOwners.length">
+    Click the above Button and view the users.
+  </h2>
 </div>
-    
-    
 
+<div class="spinner-border text-success spinner disable" role="status">
+  <span class="sr-only"></span>
+</div>

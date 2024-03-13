@@ -5,12 +5,13 @@ import { ViewRequestComponent } from './components/view-request/view-request.com
 import { HomeComponent } from './components/home/home.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ReviewShopComponent } from './components/review-shop/review-shop.component';
+import { adminGuardGuard } from '../../guards/admin/admin-guard.guard';
 
 
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', canActivate :[adminGuardGuard],
     component: AdminDashboardComponent,
     children: [{path: 'home', component: HomeComponent},
       { path: 'view-request', component: ViewRequestComponent},

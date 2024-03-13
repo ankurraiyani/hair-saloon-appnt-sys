@@ -8,6 +8,7 @@ import { ViewRequestComponent } from './components/view-request/view-request.com
 import { HomeComponent } from './components/home/home.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ReviewShopComponent } from './components/review-shop/review-shop.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -19,6 +20,7 @@ import { ReviewShopComponent } from './components/review-shop/review-shop.compon
     HomeComponent,
     ViewUserComponent,
     ReviewShopComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
