@@ -137,7 +137,10 @@ public class ShopkeeperController {
 	}
 
 	@GetMapping("/search/{userId}/{keyword}")
-	public List<ShowShopDto> searchShops(@PathVariable String userId,@RequestParam String keyword) {
-        return shopkeeperRepository.search(keyword);
+	public ResponseEntity<List<ShowShopDto>> searchShops(@PathVariable String userId , @PathVariable String keyword) {
+		System.out.println("-----------------------------------------------------------------------come inside the controller");
+		System.out.println("===================="+userId + keyword);
+		System.out.println(shopkeeperRepository.search(keyword, userId));
+        return ResponseEntity.status(HttpStatus.OK).body(shopkeeperRepository.search(keyword,userId));
     }
 }

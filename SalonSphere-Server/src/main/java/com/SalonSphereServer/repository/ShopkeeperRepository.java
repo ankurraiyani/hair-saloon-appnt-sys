@@ -28,14 +28,8 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation,Stri
 	@Query(name = "SELECT Count(user_id) from shop_informaton where user_id=? and isdelete = 0 and status = 'accepted'", nativeQuery = true)
 	long countByUserId(String userId);
 
-	@Query(value = "SELECT s FROM ShopInformation s WHERE s.userId = :userId" +
-            "LOWER(s.shopName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(s.shopAddress) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(s.shopCity) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(s.shopEmail) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(s.shopContactNo) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(s.status) LIKE LOWER(CONCAT('%', :keyword, '%'))", nativeQuery = true)
-    List<ShowShopDto> search(@Param("keyword") String keyword);
+	@Query(value = "SELECT * FROM shop_information WHERE user_id = 'userId' and LOWER(shop_name) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(address) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_city) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_email) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_contact_no) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(status) LIKE LOWER(CONCAT('%keyword%'))", nativeQuery = true)
+    List<ShowShopDto> search(@Param("keyword") String keyword, @Param("userId") String userId);
 
 }
 
