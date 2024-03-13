@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Router } from '@angular/router';
 import { ShopRequestsService } from '../../../../services/fetch-shop-requests/shop-requests.service';
-import { response } from 'express';
-import { error } from 'console';
+
 
 interface pandingShop {
-  ownerName: string;
+  shopOwnerName: string;
   shopName: string;
-  contactNumber: string;
-  email: string;
-  location: string;
+  shopEmail: string;
+  shopOwnerEmail: string;
+  shopLocation: string;
 }
 
 @Component({
@@ -21,7 +22,7 @@ interface pandingShop {
 export class ViewRequestComponent implements OnInit {
 
   count:Number=0;
-  constructor(private shopRequest: ShopRequestsService){}
+  constructor(private shopRequest: ShopRequestsService,private router:Router){}
   
   public shops: pandingShop[] = [];
 
@@ -30,17 +31,26 @@ export class ViewRequestComponent implements OnInit {
       
   }
 
+  //get all the shop which is not approved
   public getAllShopRequests(){ 
     console.log("method run");
-    this.shopRequest.getShopRequests().subscribe(response=>{
+    this.shopRequest.getShopRequests().subscribe((response:any)=>{
       console.log(response);
+      this.shops = response;
     },
     error=>{
       console.log("error occure");
     })
   }
 
-  counter(){
-    return this.count;
+  //
+  public getShopInformation(shop:any){
+    console.log(shop.shopOwnerEmail);
+    localStorage.setItem('ownerName', shop.shopOwnerName);
+    localStorage.setItem('ownerEmail', shop.shopOwnerEmail);
+    localStorage.setItem('shopName',shop.shopName);
+    localStorage.setItem('shopEmail', shop.shopEmail);
+    this.router.navigate(['/admin/review-shop']);
   }
+
 }

@@ -31,8 +31,8 @@ public class SecurityConfiguration {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@SuppressWarnings("unused")
-	private Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
+//	@SuppressWarnings("unused")
+//	private Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
