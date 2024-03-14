@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Cookie } from 'ng2-cookies';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class GetshopService {
   constructor(private http : HttpClient) {}
 
   getshop(data:any){
-    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`,data);
-  }
+    
+const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
+    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`, {headers});
+  } 
 
 }

@@ -70,9 +70,7 @@ public class UserService {
 			loginResponse.setRole(findUser1.getRole());
 			return loginResponse;
 			// password not match this else run
-
 		}
 		return null;
 	}
-
 }

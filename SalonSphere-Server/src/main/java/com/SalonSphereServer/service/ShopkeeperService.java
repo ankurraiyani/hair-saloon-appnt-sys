@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.SalonSphereServer.common.Validation;
 import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
+import com.SalonSphereServer.dto.ShopReviewDTO;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
@@ -27,6 +28,7 @@ public class ShopkeeperService {
 
 	@Autowired
 	private ShopkeeperRepository shopkeeperRepository;
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -35,17 +37,6 @@ public class ShopkeeperService {
 
 		List<ShopInformation> shopInfo = shopkeeperRepository.findByUserId(userId);
 		List<ShowShopDto> shops = new ArrayList<ShowShopDto>();
-
-		// for(int i=0;i<shopInfo.size();i++) {
-		// ShopInformation shopInformation = shopInfo.get(i);
-		// shops.add(new ShowShopDto(shopInformation.getShopName(),
-		// shopInformation.getAddress(), shopInformation.getShopCity(),
-		// shopInformation.getShopEmail(), shopInformation.getShopContactNo(),
-		// shopInformation.isShopStatus()));
-
-		// }
-		// System.out.println(shops);
-		// return shops;
 
 		for (ShopInformation s : shopInfo) {
 			ShowShopDto dto = new ShowShopDto();
@@ -65,7 +56,7 @@ public class ShopkeeperService {
 	// database
 	public List<ShopOwnerDTO> getAllShopKeepers() {
 
-		System.out.println("come inside the services method");
+		System.out.println("come inside the services  getAllShopKeepers() method");
 		List<Users> users = userRepository.findByRole("shopkeeper");
 
 		List<ShopOwnerDTO> shopkeepers = new ArrayList<ShopOwnerDTO>();
@@ -73,7 +64,8 @@ public class ShopkeeperService {
 		for (int i = 0; i < users.size(); i++) {
 
 			Users user = users.get(i);
-			long numberOfShops = shopkeeperRepository.countByUserId(user.getUserId());
+			long numberOfShops = shopkeeperRepository.countByUserIdAndStatusAndIsDelete(user.getUserId(), "accepted",
+					false);
 			shopkeepers.add(new ShopOwnerDTO(user.getFirstName() + " " + user.getLastName(), user.getEmail(),
 					user.getContactNumber(), numberOfShops));
 		}
@@ -124,6 +116,21 @@ public class ShopkeeperService {
 	public Optional<ShopInformation> getShopDetailsByShopId(@NonNull String shopId) {
 		Optional<ShopInformation> shopInformation = shopkeeperRepository.findById(shopId);
 		return shopInformation;
+	}
+
+	// Through this method we get shop infromation details by shopEmail.
+	public ShopReviewDTO getShopDetailsByShopEmail(@NonNull String shopEmail) {
+		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+
+		ShopReviewDTO shopReviewDTO = new ShopReviewDTO();
+		shopReviewDTO.setShopName(shopInformation.getShopName());
+		shopReviewDTO.setShopContactNo(shopInformation.getShopContactNo());
+		shopReviewDTO.setState(shopInformation.getState());
+		shopReviewDTO.setDistrict(shopInformation.getDistrict());
+		shopReviewDTO.setLandmark(shopInformation.getLandmark());
+		shopReviewDTO.setLicenseDocument(shopInformation.getLicenseDocument());
+
+		return shopReviewDTO;
 	}
 
 	// Through this method we upadte shopInformation to the database
@@ -205,7 +212,14 @@ public class ShopkeeperService {
 				images.add(Files.readAllBytes(file.toPath()));
 			}
 		}
-
 		return images;
+	}
+
+	// Through this method we can update status  
+	@Transactional
+	public void updateStatus(String shopEmail, String status) {
+
+		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
+		return;
 	}
 }

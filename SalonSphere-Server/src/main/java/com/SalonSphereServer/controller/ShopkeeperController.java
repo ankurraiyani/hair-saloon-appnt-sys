@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.SalonSphereServer.dto.ShowShopDto;
+import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopInformation;
+import com.SalonSphereServer.response.Response;
+import com.SalonSphereServer.service.ShopServices;
 import com.SalonSphereServer.service.ShopkeeperService;
 
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
@@ -39,19 +42,31 @@ public class ShopkeeperController {
 	@Autowired
 	private ShopkeeperService shopkeeperService;
 
+	@Autowired
+	private ShopServices  shopServices;
+
+
+
+
+
+
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value ="/addshop", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured("shopkeeper")
-	public ResponseEntity<String> addShop(@RequestBody ShopInformation shop) {
+	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
+
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
-			return ResponseEntity.status(HttpStatus.OK).body("Successfully Registered the Shop");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfullt Added Shop"));
 		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error while registering the shop");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("Error while adding shop"));
 	}
+
+
+
 
 	// Through this api we will get shops information through id
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -66,6 +81,8 @@ public class ShopkeeperController {
 		}
 	}
 
+
+
 	// Through show-shop api we can show all salons of perticular user
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/show-shop/{userId}")
@@ -73,6 +90,8 @@ public class ShopkeeperController {
 		System.out.println(userId);
 		return new ResponseEntity<>(shopkeeperService.getAllShops(userId), HttpStatus.OK);
 	}
+
+
 
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -89,6 +108,8 @@ public class ShopkeeperController {
 			return ResponseEntity.status(HttpStatus.CREATED).body("update failer");
 	}
 
+
+
 	// Through addshop API we can delete salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/deleteshop")
@@ -101,7 +122,10 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-	public static String uploadDirectory ="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+
+
+	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -126,9 +150,66 @@ public class ShopkeeperController {
 		}
 	}
 
+
+
+
 	@GetMapping("/fetchDocument/{shopId}")
 	public List<byte[]> getImagesByShopId(@PathVariable String shopId) throws IOException {
 		return shopkeeperService.getImagesByShopId(shopId);
+	}
+
+
+
+
+	// API's FOR SALON KEEPER PERFORM OPERATION ON SERVICES INFORMATION HERE
+
+
+	
+	// Through addshop API we can delete salons in the system
+	@CrossOrigin(origins = "http://localhost:4200")
+	@Secured("shopkeeper")
+	@PostMapping("/add-service")
+	public ResponseEntity<String> addService(@RequestBody ServiceInformation serviceInformation) {
+
+		boolean isAdd = shopServices.addShopServices(serviceInformation);
+		if (isAdd == true)
+			return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
+		else
+			return new ResponseEntity<>("Service already exists.", HttpStatus.CONFLICT);
+	}
+
+
+
+
+	// Through addshop API we can update shop Service
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/updateshop-service")
+	@Secured("shopkeeper")
+	public ResponseEntity<String> updateShopService(@RequestBody ServiceInformation serviceInformation) {
+
+		// Call service method to update shopService
+		System.out.println(
+				"======THIS IS SHOPKEEPER CONTROLLER  updatedateShopService METHOD=======" + serviceInformation);
+		boolean isUpdate = shopServices.updateService(serviceInformation);
+		if (isUpdate)
+			return ResponseEntity.status(HttpStatus.CREATED).body("update shop Service successfull");
+		else
+			return ResponseEntity.status(HttpStatus.CREATED).body("shop Service update failer");
+	}
+
+
+
+
+	// Through addshop API we can delete salons in the system
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/deleteshop-service")
+	@Secured("shopkeeper")
+	public ResponseEntity<String> deleteShopService(@RequestParam int id) {
+
+		// Call service method to add shop
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP SERVICE METHOD=======");
+		shopServices.deleteService(id);
+		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
 }

@@ -13,12 +13,23 @@ import { ImageService } from '../../../../services/common/image.service';
 import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
 
+
+
+interface Location {
+    city: string;
+    district: string;
+    state: string;
+  }
+
 @Component({
   selector: 'app-shopregister',
   templateUrl: './shopregister.component.html',
   styleUrl: './shopregister.component.css',
 })
 export class ShopregisterComponent {
+
+  
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,6 +40,7 @@ export class ShopregisterComponent {
   ) {}
 
   file: any;
+  cities: Location[] = [];
 
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
@@ -62,23 +74,33 @@ export class ShopregisterComponent {
       shopCity: [''],
       district: [''],
       state: [''],
-      // country: [''],
+
     });
   }
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
     this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
-      if (data && data[0] && data[0].PostOffice) {
-        data[0].PostOffice.forEach((postOffice: any) => {
-          this.register.patchValue({
-            shopCity: postOffice.Name,
-            district: postOffice.District,
-            state: postOffice.State,
-            // country: postOffice.Country,
-          });
+
+      data[0].PostOffice.forEach((postOffice: any) => {
+        this.register.patchValue({
+          district: postOffice.District,
+          state: postOffice.State,
         });
-      } else {
+      });
+
+
+      if (data && data[0] && data[0].PostOffice) {
+        this.cities = data[0].PostOffice.map((postOffice: any) => ({
+          city: postOffice.Name,
+          district: postOffice.District,
+          state: postOffice.State
+        }));
+
+        this.cities.forEach((city: Location) => {
+          console.log(`City: ${city.city}, District: ${city.district}, State: ${city.state}`);
+        });
+      }else {
         Swal.fire({
           title: 'Error!',
           text: 'Pincode does not exist !!!',
@@ -103,6 +125,7 @@ export class ShopregisterComponent {
       return;
     }
   }
+
   isImageFile(file: File): boolean {
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
     return allowedFormats.includes(file.type);
@@ -172,8 +195,9 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-    this.shopregisterService.registerShop(this.register.value).subscribe(
-      (response: any) => {
+    this.shopregisterService
+      .registerShop(this.register.value)
+      .subscribe((response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({
           title: 'Register Successfully!!',
@@ -183,8 +207,7 @@ export class ShopregisterComponent {
 
         //and Navigate to the login page
         this.router.navigate(['/shopkeeper/view-shop']);
-      }
-    );
+      });
   }
 
   //Validate the name fields
@@ -280,4 +303,7 @@ export class ShopregisterComponent {
     // }
     // const pincode = this.register.get('pincode')?.value;
   }
+}
+function loadCities() {
+  throw new Error('Function not implemented.');
 }

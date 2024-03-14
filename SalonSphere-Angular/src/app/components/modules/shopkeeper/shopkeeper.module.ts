@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormGroup,FormControl } from '@angular/forms';
 
 import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
 
@@ -17,12 +19,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatOption } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
 import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
+import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 
 
 
@@ -30,13 +35,14 @@ import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopk
   declarations: [
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
-    ShopkeeperprofileComponent
+    ShopkeeperprofileComponent,
+    UpdateShopComponent
   ],
   imports: [
     CommonModule,
     ShopkeeperRoutingModule,
     MatCardModule,
-
+    ReactiveFormsModule,
 
     // Mat Imports
     MatTooltipModule,
@@ -51,7 +57,9 @@ import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopk
     MatTableModule,
     MatExpansionModule,
     MatAccordion,
-    MatDialogModule
+    MatDialogModule,
+    MatOption,
+    MatSelectModule
   ]
 })
 export class ShopkeeperModule { }

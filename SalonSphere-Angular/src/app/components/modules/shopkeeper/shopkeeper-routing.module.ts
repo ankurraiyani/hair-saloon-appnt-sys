@@ -6,20 +6,30 @@ import { ShopregisterComponent } from './components/shopregister/shopregister.co
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
 
 const routes: Routes = [
-  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent},
-  {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
-  {path: 'view-shop', component: ViewshopsComponent},
-  {path: 'addshop', component: ShopregisterComponent},
-  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent,
-  children: [
-  {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
-  {path: 'view-shop', component: ViewshopsComponent},
-  ],
-}
+  {
+    path: '',
+    canActivate: [shopGuardGuard],
+    component: ShopkeeperDashboardComponent,
+  },
+  { path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent },
+  { path: 'view-shop', component: ViewshopsComponent },
+  { path: 'updateshop', component: ShopregisterComponent },
+  { path: 'addshop', component: ShopregisterComponent },
+  {
+    path: '',
+    canActivate: [shopGuardGuard],
+    component: ShopkeeperDashboardComponent,
+    children: [
+      { path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent },
+      { path: 'view-shop', component: ViewshopsComponent },
+      { path: 'updateshop', component: ShopregisterComponent },
+      { path: 'addshop', component: ShopregisterComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ShopkeeperRoutingModule { }
+export class ShopkeeperRoutingModule {}
