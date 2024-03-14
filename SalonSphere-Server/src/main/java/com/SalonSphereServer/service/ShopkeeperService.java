@@ -244,4 +244,5 @@ public class ShopkeeperService {
 		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
 		return;
 	}
+
 }

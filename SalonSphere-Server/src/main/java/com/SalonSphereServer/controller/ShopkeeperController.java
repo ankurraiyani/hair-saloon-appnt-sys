@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.SalonSphereServer.dto.ShopServiceDTO;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopInformation;
@@ -217,5 +218,15 @@ public class ShopkeeperController {
 		shopServices.deleteService(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
+
+	@GetMapping("/showservices/{shopId}")
+	public ResponseEntity<List<ShopServiceDTO>> showServices(@PathVariable String shopId) {
+		System.out.println("===========================inside shop keeper controllere show services =====================");
+		List<ShopServiceDTO> serviceslist = shopServices.showServices(shopId);
+		if(serviceslist!=null){
+			return new ResponseEntity<>(serviceslist,HttpStatus.OK);
+		}
+		return new  ResponseEntity<>(serviceslist ,  HttpStatus.NOT_FOUND);
+    }
 
 }
