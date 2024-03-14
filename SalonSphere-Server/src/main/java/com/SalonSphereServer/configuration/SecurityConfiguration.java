@@ -29,13 +29,16 @@ public class SecurityConfiguration {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	// @SuppressWarnings("unused")
+	// private Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
+
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll()
 						.requestMatchers("/shopkeeper/**").permitAll()
-						.requestMatchers("/register").permitAll()// .requestMatchers("/shop-requests").permitAll()
+						.requestMatchers("/register").permitAll()
 						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

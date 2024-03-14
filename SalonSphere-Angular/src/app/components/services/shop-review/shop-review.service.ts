@@ -7,20 +7,21 @@ import { Cookie } from 'ng2-cookies';
 })
 export class ShopReviewService {
   constructor(private httpClient: HttpClient) {}
-
+                                                  
   baseURL: string = 'http://localhost:8081/admin/view-requests/review-shop';
 
   //get the shop which is being Review by the admin
   public getReviewShop(shopEmailId: string) {
-    console.log('come inside the service');
+    console.log('come inside the service get review shop');
 
     //set the token in header
     const token = Cookie.get('token');
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      'Bearer ' + token
-    );
-    return this.httpClient.post(`${this.baseURL}`, shopEmailId, { headers });
+    console.log(token);
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    const params = { shopEmailId: shopEmailId };
+    console.log(headers);
+    console.log(params);
+    return this.httpClient.post(`${this.baseURL}`,shopEmailId,{ headers });
 
   }
 
@@ -28,7 +29,7 @@ export class ShopReviewService {
   approveURL: string = 'http://localhost:8081/admin/view-requests/approve-request';
 
   //approve the shop which i begin review by the admin
-  public approveRequest() {
+  public approveRequest(shopEmail:any) {
     console.log('come inside approve-requests');
 
     //set the token in header
@@ -37,14 +38,15 @@ export class ShopReviewService {
       'Authorization',
       'Bearer ' + token
     );
-    return this.httpClient.get(`${this.approveURL}`, { headers });
+    const params = { shopEmail: shopEmail };
+    return this.httpClient.post(`${this.approveURL}`, shopEmail, { headers });
   }
 
   //URL for Rejection
   rejectURL: string = 'http://localhost:8081/admin/view-requests/reject-request';
 
   //approve the shop which i begin review by the admin
-  public rejectRequest() {
+  public rejectRequest(shopEmail:any) {
     console.log('come inside approve-requests');
 
     //set the token in header
@@ -53,7 +55,9 @@ export class ShopReviewService {
       'Authorization',
       'Bearer ' + token
     );
-    return this.httpClient.get(`${this.rejectURL}`, { headers });
+
+    const params = { shopEmail: shopEmail };
+    return this.httpClient.post(`${this.rejectURL}`, shopEmail, { headers });
   }
 
 
