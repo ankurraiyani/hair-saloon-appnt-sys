@@ -208,4 +208,27 @@ public class ShopkeeperService {
 
 		return images;
 	}
+
+
+	//this method for filter the shops according searchbar keyword 
+	public List<ShowShopDto> searchShops(String userId, String keyword){
+
+		List<ShowShopDto> list= new ArrayList<>();
+		List<ShopInformation> sList=shopkeeperRepository.search(keyword,userId);
+		for(ShopInformation s:sList){
+			ShowShopDto tem=new ShowShopDto();
+			tem.setShopName(s.getShopName());
+			tem.setShopAddress(s.getAddress());
+			tem.setShopEmail(s.getShopEmail());
+			tem.setShopContactNo(s.getShopContactNo());
+			tem.setShopCity(s.getShopCity());
+			tem.setStatus(s.getStatus());
+			
+			list.add(tem);
+		}
+
+		return list;
+	}
+
+
 }

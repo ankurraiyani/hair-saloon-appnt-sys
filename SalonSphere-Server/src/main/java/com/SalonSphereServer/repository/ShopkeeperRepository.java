@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ShopInformation;
 
 @Repository
@@ -28,8 +27,15 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation,Stri
 	@Query(name = "SELECT Count(user_id) from shop_informaton where user_id=? and isdelete = 0 and status = 'accepted'", nativeQuery = true)
 	long countByUserId(String userId);
 
-	@Query(value = "SELECT * FROM shop_information WHERE user_id = 'userId' and LOWER(shop_name) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(address) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_city) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_email) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(shop_contact_no) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(status) LIKE LOWER(CONCAT('%keyword%'))", nativeQuery = true)
-    List<ShowShopDto> search(@Param("keyword") String keyword, @Param("userId") String userId);
+	
+// @Query(value = "SELECT s.* FROM shop_information s INNER JOIN user_information u ON s.user_id = u.user_id WHERE s.user_id = ? AND (LOWER(s.shop_name) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.address) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_city) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_email) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_contact_no) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.status) LIKE LOWER(CONCAT('%keyword%')));", nativeQuery = true)
+//     List<ShowShopDto> search(@Param("keyword") String keyword, @Param("userId") String userId);
+
+@Query(value = "SELECT s.* FROM shop_information s INNER JOIN user_information u ON s.user_id = u.user_id WHERE s.user_id = :userId AND (LOWER(s.shop_name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.address) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_city) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_contact_no) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.status) LIKE LOWER(CONCAT('%', :keyword, '%')))", nativeQuery = true)
+List<ShopInformation> search(@Param("keyword") String keyword, @Param("userId") String userId);
+
+
+
 
 }
 
