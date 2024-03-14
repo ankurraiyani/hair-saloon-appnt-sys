@@ -52,7 +52,7 @@ public class ShopkeeperController {
 	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD======="+ shop.getLicenseDocument());
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
@@ -110,7 +110,7 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
-	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
+	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -184,11 +184,11 @@ public class ShopkeeperController {
 	}
 
 	// Through this api we will get shops information through shopEmail
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/getshopbyemail")
-    public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam String shopEmailId) {
-        System.out.println("=======GetShopinformation by email=============>" + shopEmailId);
-		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmailId);
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/getshopbyemail")
+	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {
+		System.out.println("=======GetShopinformation by email=============>" + shopEmail);
+		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmail);
         if (sDto != null) {
             return new ResponseEntity<>(sDto, HttpStatus.OK);
         } else {

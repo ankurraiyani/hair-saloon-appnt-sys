@@ -13,13 +13,11 @@ import { ImageService } from '../../../../services/common/image.service';
 import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
 
-
-
 interface Location {
-    city: string;
-    district: string;
-    state: string;
-  }
+  city: string;
+  district: string;
+  state: string;
+}
 
 @Component({
   selector: 'app-shopregister',
@@ -27,9 +25,6 @@ interface Location {
   styleUrl: './shopregister.component.css',
 })
 export class ShopregisterComponent {
-
-  
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -40,6 +35,7 @@ export class ShopregisterComponent {
   ) {}
 
   file: any;
+  licence: any;
   cities: Location[] = [];
 
   register = new FormGroup({
@@ -74,14 +70,12 @@ export class ShopregisterComponent {
       shopCity: [''],
       district: [''],
       state: [''],
-
     });
   }
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
     this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
-
       data[0].PostOffice.forEach((postOffice: any) => {
         this.register.patchValue({
           district: postOffice.District,
@@ -89,18 +83,19 @@ export class ShopregisterComponent {
         });
       });
 
-
       if (data && data[0] && data[0].PostOffice) {
         this.cities = data[0].PostOffice.map((postOffice: any) => ({
           city: postOffice.Name,
           district: postOffice.District,
-          state: postOffice.State
+          state: postOffice.State,
         }));
 
         this.cities.forEach((city: Location) => {
-          console.log(`City: ${city.city}, District: ${city.district}, State: ${city.state}`);
+          console.log(
+            `City: ${city.city}, District: ${city.district}, State: ${city.state}`
+          );
         });
-      }else {
+      } else {
         Swal.fire({
           title: 'Error!',
           text: 'Pincode does not exist !!!',
@@ -115,8 +110,22 @@ export class ShopregisterComponent {
   uploadFile(event: any): void {
     this.file = event.target.files[0];
     console.log('file', this.file);
-
     if (!this.isImageFile(this.file)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
+        icon: 'error',
+      });
+      return;
+    }
+  }
+
+  // Document Uploading
+
+  uploadLicenceDocument(event: any): void {
+    this.licence = event.target.files[0];
+    console.log(this.licence);
+    if (!this.isImageFile(this.licence)) {
       Swal.fire({
         title: 'Error!',
         text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
@@ -183,7 +192,9 @@ export class ShopregisterComponent {
 
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
-    formData.set('file', this.file);
+    formData.set(Cookie.get(''), this.file);
+
+    
 
     this.upload.uploadImage(formData).subscribe((data: any) => {
       Swal.fire({
@@ -303,7 +314,4 @@ export class ShopregisterComponent {
     // }
     // const pincode = this.register.get('pincode')?.value;
   }
-}
-function loadCities() {
-  throw new Error('Function not implemented.');
 }

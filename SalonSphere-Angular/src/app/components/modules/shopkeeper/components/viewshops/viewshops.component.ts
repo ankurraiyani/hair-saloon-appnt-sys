@@ -21,9 +21,7 @@ export class ViewshopsComponent {
 
   showinfo(email: string) {
     console.log('This Shop is ' + email);
-
-    if (!localStorage.getItem('shopEmail'))
       localStorage.setItem('shopEmail', email);
-    else localStorage.removeItem('shopEmail');
+    
   }
 }

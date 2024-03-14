@@ -1,21 +1,97 @@
-<mat-card>
-    <mat-card-content>
-        <!-- view-shop-info.component.html -->
-
-<div *ngFor="let shop of shopinfo">
-    <h2>{{ shop.shopName }}</h2>
-    <p>Pincode: {{ shop.pincode }}</p>
-    <p>State: {{ shop.state }}</p>
-    <p>District: {{ shop.district }}</p>
-    <p>Landmark: {{ shop.landmark }}</p>
-    <p>Address: {{ shop.address }}</p>
-    <p>Licence No: {{ shop.licenceNo }}</p>
-    <p>Shop Status: {{ shop.shopStatus }}</p>
-    <img [src]="shop.coverImage" alt="Shop Cover Image" />
-    <p>Email: {{ shop.shopEmail }}</p>
-    <p>Contact No: {{ shop.shopContactNo }}</p>
-    <p>City: {{ shop.shopCity }}</p>
-  </div>
-  
-    </mat-card-content>
-</mat-card>
+<section class="container">
+  <h1>Update Shop Details</h1>
+  <form
+    [formGroup]="register"
+    (ngSubmit)="updateShopDetails()"
+    method="post"
+    class="form"
+  >
+    <div class="input-box">
+      <label>Shop Name</label>
+      <input
+        type="text"
+        formControlName="shopName"
+        value="{{ shopName }}"
+        required
+      />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>Licence Number</label>
+      <input
+        type="text"
+        value="{{ licenceNo }}"
+        formControlName="licenceNo"
+        required
+      />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>Email Address</label>
+      <input type="text" value="{{ shopEmail }}" formControlName="shopEmail" />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="column">
+      <div class="input-box">
+        <label>Shop Contact Number</label>
+        <input
+          type="text"
+          value="{{ shopContactNo }}"
+          formControlName="shopContactNo"
+        />
+      </div>
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="column">
+      <div class="input-box">
+        <label>Address</label>
+        <input type="text" value="{{ address }}" formControlName="address" />
+      </div>
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="column">
+      <div class="input-box">
+        <label>Landmark</label>
+        <input type="text" value="{{ landmark }}" formControlName="landmark" />
+      </div>
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>Pincode</label>
+      <input
+        type="text"
+        value="{{ pincode }}"
+        formControlName="pincode"
+        maxlength="6"
+        #id
+        (blur)="searchByPincode(id.value)"
+      />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>City</label>
+      <select matNativeControl formControlName="shopCity">
+        <option *ngFor="let city of cities" [value]="city.city">
+          {{ city.city }}
+        </option>
+      </select>
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>District</label>
+      <input
+        type="text"
+        placeholder="District"
+        formControlName="district"
+        readonly
+      />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <div class="input-box">
+      <label>State</label>
+      <input type="text" placeholder="State" formControlName="state" readonly />
+    </div>
+    <!-- ------------------------------------------------------------------- -->
+    <button>Submit</button>
+  </form>
+</section>
