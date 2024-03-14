@@ -28,6 +28,7 @@ import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
 import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
+import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
 
 
@@ -36,7 +37,8 @@ import { UpdateShopComponent } from './components/update-shop/update-shop.compon
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
     ShopkeeperprofileComponent,
-    UpdateShopComponent
+    UpdateShopComponent,
+    ViewShopInfoComponent
   ],
   imports: [
     CommonModule,

@@ -178,7 +178,7 @@
     </div>
     <div class="shopContainer">
       <ng-container *ngIf="data && data.length > 0; else noShops">
-        <mat-card class="shopCard" *ngFor="let shop of data">
+        <mat-card class="shopCard" *ngFor="let shop of data" (click)="showinfo(shop.shopEmail)">
           <mat-icon>edit</mat-icon>
           <img [src]="shop.coverImage" alt="Cover Image" />
           <h2>{{ shop.shopName }}</h2>

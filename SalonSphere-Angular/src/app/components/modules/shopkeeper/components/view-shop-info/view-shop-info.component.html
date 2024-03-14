@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-content>
+        <!-- view-shop-info.component.html -->
+
+<div *ngFor="let shop of shopinfo">
+    <h2>{{ shop.shopName }}</h2>
+    <p>Pincode: {{ shop.pincode }}</p>
+    <p>State: {{ shop.state }}</p>
+    <p>District: {{ shop.district }}</p>
+    <p>Landmark: {{ shop.landmark }}</p>
+    <p>Address: {{ shop.address }}</p>
+    <p>Licence No: {{ shop.licenceNo }}</p>
+    <p>Shop Status: {{ shop.shopStatus }}</p>
+    <img [src]="shop.coverImage" alt="Shop Cover Image" />
+    <p>Email: {{ shop.shopEmail }}</p>
+    <p>Contact No: {{ shop.shopContactNo }}</p>
+    <p>City: {{ shop.shopCity }}</p>
+  </div>
+  
+    </mat-card-content>
+</mat-card>
