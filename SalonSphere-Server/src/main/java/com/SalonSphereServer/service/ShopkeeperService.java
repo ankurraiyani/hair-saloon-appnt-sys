@@ -133,6 +133,12 @@ public class ShopkeeperService {
 		return shopReviewDTO;
 	}
 
+	// Through this method we get shop infromation details by shopEmail.
+	public ShopInformation getShopDetailsByShopEmail2(@NonNull String shopEmail) {
+		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+		return shopInformation;
+	}
+
 	// Through this method we upadte shopInformation to the database
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
