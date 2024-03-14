@@ -11,7 +11,7 @@ import { adminGuardGuard } from '../../guards/admin/admin-guard.guard';
 
 const routes: Routes = [
   {
-    path: '', canActivate :[adminGuardGuard],
+    path: '', canActivate: [adminGuardGuard],
     component: AdminDashboardComponent,
     children: [{path: 'home', component: HomeComponent},
       { path: 'view-request', component: ViewRequestComponent},

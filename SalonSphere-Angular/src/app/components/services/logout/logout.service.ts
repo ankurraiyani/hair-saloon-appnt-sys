@@ -18,6 +18,10 @@ export class LogoutService {
     Cookie.delete('name','/','localhost');
     Cookie.delete('role','/','localhost');
 
+    if(Cookie.check('userId')){
+    Cookie.delete('userId','/','localhost')
+    }
+
     console.log("logout successfully");
   }
 }
