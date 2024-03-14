@@ -4,16 +4,24 @@ import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/
 import { shopGuardGuard } from '../../guards/shopkeeper/shop-guard.guard';
 import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
+import { AddshopserviceComponent } from './components/addshopservice/addshopservice.component';
+import { UpdateshopserviceComponent } from './components/updateshopservice/updateshopservice.component';
 
 const routes: Routes = [
   {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent},
   {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
   {path: 'view-shop', component: ViewshopsComponent},
   {path: 'addshop', component: ShopregisterComponent},
+  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'updateshopService', component: UpdateshopserviceComponent},
+ 
   {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent,
   children: [
   {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
   {path: 'view-shop', component: ViewshopsComponent},
+  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'updateshopService', component: UpdateshopserviceComponent},
+
   ],
 }
 ];

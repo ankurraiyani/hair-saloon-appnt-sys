@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 import { ShopregisterService } from '../../../../services/shopregister/shopregister.service';
 import { PincodeService } from '../../../../services/common/pincode.service';
 import { ImageService } from '../../../../services/common/image.service';
-import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
 
 @Component({

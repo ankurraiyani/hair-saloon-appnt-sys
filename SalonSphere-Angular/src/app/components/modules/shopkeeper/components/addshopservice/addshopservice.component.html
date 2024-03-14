@@ -1,0 +1,39 @@
+<div class="container-box">
+  <div class="container">
+    <div class="mssg-box">
+      <h2>Add Your Shop Service Here</h2>
+    </div>
+    <form>
+      <div class="input-box">
+        <label>Service Name</label><br>
+        <input
+          type="text"
+          placeholder="Enter service Name"
+          formControlName="serviceName"
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Service Price</label><br>
+        <input
+          type="text"
+          placeholder="Enter service Price"
+          formControlName="servicePrice"
+          required
+        />
+      </div>
+      
+
+    </form>
+    <div class="btn-box">
+      <a class="btn" id="register" routerLink="./shop-register"
+        >Add Service</a
+      >
+    </div>
+    <div class="btn-box">
+        <a mat-raised-button routerLink="./shop-register"
+          >Back</a
+        >
+      </div>
+  </div>
+</div>
