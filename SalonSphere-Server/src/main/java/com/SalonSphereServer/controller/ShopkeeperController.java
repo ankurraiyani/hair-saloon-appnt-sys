@@ -186,7 +186,7 @@ public class ShopkeeperController {
 	// Through this api we will get shops information through shopEmail
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
-	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam @NonNull String shopEmailId) {
+	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam String shopEmailId) {
 		System.out.println("=======GetShopinformation by email=============>" + shopEmailId);
 		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmailId);
 		if (sDto != null) {
