@@ -19,7 +19,9 @@ import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.dto.ShopReviewDTO;
 import com.SalonSphereServer.repository.UserRepository;
+import com.SalonSphereServer.request.EmailRequest;
 import com.SalonSphereServer.service.CustomerService;
+import com.SalonSphereServer.service.EmailService;
 import com.SalonSphereServer.service.ShopkeeperService;
 
 @RestController
@@ -34,6 +36,9 @@ public class AdminController {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("/view-customer")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -101,6 +106,20 @@ public class AdminController {
 	public ResponseEntity<?> rejectRequest(@RequestBody String shopEmail) {
 		shopKeeperService.updateStatus(shopEmail, "rejected");
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@PostMapping("/sendemail")
+	public ResponseEntity<?> sendEmail(@RequestBody EmailRequest request) {
+		
+		boolean result = this.emailService.sendEmail(request.getSubject() , request.getMessage(), request.getTo());
+		
+		System.out.println(request);
+		if(result) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Email send successfully");
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Email not sent..");
+		}
 	}
 
 }
