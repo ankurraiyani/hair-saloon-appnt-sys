@@ -15,5 +15,5 @@ import lombok.ToString;
 @Builder
 public class Response {
 
-	private String statu;
+	private String status;
 }

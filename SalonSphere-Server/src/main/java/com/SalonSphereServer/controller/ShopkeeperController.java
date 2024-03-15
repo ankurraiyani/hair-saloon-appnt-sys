@@ -44,16 +44,11 @@ public class ShopkeeperController {
 	private ShopkeeperService shopkeeperService;
 
 	@Autowired
-	private ShopServices  shopServices;
-
-
-
-
-
+	private ShopServices shopServices;
 
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(value ="/addshop", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/addshop", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured("shopkeeper")
 	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
@@ -61,13 +56,11 @@ public class ShopkeeperController {
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
-			return ResponseEntity.status(HttpStatus.OK).body(new Response("sucess"));
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
 		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("failer"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error while Updating Shop"));
 	}
-
-
-
 
 	// Through this api we will get shops information through id
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -82,8 +75,6 @@ public class ShopkeeperController {
 		}
 	}
 
-
-
 	// Through show-shop api we can show all salons of perticular user
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/show-shop/{userId}")
@@ -92,24 +83,21 @@ public class ShopkeeperController {
 		return new ResponseEntity<>(shopkeeperService.getAllShops(userId), HttpStatus.OK);
 	}
 
-
-
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updateshop")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> updateShop(@RequestBody ShopInformation shop) {
+	public ResponseEntity<Response> updateShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  UPDATESHOP METHOD=======");
 		boolean isUpdate = shopkeeperService.updateShopInformation(shop);
 		if (isUpdate)
-			return ResponseEntity.status(HttpStatus.CREATED).body("update  successfull");
+			return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Successfully Updated Shop"));
 		else
-			return ResponseEntity.status(HttpStatus.CREATED).body("update failer");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error while Updating Shop"));
 	}
-
-
 
 	// Through addshop API we can delete salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -171,8 +159,6 @@ public class ShopkeeperController {
 
 	// API's FOR SALON KEEPER PERFORM OPERATION ON SERVICES INFORMATION HERE
 
-
-	
 	// Through addshop API we can delete salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("shopkeeper")
@@ -185,9 +171,6 @@ public class ShopkeeperController {
 		else
 			return new ResponseEntity<>("Service already exists.", HttpStatus.CONFLICT);
 	}
-
-
-
 
 	// Through addshop API we can update shop Service
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -204,9 +187,6 @@ public class ShopkeeperController {
 		else
 			return ResponseEntity.status(HttpStatus.CREATED).body("shop Service update failer");
 	}
-
-
-
 
 	// Through addshop API we can delete salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -229,5 +209,17 @@ public class ShopkeeperController {
 		}
 		return new  ResponseEntity<>(serviceslist ,  HttpStatus.NOT_FOUND);
     }
+	// Through this api we will get shops information through shopEmail
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/getshopbyemail")
+	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam String shopEmailId) {
+		System.out.println("=======GetShopinformation by email=============>" + shopEmailId);
+		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmailId);
+		if (sDto != null) {
+			return new ResponseEntity<>(sDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

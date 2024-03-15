@@ -101,9 +101,21 @@ public class ShopkeeperService {
 			shopInformation.setStatus("Pending");
 
 			// Set Cover image name and lincense document name
-			shopInformation.setCoverImage(shopInformation.getShopId() + "_" + shopInformation.getCoverImage());
-			shopInformation
-					.setLicenseDocument(shopInformation.getShopId() + "_" + shopInformation.getLicenseDocument());
+
+			// Find the index of the last backslash (\) character
+			int lastIndex = 0;
+			if (shopInformation.getCoverImage() != null) {
+				lastIndex = shopInformation.getCoverImage().lastIndexOf("\\");
+				shopInformation.setCoverImage(
+						shopInformation.getShopId() + "_" + shopInformation.getCoverImage().substring(lastIndex + 1));
+			}
+
+			if (shopInformation.getLicenseDocument() != null) {
+				lastIndex = shopInformation.getLicenseDocument().lastIndexOf("\\");
+				shopInformation.setLicenseDocument(shopInformation.getShopId() + "_"
+						+ shopInformation.getLicenseDocument().substring(lastIndex + 1));
+			}
+
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -133,17 +145,38 @@ public class ShopkeeperService {
 		return shopReviewDTO;
 	}
 
+	// Through this method we get shop infromation details by shopEmail.
+	public ShopInformation getShopDetailsByShopEmail2(@NonNull String shopEmail) {
+		ShopInformation shopInformation = shopkeeperRepository.findByShopEmail(shopEmail);
+		return shopInformation;
+	}
+
 	// Through this method we upadte shopInformation to the database
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
+		Optional<ShopInformation> existingShopOptional = shopkeeperRepository.findById(shopInformation.getShopId());
 		// Validation
-		if (Validation.emailValidation(shopInformation.getShopEmail())
+		if (existingShopOptional.isPresent() && (Validation.emailValidation(shopInformation.getShopEmail())
 				&& Validation.contactNumberValidation(shopInformation.getShopContactNo())
 				&& Validation.firstNameValidation(shopInformation.getShopName())
 				&& Validation.addressValidation(shopInformation.getAddress())
-				&& Validation.pincodeValidation(shopInformation.getPincode())) {
+				&& Validation.pincodeValidation(shopInformation.getPincode()))) {
 
 			System.out.println("This is shop keeper service inside update service after validation");
+
+			ShopInformation existingShop = existingShopOptional.get();
+			// Update the properties of the existing shop with the new values
+			existingShop.setShopName(shopInformation.getShopName());
+			existingShop.setPincode(shopInformation.getPincode());
+			existingShop.setState(shopInformation.getState());
+			existingShop.setDistrict(shopInformation.getDistrict());
+			existingShop.setLandmark(shopInformation.getLandmark());
+			existingShop.setAddress(shopInformation.getAddress());
+			existingShop.setLicenceNo(shopInformation.getLicenceNo());
+			existingShop.setShopStatus(shopInformation.isShopStatus());
+			existingShop.setShopEmail(shopInformation.getShopEmail());
+			existingShop.setShopContactNo(shopInformation.getShopContactNo());
+			existingShop.setShopCity(shopInformation.getShopCity());
 
 			// Create a java.util.Date object
 			java.util.Date utilDate = new java.util.Date();
@@ -161,13 +194,13 @@ public class ShopkeeperService {
 				shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
 			} else if (shopInformation.getLicenseDocument() == null) {
 				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
-			} else {
-
-				ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
-				// shopInformation equal to null that means shop not add successfull if it is
-				// not null then shop added successfully
-				return shopInformation2 != null;
 			}
+
+			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
+			// shopInformation equal to null that means shop not add successfull if it is
+			// not null then shop added successfully
+			return shopInformation2 != null;
+
 		}
 		return false;
 	}

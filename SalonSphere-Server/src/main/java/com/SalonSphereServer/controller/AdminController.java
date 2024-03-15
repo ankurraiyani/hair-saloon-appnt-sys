@@ -89,6 +89,12 @@ public class AdminController {
 		}
 	}
 
+
+
+
+
+	
+
 	// This method is used to accept the Shop Request by admin
 	@CrossOrigin(origins = "http://localhost:4200")
 	// @Secured("admin")

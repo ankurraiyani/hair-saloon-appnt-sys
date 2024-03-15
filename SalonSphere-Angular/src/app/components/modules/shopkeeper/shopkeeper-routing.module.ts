@@ -3,16 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { shopGuardGuard } from '../../guards/shopkeeper/shop-guard.guard';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
-import { HomeComponent } from './home/home.component';
+import { AddshopserviceComponent } from './components/addshopservice/addshopservice.component';
+import { UpdateshopserviceComponent } from './components/updateshopservice/updateshopservice.component';
 import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 
 const routes: Routes = [
-  {path: '', canActivate: [shopGuardGuard], component: ShopkeeperDashboardComponent,
+  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent},
+  {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
+  {path: 'view-shop', component: ViewshopsComponent},
+  {path: 'addshop', component: ShopregisterComponent},
+  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'updateshopService', component: UpdateshopserviceComponent},
+ 
+  {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent,
   children: [
   {path: 'view-shop', component: ViewshopsComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'add-shop', component:ShopregisterComponent},
-  {path: '', redirectTo: '/shopkeeper/home', pathMatch: 'full'},
+  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'updateshopService', component: UpdateshopserviceComponent},
+
   ],
 }
 ];
