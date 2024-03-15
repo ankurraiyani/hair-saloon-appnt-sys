@@ -24,11 +24,14 @@ import { MatSelectModule } from '@angular/material/select';
 
 
 
+
+
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
 import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
+
 
 
 
@@ -38,7 +41,7 @@ import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-inf
     ViewshopsComponent,
     ShopkeeperprofileComponent,
     UpdateShopComponent,
-    ViewShopInfoComponent
+    ViewShopInfoComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +64,7 @@ import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-inf
     MatAccordion,
     MatDialogModule,
     MatOption,
-    MatSelectModule
+    MatSelectModule, 
   ]
 })
 export class ShopkeeperModule { }

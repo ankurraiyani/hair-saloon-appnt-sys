@@ -140,57 +140,57 @@ public class ShopkeeperService {
 	}
 
 	// Through this method we upadte shopInformation to the database
+	@SuppressWarnings("null")
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
 		Optional<ShopInformation> existingShopOptional = shopkeeperRepository.findById(shopInformation.getShopId());
-        // Validation
-        if (existingShopOptional.isPresent() && (Validation.emailValidation(shopInformation.getShopEmail())
-                && Validation.contactNumberValidation(shopInformation.getShopContactNo())
-                && Validation.firstNameValidation(shopInformation.getShopName())
-                && Validation.addressValidation(shopInformation.getAddress())
-                && Validation.pincodeValidation(shopInformation.getPincode()))) {
+		// Validation
+		if (existingShopOptional.isPresent() && (Validation.emailValidation(shopInformation.getShopEmail())
+				&& Validation.contactNumberValidation(shopInformation.getShopContactNo())
+				&& Validation.firstNameValidation(shopInformation.getShopName())
+				&& Validation.addressValidation(shopInformation.getAddress())
+				&& Validation.pincodeValidation(shopInformation.getPincode()))) {
 
-            System.out.println("This is shop keeper service inside update service after validation");
-            
-            
-            ShopInformation existingShop = existingShopOptional.get();
-            // Update the properties of the existing shop with the new values
-            existingShop.setShopName(shopInformation.getShopName());
-            existingShop.setPincode(shopInformation.getPincode());
-            existingShop.setState(shopInformation.getState());
-            existingShop.setDistrict(shopInformation.getDistrict());
-            existingShop.setLandmark(shopInformation.getLandmark());
-            existingShop.setAddress(shopInformation.getAddress());
-            existingShop.setLicenceNo(shopInformation.getLicenceNo());           
-            existingShop.setShopStatus(shopInformation.isShopStatus());           
-            existingShop.setShopEmail(shopInformation.getShopEmail());
-            existingShop.setShopContactNo(shopInformation.getShopContactNo());
-            existingShop.setShopCity(shopInformation.getShopCity());  
-            
-            // Create a java.util.Date object
-            java.util.Date utilDate = new java.util.Date();
+			System.out.println("This is shop keeper service inside update service after validation");
 
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            shopInformation.setModifyDate(sqlDate);
+			ShopInformation existingShop = existingShopOptional.get();
+			// Update the properties of the existing shop with the new values
+			existingShop.setShopName(shopInformation.getShopName());
+			existingShop.setPincode(shopInformation.getPincode());
+			existingShop.setState(shopInformation.getState());
+			existingShop.setDistrict(shopInformation.getDistrict());
+			existingShop.setLandmark(shopInformation.getLandmark());
+			existingShop.setAddress(shopInformation.getAddress());
+			existingShop.setLicenceNo(shopInformation.getLicenceNo());
+			existingShop.setShopStatus(shopInformation.isShopStatus());
+			existingShop.setShopEmail(shopInformation.getShopEmail());
+			existingShop.setShopContactNo(shopInformation.getShopContactNo());
+			existingShop.setShopCity(shopInformation.getShopCity());
 
-            // Cheking cover image and licence document name is null or not if null then set
-            // default name
-            if (shopInformation.getCoverImage() == null && shopInformation.getLicenseDocument() == null) {
-                shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
-                shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
-            } else if (shopInformation.getCoverImage() == null) {
-                shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
-            } else if (shopInformation.getLicenseDocument() == null) {
-                shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
-            }
+			// Create a java.util.Date object
+			java.util.Date utilDate = new java.util.Date();
 
-                ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
-                // shopInformation equal to null that means shop not add successfull if it is
-                // not null then shop added successfully
-                return shopInformation2 != null;
-        }
-        return false;
+			// Convert java.util.Date to java.sql.Date
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			shopInformation.setModifyDate(sqlDate);
+
+			// Cheking cover image and licence document name is null or not if null then set
+			// default name
+			if (shopInformation.getCoverImage() == null && shopInformation.getLicenseDocument() == null) {
+				shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
+				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
+			} else if (shopInformation.getCoverImage() == null) {
+				shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
+			} else if (shopInformation.getLicenseDocument() == null) {
+				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
+			}
+
+			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
+			// shopInformation equal to null that means shop not add successfull if it is
+			// not null then shop added successfully
+			return shopInformation2 != null;
+		}
+		return false;
 	}
 
 	// Through this method we delete Shop from the database and mark isDeleted=true
@@ -236,7 +236,7 @@ public class ShopkeeperService {
 		return images;
 	}
 
-	// Through this method we can update status  
+	// Through this method we can update status
 	@Transactional
 	public void updateStatus(String shopEmail, String status) {
 

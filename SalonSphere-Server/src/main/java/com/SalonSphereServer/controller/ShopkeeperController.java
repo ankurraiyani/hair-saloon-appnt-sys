@@ -102,12 +102,12 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/deleteshop")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> deleteShop(@RequestParam String shopId) {
+	public ResponseEntity<Response> deleteShop(@RequestBody String shopId) {
 
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP METHOD=======");
 		shopkeeperService.deleteShopById(shopId);
-		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
 	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
@@ -184,6 +184,7 @@ public class ShopkeeperController {
 	}
 
 	// Through this api we will get shops information through shopEmail
+	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
 	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {

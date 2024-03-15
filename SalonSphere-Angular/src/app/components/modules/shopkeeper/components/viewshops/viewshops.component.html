@@ -178,11 +178,13 @@
     </div>
     <div class="shopContainer">
       <ng-container *ngIf="data && data.length > 0; else noShops">
-        <mat-card class="shopCard" *ngFor="let shop of data" >
+        <mat-card class="shopCard" *ngFor="let shop of data">
           <div class="edit">
-            
-            <mat-icon (click)="showinfo(shop.shopEmail)" routerLink="/shopkeeper/viewshopinfo" >edit</mat-icon>
-            
+            <mat-icon
+              (click)="showinfo(shop.shopEmail)"
+              routerLink="/shopkeeper/viewshopinfo"
+              >edit</mat-icon
+            >
           </div>
           <img [src]="shop.coverImage" alt="Cover Image" />
           <h2>{{ shop.shopName }}</h2>
@@ -198,7 +200,7 @@
         <div class="noshopCard">
           <h2>No Shops Added</h2>
           <br />
-          <button class="button"routerLink="/shopkeeper/addshop">
+          <button class="button" routerLink="/shopkeeper/addshop">
             <span class="button-content">Add Shop</span>
           </button>
         </div>

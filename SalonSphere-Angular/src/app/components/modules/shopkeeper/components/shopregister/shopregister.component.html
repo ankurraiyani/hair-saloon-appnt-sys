@@ -232,12 +232,20 @@
         <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>City</label>
-          <select matNativeControl formControlName="shopCity">
-            <option *ngFor="let city of cities" [value]="city.city">
-              {{ city.city }}
-            </option>
-          </select>
+          <mat-select matNativeControl formControlName="shopCity">
+            <mat-option *ngFor="let city of cities" [value]="city.city">
+             <h4>{{ city.city }}</h4> 
+            </mat-option>
+          </mat-select>
         </div>
+
+        <mat-label>City</mat-label>
+        <mat-select >
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+
         <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>District</label>

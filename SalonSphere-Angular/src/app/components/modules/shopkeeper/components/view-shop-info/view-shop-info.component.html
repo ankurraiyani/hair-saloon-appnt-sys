@@ -2,8 +2,7 @@
   <h1>Update Shop Details</h1>
   <form
     [formGroup]="register"
-    (ngSubmit)="updateShopDetails()"
-    method="post"
+    
     class="form"
   >
     <div class="input-box">
@@ -92,6 +91,10 @@
       <input type="text" placeholder="State" formControlName="state" readonly />
     </div>
     <!-- ------------------------------------------------------------------- -->
-    <button>Submit</button>
+
+    <div class="actions"> 
+      <button mat-raised-button style="background-color: red;" (click)="deleteShop()">Delete</button>
+      <button style="background-color: green;"(click)="updateShopDetails()">Update</button>
+    </div>
   </form>
 </section>

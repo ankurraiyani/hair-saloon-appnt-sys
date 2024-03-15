@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { ShopregisterService } from '../../../../services/shopregister/shopregister.service';
 import { ImageService } from '../../../../services/common/image.service';
 import { UpdateShopService } from '../../../../services/updateShop/update-shop.service';
+import { DeleteShopService } from '../../../../services/deleteShop/delete-shop.service';
+
 
 interface Location {
   city: string;
@@ -22,8 +24,22 @@ interface Location {
 })
 export class ViewShopInfoComponent implements OnInit {
 
+
+
+   
+//------------------CONSTRUCTOR---------------------------------------------------------
+constructor(private fetchshopInfo: FetchshopInfoService,private postalCodeService:PincodeService,
+  private router: Router,
+  private shopregisterService: ShopregisterService,
+  private upload: ImageService,
+  private updateShop:UpdateShopService,
+  private deleteShopService:DeleteShopService) {}
+
+
+  // --------------------------------------------------------------------------------------
+
   cities: Location[] = [];
-file:any;
+  file:any;
 
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
@@ -114,9 +130,30 @@ updateShopDetails() {
     );
 }
 
+deleteShop() {
+  Swal.fire({
+    title: "Are you sure you want to delete this shop?",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it",
+    cancelButtonText: "Cancel"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.confirmDeleteShop();
+    }
+  });
+}
 
+confirmDeleteShop() {
+  this.deleteShopService.deleteShop(localStorage.getItem('shopId')).subscribe((data: any) => {
+    // Handle successful deletion
+    Swal.fire("Shop deleted!", "", "success");
+  }, error => {
+    // Handle error
+    Swal.fire("Error", "Failed to delete the shop", "error");
+  });
+}
 
-
+//-----------------Validations-------------------------------------
 //Validate the name fields
 validateName(shopName: any): string {
   let message = '';
@@ -214,16 +251,7 @@ checkPassword(password: any): string {
   shopContactNo: string | null = '';
   shopCity: string | null = '';
   shopId:string ='';
-  
-//---------------------------------------------------------------------------------------------------------
-  constructor(private fetchshopInfo: FetchshopInfoService,private postalCodeService:PincodeService,
-    private router: Router,
-    private shopregisterService: ShopregisterService,
-    private upload: ImageService,
-    private updateShop:UpdateShopService) {}
-
-
-    // --------------------------------------------------------------------------------------
+ 
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
