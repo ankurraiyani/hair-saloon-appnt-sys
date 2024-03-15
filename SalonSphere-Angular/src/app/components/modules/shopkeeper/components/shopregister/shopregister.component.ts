@@ -103,6 +103,7 @@ export class ShopregisterComponent {
       return;
     }
   }
+
   isImageFile(file: File): boolean {
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
     return allowedFormats.includes(file.type);
@@ -176,8 +177,8 @@ export class ShopregisterComponent {
       (response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({
-          title: 'Register Successfully!!',
-          text: 'You can login now',
+          title: 'Shop Registered!!',
+          text: 'Your Shop Registered successfully',
           icon: 'success',
         });
 

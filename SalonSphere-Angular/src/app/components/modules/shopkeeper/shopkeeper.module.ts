@@ -22,7 +22,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
-import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -30,7 +32,9 @@ import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopk
   declarations: [
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
-    ShopkeeperprofileComponent
+    NavbarComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

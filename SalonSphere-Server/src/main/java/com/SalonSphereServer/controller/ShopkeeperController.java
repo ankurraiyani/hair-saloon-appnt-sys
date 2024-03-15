@@ -129,6 +129,7 @@ public class ShopkeeperController {
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
 			throws IOException {
+		
 		try {
 			String originalFileName = file.getOriginalFilename();
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);

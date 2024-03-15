@@ -12,7 +12,7 @@ export const adminGuardGuard: CanActivateFn = (route, state) => {
     return true;
   }
   
-  //otherwise  redirect to login page and return false
+  //else redirect to login page and return false
   router.navigate(['/login']);
   return false;
 };

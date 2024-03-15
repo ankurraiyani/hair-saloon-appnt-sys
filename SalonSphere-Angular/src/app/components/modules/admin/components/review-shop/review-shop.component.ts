@@ -2,19 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShopReviewService } from '../../../../services/shop-review/shop-review.service';
 import { Router } from '@angular/router';
-import { response } from 'express';
 import Swal from 'sweetalert2';
-
 
 
 @Component({
   selector: 'app-review-shop',
   templateUrl: './review-shop.component.html',
-  styleUrl: './review-shop.component.css'
+  styleUrl: './review-shop.component.css',
 })
-export class ReviewShopComponent implements OnInit{
+export class ReviewShopComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private shopReviewService: ShopReviewService,
+    private router: Router
+  ) {}
 
-  constructor(private route: ActivatedRoute,private shopReviewService: ShopReviewService, private router:Router){}
 
   
 
@@ -33,20 +35,21 @@ export class ReviewShopComponent implements OnInit{
 
 
   ngOnInit(): void {
-    console.log("come inside the oninit");
-      this.showAllShopInformation();
+    console.log('come inside the oninit');
+    this.showAllShopInformation();
   }
 
-  showAllShopInformation(){
-    console.log("come inside the show method");
-    
-    //git shop Email from the localStorage 
+  //get all the information of the shop which is begin review
+  showAllShopInformation() {
+    console.log('come inside the show method');
+
+    //git shop Email from the localStorage
     const shopEmail = localStorage.getItem('shopEmail');
 
     //if shopEmail is not present in the localStorage then redirect to the view-request page
     if (shopEmail === null) {
       this.router.navigate(['/admin/view-request']);
-      return ;
+      return;
     }
 
     //else call the service which  will fetch shop information using the shopEmail
@@ -66,49 +69,90 @@ export class ReviewShopComponent implements OnInit{
   }
 
   //approve the shop
-  public approveShop(){
-      console.log("come inside the approve");
+  public approveShop() {
+    //enable the spinner
+    const spinner = document.querySelector('.spinner');
+    spinner?.classList.remove('disable');
 
       //call the service
       this.shopReviewService.approveRequest(this.shopEmail).subscribe(response=>{
         console.log(response);
+        spinner?.classList.add('disable');
         Swal.fire({
-          title: 'Good Job!',
-          text: 'Approved Successfully',
+          title: 'Approved',
+          text: 'Shop has been approved',
           icon: 'success',
         });
+        this.router.navigate(['/admin/view-request']);
       },
-      error=>{
-        console.log("error occured"+error);
+      (error) => {
+        console.log('error occured' + error);
+        spinner?.classList.add('disable');
         Swal.fire({
           title: 'Error',
           text: 'Server error occured',
           icon: 'error',
         });
-      })
+      }
+    );
   }
 
   //reject the shop
-  public rejectShop(){
-    console.log("come inside the reject");
-    
-    //call the service
-    this.shopReviewService.rejectRequest(this.shopEmail).subscribe(response=>{
-      console.log(response);
-      Swal.fire({
-        title: 'Good Job!',
-        text: 'Rejected Successfully',
-        icon: 'success',
-      });
-    },
-    error=>{
-      console.log("error occured"+error);
-      Swal.fire({
-        title: 'Error',
-        text: 'Server error occured',
-        icon: 'error',
-      });
-    })
+  public rejectShop() {
+    //take the surity to reject the job
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      //if the confirmation is done then reject
+      if (result.isConfirmed) {
+        //enable the spinner
+        const spinner = document.querySelector('.spinner');
+        spinner?.classList.remove('disable');
+
+        //call the service
+        this.shopReviewService.rejectRequest(this.shopEmail).subscribe(
+          (response) => {
+            console.log(response);
+            spinner?.classList.add('disable');
+            Swal.fire({
+              title: 'Rejected!',
+              text: 'Shop has been Rejected.',
+              icon: 'success',
+            });
+            this.router.navigate(['/admin/view-request']);
+          },
+          (error) => {
+            console.log('error in rejection');
+            spinner?.classList.add('disable');
+            Swal.fire({
+              title: 'Error',
+              text: 'Server error occured',
+              icon: 'error',
+            });
+          }
+        );
+      }
+
+      //else do nothing
+      else {
+        return;
+      }
+    });
   }
 
+  public viewLicence() {
+    //get image URL which has been come from backend
+    const imgURL = this.licenseDocument;
+    console.log(imgURL);
+    Swal.fire({
+      imageUrl: `../../../../../../assets/images/${imgURL}`,
+      imageAlt: "Aman's Image",
+    });
+  }
 }
