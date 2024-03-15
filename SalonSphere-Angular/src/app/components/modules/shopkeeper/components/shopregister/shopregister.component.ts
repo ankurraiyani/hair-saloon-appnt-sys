@@ -12,6 +12,12 @@ import { PincodeService } from '../../../../services/common/pincode.service';
 import { ImageService } from '../../../../services/common/image.service';
 import { Cookie } from 'ng2-cookies';
 
+interface Location {
+  city: string;
+  district: string;
+  state: string;
+}
+
 @Component({
   selector: 'app-shopregister',
   templateUrl: './shopregister.component.html',
@@ -28,6 +34,8 @@ export class ShopregisterComponent {
   ) {}
 
   file: any;
+  licence: any;
+  cities: Location[] = [];
 
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
@@ -61,21 +69,30 @@ export class ShopregisterComponent {
       shopCity: [''],
       district: [''],
       state: [''],
-      // country: [''],
     });
   }
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
     this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
+      data[0].PostOffice.forEach((postOffice: any) => {
+        this.register.patchValue({
+          district: postOffice.District,
+          state: postOffice.State,
+        });
+      });
+
       if (data && data[0] && data[0].PostOffice) {
-        data[0].PostOffice.forEach((postOffice: any) => {
-          this.register.patchValue({
-            shopCity: postOffice.Name,
-            district: postOffice.District,
-            state: postOffice.State,
-            // country: postOffice.Country,
-          });
+        this.cities = data[0].PostOffice.map((postOffice: any) => ({
+          city: postOffice.Name,
+          district: postOffice.District,
+          state: postOffice.State,
+        }));
+
+        this.cities.forEach((city: Location) => {
+          console.log(
+            `City: ${city.city}, District: ${city.district}, State: ${city.state}`
+          );
         });
       } else {
         Swal.fire({
@@ -92,7 +109,6 @@ export class ShopregisterComponent {
   uploadFile(event: any): void {
     this.file = event.target.files[0];
     console.log('file', this.file);
-
     if (!this.isImageFile(this.file)) {
       Swal.fire({
         title: 'Error!',
@@ -160,7 +176,9 @@ export class ShopregisterComponent {
 
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
-    formData.set('file', this.file);
+    formData.set(Cookie.get(''), this.file);
+
+    
 
     this.upload.uploadImage(formData).subscribe((data: any) => {
       Swal.fire({
@@ -172,6 +190,10 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
+<<<<<<< HEAD
+=======
+
+>>>>>>> b5c9d736a62eca823ed6c9008fcfb4d85cc5f410
     this.shopregisterService.registerShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
@@ -183,8 +205,7 @@ export class ShopregisterComponent {
 
         //and Navigate to the login page
         this.router.navigate(['/shopkeeper/view-shop']);
-      }
-    );
+      });
   }
 
   //Validate the name fields

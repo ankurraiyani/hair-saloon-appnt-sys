@@ -2,6 +2,13 @@
       <div class="cards">
       <ng-container *ngIf="data && data.length">
         <mat-card class="shopCard" *ngFor="let shop of data">
+          <div class="edit">
+            <mat-icon
+              (click)="showinfo(shop.shopEmail)"
+              routerLink="/shopkeeper/viewshopinfo"
+              >edit</mat-icon
+            >
+          </div>
           <img [src]="shop.coverImage" alt="Cover Image" />
           <h2>{{ shop.shopName }}</h2>
           <h3>{{ shop.shopAddress }}</h3>
@@ -11,6 +18,16 @@
           <h3>{{ shop.status }}</h3>
         </mat-card>
       </ng-container>
+
+      <ng-template #noShops>
+        <div class="noshopCard">
+          <h2>No Shops Added</h2>
+          <br />
+          <button class="button" routerLink="/shopkeeper/addshop">
+            <span class="button-content">Add Shop</span>
+          </button>
+        </div>
+      </ng-template>
     </div>
 
     <div class="add-shop">

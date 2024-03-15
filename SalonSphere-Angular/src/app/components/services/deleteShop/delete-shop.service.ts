@@ -5,17 +5,13 @@ import { Cookie } from 'ng2-cookies';
 @Injectable({
   providedIn: 'root'
 })
-export class GetshopService {
-
-  // Url Subject to change
-  private baseURL: String = 'http://localhost:8081';
+export class DeleteShopService {
 
   constructor(private http : HttpClient) {}
 
-  getshop(data:any){
+  deleteShop(shopId:any){
     
 const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
-    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`, {headers});
+    return this.http.post(`http://localhost:8081/shopkeeper/deleteshop`, shopId ,{headers});
   } 
-
 }

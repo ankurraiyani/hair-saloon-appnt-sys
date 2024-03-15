@@ -18,4 +18,10 @@ export class ViewshopsComponent {
       this.data = data;
     });
   }
+
+  showinfo(email: string) {
+    console.log('This Shop is ' + email);
+      localStorage.setItem('shopEmail', email);
+    
+  }
 }

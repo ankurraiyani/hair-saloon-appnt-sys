@@ -28,6 +28,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -67,7 +68,8 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatDividerModule,
     MatTableModule,
     MatExpansionModule,
-    MatAccordion
+    MatAccordion,
+    MatSelectModule
   ],
   providers: [
     provideClientHydration(),

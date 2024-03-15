@@ -152,6 +152,7 @@ public class ShopkeeperService {
 	}
 
 	// Through this method we upadte shopInformation to the database
+	@SuppressWarnings("null")
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
 		Optional<ShopInformation> existingShopOptional = shopkeeperRepository.findById(shopInformation.getShopId());
@@ -200,7 +201,6 @@ public class ShopkeeperService {
 			// shopInformation equal to null that means shop not add successfull if it is
 			// not null then shop added successfully
 			return shopInformation2 != null;
-
 		}
 		return false;
 	}

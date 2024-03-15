@@ -19,6 +19,17 @@
   color: #000;
 }
 
+.edit{
+  margin-left: 400px;
+  transition: all 0.4s ease;
+}
+
+.edit:hover{
+  cursor: pointer;
+  scale: 1.5;
+}
+/* **************************** */
+
 .cards{
   display: flex;
   flex-wrap: wrap;

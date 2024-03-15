@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormGroup,FormControl } from '@angular/forms';
 
 import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
 
@@ -17,17 +19,22 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatOption } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
 import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
-import { AddshopserviceComponent } from './components/addshopservice/addshopservice.component';
-import { UpdateshopserviceComponent } from './components/updateshopservice/updateshopservice.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateShopComponent } from './components/update-shop/update-shop.component';
+import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -36,16 +43,17 @@ import { NavbarComponent } from './navbar/navbar.component';
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
     ShopkeeperprofileComponent,
-    AddshopserviceComponent,
-    UpdateshopserviceComponent,
+    UpdateShopComponent,
+    ViewShopInfoComponent,
+    NavbarComponent,
     HeaderComponent,
-    NavbarComponent
+    HomeComponent
   ],
   imports: [
     CommonModule,
     ShopkeeperRoutingModule,
     MatCardModule,
-
+    ReactiveFormsModule,
 
     // Mat Imports
     MatTooltipModule,
@@ -61,7 +69,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatExpansionModule,
     MatAccordion,
     MatDialogModule,
-    
+    MatOption,
+    MatSelectModule, 
   ]
 })
 export class ShopkeeperModule { }
