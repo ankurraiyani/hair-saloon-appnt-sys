@@ -110,12 +110,16 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+
+
+
+	public static String uploadDirectory = "E:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
 			throws IOException {
+		
 		try {
 			String originalFileName = file.getOriginalFilename();
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);

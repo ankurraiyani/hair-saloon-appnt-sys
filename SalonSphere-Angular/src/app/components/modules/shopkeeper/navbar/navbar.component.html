@@ -1,0 +1,55 @@
+
+<div class="main-container">
+    <div class="navcontainer">
+      <nav class="nav">
+        <div class="nav-upper-options">
+          <div class="nav-option option1 active" (click)="navigateHome()" >
+            <mat-icon>dashboard</mat-icon>
+            <h3>Home</h3>
+          </div>
+  
+          <div class="option2 nav-option" (click)="navigateAddShop()">
+            <mat-icon>add_business</mat-icon>
+            <h3>Add Shop</h3>
+          </div>
+  
+          <div class="nav-option option3" (click)="navigateViewShop()" >
+            <mat-icon>storefront</mat-icon>
+            <h3>View Shops</h3>
+          </div>
+  
+          <div class="nav-option option4">
+            <mat-icon>add_circle</mat-icon>
+            <h3><a routerLink="/admin/view-request">Add Services</a></h3>
+          </div>
+  
+          <div class="nav-option option5">
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
+              class="nav-img"
+              alt="blog"
+            />
+            <h3>Profile</h3>
+          </div>
+  
+          <div class="nav-option option6">
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
+              class="nav-img"
+              alt="settings"
+            />
+            <h3>Settings</h3>
+          </div>
+  
+          <div class="nav-option logout option7"(click)="navigateLogout()">
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+              class="nav-img"
+              alt="logout"
+            />
+            <h3>Logout</h3>
+          </div>
+        </div>
+      </nav>
+    </div>
+  

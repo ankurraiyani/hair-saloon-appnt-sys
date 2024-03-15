@@ -120,21 +120,6 @@ export class ShopregisterComponent {
     }
   }
 
-  // Document Uploading
-
-  uploadLicenceDocument(event: any): void {
-    this.licence = event.target.files[0];
-    console.log(this.licence);
-    if (!this.isImageFile(this.licence)) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
-        icon: 'error',
-      });
-      return;
-    }
-  }
-
   isImageFile(file: File): boolean {
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
     return allowedFormats.includes(file.type);
@@ -206,13 +191,13 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-    this.shopregisterService
-      .registerShop(this.register.value)
-      .subscribe((response: any) => {
+
+    this.shopregisterService.registerShop(this.register.value).subscribe(
+      (response: any) => {
         console.log('Response from server : ', response);
         Swal.fire({
-          title: 'Register Successfully!!',
-          text: 'You can login now',
+          title: 'Shop Registered!!',
+          text: 'Your Shop Registered successfully',
           icon: 'success',
         });
 

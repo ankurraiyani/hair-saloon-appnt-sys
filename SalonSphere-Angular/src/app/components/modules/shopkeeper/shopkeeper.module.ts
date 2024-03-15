@@ -32,6 +32,9 @@ import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopk
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
+import { NavbarComponent } from './navbar/navbar.component';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -42,6 +45,9 @@ import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-inf
     ShopkeeperprofileComponent,
     UpdateShopComponent,
     ViewShopInfoComponent,
+    NavbarComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
