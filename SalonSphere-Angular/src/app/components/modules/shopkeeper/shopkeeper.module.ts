@@ -26,7 +26,8 @@ import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopk
 import { AddshopserviceComponent } from './components/addshopservice/addshopservice.component';
 import { UpdateshopserviceComponent } from './components/updateshopservice/updateshopservice.component';
 import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from '../admin/components/navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
 
 
 
