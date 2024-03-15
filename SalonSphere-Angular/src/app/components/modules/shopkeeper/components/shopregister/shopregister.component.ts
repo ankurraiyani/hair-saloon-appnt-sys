@@ -190,10 +190,6 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-<<<<<<< HEAD
-=======
-
->>>>>>> b5c9d736a62eca823ed6c9008fcfb4d85cc5f410
     this.shopregisterService.registerShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
