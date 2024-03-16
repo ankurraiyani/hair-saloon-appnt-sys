@@ -12,14 +12,14 @@ const routes: Routes = [
   {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
   {path: 'view-shop', component: ViewshopsComponent},
   {path: 'addshop', component: ShopregisterComponent},
-  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'addshopservice', component: AddshopserviceComponent},
   {path: 'updateshopService', component: UpdateshopserviceComponent},
  
   {path: '', canActivate:[shopGuardGuard],component: ShopkeeperDashboardComponent,
   children: [
   {path: 'shopkeeper-dashboard', component: ShopkeeperDashboardComponent},
   {path: 'view-shop', component: ViewshopsComponent},
-  {path: 'addshopservise', component: AddshopserviceComponent},
+  {path: 'addshopservice', component: AddshopserviceComponent},
   {path: 'updateshopService', component: UpdateshopserviceComponent},
 
   ],

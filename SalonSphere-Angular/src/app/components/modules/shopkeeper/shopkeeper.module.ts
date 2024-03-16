@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -40,9 +42,12 @@ import { UpdateshopserviceComponent } from './components/updateshopservice/updat
     CommonModule,
     ShopkeeperRoutingModule,
     MatCardModule,
+    ReactiveFormsModule,
+    
 
 
     // Mat Imports
+    MatInputModule,
     MatTooltipModule,
     MatButtonModule,  
     MatCardModule,

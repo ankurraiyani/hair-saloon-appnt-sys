@@ -1,39 +1,24 @@
-<div class="container-box">
-  <div class="container">
-    <div class="mssg-box">
-      <h2>Add Your Shop Service Here</h2>
-    </div>
-    <form>
-      <div class="input-box">
-        <label>Service Name</label><br>
-        <input
-          type="text"
-          placeholder="Enter service Name"
-          formControlName="serviceName"
-          required
-        />
-      </div>
-      <div class="input-box">
-        <label>Service Price</label><br>
-        <input
-          type="text"
-          placeholder="Enter service Price"
-          formControlName="servicePrice"
-          required
-        />
-      </div>
-      
+<div class="d-flex justify-content-center">
 
-    </form>
-    <div class="btn-box">
-      <a class="btn" id="register" routerLink="./shop-register"
-        >Add Service</a
-      >
-    </div>
-    <div class="btn-box">
-        <a mat-raised-button routerLink="./shop-register"
-          >Back</a
-        >
+  <form [formGroup]="addServiceForm" (ngSubmit)="getFormData()" class="mt-5 w-50">
+
+    <div class="border border-info p-5" formArrayName="serviceList">
+
+      <div *ngFor="let student of serviceListArray().controls; let i = index">
+
+        <div [formGroupName]="i" class="border border-dark my-2 p-5">
+          <input  type="text" placeholder="Service Name" formControlName="serviceName" />
+          <input type="text" placeholder="Service Price" formControlName="servicePrice" />
+          <input type="text" placeholder="Service Duration"  formControlName="serviceDuration" />
+          <button type="button" *ngIf="serviceListArray().length > 1" (click)="removeService(i)" class="btn btn-sm btn-danger ms-1">Remove Service</button>
+
+        </div>
+
       </div>
-  </div>
+    </div>
+    <button type="button" (click)="addService()" class="btn btn-sm btn-primary mt-4 mb-5">Add New Service</button>
+    <button type="submit" class="btn btn-sm btn-success mt-4 ms-2 mb-5">Submit</button>
+
+  </form>
+{{addServiceForm.value|json}}
 </div>

@@ -1,6 +1,10 @@
 package com.SalonSphereServer.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,67 +14,73 @@ import com.SalonSphereServer.repository.ShopServicesRepository;
 
 @Service
 public class ShopServices {
-    @Autowired
-    private ShopServicesRepository servicesRepository;
-    
-    
-    
+	@Autowired
+	private ShopServicesRepository servicesRepository;
 
-    public boolean addShopServices(ServiceInformation serviceInformation) {
+	public boolean addShopServices(@NonNull List<ServiceInformation> serviceInformation) {
 
-        // Validation Check
-        if (Validation.firstNameValidation(serviceInformation.getServiceName())
-                && (serviceInformation.getServicePrice() > 0)) {
+		List<ServiceInformation> serviceInformationList = new ArrayList<>();
 
-            // Setting some Defualt value
-            // Create a java.util.Date object
-            java.util.Date utilDate = new java.util.Date();
+		for (ServiceInformation serviceInformation2 : serviceInformation) {
+			// Validation Check
+			System.out.println("=validation=>"+Validation.firstNameValidation(serviceInformation2.getServiceName()));
+			if (Validation.firstNameValidation(serviceInformation2.getServiceName())&& (serviceInformation2.getServicePrice() > 0)) {
 
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+				// Setting some Defualt value
+				// Create a java.util.Date object
+				java.util.Date utilDate = new java.util.Date();
 
-            serviceInformation.setCreateDate(sqlDate);
-            serviceInformation.setModifyDate(sqlDate);
+				// Convert java.util.Date to java.sql.Date
+				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-            ServiceInformation sInformation = servicesRepository.save(serviceInformation);
-            if (sInformation != null)
-                return true;
-        }
-        return false;
-    }
+				serviceInformation2.setCreateDate(sqlDate);
+				serviceInformation2.setModifyDate(sqlDate);
 
-    public boolean updateService(ServiceInformation serviceInformation) {
-        // Retrieve the service from the database
-        ServiceInformation existingService = servicesRepository.findById(serviceInformation.getServiceId())
-                .orElse(null);
+				System.out.println("====in loop==="+serviceInformation2);
+				serviceInformationList.add(serviceInformation2);
+			}
+		}
+		System.out.println("==LIST SIZE===\n"+serviceInformationList.isEmpty());
+		System.out.println("====================================\n"+serviceInformationList);
+		List<ServiceInformation> sInformation = servicesRepository.saveAll(serviceInformationList);
+		System.out.println("Result===============================\n"+sInformation);
+		if (sInformation.isEmpty())
+			return true;
+		return false;
+	}
 
-        // Update the service fields excluding serviceId
-        if (existingService != null && (Validation.firstNameValidation(serviceInformation.getServiceName())
-                && (serviceInformation.getServicePrice() > 0))) {
+	public boolean updateService(ServiceInformation serviceInformation) {
+		// Retrieve the service from the database
+		ServiceInformation existingService = servicesRepository.findById(serviceInformation.getServiceId())
+				.orElse(null);
 
-            existingService.setServiceName(serviceInformation.getServiceName());
-            existingService.setServicePrice(serviceInformation.getServicePrice());
-            existingService.setShopId(serviceInformation.getShopId());
-            existingService.setCreateDate(serviceInformation.getCreateDate());
+		// Update the service fields excluding serviceId
+		if (existingService != null && (Validation.firstNameValidation(serviceInformation.getServiceName())
+				&& (serviceInformation.getServicePrice() > 0))) {
 
-            // Create a java.util.Date object
-            java.util.Date utilDate = new java.util.Date();
+			existingService.setServiceName(serviceInformation.getServiceName());
+			existingService.setServicePrice(serviceInformation.getServicePrice());
+			existingService.setShopId(serviceInformation.getShopId());
+			existingService.setCreateDate(serviceInformation.getCreateDate());
 
-            // Convert java.util.Date to java.sql.Date
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			// Create a java.util.Date object
+			java.util.Date utilDate = new java.util.Date();
 
-            existingService.setModifyDate(sqlDate);
+			// Convert java.util.Date to java.sql.Date
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 
-            // Save the updated service
-            servicesRepository.save(existingService);
-            return true;
-        }
-        return false;
-    }
+			existingService.setModifyDate(sqlDate);
 
-    @Transactional
-    public void deleteService(int id) {
-        servicesRepository.updateIsDeleteById(true,id);
-        return;
-    }
+			// Save the updated service
+			servicesRepository.save(existingService);
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional
+	public void deleteService(int id) {
+		servicesRepository.updateIsDeleteById(true, id);
+		return;
+	}
 }

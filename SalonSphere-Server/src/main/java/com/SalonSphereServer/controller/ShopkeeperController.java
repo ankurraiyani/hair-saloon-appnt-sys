@@ -146,8 +146,8 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("shopkeeper")
 	@PostMapping("/add-service")
-	public ResponseEntity<String> addService(@RequestBody ServiceInformation serviceInformation) {
-
+	public ResponseEntity<String> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD======="+serviceInformation);
 		boolean isAdd = shopServices.addShopServices(serviceInformation);
 		if (isAdd == true)
 			return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
@@ -186,7 +186,7 @@ public class ShopkeeperController {
 	// Through this api we will get shops information through shopEmail
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
-	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam String shopEmailId) {
+	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam @NonNull String shopEmailId) {
 		System.out.println("=======GetShopinformation by email=============>" + shopEmailId);
 		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmailId);
 		if (sDto != null) {
