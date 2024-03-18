@@ -27,17 +27,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
-import { AddshopserviceComponent } from './components/addshopservice/addshopservice.component';
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
-import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
-import { UpdateshopserviceComponent } from './components/updateshopservice/updateshopservice.component';
-import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
+import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
+import { UpdateShopComponent } from './components/update-shop/update-shop.component';
+import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { UpdateServiceComponent } from './components/update-service/update-service.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 
 
 
@@ -46,13 +45,12 @@ import { UpdateShopComponent } from './components/update-shop/update-shop.compon
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
     ShopkeeperprofileComponent,
-    AddshopserviceComponent,
-    UpdateshopserviceComponent,
+    UpdateShopComponent,
     ViewShopInfoComponent,
     NavbarComponent,
     HeaderComponent,
     HomeComponent,
-    UpdateShopComponent
+    UpdateServiceComponent
   ],
   imports: [
     CommonModule,

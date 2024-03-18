@@ -1,0 +1,41 @@
+<section class="container">
+    <h1>Register Your Shop</h1>
+    <form
+      [formGroup]="updateServiceForm"
+      (ngSubmit)="updateservice()"
+      method="post"
+      class="form"
+    >
+      <div class="input-box">
+        <label>Service Name</label>
+        <input
+          type="text"
+          placeholder="Enter Service Name"
+          formControlName="serviceName"
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Service Price</label>
+        <input
+          type="text"
+          placeholder="Enter Service Price"
+          formControlName="servicePrice"
+          
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Duration</label>
+        <input
+          type="text"
+          placeholder="Enter Service Duration"
+          formControlName="serviceDuration"
+         
+          
+        />
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>

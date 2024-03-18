@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.SalonSphereServer.dto.ShopServiceDTO;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopInformation;
@@ -136,10 +137,25 @@ public class ShopkeeperController {
 		}
 	}
 
+	//this Api used for fetch the files or images
 	@GetMapping("/fetchDocument/{shopId}")
 	public List<byte[]> getImagesByShopId(@PathVariable String shopId) throws IOException {
 		return shopkeeperService.getImagesByShopId(shopId);
 	}
+
+
+	//this api is for filter the shop
+	@GetMapping("/search/{userId}/{keyword}")
+	public ResponseEntity<List<ShowShopDto>> searchShops(@PathVariable String userId , @PathVariable String keyword) {
+		System.out.println("====come inside the ShopKeeper controller search shop method =================");
+
+		List<ShowShopDto> filterShop = shopkeeperService.searchShops(userId, keyword);
+		if(filterShop!=null){
+			return new ResponseEntity<>(filterShop,HttpStatus.OK);
+		}
+		return new  ResponseEntity<>(filterShop ,  HttpStatus.NOT_FOUND);
+    }
+
 
 	// API's FOR SALON KEEPER PERFORM OPERATION ON SERVICES INFORMATION HERE
 
@@ -184,6 +200,15 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
+	@GetMapping("/showservices/{shopId}")
+	public ResponseEntity<List<ShopServiceDTO>> showServices(@PathVariable String shopId) {
+		System.out.println("===========================inside shop keeper controllere show services =====================");
+		List<ShopServiceDTO> serviceslist = shopServices.showServices(shopId);
+		if(serviceslist!=null){
+			return new ResponseEntity<>(serviceslist,HttpStatus.OK);
+		}
+		return new  ResponseEntity<>(serviceslist ,  HttpStatus.NOT_FOUND);
+    }
 	// Through this api we will get shops information through shopEmail
 	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")

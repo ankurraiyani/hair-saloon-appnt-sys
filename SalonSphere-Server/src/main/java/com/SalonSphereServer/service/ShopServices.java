@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.SalonSphereServer.common.Validation;
+import com.SalonSphereServer.dto.ShopServiceDTO;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.repository.ShopServicesRepository;
 
@@ -78,9 +79,28 @@ public class ShopServices {
 		return false;
 	}
 
-	@Transactional
-	public void deleteService(int id) {
-		servicesRepository.updateIsDeleteById(true, id);
-		return;
+	//Through this method we marked as delete by setting the isActive field to false in Service table
+    @Transactional
+    public void deleteService(int id) {
+        servicesRepository.updateIsDeleteById(true,id);
+        return;
+    }
+
+    //through this method we show all services
+	public List<ShopServiceDTO> showServices(String shopId){
+
+		List<ShopServiceDTO> serviceList= new ArrayList<>();
+		List<ServiceInformation> sList=servicesRepository.findAllServicesByShopId(shopId);
+		
+		for(ServiceInformation s:sList){
+			ShopServiceDTO temp=new ShopServiceDTO();
+			temp.setServiceId(s.getServiceId());
+			temp.setServiceName(s.getServiceName());
+			temp.setServicePrice(s.getServicePrice());			
+			
+			serviceList.add(temp);
+		}
+
+		return serviceList;
 	}
 }
