@@ -49,7 +49,7 @@ public class ShopServices {
         System.out.println("====================================\n"+serviceInformationList);
         List<ServiceInformation> sInformation = servicesRepository.saveAll(serviceInformationList);
         System.out.println("Result===============================\n"+sInformation);
-        if (sInformation.isEmpty())
+        if (!sInformation.isEmpty())
             return true;
         return false;
     }

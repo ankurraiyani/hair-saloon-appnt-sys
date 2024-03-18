@@ -163,13 +163,16 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("shopkeeper")
 	@PostMapping("/add-service")
-	public ResponseEntity<String> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
+	public ResponseEntity<Response> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
         System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
         boolean isAdd = shopServices.addShopServices(serviceInformation);
-        if (isAdd == true)
-            return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
+        if (isAdd == true){
+			System.out.println("Inside If Statement");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Service Added Successfully"));
+		}
+            
         else
-            return new ResponseEntity<>("Service already exists.", HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("Error caught while adding Services"));
     }
 
 	// Through addshop API we can update shop Service
