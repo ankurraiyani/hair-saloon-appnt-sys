@@ -1,0 +1,51 @@
+<div class="container">
+    <h1 style="font-weight: bold;">Add Services</h1>
+  <form [formGroup]="addServiceForm" (ngSubmit)="getFormData()" class="form">
+    <div formArrayName="serviceList">
+      <div *ngFor="let student of serviceListArray().controls; let i = index">
+        <div [formGroupName]="i" class="input">
+          <div class="input-box">
+            <label>Service Name</label>
+            <input
+              type="text"
+              placeholder="Service Name"
+              formControlName="serviceName"
+            />
+          </div>
+          <div class="input-box">
+            <label>Service Price</label>
+            <input
+              type="text"
+              placeholder="Service Price"
+              formControlName="servicePrice"
+            />
+          </div>
+
+          <div class="input-box">
+            <label>Service Duration</label>
+            <input
+              type="text"
+              placeholder="Service Duration (in Minutes)"
+              formControlName="serviceDuration"
+            />
+          </div>
+
+          <mat-icon class="
+          delete_icon"
+            *ngIf="serviceListArray().length > 1"
+            (click)="removeService(i)"
+            >delete</mat-icon
+          >
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+        <button mat-raised-button type="button" (click)="addService()" class="add_service">
+      <mat-icon>add</mat-icon>Add New Service
+    </button>
+    <button mat-raised-button type="submit" class="submit_button">Submit</button>
+    </div>
+
+    
+  </form>
+</div>

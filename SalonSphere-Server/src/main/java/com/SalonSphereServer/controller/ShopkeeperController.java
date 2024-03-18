@@ -52,7 +52,7 @@ public class ShopkeeperController {
 	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD======="+ shop.getLicenseDocument());
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop.getLicenseDocument());
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
@@ -110,16 +110,13 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-
-
-
 	public static String uploadDirectory = "E:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
 			throws IOException {
-		
+
 		try {
 			String originalFileName = file.getOriginalFilename();
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
@@ -150,14 +147,14 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@Secured("shopkeeper")
 	@PostMapping("/add-service")
-	public ResponseEntity<String> addService(@RequestBody ServiceInformation serviceInformation) {
-
-		boolean isAdd = shopServices.addShopServices(serviceInformation);
-		if (isAdd == true)
-			return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
-		else
-			return new ResponseEntity<>("Service already exists.", HttpStatus.CONFLICT);
-	}
+	public ResponseEntity<String> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
+        System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
+        boolean isAdd = shopServices.addShopServices(serviceInformation);
+        if (isAdd == true)
+            return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
+        else
+            return new ResponseEntity<>("Service already exists.", HttpStatus.CONFLICT);
+    }
 
 	// Through addshop API we can update shop Service
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -194,13 +191,11 @@ public class ShopkeeperController {
 	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {
 		System.out.println("=======GetShopinformation by email=============>" + shopEmail);
 		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmail);
-        if (sDto != null) {
-            return new ResponseEntity<>(sDto, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-
+		if (sDto != null) {
+			return new ResponseEntity<>(sDto, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

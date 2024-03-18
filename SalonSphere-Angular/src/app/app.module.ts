@@ -29,6 +29,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
+import {MatRippleModule} from '@angular/material/core';
+
 
 
 
@@ -48,7 +50,7 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     ContactComponent,
     AboutComponent,
     RegisterComponent,
-    ShopregisterComponent
+    ShopregisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatTableModule,
     MatExpansionModule,
     MatAccordion,
-    MatSelectModule
+    MatSelectModule,
+    MatRippleModule
   ],
   providers: [
     provideClientHydration(),
