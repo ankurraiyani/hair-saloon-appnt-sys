@@ -2,6 +2,7 @@ package com.SalonSphereServer.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,4 +107,17 @@ public class ShopServices {
 
 		return serviceList;
 	}
+
+    public ShopServiceDTO getService(int serviceId){
+
+        Optional<ServiceInformation> dto = servicesRepository.findById(serviceId);
+        ShopServiceDTO serviceDTO=new ShopServiceDTO();
+        ServiceInformation sdto = dto.get();
+        serviceDTO.setServiceId(serviceId);
+        serviceDTO.setServiceName(sdto.getServiceName());
+        serviceDTO.setServicePrice(sdto.getServicePrice());
+        serviceDTO.setDuration(sdto.getServiceDuration());
+        return serviceDTO;
+    }
+
 }

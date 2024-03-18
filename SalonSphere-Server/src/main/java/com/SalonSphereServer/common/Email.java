@@ -1,4 +1,4 @@
-package com.SalonSphereServer.entity;
+package com.SalonSphereServer.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

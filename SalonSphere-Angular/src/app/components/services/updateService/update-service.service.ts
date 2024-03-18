@@ -7,7 +7,7 @@ import { Cookie } from 'ng2-cookies';
 })
 export class UpdateServiceService {
 
-  baseURL:string = "http://localhost:8081/shopkeeper/updateservice";
+  baseURL:string = "http://localhost:8081/shopkeeper/updateshop-service";
 
   constructor(private http:HttpClient) { }
 

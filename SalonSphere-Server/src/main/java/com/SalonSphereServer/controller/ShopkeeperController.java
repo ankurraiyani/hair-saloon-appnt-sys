@@ -226,4 +226,14 @@ public class ShopkeeperController {
 		}
 	}
 
+	@GetMapping("/getService/{serviceId}")
+	public ResponseEntity<ShopServiceDTO> getServiceById(@PathVariable int serviceId) {
+		System.out.println("===========================inside shop keeper controllere show services =====================");
+		ShopServiceDTO service = shopServices.getService(serviceId);
+		if(service!=null){
+			return new ResponseEntity<>(service,HttpStatus.OK);
+		}
+		return new  ResponseEntity<>(service ,  HttpStatus.NOT_FOUND);
+    }
+
 }
