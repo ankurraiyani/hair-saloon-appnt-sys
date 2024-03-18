@@ -101,9 +101,21 @@ public class ShopkeeperService {
 			shopInformation.setStatus("Pending");
 
 			// Set Cover image name and lincense document name
-			shopInformation.setCoverImage(shopInformation.getShopId() + "_" + shopInformation.getCoverImage());
-			shopInformation
-					.setLicenseDocument(shopInformation.getShopId() + "_" + shopInformation.getLicenseDocument());
+
+			// Find the index of the last backslash (\) character
+			int lastIndex = 0;
+			if (shopInformation.getCoverImage() != null) {
+				lastIndex = shopInformation.getCoverImage().lastIndexOf("\\");
+				shopInformation.setCoverImage(
+						shopInformation.getShopId() + "_" + shopInformation.getCoverImage().substring(lastIndex + 1));
+			}
+
+			if (shopInformation.getLicenseDocument() != null) {
+				lastIndex = shopInformation.getLicenseDocument().lastIndexOf("\\");
+				shopInformation.setLicenseDocument(shopInformation.getShopId() + "_"
+						+ shopInformation.getLicenseDocument().substring(lastIndex + 1));
+			}
+
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -236,11 +248,34 @@ public class ShopkeeperService {
 		return images;
 	}
 
-	// Through this method we can update status
+
+	//this method for filter the shops according searchbar keyword 
+	public List<ShowShopDto> searchShops(String userId, String keyword){
+
+		List<ShowShopDto> list= new ArrayList<>();
+		List<ShopInformation> sList=shopkeeperRepository.search(keyword,userId);
+		for(ShopInformation s:sList){
+			ShowShopDto tem=new ShowShopDto();
+			tem.setShopName(s.getShopName());
+			tem.setShopAddress(s.getAddress());
+			tem.setShopEmail(s.getShopEmail());
+			tem.setShopContactNo(s.getShopContactNo());
+			tem.setShopCity(s.getShopCity());
+			tem.setStatus(s.getStatus());
+			
+			list.add(tem);
+		}
+
+		return list;
+	}
+
+
+	// Through this method we can update status  
 	@Transactional
 	public void updateStatus(String shopEmail, String status) {
 
 		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
 		return;
 	}
+
 }

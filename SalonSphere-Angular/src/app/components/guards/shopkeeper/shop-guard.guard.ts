@@ -10,7 +10,7 @@ export const shopGuardGuard: CanActivateFn = (route, state) => {
   //if the user is login and the role is shopkeeper then return true
   if( authService.isLogin() && authService.getRole() == 'shopkeeper'){
     return true;
-  }
+  } 
   
   //otherwise  redirect to login page and return false
   router.navigate(['/login']);

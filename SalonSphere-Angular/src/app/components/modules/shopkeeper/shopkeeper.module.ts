@@ -36,6 +36,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AddserviceComponent } from './components/addservice/addservice.component';
+import { UpdateServiceComponent } from './components/update-service/update-service.component';
 
 
 
@@ -49,7 +50,8 @@ import { AddserviceComponent } from './components/addservice/addservice.componen
     NavbarComponent,
     HeaderComponent,
     HomeComponent,
-    AddserviceComponent
+    AddserviceComponent,
+    UpdateServiceComponent
   ],
   imports: [
     CommonModule,

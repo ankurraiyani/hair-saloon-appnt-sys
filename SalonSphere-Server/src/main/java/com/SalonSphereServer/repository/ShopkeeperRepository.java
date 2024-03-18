@@ -38,4 +38,14 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query("UPDATE ShopInformation e SET e.status = :status WHERE e.shopEmail = :shopEmail")
 	void updateStatusByShopEmail(String shopEmail, String status);
 
+	
+// @Query(value = "SELECT s.* FROM shop_information s INNER JOIN user_information u ON s.user_id = u.user_id WHERE s.user_id = ? AND (LOWER(s.shop_name) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.address) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_city) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_email) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.shop_contact_no) LIKE LOWER(CONCAT('%keyword%')) OR LOWER(s.status) LIKE LOWER(CONCAT('%keyword%')));", nativeQuery = true)
+//     List<ShowShopDto> search(@Param("keyword") String keyword, @Param("userId") String userId);
+
+@Query(value = "SELECT s.* FROM shop_information s INNER JOIN user_information u ON s.user_id = u.user_id WHERE s.user_id = :userId AND (LOWER(s.shop_name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.address) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_city) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_contact_no) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.status) LIKE LOWER(CONCAT('%', :keyword, '%')))", nativeQuery = true)
+List<ShopInformation> search(@Param("keyword") String keyword, @Param("userId") String userId);
+
+
+
+
 }
