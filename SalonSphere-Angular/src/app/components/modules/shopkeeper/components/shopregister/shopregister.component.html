@@ -1,133 +1,5 @@
 
-
-
-<header>
-  <div class="logosec">
-    <div class="logo">SalonSphere</div>
-  </div>
-
-  <div class="searchbar">
-    <input type="text" placeholder="Search" />
-    <div class="searchbtn">
-      <img
-        src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-        class="icn srchicn"
-        alt="search-icon"
-      />
-    </div>
-  </div>
-
-  <div class="message">
-    <div class="circle"></div>
-    <mat-icon
-      class="navicons"
-      matTooltip="Notifications"
-      [matMenuTriggerFor]="notification"
-      >notifications</mat-icon
-    >
-    <mat-menu #notification="matMenu" yPosition="below">
-      <button mat-menu-item>👉Hi, Your Appointment is Confirmed</button>
-      <button mat-menu-item>👉Appointment Initiated</button>
-    </mat-menu>
-    <div class="dp">
-      <img
-        src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
-        class="dpicn"
-        [matMenuTriggerFor]="account"
-        alt="dp"
-      />
-      <mat-menu #account="matMenu" yPosition="below">
-        <button mat-menu-item>My Account</button>
-        <button mat-menu-item>LogOut</button>
-      </mat-menu>
-    </div>
-  </div>
-</header>
-<!-- -------------------------------------------------------------------------------------------------- -->
-
-<div class="main-container">
-  <div class="navcontainer">
-    <nav class="nav">
-      <div class="nav-upper-options">
-        <div class="nav-option option1" routerLink="/shopkeeper/shopkeeper-dashboard">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/4116/4116414.png"
-            class="nav-img"
-            alt="dashboard"
-          />
-          <h3>Home</h3>
-        </div>
-
-        <div class="option2 nav-option" routerLink="/shopkeeper/addshop">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/13884/13884427.png"
-            class="nav-img"
-            alt="articles"
-          />
-          <h3><a>Add Shop</a></h3>
-        </div>
-
-        <div class="nav-option option3" >
-          <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
-            class="nav-img"
-            alt="report"
-          />
-          <h3 routerLink="/shopkeeper/view-shop">View Shops</h3>
-        </div>
-
-        <div class="nav-option option4">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/1436/1436756.png"
-            class="nav-img"
-            alt="institution"
-          />
-          <h3><a routerLink="/admin/view-request">Update Shop</a></h3>
-        </div>
-
-        <div class="nav-option option5">
-          <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-            class="nav-img"
-            alt="blog"
-          />
-          <h3>Profile</h3>
-        </div>
-
-        <div class="nav-option option6">
-          <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
-            class="nav-img"
-            alt="settings"
-          />
-          <h3>Settings</h3>
-        </div>
-
-        <div class="nav-option logout">
-          <img
-            src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-            class="nav-img"
-            alt="logout"
-          />
-          <h3>Logout</h3>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-  <div class="main">
-    <div class="searchbar2">
-      <input type="text" name="" id="" placeholder="Search" />
-      <div class="searchbtn">
-        <img
-          src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-          class="icn srchicn"
-          alt="search-button"
-        />
-      </div>
-    </div>
-<!-- ----------------------------------------------------------------------------------------------- -->
-    
+    <div class="main">
     <section class="container">
       <h1>Register Your Shop</h1>
       <form
@@ -145,16 +17,17 @@
             required
           />
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>Licence Number</label>
           <input
             type="text"
             placeholder="Enter Licence No."
             formControlName="licenceNo"
-            
             required
           />
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>Licence Document</label>
           <input
@@ -162,10 +35,9 @@
             placeholder="Upload Licence Document"
             formControlName="licenceDocument"
             (change)="uploadFile($event)"
-            
           />
         </div>
-    
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>Cover Picture</label>
           <input
@@ -173,20 +45,18 @@
             placeholder="Upload Image"
             formControlName="coverImage"
             (change)="uploadFile($event)"
-            
           />
         </div>
-    
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>Email Address</label>
           <input
             type="text"
             placeholder="Enter email address"
             formControlName="shopEmail"
-            
-            
           />
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="column">
           <div class="input-box">
             <label>Shop Contact Number</label>
@@ -194,11 +64,10 @@
               type="text"
               placeholder="Enter phone number"
               formControlName="shopContactNo"
-              
-              
             />
           </div>
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="column">
           <div class="input-box">
             <label>Address</label>
@@ -206,10 +75,10 @@
               type="text"
               placeholder="Enter Your Address"
               formControlName="address"
-              
             />
           </div>
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="column">
           <div class="input-box">
             <label>Landmark</label>
@@ -220,27 +89,42 @@
             />
           </div>
         </div>
-        <div class="input-box">
-          <label>Pincode</label>
-          <input
+        <!-- ------------------------------------------------------------------- -->
+        
+
+          <div class="input-box">
+            <label>Pincode</label>
+            <input
             type="text"
             placeholder="Enter Pincode"
             formControlName="pincode"
-    
             maxlength="6"
             #id
-            
             (blur)="searchByPincode(id.value)"
           />
         </div>
-        <div class="input-box">
-          <label>City</label>
-          <input
-            type="text"
-            placeholder="City"
-            formControlName="shopCity"
-          />
+        <!-- ------------------------------------------------------------------- -->
+        <div class="column">
+          <div class="input-box">
+            <label>City</label>
+            <mat-select matNativeControl formControlName="shopCity" style="border:0.1px black solid;  border-radius: 6px; position: relative;
+            height: 50px;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+            color: #707070;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0 15px;">
+              <mat-option *ngFor="let city of cities" [value]="city.city" >
+                <h4>{{ city.city }}</h4>
+              </mat-option>
+            </mat-select>
+          </div>
         </div>
+
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>District</label>
           <input
@@ -250,28 +134,21 @@
             readonly
           />
         </div>
+        <!-- ------------------------------------------------------------------- -->
         <div class="input-box">
           <label>State</label>
-          <input type="text" placeholder="State" formControlName="state" readonly />
-        </div>
-        <!-- <div class="input-box">
-          <label>Country</label>
           <input
             type="text"
-            placeholder="Country"
-            formControlName="country"
+            placeholder="State"
+            formControlName="state"
             readonly
           />
-        </div> -->
+        </div>
+        <!-- ------------------------------------------------------------------- -->
         <button>Submit</button>
       </form>
     </section>
-    
   </div>
-</div>
-
-
-
-
+    
 
 <!-- ------------------------------------------------------------------- -->

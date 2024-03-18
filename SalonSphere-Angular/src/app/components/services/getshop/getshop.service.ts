@@ -13,8 +13,9 @@ export class GetshopService {
   constructor(private http : HttpClient) {}
 
   getshop(data:any){
-    const headers=new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
+    
+const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
     return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`, {headers});
-  }
+  } 
 
 }

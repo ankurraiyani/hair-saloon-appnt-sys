@@ -96,10 +96,14 @@ public class AdminController {
 	@PostMapping("/view-requests/approve-request")
 	public ResponseEntity<?> approveRequest(@RequestBody String shopEmail) {
 		System.out.println("========"+shopEmail);
+
+
+		
 		shopKeeperService.updateStatus(shopEmail, "accepted");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	
 	// This method is used to reject the Shop Request by admin
 	@CrossOrigin(origins = "http://localhost:4200")
 	// @Secured("admin")

@@ -38,4 +38,8 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query("UPDATE ShopInformation e SET e.status = :status WHERE e.shopEmail = :shopEmail")
 	void updateStatusByShopEmail(String shopEmail, String status);
 
+
+	// This method help to filering by shopCity
+    public List<ShopInformation> findShopByCity(String city);
+
 }

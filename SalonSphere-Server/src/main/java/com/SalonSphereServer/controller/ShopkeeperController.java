@@ -52,7 +52,7 @@ public class ShopkeeperController {
 	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======");
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop.getLicenseDocument());
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
@@ -102,20 +102,21 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/deleteshop")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> deleteShop(@RequestParam String shopId) {
+	public ResponseEntity<Response> deleteShop(@RequestBody String shopId) {
 
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP METHOD=======");
 		shopkeeperService.deleteShopById(shopId);
-		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
+		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
+	public static String uploadDirectory = "E:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
 			throws IOException {
+
 		try {
 			String originalFileName = file.getOriginalFilename();
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
@@ -147,7 +148,7 @@ public class ShopkeeperController {
 	@Secured("shopkeeper")
 	@PostMapping("/add-service")
 	public ResponseEntity<String> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD======="+serviceInformation);
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
 		boolean isAdd = shopServices.addShopServices(serviceInformation);
 		if (isAdd == true)
 			return ResponseEntity.status(HttpStatus.CREATED).body("Service added Successfully.");
@@ -184,11 +185,12 @@ public class ShopkeeperController {
 	}
 
 	// Through this api we will get shops information through shopEmail
+	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
-	public ResponseEntity<ShopInformation> getShopByEmail(@RequestParam @NonNull String shopEmailId) {
-		System.out.println("=======GetShopinformation by email=============>" + shopEmailId);
-		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmailId);
+	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {
+		System.out.println("=======GetShopinformation by email=============>" + shopEmail);
+		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmail);
 		if (sDto != null) {
 			return new ResponseEntity<>(sDto, HttpStatus.OK);
 		} else {
