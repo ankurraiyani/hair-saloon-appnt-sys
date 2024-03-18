@@ -18,7 +18,7 @@ public class ShopServiceDTO {
     private int serviceId;
     private String serviceName;
     private Double servicePrice;
-    private String duration;
+    private String serviceDuration;
 
     
 }

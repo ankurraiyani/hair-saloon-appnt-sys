@@ -116,7 +116,7 @@ public class ShopServices {
         serviceDTO.setServiceId(serviceId);
         serviceDTO.setServiceName(sdto.getServiceName());
         serviceDTO.setServicePrice(sdto.getServicePrice());
-        serviceDTO.setDuration(sdto.getServiceDuration());
+        serviceDTO.setServiceDuration(sdto.getServiceDuration());
         return serviceDTO;
     }
 
