@@ -17,7 +17,6 @@ const routes: Routes = [
       { path: 'view-shop', component: ViewshopsComponent },
       { path: 'home', component: HomeComponent },
       { path: 'updateshop', component: ShopregisterComponent },
-
       { path: 'add-shop', component: ShopregisterComponent },
       { path: '', redirectTo: '/shopkeeper/home', pathMatch: 'full' },
       { path: 'viewshopinfo', component: ViewShopInfoComponent },
