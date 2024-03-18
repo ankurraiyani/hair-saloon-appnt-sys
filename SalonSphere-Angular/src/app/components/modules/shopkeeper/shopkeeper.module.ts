@@ -35,6 +35,7 @@ import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-inf
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { UpdateServiceComponent } from './components/update-service/update-service.component';
 
 
 
@@ -47,7 +48,8 @@ import { HomeComponent } from './home/home.component';
     ViewShopInfoComponent,
     NavbarComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    UpdateServiceComponent
   ],
   imports: [
     CommonModule,

@@ -16,13 +16,13 @@ import com.SalonSphereServer.entity.Email;
 @Component
 public class EmailService {
 
-    	public boolean sendEmail(String subject , String message , String to) {
-		
-		boolean f = false;
-		
-		String from = "krunal7022110@gmail.com";
-		
-		String host = "smtp.gmail.com";
+    public boolean sendEmail(String subject , String message , String to1, String to2) {
+        
+        boolean f = false;
+        
+        String from = "krunal7022110@gmail.com";
+        
+        String host = "smtp.gmail.com";
 
         Properties properties = System.getProperties();
 //        System.out.println(properties);
@@ -54,8 +54,9 @@ public class EmailService {
 //            Adding Sender
             mimeMessage.setFrom(from);
 
-//            Adding Recipient
-            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//            Adding Recipients
+            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to1));
+            mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(to2));
 
 //            Adding subject to message
             mimeMessage.setSubject(subject);
@@ -69,7 +70,8 @@ public class EmailService {
             f = true;
             
             Email email = new Email();
-            email.setTo(to);
+            email.setTo(to1);
+            email.setCc(to2);
             email.setSubject(subject);
             email.setMessage(message);
             
@@ -78,8 +80,8 @@ public class EmailService {
             e.printStackTrace();
         }
 
-		return f;
-		
-	}
+        return f;
+        
+    }
 
 }
