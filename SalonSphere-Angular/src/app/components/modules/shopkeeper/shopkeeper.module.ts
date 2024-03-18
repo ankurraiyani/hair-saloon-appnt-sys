@@ -28,15 +28,14 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
-import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
-import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AddserviceComponent } from './components/addservice/addservice.component';
 import { UpdateServiceComponent } from './components/update-service/update-service.component';
+import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
 
 
 
@@ -44,14 +43,13 @@ import { UpdateServiceComponent } from './components/update-service/update-servi
   declarations: [
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
-    ShopkeeperprofileComponent,
     UpdateShopComponent,
-    ViewShopInfoComponent,
     NavbarComponent,
     HeaderComponent,
     HomeComponent,
     AddserviceComponent,
-    UpdateServiceComponent
+    UpdateServiceComponent,
+    ViewShopServicesComponent
   ],
   imports: [
     CommonModule,

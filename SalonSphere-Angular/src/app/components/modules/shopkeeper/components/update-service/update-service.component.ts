@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetshopService } from '../../../../services/getshop/getshop.service';
 import { UpdateServiceService } from '../../../../services/updateService/update-service.service';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './update-service.component.html',
   styleUrl: './update-service.component.css'
 })
-export class UpdateServiceComponent {
+export class UpdateServiceComponent implements OnInit {
     updateServiceForm = new FormGroup({
       serviceId:new FormControl(localStorage.getItem('serviceId')),
       serviceName: new FormControl('',Validators.required),
@@ -20,6 +20,9 @@ export class UpdateServiceComponent {
     });
 
     constructor(private getshop:GetshopService, private update:UpdateServiceService, private router:Router){}
+  ngOnInit(): void {
+    // 
+  }
 
     updateservice(){
         this.update.updateService(this.updateServiceForm.value)

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AddshopService } from '../../../../services/addshopservice/addshop.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-addservice',
@@ -45,9 +46,20 @@ getFormData() {
 
   this.addservice.addservice(this.data.value).subscribe((data:any)=>
   {
-    console.log(data);
-  })
-
+    Swal.fire({
+      title: 'Success',
+      text: 'Service(s) Added Successfully',
+      icon: 'success',
+    });
+  },(error:any)=>{
+    Swal.fire({
+      title: 'Please Try Again',
+      text: 'Error caught while adding Service(s)',
+      icon: 'error',
+    });
+  }
+  )
+  
 }
 
 

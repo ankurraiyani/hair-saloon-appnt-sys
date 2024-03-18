@@ -7,6 +7,8 @@
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     margin-top: 30px;
+
+    margin-left: 500px;
   }
   .container header {
     font-size: 1.5rem;

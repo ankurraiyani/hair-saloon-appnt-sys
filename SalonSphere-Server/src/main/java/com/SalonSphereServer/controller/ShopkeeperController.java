@@ -203,6 +203,7 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/showservices/{shopId}")
 	public ResponseEntity<List<ShopServiceDTO>> showServices(@PathVariable String shopId) {
 		System.out.println("===========================inside shop keeper controllere show services =====================");
@@ -210,7 +211,7 @@ public class ShopkeeperController {
 		if(serviceslist!=null){
 			return new ResponseEntity<>(serviceslist,HttpStatus.OK);
 		}
-		return new  ResponseEntity<>(serviceslist ,  HttpStatus.NOT_FOUND);
+		return new  ResponseEntity<>(serviceslist,HttpStatus.NOT_FOUND);
     }
 	// Through this api we will get shops information through shopEmail
 	@SuppressWarnings("null")

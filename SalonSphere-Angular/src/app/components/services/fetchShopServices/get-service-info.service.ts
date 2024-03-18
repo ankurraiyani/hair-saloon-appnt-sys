@@ -5,14 +5,13 @@ import { Cookie } from 'ng2-cookies';
 @Injectable({
   providedIn: 'root'
 })
-export class UpdateServiceService {
+export class GetServiceInfoService {
 
-  baseURL:string = "http://localhost:8081/shopkeeper/updateshop-service";
+  constructor(private http : HttpClient) { }
 
-  constructor(private http:HttpClient) { }
-
-  updateService(data:any){
+  fetchAllServices(shopId:any){
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
-    return this.http.post(`${this.baseURL}`, data,{ headers});
+
+    return this.http.get(`http://localhost:8081/shopkeeper/showservices/${shopId}`,{headers});
   }
 }
