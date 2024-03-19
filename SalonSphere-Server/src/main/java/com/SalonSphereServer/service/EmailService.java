@@ -20,7 +20,7 @@ public class EmailService {
         
         boolean f = false;
         
-        String from = "krunal7022110@gmail.com";
+        String from = "salonsphere.woss@gmail.com";
         
         String host = "smtp.gmail.com";
 
@@ -40,7 +40,7 @@ public class EmailService {
             @Override
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                 // TODO Auto-generated method stub
-                return new javax.mail.PasswordAuthentication("krunal7022110@gmail.com", "ypuo nmqi chwi lswb");
+                return new javax.mail.PasswordAuthentication("salonsphere.woss@gmail.com", "ukzh wxow wocl aaiv");
             }
 
         });
