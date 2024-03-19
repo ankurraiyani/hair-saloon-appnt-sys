@@ -116,6 +116,7 @@ public class ShopkeeperService {
 						+ shopInformation.getLicenseDocument().substring(lastIndex + 1));
 			}
 
+			System.out.println("++++++++Saving shop in db++++++++"+shopInformation);
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -277,5 +278,8 @@ public class ShopkeeperService {
 		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
 		return;
 	}
+
+	
+
 
 }

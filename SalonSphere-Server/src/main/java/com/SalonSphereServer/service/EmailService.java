@@ -11,35 +11,30 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.entity.Email;
+import com.SalonSphereServer.common.Email;
 
 @Service
 public class EmailService {
 
-	public boolean sendEmail(String subject, String message, String to1, String to2) {
+	public static boolean sendEmail(Email email) {
 
-		boolean f = false;
-
+		boolean flag = false;
 		String from = "krunal7022110@gmail.com";
-
 		String host = "smtp.gmail.com";
 
 		Properties properties = System.getProperties();
-//        System.out.println(properties);
 
-//        Set Host
+		// Set Host
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", 465);
 		properties.put("mail.smtp.ssl.enable", "true");
 		properties.put("mail.smtp.auth", "true");
 
-//        Get the session object
-
+		// Get the session object
 		Session session = Session.getInstance(properties, new Authenticator() {
 
 			@Override
 			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
 				return new javax.mail.PasswordAuthentication("krunal7022110@gmail.com", "ypuo nmqi chwi lswb");
 			}
 
@@ -47,40 +42,32 @@ public class EmailService {
 
 		session.setDebug(true);
 
-//        Compose message
+		// Compose message
 		MimeMessage mimeMessage = new MimeMessage(session);
 
 		try {
-//            Adding Sender
+			// Adding Sender
 			mimeMessage.setFrom(from);
 
-//            Adding Recipients
-			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to1));
-			mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(to2));
+			// Adding Recipients
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
+			mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(email.getCc()));
 
-//            Adding subject to message
-			mimeMessage.setSubject(subject);
+			// Adding subject to message
+			mimeMessage.setSubject(email.getSubject());
 
-//            Adding Message Text
-			mimeMessage.setText(message);
+			// Adding Message Text
+			mimeMessage.setText(email.getMessage());
 
 			Transport.send(mimeMessage);
-			System.out.println("Sent Successfully...................");
+			System.out.println("Sent Email Successfully...");
 
-			f = true;
-
-			Email email = new Email();
-			email.setTo(to1);
-			email.setCc(to2);
-			email.setSubject(subject);
-			email.setMessage(message);
-
+			flag = true;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			return false;
 		}
-
-		return f;
+		return flag;
 
 	}
 

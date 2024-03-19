@@ -1,4 +1,4 @@
-package com.SalonSphereServer.entity;
+package com.SalonSphereServer.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,10 +13,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class Email {
-
-    private String to;
-    private String cc;
-	private String subject;
-    private String message;
+public class FilterResponseByCity {
+    private String shopName;
+    private String location;
+    private String coverImage;
 }

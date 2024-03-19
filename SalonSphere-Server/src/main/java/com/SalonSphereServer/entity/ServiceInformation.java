@@ -2,8 +2,6 @@ package com.SalonSphereServer.entity;
 
 import java.util.Date;
 
-import org.springframework.boot.autoconfigure.security.saml2.Saml2RelyingPartyProperties.Registration.Signing;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,7 +37,7 @@ public class ServiceInformation {
     private double servicePrice;
     
     @Column(name = "service_duration")
-    private Signing serviceDuration;
+    private int serviceDuration;
 
     @Column(name = "shop_id")
     private String shopId;

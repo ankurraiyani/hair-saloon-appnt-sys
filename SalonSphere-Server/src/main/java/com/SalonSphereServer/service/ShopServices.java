@@ -24,8 +24,9 @@ public class ShopServices {
 
 		for (ServiceInformation serviceInformation2 : serviceInformation) {
 			// Validation Check
-			System.out.println("=validation=>"+Validation.firstNameValidation(serviceInformation2.getServiceName()));
-			if (Validation.firstNameValidation(serviceInformation2.getServiceName())&& (serviceInformation2.getServicePrice() > 0)) {
+			System.out.println("=validation=>" + Validation.firstNameValidation(serviceInformation2.getServiceName()));
+			if (Validation.firstNameValidation(serviceInformation2.getServiceName())
+					&& (serviceInformation2.getServicePrice() > 0)) {
 
 				// Setting some Defualt value
 				// Create a java.util.Date object
@@ -37,15 +38,15 @@ public class ShopServices {
 				serviceInformation2.setCreateDate(sqlDate);
 				serviceInformation2.setModifyDate(sqlDate);
 
-				System.out.println("====in loop==="+serviceInformation2);
+				System.out.println("====in loop===" + serviceInformation2);
 				serviceInformationList.add(serviceInformation2);
 			}
 		}
-		System.out.println("==LIST SIZE===\n"+serviceInformationList.isEmpty());
-		System.out.println("====================================\n"+serviceInformationList);
+		System.out.println("==LIST SIZE===\n" + serviceInformationList.isEmpty());
+		System.out.println("====================================\n" + serviceInformationList);
 		List<ServiceInformation> sInformation = servicesRepository.saveAll(serviceInformationList);
-		System.out.println("Result===============================\n"+sInformation);
-		if (sInformation.isEmpty())
+		System.out.println("Result===============================\n" + sInformation);
+		if (!sInformation.isEmpty())
 			return true;
 		return false;
 	}
@@ -79,25 +80,26 @@ public class ShopServices {
 		return false;
 	}
 
-	//Through this method we marked as delete by setting the isActive field to false in Service table
-    @Transactional
-    public void deleteService(int id) {
-        servicesRepository.updateIsDeleteById(true,id);
-        return;
-    }
+	// Through this method we marked as delete by setting the isActive field to
+	// false in Service table
+	@Transactional
+	public void deleteService(int id) {
+		servicesRepository.updateIsDeleteById(true, id);
+		return;
+	}
 
-    //through this method we show all services
-	public List<ShopServiceDTO> showServices(String shopId){
+	// through this method we show all services
+	public List<ShopServiceDTO> showServices(String shopId) {
 
-		List<ShopServiceDTO> serviceList= new ArrayList<>();
-		List<ServiceInformation> sList=servicesRepository.findAllServicesByShopId(shopId);
-		
-		for(ServiceInformation s:sList){
-			ShopServiceDTO temp=new ShopServiceDTO();
+		List<ShopServiceDTO> serviceList = new ArrayList<>();
+		List<ServiceInformation> sList = servicesRepository.findAllServicesByShopId(shopId);
+
+		for (ServiceInformation s : sList) {
+			ShopServiceDTO temp = new ShopServiceDTO();
 			temp.setServiceId(s.getServiceId());
 			temp.setServiceName(s.getServiceName());
-			temp.setServicePrice(s.getServicePrice());			
-			
+			temp.setServicePrice(s.getServicePrice());
+
 			serviceList.add(temp);
 		}
 

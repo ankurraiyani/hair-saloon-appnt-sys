@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { AddshopService } from '../services/addshopservice/addshop.service';
-import { Cookie } from 'ng2-cookies';
-
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AddshopService } from '../../../../services/addshopservice/addshop.service';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  selector: 'app-addservice',
+  templateUrl: './addservice.component.html',
+  styleUrl: './addservice.component.css'
 })
-export class AboutComponent { 
+export class AddserviceComponent { 
 
   
   data!: FormArray<any>;
@@ -56,3 +52,4 @@ getFormData() {
 
 
 }
+

@@ -15,7 +15,7 @@ import lombok.ToString;
 @Builder
 public class FilterResponse {
     private String shopName;
-    private String location;
-    private String serviceDuration;
-    private String coverImage;
+    private String serviceName;
+    private int servicePrice;
+    private int  serviceDuration;
 }

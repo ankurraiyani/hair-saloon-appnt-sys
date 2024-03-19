@@ -13,9 +13,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class SendEmail {
+public class Email {
 
-    private String to[];
-    private String subject;
-    private String body;
+    private String to;
+    private String cc;
+	private String subject;
+    private String message;
 }

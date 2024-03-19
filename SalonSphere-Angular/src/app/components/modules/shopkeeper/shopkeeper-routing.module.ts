@@ -7,6 +7,7 @@ import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-inf
 
 import { HomeComponent } from './home/home.component';
 import { ShopregisterComponent } from './components/shopregister/shopregister.component';
+import { AddserviceComponent } from './components/addservice/addservice.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'add-shop', component: ShopregisterComponent },
       { path: '', redirectTo: '/shopkeeper/home', pathMatch: 'full' },
       { path: 'viewshopinfo', component: ViewShopInfoComponent },
+      { path: 'addservice', component: AddserviceComponent },
     ],
   },
 ];
