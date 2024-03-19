@@ -98,25 +98,7 @@ public class ShopkeeperService {
 
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
-			shopInformation.setStatus("Pending");
-
-			// Set Cover image name and lincense document name
-
-			// Find the index of the last backslash (\) character
-			int lastIndex = 0;
-			if (shopInformation.getCoverImage() != null) {
-				lastIndex = shopInformation.getCoverImage().lastIndexOf("\\");
-				shopInformation.setCoverImage(
-						shopInformation.getShopId() + "_" + shopInformation.getCoverImage().substring(lastIndex + 1));
-			}
-
-			if (shopInformation.getLicenseDocument() != null) {
-				lastIndex = shopInformation.getLicenseDocument().lastIndexOf("\\");
-				shopInformation.setLicenseDocument(shopInformation.getShopId() + "_"
-						+ shopInformation.getLicenseDocument().substring(lastIndex + 1));
-			}
-
-			System.out.println("++++++++Saving shop in db++++++++"+shopInformation);
+			shopInformation.setStatus("Pending");	
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully

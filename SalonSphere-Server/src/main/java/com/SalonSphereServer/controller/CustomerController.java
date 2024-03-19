@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.request.FilterRequest;
@@ -18,7 +20,7 @@ import com.SalonSphereServer.service.CustomerService;
 
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
 @RestController
-// @RequestMapping("/customer")
+@RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
@@ -26,6 +28,7 @@ public class CustomerController {
 
 	// ============================================================================================================
 	// Filter shops by given city
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/filter-by-city/{city}")
 	public ResponseEntity<List<FilterResponseByCity>> filterByCity(@PathVariable String city) {
 
@@ -42,6 +45,7 @@ public class CustomerController {
 	// ==============================================================================================================
 
 	// Filtering based on servicename, serviceprice and distance
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/filter-shop")
 	public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
 

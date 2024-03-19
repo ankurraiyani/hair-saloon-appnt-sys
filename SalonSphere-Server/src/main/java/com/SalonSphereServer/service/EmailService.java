@@ -19,7 +19,7 @@ public class EmailService {
 	public static boolean sendEmail(Email email) {
 
 		boolean flag = false;
-		String from = "krunal7022110@gmail.com";
+		String from = "salonsphere.woss@gmail.com";
 		String host = "smtp.gmail.com";
 
 		Properties properties = System.getProperties();
@@ -35,7 +35,7 @@ public class EmailService {
 
 			@Override
 			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-				return new javax.mail.PasswordAuthentication("krunal7022110@gmail.com", "ypuo nmqi chwi lswb");
+				return new javax.mail.PasswordAuthentication("salonsphere.woss@gmail.com", "ukzh wxow wocl aaiv");
 			}
 
 		});
