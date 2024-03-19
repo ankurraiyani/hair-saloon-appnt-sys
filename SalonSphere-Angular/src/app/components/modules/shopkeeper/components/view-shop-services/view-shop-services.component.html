@@ -1,0 +1,39 @@
+<p>view-shop-services works!</p>
+<div class="shopContainer">
+    <div class="cards">
+    <ng-container *ngIf="data && data.length">
+      <mat-card class="shopCard" *ngFor="let shop of data">
+        <div class="edit" >
+          <mat-icon (click)="saveId(shop.serviceId)"
+            routerLink="/shopkeeper/updateService"
+            >edit</mat-icon
+          >
+        </div>
+        <h3>Service Name:  {{ shop.serviceName}}</h3>
+        <h3>Price:  ₹{{ shop.servicePrice }}</h3>
+        <h3>Duration:  {{ shop.serviceDuration }} Minutes</h3>
+      </mat-card>
+    </ng-container>
+
+    <ng-template #noShops>
+      <div class="noshopCard">
+        <h2>No Shops Added</h2>
+        <br />
+        <button class="button" routerLink="/shopkeeper/addservice">
+          <span class="button-content">Add Service</span>
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="add-shop">
+      <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+       <button class="button"routerLink="/shopkeeper/addservice">
+          <span class="button-content">Add Shop</span>
+      </button>
+  </div>
+  </div>
+
+
+
+

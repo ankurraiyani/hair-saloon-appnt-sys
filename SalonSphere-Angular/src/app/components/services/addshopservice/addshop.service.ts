@@ -13,6 +13,6 @@ export class AddshopService {
 
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token')); 
 
-    return this.http.post('http://localhost:8081/shopkeeper/add-service',data,{headers})
+    return this.http.post('http://localhost:8081/shopkeeper/add-service',data,{headers});
   }
 }

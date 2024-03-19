@@ -77,6 +77,7 @@ public class ShopServices {
 
             existingService.setModifyDate(sqlDate);
 
+            System.out.println("===============================================\n"+existingService);
             // Save the updated service
             servicesRepository.save(existingService);
             return true;
@@ -100,7 +101,8 @@ public class ShopServices {
 			ShopServiceDTO temp=new ShopServiceDTO();
 			temp.setServiceId(s.getServiceId());
 			temp.setServiceName(s.getServiceName());
-			temp.setServicePrice(s.getServicePrice());			
+			temp.setServicePrice(s.getServicePrice());	
+            temp.setServiceDuration(s.getServiceDuration());		
 			
 			serviceList.add(temp);
 		}
@@ -117,6 +119,7 @@ public class ShopServices {
         serviceDTO.setServiceName(sdto.getServiceName());
         serviceDTO.setServicePrice(sdto.getServicePrice());
         serviceDTO.setServiceDuration(sdto.getServiceDuration());
+        serviceDTO.setCreateDate(sdto.getCreateDate());
         return serviceDTO;
     }
 
