@@ -1,3 +1,19 @@
+h1 {
+  background: -webkit-linear-gradient(#000000, #a39191);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bolder;
+}
+
+.header{
+  padding-left: 100px;
+  padding-top: 10px;
+}
+.container{
+  margin-top: 15px;
+  margin-left: 22vw;
+  width: 75vw;
+}
 .shopContainer {
   width: 75%;
   height: 100%;
@@ -9,15 +25,15 @@
   padding-top: 20%;
 }
 .shopCard {
-  height: 380px;
-  width: 30vw;
-  margin: 50px;
+  height: 250px;
+  width: 300px;
+  margin: 30px;
   border-radius: 25px;
   justify-content: center;
   /* align-items: center; */
   background-color: #f5f5f5;
   color: #000;
-  padding: 15px;
+  padding-left: 15px;
   transition: all 0.35s ease;
 }
 
@@ -26,13 +42,13 @@
 }
 
 .edit {
-  margin-left: 400px;
+  margin-left: 240px;
   transition: all 0.4s ease;
 }
 
 .edit:hover {
   cursor: pointer;
-  scale: 1.5;
+  scale: 1.2;
 }
 /* **************************** */
 

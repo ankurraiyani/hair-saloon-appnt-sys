@@ -17,7 +17,8 @@ public class ShowShopDto {
         private String shopContactNo;
         private String shopCity;
         private String status;
-        public ShowShopDto(String shopName, String shopAddress, String shopEmail, String shopContactNo, String shopCity,String status) {
+        private String shopId;
+        public ShowShopDto(String shopName, String shopAddress, String shopEmail, String shopContactNo, String shopCity,String status, String shopId) {
                 this.shopName = shopName;
                 this.shopAddress = shopAddress;
                 this.shopEmail = shopEmail;

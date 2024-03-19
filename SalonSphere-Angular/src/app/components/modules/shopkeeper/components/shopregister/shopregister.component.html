@@ -1,6 +1,7 @@
 
     <div class="main">
     <section class="container">
+      <button mat-button (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon> Back</button>
       <h1>Register Your Shop</h1>
       <form
         [formGroup]="register"
@@ -104,24 +105,15 @@
           />
         </div>
         <!-- ------------------------------------------------------------------- -->
-        <div class="column">
-          <div class="input-box">
-            <label>City</label>
-            <mat-select matNativeControl formControlName="shopCity" style="border:0.1px black solid;  border-radius: 6px; position: relative;
-            height: 50px;
-            width: 100%;
-            outline: none;
-            font-size: 1rem;
-            color: #707070;
-            margin-top: 8px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 0 15px;">
-              <mat-option *ngFor="let city of cities" [value]="city.city" >
-                <h4>{{ city.city }}</h4>
-              </mat-option>
-            </mat-select>
-          </div>
+        <div class="input-box">
+          <mat-form-field>
+          <mat-label>City</mat-label>
+          <mat-select matNativeControl formControlName="shopCity">
+            <mat-option *ngFor="let city of cities" value="{{city.city}}">
+              {{ city.city }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         </div>
 
         <!-- ------------------------------------------------------------------- -->

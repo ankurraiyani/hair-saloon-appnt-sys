@@ -71,6 +71,9 @@ export class ShopregisterComponent {
       state: [''],
     });
   }
+  goBack(){
+    window.history.back();
+  }
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 

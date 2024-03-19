@@ -20,6 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatOption } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+
 import { MatSelectModule } from '@angular/material/select';
 
 
@@ -36,6 +38,7 @@ import { HomeComponent } from './home/home.component';
 import { AddserviceComponent } from './components/addservice/addservice.component';
 import { UpdateServiceComponent } from './components/update-service/update-service.component';
 import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
+import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
 
 
 
@@ -49,7 +52,8 @@ import { ViewShopServicesComponent } from './components/view-shop-services/view-
     HomeComponent,
     AddserviceComponent,
     UpdateServiceComponent,
-    ViewShopServicesComponent
+    ViewShopServicesComponent,
+    ShopDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +77,8 @@ import { ViewShopServicesComponent } from './components/view-shop-services/view-
     MatDialogModule,
     MatOption,
     MatSelectModule, 
+    MatTabsModule,
+    
   ]
 })
 export class ShopkeeperModule { }

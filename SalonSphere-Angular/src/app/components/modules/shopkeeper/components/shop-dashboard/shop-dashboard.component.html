@@ -1,7 +1,8 @@
+<div class="container">
 <mat-card class="header">
   <h1 >{{ shopData.shopName }}</h1>
   <p>{{ shopData.address }}</p>
-  <p>{{ shopData.shopCity }}</p>
+  <p>{{ shopData.shopCity }}, {{shopData.district}}</p>
 </mat-card>
 <mat-tab-group>
   <mat-tab label="Services">
@@ -31,9 +32,21 @@
         </div>
       </ng-template>
     </div>
+
+    <div class="add-shop">
+      <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+      <button
+        mat-raised-button
+        class="button"
+        routerLink="/shopkeeper/addservice"
+      >
+        <span>Add Service</span>
+      </button>
+    </div>
   </mat-tab>
 
   <mat-tab label="Stats"> </mat-tab>
 
   <!-- Add more mat-tabs if needed -->
 </mat-tab-group>
+</div>

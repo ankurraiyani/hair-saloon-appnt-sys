@@ -137,25 +137,23 @@ public class ShopkeeperController {
 		}
 	}
 
-	//this Api used for fetch the files or images
+	// this Api used for fetch the files or images
 	@GetMapping("/fetchDocument/{shopId}")
 	public List<byte[]> getImagesByShopId(@PathVariable String shopId) throws IOException {
 		return shopkeeperService.getImagesByShopId(shopId);
 	}
 
-
-	//this api is for filter the shop
+	// this api is for filter the shop
 	@GetMapping("/search/{userId}/{keyword}")
-	public ResponseEntity<List<ShowShopDto>> searchShops(@PathVariable String userId , @PathVariable String keyword) {
+	public ResponseEntity<List<ShowShopDto>> searchShops(@PathVariable String userId, @PathVariable String keyword) {
 		System.out.println("====come inside the ShopKeeper controller search shop method =================");
 
 		List<ShowShopDto> filterShop = shopkeeperService.searchShops(userId, keyword);
-		if(filterShop!=null){
-			return new ResponseEntity<>(filterShop,HttpStatus.OK);
+		if (filterShop != null) {
+			return new ResponseEntity<>(filterShop, HttpStatus.OK);
 		}
-		return new  ResponseEntity<>(filterShop ,  HttpStatus.NOT_FOUND);
-    }
-
+		return new ResponseEntity<>(filterShop, HttpStatus.NOT_FOUND);
+	}
 
 	// API's FOR SALON KEEPER PERFORM OPERATION ON SERVICES INFORMATION HERE
 
@@ -164,16 +162,17 @@ public class ShopkeeperController {
 	@Secured("shopkeeper")
 	@PostMapping("/add-service")
 	public ResponseEntity<Response> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
-        System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
-        boolean isAdd = shopServices.addShopServices(serviceInformation);
-        if (isAdd == true){
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
+		boolean isAdd = shopServices.addShopServices(serviceInformation);
+		if (isAdd == true) {
 			System.out.println("Inside If Statement");
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Service Added Successfully"));
 		}
-            
-        else
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("Error caught while adding Services"));
-    }
+
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error caught while adding Services"));
+	}
 
 	// Through addshop API we can update shop Service
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -188,7 +187,8 @@ public class ShopkeeperController {
 		if (isUpdate)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("update shop Service successfull"));
 		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Response("update shop Service unsuccessfull"));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("update shop Service unsuccessfull"));
 	}
 
 	// Through addshop API we can delete salons in the system
@@ -206,13 +206,15 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/showservices/{shopId}")
 	public ResponseEntity<List<ShopServiceDTO>> showServices(@PathVariable String shopId) {
-		System.out.println("===========================inside shop keeper controllere show services =====================");
+		System.out.println(
+				"===========================inside shop keeper controllere show services =====================");
 		List<ShopServiceDTO> serviceslist = shopServices.showServices(shopId);
-		if(serviceslist!=null){
-			return new ResponseEntity<>(serviceslist,HttpStatus.OK);
+		if (serviceslist != null) {
+			return new ResponseEntity<>(serviceslist, HttpStatus.OK);
 		}
-		return new  ResponseEntity<>(serviceslist,HttpStatus.NOT_FOUND);
-    }
+		return new ResponseEntity<>(serviceslist, HttpStatus.NOT_FOUND);
+	}
+
 	// Through this api we will get shops information through shopEmail
 	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -230,12 +232,13 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/getService/{serviceId}")
 	public ResponseEntity<ShopServiceDTO> getServiceById(@PathVariable int serviceId) {
-		System.out.println("===========================inside shop keeper controllere show services =====================");
+		System.out.println(
+				"===========================inside shop keeper controllere show services =====================");
 		ShopServiceDTO service = shopServices.getService(serviceId);
-		if(service!=null){
-			return new ResponseEntity<>(service,HttpStatus.OK);
+		if (service != null) {
+			return new ResponseEntity<>(service, HttpStatus.OK);
 		}
-		return new  ResponseEntity<>(service ,  HttpStatus.NOT_FOUND);
-    }
+		return new ResponseEntity<>(service, HttpStatus.NOT_FOUND);
+	}
 
 }

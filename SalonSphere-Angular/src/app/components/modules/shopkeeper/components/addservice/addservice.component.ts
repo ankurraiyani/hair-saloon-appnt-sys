@@ -28,6 +28,9 @@ getServiceFields(): FormGroup {
     serviceDuration: new FormControl(""),
   });
 }
+goBack(){
+  window.history.back();
+}
 
 serviceListArray() {
   this.data =  this.addServiceForm.get("serviceList") as FormArray;
@@ -46,6 +49,7 @@ getFormData() {
 
   this.addservice.addservice(this.data.value).subscribe((data:any)=>
   {
+    
     Swal.fire({
       title: 'Success',
       text: 'Service(s) Added Successfully',

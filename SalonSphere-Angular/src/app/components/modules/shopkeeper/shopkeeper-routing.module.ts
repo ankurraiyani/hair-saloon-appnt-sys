@@ -10,6 +10,7 @@ import { AddserviceComponent } from './components/addservice/addservice.componen
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
 import { UpdateServiceComponent } from './components/update-service/update-service.component';
+import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'addservice', component: AddserviceComponent },
       { path: 'showServices', component: ViewShopServicesComponent },
       { path: 'updateService', component: UpdateServiceComponent },
+      { path: 'shopDashboard', component: ShopDashboardComponent },
     ],
   },
 ];

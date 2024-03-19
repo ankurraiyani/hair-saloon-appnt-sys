@@ -1,43 +1,45 @@
-    <div class="shopContainer">
-      <div class="cards">
-      <ng-container *ngIf="data && data.length">
-        <mat-card class="shopCard" *ngFor="let shop of data">
+<div class="shopContainer">
+  <div class="cards">
+    <ng-container *ngIf="data && data.length">
+      <mat-card class="shopCard" *ngFor="let shop of data">
+        <div
+          class="click"
+          (click)="showinfo(shop.shopEmail, shop.shopId)"
+          routerLink="/shopkeeper/shopDashboard"
+        >
           <div class="edit">
             <mat-icon
-              (click)="showinfo(shop.shopEmail)"
+              (click)="showinfo(shop.shopEmail, shop.shopId)"
               routerLink="/shopkeeper/updateshop"
               >edit</mat-icon
             >
           </div>
-          <img [src]="shop.coverImage" alt="Cover Image" />
-          <h2>{{ shop.shopName }}</h2>
-          <h3>{{ shop.shopAddress }}</h3>
-          <h3>{{ shop.shopCity }}</h3>
-          <h3>{{ shop.shopEmail }}</h3>
-          <h3>{{ shop.shopContactNo }}</h3>
-          <h3>{{ shop.status }}</h3>
-        </mat-card>
-      </ng-container>
-
-      <ng-template #noShops>
-        <div class="noshopCard">
-          <h2>No Shops Added</h2>
-          <br />
-          <button class="button" routerLink="/shopkeeper/addshop">
-            <span class="button-content">Add Shop</span>
-          </button>
+          <!-- <img [src]="shop.coverImage" alt="Cover Image" /> -->
+          <h2><b>Shop Name:</b>{{ shop.shopName }}</h2>
+          <h3><b>Address:</b>{{ shop.shopAddress }}</h3>
+          <h3><b>City:</b>{{ shop.shopCity }}</h3>
+          <h3><b>Email:</b>{{ shop.shopEmail }}</h3>
+          <h3><b>Contact No.:</b>{{ shop.shopContactNo }}</h3>
+          <h3><b>Status:</b>{{ shop.status }}</h3>
         </div>
-      </ng-template>
-    </div>
+      </mat-card>
+    </ng-container>
 
-    <div class="add-shop">
-        <h2 *ngIf="!data || !data.length">No Shops Added</h2>
-         <button class="button"routerLink="/shopkeeper/add-shop">
-            <span class="button-content">Add Shop</span>
+    <ng-template #noShops>
+      <div class="noshopCard">
+        <h2>No Shops Added</h2>
+        <br />
+        <button class="button" routerLink="/shopkeeper/addshop">
+          <span class="button-content">Add Shop</span>
         </button>
-    </div>
-    </div>
+      </div>
+    </ng-template>
+  </div>
 
-  
-
-
+  <div class="add-shop">
+    <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+    <button class="button" routerLink="/shopkeeper/add-shop">
+      <span class="button-content">Add Shop</span>
+    </button>
+  </div>
+</div>

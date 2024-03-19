@@ -47,6 +47,7 @@ public class ShopkeeperService {
 			dto.setShopCity(s.getShopCity());
 			dto.setShopContactNo(s.getShopContactNo());
 			dto.setStatus(s.getStatus());
+			dto.setShopId(s.getShopId());
 			shops.add(dto);
 		}
 		return shops;
@@ -99,6 +100,9 @@ public class ShopkeeperService {
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");
+
+
+			System.out.println("************************************\n"+shopInformation);
 
 			// Set Cover image name and lincense document name
 
