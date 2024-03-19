@@ -10,8 +10,8 @@ export class ImageService {
   constructor(private http:HttpClient) { }
 
   uploadImage(data:any){
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
 
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
     return this.http.post("http://localhost:8081/shopkeeper/uploadDocument",data, { headers });
   }
 }

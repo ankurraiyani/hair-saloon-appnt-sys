@@ -116,8 +116,11 @@ public class ShopkeeperController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
+	
+			
 			throws IOException {
-
+		System.out.println("================================================come inside the controller");
+		
 		try {
 			String originalFileName = file.getOriginalFilename();
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);

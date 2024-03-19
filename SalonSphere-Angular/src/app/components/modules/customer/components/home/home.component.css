@@ -1,0 +1,62 @@
+
+
+.main {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 12%;
+}
+
+.cards {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  width: 25rem;
+  height: 300px;
+  margin-bottom: 40px;
+}
+
+.card:hover {
+  transition: all 0.2s linear;
+  box-shadow: 0 10px 20px #999;
+  cursor: pointer;
+}
+
+img {
+  height: 190px;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+p {
+  font-size: large;
+  font-weight: bold;
+}
+
+.explore-btn {
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: large;
+}
+
+.explore-btn:hover {
+  background-color: #0e074f;
+  color: white;
+  border: #0e074f;
+  transition: all 0.2s linear;
+}

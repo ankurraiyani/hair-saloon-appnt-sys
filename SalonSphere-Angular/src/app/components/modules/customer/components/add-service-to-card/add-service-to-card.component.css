@@ -1,0 +1,206 @@
+.main-div{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+}
+.services{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 13%;
+
+  }
+  
+  .service{
+    width: 80%;
+    background-color: rgb(245, 243, 243);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+  
+  }
+  
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  
+  .img{
+    width: 250px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .add-btn{
+    width: 120px;
+    position: absolute;
+    bottom: -3%;
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    letter-spacing: 2px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+  
+  }
+  .add-btn:hover{
+    transition: all 0.3s linear;
+    background-color: red;
+  }
+  .right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+   .price img{
+    object-fit: cover;
+    width: 15px;
+    height: 20px;
+    mix-blend-mode: color-burn;
+    aspect-ratio: 2/3;
+  }
+  
+  .price{
+    display: flex;
+    gap: 4px;
+  
+  }
+  
+  .price-time{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .time{
+    display: flex;
+    gap: 5px;
+  }
+  
+  .time .circle{
+    background-color: rgb(14, 15, 15);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 5px;
+  }
+  
+  h1{
+    letter-spacing: 2px;
+  }
+
+  .card{
+    width: 35%;
+    height: 100vh;
+    position: fixed;
+    right: 2%;
+    top: 13%;
+    border: none;
+    background-color: transparent;
+  }
+
+  .service:hover{
+    cursor: pointer;
+    background-color: rgb(185, 187, 190);
+    transition: all 0.5s linear;
+  }
+
+  .card p{
+    margin-top: 0px;
+    color: #828582;
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+  .card span{
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .product-card{
+    margin-top: 20px;
+    width: 90%;
+    height: 200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+    border: none;
+  }
+  .empty-product{
+    width: 70%;
+    object-fit: cover;
+    height: 70%
+  }
+
+  .products{
+    width: 100%;
+    background-color: aliceblue;
+    border: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    gap: 20px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .product{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-details{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-btn{
+    width: 131px;
+    height: 40px;
+    background-color: blue;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+
+  .total{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 41px;
+    padding: 32px;
+    cursor: pointer;
+    border-radius: 40px;
+    margin: 0 auto;
+    background-color: rgb(145, 145, 151);
+    margin-top: 12px;
+  }
+ 
+
+  .total:hover{
+    background-color: rgb(135, 135, 139);
+    transition: all 0.4s linear;
+  }
+
+  
