@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.stereotype.Service;
 
-import com.SalonSphereServer.entity.Email;
+import com.SalonSphereServer.common.Email;
 
 @Service
 public class EmailService {

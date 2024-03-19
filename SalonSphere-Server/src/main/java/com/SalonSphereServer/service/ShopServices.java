@@ -2,6 +2,7 @@ package com.SalonSphereServer.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,7 @@ public class ShopServices {
 
             existingService.setModifyDate(sqlDate);
 
+            System.out.println("===============================================\n"+existingService);
             // Save the updated service
             servicesRepository.save(existingService);
             return true;
@@ -107,4 +109,18 @@ public class ShopServices {
 
 		return serviceList;
 	}
+
+    public ShopServiceDTO getService(int serviceId){
+
+        Optional<ServiceInformation> dto = servicesRepository.findById(serviceId);
+        ShopServiceDTO serviceDTO=new ShopServiceDTO();
+        ServiceInformation sdto = dto.get();
+        serviceDTO.setServiceId(serviceId);
+        serviceDTO.setServiceName(sdto.getServiceName());
+        serviceDTO.setServicePrice(sdto.getServicePrice());
+        serviceDTO.setServiceDuration(sdto.getServiceDuration());
+        serviceDTO.setCreateDate(sdto.getCreateDate());
+        return serviceDTO;
+    }
+
 }

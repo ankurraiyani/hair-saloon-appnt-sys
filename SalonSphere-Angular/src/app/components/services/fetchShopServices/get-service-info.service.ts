@@ -14,4 +14,10 @@ export class GetServiceInfoService {
 
     return this.http.get(`http://localhost:8081/shopkeeper/showservices/${shopId}`,{headers});
   }
+
+  fetchServicebyId(serviceId:any){
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
+
+    return this.http.get(`http://localhost:8081/shopkeeper/getService/${serviceId}`,{headers});
+  }
 }

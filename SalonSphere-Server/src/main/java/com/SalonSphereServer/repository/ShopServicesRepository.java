@@ -24,5 +24,4 @@ public interface ShopServicesRepository extends JpaRepository<ServiceInformation
     @Query(value = "SELECT * FROM service_information WHERE shop_id = :shopId", nativeQuery = true)
     List<ServiceInformation> findAllServicesByShopId(@Param("shopId") String shopId);
 
-
 }
