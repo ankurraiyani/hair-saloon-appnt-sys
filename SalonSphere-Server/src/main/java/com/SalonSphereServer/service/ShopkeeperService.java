@@ -47,6 +47,7 @@ public class ShopkeeperService {
 			dto.setShopCity(s.getShopCity());
 			dto.setShopContactNo(s.getShopContactNo());
 			dto.setStatus(s.getStatus());
+			dto.setShopId(s.getShopId());
 			shops.add(dto);
 		}
 		return shops;

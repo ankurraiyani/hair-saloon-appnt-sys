@@ -72,6 +72,7 @@ public class CustomerController {
 			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePrice(
 					request.getCity(), request.getServiceName(), request.getPrice());
 
+			System.out.println("++++++Return++++\n"+filterRespons);
 			// here we check filterResponse is empty or not
 			if (!filterRespons.isEmpty())
 				return ResponseEntity.ok().body(filterRespons);

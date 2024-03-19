@@ -30,6 +30,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import {MatRippleModule} from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 
@@ -72,7 +74,8 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatExpansionModule,
     MatAccordion,
     MatSelectModule,
-    MatRippleModule
+    MatRippleModule,
+    MatTabsModule,
   ],
   providers: [
     provideClientHydration(),

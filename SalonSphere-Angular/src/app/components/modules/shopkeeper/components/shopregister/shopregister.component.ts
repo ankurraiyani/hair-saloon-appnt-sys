@@ -78,7 +78,9 @@ export class ShopregisterComponent {
       state: [''],
     });
   }
-
+  goBack(){
+    window.history.back();
+  }
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
@@ -115,6 +117,15 @@ export class ShopregisterComponent {
   // Image Uploading 
   uploadFile(event: any): void {
     this.file = event.target.files[0];
+    console.log('file', this.file);
+    if (!this.isImageFile(this.file)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
+        icon: 'error',
+      });
+      return;
+    }
     
     this.file = new File([this.file], 'cover_image_' + this.imageId+ '.jpg');
     console.log('Image file : ', this.file);
@@ -128,7 +139,7 @@ export class ShopregisterComponent {
     this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
 
     console.log(this.licenceFile);
-    return ;
+    return;
   }
 
   isImageFile(file: File): boolean {
@@ -231,6 +242,7 @@ export class ShopregisterComponent {
           text: 'Your Shop Registered successfully',
           icon: 'success',
         });
+        this.router.navigate(['/shopkeeper/view-shop']);
       },
       (
         // if any  error occured while registering user

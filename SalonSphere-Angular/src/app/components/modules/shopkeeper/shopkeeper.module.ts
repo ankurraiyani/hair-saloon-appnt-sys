@@ -9,19 +9,22 @@ import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatOption } from '@angular/material/core';
-import { MatDialogModule } from '@angular/material/dialog';
+
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatOption } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -29,15 +32,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
-import { ShopkeeperprofileComponent } from './components/shopkeeperprofile/shopkeeperprofile.component';
 import { UpdateShopComponent } from './components/update-shop/update-shop.component';
-import { ViewShopInfoComponent } from './components/view-shop-info/view-shop-info.component';
 
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AddserviceComponent } from './components/addservice/addservice.component';
 import { UpdateServiceComponent } from './components/update-service/update-service.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
+import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
 
 
 
@@ -45,14 +48,14 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
-    ShopkeeperprofileComponent,
     UpdateShopComponent,
-    ViewShopInfoComponent,
     NavbarComponent,
     HeaderComponent,
     HomeComponent,
     AddserviceComponent,
-    UpdateServiceComponent
+    UpdateServiceComponent,
+    ViewShopServicesComponent,
+    ShopDashboardComponent
   ],
   imports: [
     CommonModule,
@@ -79,6 +82,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatDialogModule,
     MatOption,
     MatSelectModule, 
+    MatTabsModule,
+    
   ]
 })
 export class ShopkeeperModule { }

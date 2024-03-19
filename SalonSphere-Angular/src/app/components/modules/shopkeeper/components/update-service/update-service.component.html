@@ -1,8 +1,8 @@
 <section class="container">
-    <h1>Register Your Shop</h1>
+  <button mat-button (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon> Back</button>
+    <h1>Update Service</h1>
     <form
       [formGroup]="updateServiceForm"
-      (ngSubmit)="updateservice()"
       method="post"
       class="form"
     >
@@ -21,7 +21,6 @@
           type="text"
           placeholder="Enter Service Price"
           formControlName="servicePrice"
-          
           required
         />
       </div>
@@ -35,7 +34,10 @@
           
         />
       </div>
+      <div class="actions">
 
-      <button type="submit">Submit</button>
+        <button mat-raised-button style="background-color: red;" (click)="deleteService()">Delete</button>
+        <button style="background-color: green;"(click)="updateservice()">Update</button>
+      </div>
     </form>
   </section>

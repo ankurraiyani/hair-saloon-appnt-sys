@@ -170,41 +170,46 @@ public class ShopkeeperController {
 	public ResponseEntity<Response> addService(@RequestBody @NonNull List<ServiceInformation> serviceInformation) {
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP SERVICE METHOD=======" + serviceInformation);
 		boolean isAdd = shopServices.addShopServices(serviceInformation);
-		if (isAdd == true)
-			return ResponseEntity.status(HttpStatus.OK).body(new Response("Service added Successfully"));
+		if (isAdd == true) {
+			System.out.println("Inside If Statement");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Service Added Successfully"));
+		}
+
 		else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new Response("Error caught while adding service"));
+					.body(new Response("Error caught while adding Services"));
 	}
 
 	// Through addshop API we can update shop Service
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/updateshop-service")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> updateShopService(@RequestBody ServiceInformation serviceInformation) {
+	public ResponseEntity<Response> updateShopService(@RequestBody ServiceInformation serviceInformation) {
 
 		// Call service method to update shopService
 		System.out.println(
 				"======THIS IS SHOPKEEPER CONTROLLER  updatedateShopService METHOD=======" + serviceInformation);
 		boolean isUpdate = shopServices.updateService(serviceInformation);
 		if (isUpdate)
-			return ResponseEntity.status(HttpStatus.CREATED).body("update shop Service successfull");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("update shop Service successfull"));
 		else
-			return ResponseEntity.status(HttpStatus.CREATED).body("shop Service update failer");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("update shop Service unsuccessfull"));
 	}
 
 	// Through addshop API we can delete salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/deleteshop-service")
+	@PostMapping("/deleteshop-service/{serviceId}")
 	@Secured("shopkeeper")
-	public ResponseEntity<String> deleteShopService(@RequestParam int id) {
+	public ResponseEntity<Response> deleteShopService(@PathVariable int serviceId) {
 
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP SERVICE METHOD=======");
-		shopServices.deleteService(id);
-		return ResponseEntity.status(HttpStatus.OK).body("Delete successfull");
+		shopServices.deleteService(serviceId);
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfull Deletion"));
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/showservices/{shopId}")
 	public ResponseEntity<List<ShopServiceDTO>> showServices(@PathVariable String shopId) {
 		System.out.println(
@@ -228,6 +233,18 @@ public class ShopkeeperController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/getService/{serviceId}")
+	public ResponseEntity<ShopServiceDTO> getServiceById(@PathVariable int serviceId) {
+		System.out.println(
+				"===========================inside shop keeper controllere show services =====================");
+		ShopServiceDTO service = shopServices.getService(serviceId);
+		if (service != null) {
+			return new ResponseEntity<>(service, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(service, HttpStatus.NOT_FOUND);
 	}
 
 }

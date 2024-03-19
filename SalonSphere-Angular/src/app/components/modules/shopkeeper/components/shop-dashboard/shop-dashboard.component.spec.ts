@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewShopInfoComponent } from './view-shop-info.component';
+import { ShopDashboardComponent } from './shop-dashboard.component';
 
-describe('ViewShopInfoComponent', () => {
-  let component: ViewShopInfoComponent;
-  let fixture: ComponentFixture<ViewShopInfoComponent>;
+describe('ShopDashboardComponent', () => {
+  let component: ShopDashboardComponent;
+  let fixture: ComponentFixture<ShopDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ViewShopInfoComponent]
+      declarations: [ShopDashboardComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ViewShopInfoComponent);
+    fixture = TestBed.createComponent(ShopDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
