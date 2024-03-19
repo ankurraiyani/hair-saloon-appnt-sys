@@ -12,6 +12,7 @@ import { PincodeService } from '../../../../services/common/pincode.service';
 import { ImageService } from '../../../../services/common/image.service';
 import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
+import { CookieOptions, response } from 'express';
 
 @Component({
   selector: 'app-shopregister',
@@ -30,11 +31,17 @@ export class ShopregisterComponent {
 
   file: any;
 
+  licenceFile: any;
+  
+  imageId:string=Cookie.get('userId');
+  licenceName: string='';
+
+
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
     shopName: new FormControl('', Validators.required),
     licenceNo: new FormControl('', Validators.required),
-    licenceDocument: new FormControl(''),
+    licenseDocument: new FormControl(''),
     coverImage: new FormControl(''),
     shopEmail: new FormControl('', Validators.required),
     shopContactNo: new FormControl('', Validators.required),
@@ -52,7 +59,7 @@ export class ShopregisterComponent {
       userId: [Cookie.get('userId')],
       shopName: [''],
       licenceNo: [''],
-      licenceDocument: [''],
+      licenseDocument: [''],
       coverImage: [''],
       shopEmail: [''],
       shopContactNo: [''],
@@ -65,6 +72,7 @@ export class ShopregisterComponent {
       // country: [''],
     });
   }
+
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
@@ -88,20 +96,27 @@ export class ShopregisterComponent {
     });
   }
 
-  // Image Uploading
-
+  // Image Uploading 
   uploadFile(event: any): void {
     this.file = event.target.files[0];
-    console.log('file', this.file);
+    
+    //change the name of cover image
+    this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
 
-    if (!this.isImageFile(this.file)) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
-        icon: 'error',
-      });
-      return;
-    }
+    
+    console.log('file', this.file);
+  }
+
+  //licence uploading
+  uploadLicence(event: any){
+    this.licenceFile = event.target.files[0];
+    console.log("uploadLicence method called");
+
+    //change the name of licence document
+    this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
+
+    console.log(this.licenceFile);
+    return;
   }
 
   isImageFile(file: File): boolean {
@@ -112,6 +127,9 @@ export class ShopregisterComponent {
   //Validate the data of the form and send the data to the service
   doSubmit() {
     // alert('values comes');
+    
+    this.register.value.licenseDocument= 'licence_'+this.imageId+'.jpg';
+    this.register.value.coverImage= 'cover_image_'+this.imageId+'.jpg';
     console.log(this.register.value);
 
     //check first name and last name
@@ -162,14 +180,34 @@ export class ShopregisterComponent {
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
     formData.set('file', this.file);
+  
 
     this.upload.uploadImage(formData).subscribe((data: any) => {
+      console.log(data);
+    },
+    error=>{
       Swal.fire({
-        title: 'Good job!',
-        text: 'Image Uploaded Successfully',
-        icon: 'success',
+        title: 'Error!',
+        text: 'error occured while uploading the image',
+        icon: 'error',
+      });
+  });
+
+  //send image to backend for storing in folder structure
+    formData.set('file', this.licenceFile);
+    this.upload.uploadImage(formData).subscribe(response=>{
+      console.log(response);
+    },
+    error=>{
+      Swal.fire({
+        title: 'Error!',
+        text: 'error occured while uploading the licence',
+        icon: 'error',
       });
     });
+
+
+
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
@@ -182,9 +220,6 @@ export class ShopregisterComponent {
           text: 'Your Shop Registered successfully',
           icon: 'success',
         });
-
-        //and Navigate to the login page
-        this.router.navigate(['/login']);
       },
       (
         // if any  error occured while registering user
@@ -192,7 +227,7 @@ export class ShopregisterComponent {
       ) => {
         Swal.fire({
           title: 'Server Error',
-          text: 'There is something wrong please try again🫣',
+          text: 'Your Email or Shop is already registered',
           icon: 'error',
         });
       }
