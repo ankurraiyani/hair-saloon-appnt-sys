@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="shopData">
   <mat-card class="header">
     <h1 >{{ shopData.shopName }}</h1>
     <p>{{ shopData.address }}</p>
@@ -23,7 +23,7 @@
             routerLink="/shopkeeper/updateService">
               <td scope="row">{{ shop.serviceName }}</td>
               <td>{{ shop.servicePrice | currency:'INR'}}</td>
-              <td>{{ shop.serviceDuration }}</td>
+              <td>{{ shop.serviceDuration | duration}}</td>
             </tr>
             
           </tbody>
