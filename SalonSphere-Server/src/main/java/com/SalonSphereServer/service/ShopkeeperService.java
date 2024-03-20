@@ -99,15 +99,7 @@ public class ShopkeeperService {
 
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
-			shopInformation.setStatus("Pending");
-			
-			System.out.println(shopInformation.getLicenseDocument());
-
-//			// Set Cover image name and lincense document name
-//			shopInformation.setCoverImage(shopInformation.getShopId() + "_" + shopInformation.getCoverImage());
-//			shopInformation
-//					.setLicenseDocument(shopInformation.getShopId() + "_" + shopInformation.getLicenseDocument());
-			
+			shopInformation.setStatus("Pending");	
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -269,5 +261,8 @@ public class ShopkeeperService {
 		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
 		return;
 	}
+
+	
+
 
 }

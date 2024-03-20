@@ -1,6 +1,4 @@
-package com.SalonSphereServer.dto;
-
-import java.util.Date;
+package com.SalonSphereServer.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,13 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ShopServiceDTO {
-
-    private int serviceId;
+public class FilterRequest {
+    private String city;
     private String serviceName;
-    private Double servicePrice;
-    private int serviceDuration;
-    private Date createDate;
-
-    
+    private String price;
+    private String distance;
 }

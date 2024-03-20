@@ -37,7 +37,7 @@ public class ServiceInformation {
     private double servicePrice;
     
     @Column(name = "service_duration")
-    private String serviceDuration;
+    private int serviceDuration;
 
     @Column(name = "shop_id")
     private String shopId;

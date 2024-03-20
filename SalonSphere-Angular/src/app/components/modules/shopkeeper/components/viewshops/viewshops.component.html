@@ -19,7 +19,7 @@
           <h3><b>Address: </b>{{ shop.shopAddress }}</h3>
           <h3><b>City: </b>{{ shop.shopCity }}</h3>
           <h3><b>Email: </b>{{ shop.shopEmail }}</h3>
-          <h3><b>Contact No.: </b>{{ shop.shopContactNo }}</h3>
+          <h3><b>Contact No.: </b><u>{{ shop.shopContactNo  | phoneNumber}}</u></h3>
           <h3><b>Status: </b>{{ shop.status }}</h3>
         </div>
       </mat-card>

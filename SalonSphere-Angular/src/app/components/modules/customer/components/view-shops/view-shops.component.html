@@ -4,46 +4,50 @@
       <div class="nav-upper-options">
         <!-- 1st -->
 
-        <div class="select-box" (click)="showServiceDropdown()">
-          <div class="options-container service active">
-            <div class="option service-option">
-              <input
-                type="radio"
-                class="radio"
-                id="automobiles"
-                name="category"
-              />
-              <label for="automobiles">Haircut</label>
+    
+          <div class="select-box" (click)="showServiceDropdown()">
+            <div class="options-container service active">
+              <div class="option service-option">
+                <input
+                  type="radio"
+                  class="radio"
+                  id="automobiles"
+                  name="category"
+                />
+                <label for="automobiles">Hair Cutting</label>
+              </div>
+    
+              <div class="option service-option">
+                <input type="radio" class="radio" id="film" name="category" />
+                <label for="film">Facial & Cleenups</label>
+              </div>
+    
+              <div class="option service-option">
+                <input type="radio" class="radio" id="science" name="category" />
+                <label for="science">Spa</label>
+              </div>
+    
+              <div class="option service-option">
+                <input type="radio" class="radio" id="art" name="category" />
+                <label for="art">Beard Trim & Shaving</label>
+              </div>
+    
+              <div class=" option service-option">
+                <input type="radio" class="radio" id="music" name="category" />
+                <label for="music">Detaining</label>
+              </div>
+    
+              <div class="option service-option">
+                <input type="radio" class="radio" id="travel" name="category" />
+                <label for="travel">Shamppo and Blow Dry</label>
+              </div>
+  
             </div>
-
-            <div class="option service-option">
-              <input type="radio" class="radio" id="film" name="category" />
-              <label for="film">Threading</label>
-            </div>
-
-            <div class="option service-option">
-              <input type="radio" class="radio" id="science" name="category" />
-              <label for="science">Hair Coloring</label>
-            </div>
-
-            <div class="option service-option">
-              <input type="radio" class="radio" id="art" name="category" />
-              <label for="art">Manicure</label>
-            </div>
-
-            <div class="option service-option">
-              <input type="radio" class="radio" id="music" name="category" />
-              <label for="music">Detaining</label>
-            </div>
-
-            <div class="option service-option">
-              <input type="radio" class="radio" id="travel" name="category" />
-              <label for="travel">Shamppo and Blow Dry</label>
+    
+            <div class="selected service-selected ">
+              Service Type
             </div>
           </div>
-
-          <div class="selected service-selected">Service Type</div>
-        </div>
 
         <!-- 2st -->
 
@@ -169,17 +173,15 @@
       <div class="card" *ngFor="let shop of shops">
         <h2>{{ shop.shopName }}</h2>
 
-        <div class="content">
-          <div class="left">
-            <div class="pera">
-              <p class="location">location : {{ shop.location }}</p>
-              <p *ngIf="shop.price != 0" class="price">
-                Price : {{ shop.price }} Rs
-              </p>
-              <p *ngIf="shop.timeDuration != ''" class="time">
-                Time-Duration: {{ shop.timeDuration }}
-              </p>
-            </div>
+      <div class="content">
+        <div class="left">
+          <div class="pera">
+            <p class="location">
+              location : {{shop.location}}
+            </p>
+            <p *ngIf="shop.price != 0" class="price">Price : {{shop.price}} Rs</p>
+            <p *ngIf="shop.timeDuration!='' " class="time">Time-Duration: {{shop.timeDuration}}</p>
+          </div>
 
             <div class="offers">
               <strong>Special Offers:</strong>

@@ -81,6 +81,8 @@ export class ShopregisterComponent {
   goBack(){
     window.history.back();
   }
+
+
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
@@ -127,19 +129,15 @@ export class ShopregisterComponent {
       return;
     }
     
-    //change the name of cover image
-    this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
-
-    
-    console.log('file', this.file);
+    this.file = new File([this.file], 'cover_image_' + this.imageId+ '.jpg');
+    console.log('Image file : ', this.file);
   }
 
   //licence uploading
   uploadLicence(event: any){
     this.licenceFile = event.target.files[0];
-    console.log("uploadLicence method called");
 
-    //change the name of licence document
+    //change ther name of licence document
     this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
 
     console.log(this.licenceFile);

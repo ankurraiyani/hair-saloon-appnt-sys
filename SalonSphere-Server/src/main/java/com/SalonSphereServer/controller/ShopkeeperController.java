@@ -31,6 +31,7 @@ import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.response.Response;
+import com.SalonSphereServer.service.EmailService;
 import com.SalonSphereServer.service.ShopServices;
 import com.SalonSphereServer.service.ShopkeeperService;
 
@@ -46,6 +47,10 @@ public class ShopkeeperController {
 	@Autowired
 	private ShopServices shopServices;
 
+	@SuppressWarnings("unused")
+	@Autowired
+	private EmailService emailService;
+
 	// Through addshop API we can add new salons in the system
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/addshop", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -53,7 +58,7 @@ public class ShopkeeperController {
 	public ResponseEntity<Response> addShop(@RequestBody ShopInformation shop) {
 
 		// Call service method to add shop
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop.getLicenseDocument());
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop);
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
@@ -111,14 +116,12 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-	public static String uploadDirectory = "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Server\\src\\main\\webapp\\images";
+	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
-	
-			
-			throws IOException {
+	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)	throws IOException {
+
 		System.out.println("================================================come inside the controller");
 		
 		try {

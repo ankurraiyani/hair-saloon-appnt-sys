@@ -16,72 +16,59 @@ import com.SalonSphereServer.common.Email;
 @Service
 public class EmailService {
 
-    public boolean sendEmail(String subject , String message , String to1, String to2) {
-        
-        boolean f = false;
-        
-        String from = "salonsphere.woss@gmail.com";
-        
-        String host = "smtp.gmail.com";
+	public static boolean sendEmail(Email email) {
 
-        Properties properties = System.getProperties();
-//        System.out.println(properties);
+		boolean flag = false;
+		String from = "salonsphere.woss@gmail.com";
+		String host = "smtp.gmail.com";
 
-//        Set Host
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", 465);
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
+		Properties properties = System.getProperties();
 
-//        Get the session object
+		// Set Host
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", 465);
+		properties.put("mail.smtp.ssl.enable", "true");
+		properties.put("mail.smtp.auth", "true");
 
-        Session session = Session.getInstance(properties, new Authenticator() {
+		// Get the session object
+		Session session = Session.getInstance(properties, new Authenticator() {
 
-            @Override
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                // TODO Auto-generated method stub
-                return new javax.mail.PasswordAuthentication("salonsphere.woss@gmail.com", "ukzh wxow wocl aaiv");
-            }
+			@Override
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication("salonsphere.woss@gmail.com", "ukzh wxow wocl aaiv");
+			}
 
-        });
+		});
 
-        session.setDebug(true);
+		session.setDebug(true);
 
-//        Compose message
-        MimeMessage mimeMessage = new MimeMessage(session);
+		// Compose message
+		MimeMessage mimeMessage = new MimeMessage(session);
 
-        try {
-//            Adding Sender
-            mimeMessage.setFrom(from);
+		try {
+			// Adding Sender
+			mimeMessage.setFrom(from);
 
-//            Adding Recipients
-            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to1));
-            mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(to2));
+			// Adding Recipients
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email.getTo()));
+			mimeMessage.setRecipient(Message.RecipientType.CC, new InternetAddress(email.getCc()));
 
-//            Adding subject to message
-            mimeMessage.setSubject(subject);
+			// Adding subject to message
+			mimeMessage.setSubject(email.getSubject());
 
-//            Adding Message Text
-            mimeMessage.setText(message);
+			// Adding Message Text
+			mimeMessage.setText(email.getMessage());
 
-            Transport.send(mimeMessage);
-            System.out.println("Sent Successfully...................");
-            
-            f = true;
-            
-            Email email = new Email();
-            email.setTo(to1);
-            email.setCc(to2);
-            email.setSubject(subject);
-            email.setMessage(message);
-            
-        } catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }
+			Transport.send(mimeMessage);
+			System.out.println("Sent Email Successfully...");
 
-        return f;
-        
-    }
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return flag;
+
+	}
 
 }

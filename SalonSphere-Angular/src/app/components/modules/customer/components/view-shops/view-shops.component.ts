@@ -22,34 +22,15 @@ export class ViewShopsComponent implements OnInit {
   serviceName:any = null;
   renge:any = null;
   distence:any = null;
-  city:any = '';
+  city:any = localStorage.getItem('location');
 
 
-  public shops: shop[] = [{
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '30 min',
-    price: 200
-  },
-  {
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '',
-    price: 0
-  },
-  {
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '30 min',
-    price: 200
-  }];
+  public shops: shop[] = [];
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
-    this.city = localStorage.getItem('loction');
+    this.city = localStorage.getItem('location');
+    console.log(this.city);
     this.showShopByCity(this.city);
   }
 

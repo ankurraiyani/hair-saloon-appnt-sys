@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.SalonSphereServer.common.Email;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.dto.PendingShopsDetailsDTO;
 import com.SalonSphereServer.dto.ShopOwnerDTO;
 import com.SalonSphereServer.dto.ShopReviewDTO;
+import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.service.CustomerService;
+import com.SalonSphereServer.service.EmailService;
 import com.SalonSphereServer.service.ShopkeeperService;
 
 @RestController
@@ -34,6 +37,9 @@ public class AdminController {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private ShopkeeperRepository shopkeeperRepository;
 
 	@GetMapping("/view-customer")
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -89,7 +95,19 @@ public class AdminController {
 	// @Secured("admin")
 	@PostMapping("/view-requests/approve-request")
 	public ResponseEntity<?> approveRequest(@RequestBody String shopEmail) {
-		System.out.println("========"+shopEmail);
+
+		System.out.println("========" + shopEmail);
+
+		// Setting email information
+		Email email = new Email();
+		email.setCc(shopkeeperRepository.getOwnerEmailByShopEmail(shopEmail));
+		email.setTo(shopEmail);
+		email.setSubject("Shop has been approved.");
+		email.setMessage(
+				"Greetings for the day! \r\nThis mail is being sent to you by SalonSphere regarding your request for adding a shop.\r\n Congratulations your shop has been approved by our team. We wish you the best for you upcoming Journey.\r\n\r\n Thank you for connecting with us\r\nSalonSphere Inc. ");
+
+		// calling Email Service
+		EmailService.sendEmail(email);
 		shopKeeperService.updateStatus(shopEmail, "accepted");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -99,6 +117,17 @@ public class AdminController {
 	// @Secured("admin")
 	@PostMapping("/view-requests/reject-request")
 	public ResponseEntity<?> rejectRequest(@RequestBody String shopEmail) {
+
+		// Setting email information
+		Email email = new Email();
+		email.setCc(shopkeeperRepository.getOwnerEmailByShopEmail(shopEmail));
+		email.setTo(shopEmail);
+		email.setSubject("Shop has been rejected.");
+		email.setMessage(
+				"Greetings for the day! \r\nThis mail is being sent to you by SalonSphere regarding your request for adding a shop.\r\n Sorry to Inform you that the request for adding your Shop could not be considered due to incompatible details.\r\nYou can try again after 15 days .\r\n Thank You for Connecting with Us\r\n We wish you the best!!!\r\nSalonSphere Inc. ");
+
+		// calling Email Service
+		EmailService.sendEmail(email);
 		shopKeeperService.updateStatus(shopEmail, "rejected");
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

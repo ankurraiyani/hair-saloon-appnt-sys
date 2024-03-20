@@ -2,7 +2,21 @@ h3{
   align-items: center ;
   justify-content: center;
 }
+h1{
+  font-weight: bold;
+  text-align: start;
+}
 
+.expansion{
+  /* background-color: rgb(218, 218, 218); */
+  margin-left: 40px;
+}
+.gradient-text {
+  background: linear-gradient(to right, #e32222, #1979f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+ }
 .box-container {
   display: flex;
   justify-content: space-evenly;

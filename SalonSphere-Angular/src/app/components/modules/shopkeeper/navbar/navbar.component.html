@@ -2,20 +2,35 @@
   <div class="navcontainer">
     <nav class="nav">
       <div class="nav-upper-options">
+        <div class="gradient-text nav-option " >
+          <h1>Hello {{shopkeeperName}} !!! </h1>
+        </div>
+
         <div class="nav-option option1 active" (click)="navigateHome()">
           <mat-icon>dashboard</mat-icon>
           <h3>Home</h3>
         </div>
+        
+        <!-- Manage Shop Button in the Menu bar -->
+        <div class="nav-option option2 active" (click)="expansion()">
+          <mat-icon>dashboard</mat-icon>
+          <h3>Manage Shop</h3>
+        </div>
 
-        <div class="option2 nav-option" (click)="navigateAddShop()">
+          <!-- On Clicking the expansion div opens up with "Add Shop" and "View Shop" Buttons -->
+        <div class="expansion">
+          <div class="option2 nav-option expansion" *ngIf="flag==true" (click)="navigateAddShop()" >
           <mat-icon>add_business</mat-icon>
           <h3>Add Shop</h3>
         </div>
 
-        <div class="nav-option option3" (click)="navigateViewShop()">
+        <div class="nav-option option3 expansion" *ngIf="flag==true" (click)="navigateViewShop()">
           <mat-icon>storefront</mat-icon>
           <h3>View Shops</h3>
         </div>
+        </div>
+          <!-- -------------------------------------------------------------------------------- -->
+        
 
         <div class="nav-option option5">
           <img
