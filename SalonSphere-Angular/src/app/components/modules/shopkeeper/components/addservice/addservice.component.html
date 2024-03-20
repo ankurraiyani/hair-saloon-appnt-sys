@@ -7,7 +7,7 @@
         <div [formGroupName]="i" class="input">
           <mat-form-field>
             <br />
-            <mat-select formControlName="serviceName" required>
+            <mat-select formControlName="serviceName"  (click)="addService()" required>
               <mat-option value="">Select a service</mat-option>
               <mat-option value="Haircut">Haircut</mat-option>
               <mat-option value="Hair Coloring">Hair Coloring</mat-option>
@@ -60,14 +60,6 @@
       </div>
     </div>
     <div class="buttons">
-      <button
-        mat-raised-button
-        type="button"
-        (click)="addService()"
-        class="add_service"
-      >
-        <mat-icon>add</mat-icon>Add New Service
-      </button>
       <button mat-raised-button type="submit" class="submit_button" (click)="goBack()">
         Submit
       </button>
