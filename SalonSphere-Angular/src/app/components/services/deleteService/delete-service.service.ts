@@ -12,6 +12,10 @@ export class DeleteServiceService {
   deleteService(serviceId:any){
     
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
-        return this.http.post(`http://localhost:8081/shopkeeper/deleteshop-service/${serviceId}`,{headers});
+    console.log("Ye hheader hai",headers)
+    console.log("Ye hheader hai",serviceId)
+    
+
+        return this.http.post(`http://localhost:8081/shopkeeper/deleteshop-service/${serviceId}`,{},{headers});
       } 
 }

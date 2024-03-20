@@ -53,7 +53,7 @@ export class UpdateServiceComponent implements OnInit {
         console.log('response from server: ', response);
         Swal.fire({
           title: 'Updated',
-          text: 'Shop Updated Succesfully',
+          text: 'Service Updated Succesfully',
           icon: 'success',
         });
         this.router.navigate(['/shopkeeper/view-shop']);

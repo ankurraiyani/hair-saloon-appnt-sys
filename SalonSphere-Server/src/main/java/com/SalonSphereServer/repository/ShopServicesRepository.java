@@ -21,7 +21,7 @@ public interface ShopServicesRepository extends JpaRepository<ServiceInformation
     @Query("UPDATE ServiceInformation s SET s.isDelete = :isDelete WHERE s.id = :id")
     void updateIsDeleteById(@Param("isDelete") boolean isDelete, @Param("id") int id);
 
-    @Query(value = "SELECT * FROM service_information WHERE shop_id = :shopId", nativeQuery = true)
+    @Query(value = "SELECT * FROM service_information WHERE shop_id = :shopId and isdelete = 0", nativeQuery = true)
     List<ServiceInformation> findAllServicesByShopId(@Param("shopId") String shopId);
 
 }
