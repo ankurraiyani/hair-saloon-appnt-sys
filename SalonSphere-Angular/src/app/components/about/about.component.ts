@@ -26,23 +26,38 @@ interface shopData {
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit{
+  constructor(
+    private fetchshopInfo: FetchshopInfoService,
+    private getShopServices:GetServiceInfoService
+  ) {}
+
+
   data: any[] = [];
 
-  constructor(private getshop: GetshopService) {}
+  shopData: any;
 
   ngOnInit(): void {
-    this.getshop.getshop(Cookie.get('userId')).subscribe((data: any) => {
+    this.fetchshopInfo.fetchshopInfo(localStorage.getItem('shopEmail')).subscribe((data:any)=>{
+      this.shopData = data;
+      console.log(this.shopData.shopId);
+    })
+
+    this.getShopServices.fetchAllServices(localStorage.getItem('shopId')).subscribe((data: any) => {
+      
       this.data = data;
+      console.log(data);
       
     });
+
+  }
+  saveId(serviceId:any){
+    console.log(serviceId)
+    localStorage.setItem('serviceId',serviceId);
   }
 
-  showinfo(email: string,shopId:any) {
-    console.log('This Shop is ' + shopId);
-    localStorage.setItem('shopEmail', email);
-    localStorage.setItem('shopId', shopId);
-    
-    
-  }
+
 }
+
+
+
