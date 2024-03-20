@@ -12,6 +12,8 @@ import { ImageService } from '../services/common/image.service';
 import { UpdateShopService } from '../services/updateShop/update-shop.service';
 import { DeleteShopService } from '../services/deleteShop/delete-shop.service';
 import { GetServiceInfoService } from '../services/fetchShopServices/get-service-info.service';
+import {MatTableModule} from '@angular/material/table';
+
 
 interface shopData {
   shopName: string;
@@ -24,38 +26,23 @@ interface shopData {
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent implements OnInit{
-  constructor(
-    private fetchshopInfo: FetchshopInfoService,
-    private getShopServices:GetServiceInfoService
-  ) {}
-
-
+export class AboutComponent {
   data: any[] = [];
 
-  shopData: any;
+  constructor(private getshop: GetshopService) {}
 
   ngOnInit(): void {
-    this.fetchshopInfo.fetchshopInfo(localStorage.getItem('shopEmail')).subscribe((data:any)=>{
-      this.shopData = data;
-      console.log(this.shopData.shopId);
-    })
-
-    this.getShopServices.fetchAllServices(localStorage.getItem('shopId')).subscribe((data: any) => {
-      
+    this.getshop.getshop(Cookie.get('userId')).subscribe((data: any) => {
       this.data = data;
-      console.log(data);
       
     });
-
-  }
-  saveId(serviceId:any){
-    console.log(serviceId)
-    localStorage.setItem('serviceId',serviceId);
   }
 
-
+  showinfo(email: string,shopId:any) {
+    console.log('This Shop is ' + shopId);
+    localStorage.setItem('shopEmail', email);
+    localStorage.setItem('shopId', shopId);
+    
+    
+  }
 }
-
-
-

@@ -1,39 +1,39 @@
-<mat-card class="header">
-  <h1 >{{ shopData.shopName }}</h1>
-  <p>{{ shopData.address }}</p>
-  <p>{{ shopData.shopCity }}</p>
-</mat-card>
-<mat-tab-group>
-  <mat-tab label="Services">
-    <div class="cards">
-      <ng-container *ngIf="data && data.length">
-        <mat-card class="shopCard" *ngFor="let shop of data">
-          <div class="edit">
-            <mat-icon
-              (click)="saveId(shop.serviceId)"
-              routerLink="/shopkeeper/updateService"
-              >edit</mat-icon
-            >
-          </div>
-          <h3><b>Service Name:</b> {{ shop.serviceName }}</h3>
-          <h3><b>Price:</b> ₹{{ shop.servicePrice }}</h3>
-          <h3><b>Duration:</b> {{ shop.serviceDuration }} Minutes⏳</h3>
-        </mat-card>
-      </ng-container>
+<div class="shopContainer">
+     <div class="tablecon">
 
-      <ng-template #noShops>
-        <div class="noshopCard">
-          <h2>No Shops Added</h2>
-          <br />
-          <button class="button" routerLink="/shopkeeper/addservice">
-            <span class="button-content">Add Service</span>
-          </button>
-        </div>
-      </ng-template>
-    </div>
-  </mat-tab>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Shop Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Status</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shop of data" (click)="showinfo(shop.shopEmail, shop.shopId)"
+          routerLink="/shopkeeper/shopDashboard">
+            <td scope="row">{{ shop.shopName }}</td>
+            <td>{{ shop.shopAddress }}</td>
+            <td>{{ shop.shopCity }}</td>
+            <td>{{ shop.shopEmail }}</td>
+            <td>{{ shop.shopContactNo }}</td>
+            <td>{{ shop.status }}</td>
+          </tr>
+          
+        </tbody>
+      </table>
 
-  <mat-tab label="Stats"> </mat-tab>
 
-  <!-- Add more mat-tabs if needed -->
-</mat-tab-group>
+     </div>
+
+  <div class="add-shop">
+    <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+    <button class="button" routerLink="/shopkeeper/add-shop">
+      <span class="button-content">Add Shop</span>
+    </button>
+  </div>
+</div>
