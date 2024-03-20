@@ -9,7 +9,7 @@ import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchsh
   templateUrl: './shop-dashboard.component.html',
   styleUrl: './shop-dashboard.component.css',
 })
-export class ShopDashboardComponent implements OnInit {
+export class ShopDashboardComponent  implements OnInit{
   constructor(
     private fetchshopInfo: FetchshopInfoService,
     private getShopServices: GetServiceInfoService

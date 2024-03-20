@@ -12,6 +12,8 @@ import { ImageService } from '../services/common/image.service';
 import { UpdateShopService } from '../services/updateShop/update-shop.service';
 import { DeleteShopService } from '../services/deleteShop/delete-shop.service';
 import { GetServiceInfoService } from '../services/fetchShopServices/get-service-info.service';
+import {MatTableModule} from '@angular/material/table';
+
 
 interface shopData {
   shopName: string;

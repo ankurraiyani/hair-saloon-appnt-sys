@@ -7,7 +7,8 @@
       "default",
       {
         "ignore": [
-          "accent-color"
+          "accent-color",
+          "scale"
         ]
       }
     ],
@@ -19,6 +20,12 @@
         "label": "off"
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-aria": "off"
+      }
+    ]
   }
 }
