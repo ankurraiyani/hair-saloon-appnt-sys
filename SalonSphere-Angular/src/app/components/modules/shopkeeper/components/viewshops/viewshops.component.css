@@ -17,10 +17,10 @@
 .table{
   width: 100%;
   box-shadow: 0 0 8px rgb(140, 126, 161);
-  min-height: 300px;
-  
 }
-
+.table tr{
+  height: 60px;
+}
 .table td{
   background-color: #fff1df;
 }
