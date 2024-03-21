@@ -15,7 +15,7 @@ export class ShowShopsService {
 
   //show shops by using city  
   showShopsByCity(city:any){
-
+ 
     //set the token in header
     const token = Cookie.get('token');
     console.log(token);

@@ -26,12 +26,12 @@
   </div>
 
   <div class="card">
-    <span>Rahul Hair Salon</span>
+    <span class="span">Rahul Hair Salon</span>
 
     <p>Address - Ashoka Garden Bhopal, Madhya Pradesh</p>
 
     
-    <div class="products" *ngIf="cart.length">
+    <!-- <div class="products" *ngIf="cart.length">
       <div class="product" *ngFor="let product of cart">
         <div class="product-details">
           <h3>{{ product.title }}</h3>
@@ -43,7 +43,7 @@
             <p>{{ product.price }}</p>
           </div>
         </div>
-        <button class="product-btn">1</button>
+        <button class="product-btn"><span (click)="removeItem(product)">-</span>{{getFrequency(product)}}<span (click)="addItem(product)">+</span></button>
       </div>
     </div>
     <button class="total" *ngIf="cart.length">
@@ -55,10 +55,32 @@
         <p style="color: black">{{ totalAmount }}</p>
       </div>
       <p style="color: black">View Cart</p>
+    </button> -->
+    <div class="products" *ngIf="serviceCountMap.size">
+      <div class="product" *ngFor="let entry of serviceCountMap.entries()">
+        <div class="product-details">
+          <h3>{{ entry[0].title }}</h3>
+          <div class="price">
+            <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
+            <p>{{ entry[0].price }}</p>
+          </div>
+        </div>
+        <button class="product-btn">
+          <span (click)="removeItem(entry[0])">-</span>{{ entry[1] }}<span (click)="addItem(entry[0])">+</span>
+        </button>
+      </div>
+    </div>
+    
+    <button class="total" *ngIf="serviceCountMap.size">
+      <div class="price">
+        <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
+        <p style="color: black">{{ totalAmount }}</p>
+      </div>
+      <p style="color: black">View Cart</p>
     </button>
 
 
-    <div class="product-card" *ngIf="!cart.length">
+    <div class="product-card" *ngIf="!serviceCountMap.size">
       <div class="empty-product">
         <img src="../../../../../../assets/images/empty product.svg" alt="" />
       </div>
