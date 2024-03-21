@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.request.FilterRequest;
@@ -20,12 +19,14 @@ import com.SalonSphereServer.service.CustomerService;
 
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
 @RestController
-@RequestMapping("/customer")
+@CrossOrigin(origins = "http://localhost:4200")
+//@RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
-
+	
+	
 	// ============================================================================================================
 	// Filter shops by given city
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -50,7 +51,6 @@ public class CustomerController {
 	public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
 
 		System.out.println("====Inside the customer Controller in filtershop===\n" + request);
-
 		// here we are checking whether all fields of FilterRequest are empty or not
 		if (request.getServiceName() != null && request.getDistance() == null && request.getPrice() == null) {
 			// here we calling a methodn from customerservoce which is
@@ -72,7 +72,7 @@ public class CustomerController {
 			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePrice(
 					request.getCity(), request.getServiceName(), request.getPrice());
 
-			System.out.println("++++++Return++++\n"+filterRespons);
+			System.out.println("++++++Return++++\n" + filterRespons);
 			// here we check filterResponse is empty or not
 			if (!filterRespons.isEmpty())
 				return ResponseEntity.ok().body(filterRespons);
@@ -80,11 +80,13 @@ public class CustomerController {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 
-			System.out.println("+++INSIDE THE CITY,SERVICENAME,SERVICEPRICERANGE AND DISTANCERANGE FILLER ELSE IF CONDITION++++\n");
+			System.out.println(
+					"+++INSIDE THE CITY,SERVICENAME,SERVICEPRICERANGE AND DISTANCERANGE FILLER ELSE IF CONDITION++++\n");
 
 			// write code for filtering by category for service name , city , price range
 			// and distance
-			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePriceAndDistance(request.getCity(), request.getServiceName(), request.getPrice(), request.getDistance());
+			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePriceAndDistance(
+					request.getCity(), request.getServiceName(), request.getPrice(), request.getDistance());
 
 			// here we check filterResponse is empty or not
 			if (!filterRespons.isEmpty())
@@ -94,8 +96,6 @@ public class CustomerController {
 		}
 	}
 
-	// =================================================================================================================
 }
 
-//if (request.getServiceName() != null && request.getCity() != null && request.getPrice() != null
-//&& request.getDistance() != null)
+
