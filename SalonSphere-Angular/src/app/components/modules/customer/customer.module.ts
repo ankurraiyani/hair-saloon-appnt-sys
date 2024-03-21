@@ -8,6 +8,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ViewShopsComponent } from './components/view-shops/view-shops.component';
 import { AddServiceToCardComponent } from './components/add-service-to-card/add-service-to-card.component';
+import { ViewSlotsComponent } from './components/view-slots/view-slots.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -17,11 +23,16 @@ import { AddServiceToCardComponent } from './components/add-service-to-card/add-
     NavbarComponent,
     HeaderComponent,
     ViewShopsComponent,
-    AddServiceToCardComponent
+    AddServiceToCardComponent,
+    ViewSlotsComponent
   ],
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    MatDatepickerModule,
+    MatInputModule,
+    NgbDatepickerModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }

@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ShopregisterComponent } from './components/shopregister/shopregister.component';
 
 const routes: Routes = [
-  {path: '', canActivate: [shopGuardGuard], component: ShopkeeperDashboardComponent,
+  {path: '', component: ShopkeeperDashboardComponent,
   children: [
   {path: 'view-shop', component: ViewshopsComponent},
   {path: 'home', component: HomeComponent},

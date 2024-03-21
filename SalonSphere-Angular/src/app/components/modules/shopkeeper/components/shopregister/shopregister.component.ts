@@ -102,8 +102,6 @@ export class ShopregisterComponent {
     
     //change the name of cover image
     this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
-
-    
     console.log('file', this.file);
   }
 
@@ -282,13 +280,6 @@ export class ShopregisterComponent {
       return message;
     }
 
-    //check if the contact number contain only 10 digit
-    // if (contactNumber.length != 10) {
-    //   message = 'Please Enter the 10 digit Contact number';
-    //   return message;
-    // }
-
-    // Check if the contact number is valid
     const contactNumberRegex = /^\d{10}$/; // assuming a 10-digit number
 
     if (!contactNumberRegex.test(contactNumber)) {

@@ -102,10 +102,6 @@ public class ShopkeeperService {
 			
 			System.out.println(shopInformation.getLicenseDocument());
 
-//			// Set Cover image name and lincense document name
-//			shopInformation.setCoverImage(shopInformation.getShopId() + "_" + shopInformation.getCoverImage());
-//			shopInformation
-//					.setLicenseDocument(shopInformation.getShopId() + "_" + shopInformation.getLicenseDocument());
 			
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
