@@ -31,6 +31,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import {MatRippleModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
+
 
 
 
@@ -76,6 +78,7 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatSelectModule,
     MatRippleModule,
     MatTabsModule,
+    MatSliderModule
   ],
   providers: [
     provideClientHydration(),

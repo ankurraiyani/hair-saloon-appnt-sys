@@ -207,6 +207,8 @@ public class ShopkeeperController {
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  DELETESHOP SERVICE METHOD=======");
 		shopServices.deleteService(serviceId);
 		return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfull Deletion"));
+		
+
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")

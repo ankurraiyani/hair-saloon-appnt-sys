@@ -52,6 +52,8 @@ export class ShopregisterComponent {
     coverImage: new FormControl(''),
     shopEmail: new FormControl('', Validators.required),
     shopContactNo: new FormControl('', Validators.required),
+    openingTime: new FormControl('', Validators.required),
+    closingTime: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     landmark: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
@@ -70,6 +72,8 @@ export class ShopregisterComponent {
       coverImage: [''],
       shopEmail: [''],
       shopContactNo: [''],
+      openingTime: [''],
+      closingTime: [''],
       address: [''],
       landmark: [''],
       pincode: [''],
@@ -81,6 +85,8 @@ export class ShopregisterComponent {
   goBack(){
     window.history.back();
   }
+
+
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
@@ -117,6 +123,9 @@ export class ShopregisterComponent {
   // Image Uploading 
   uploadFile(event: any): void {
     this.file = event.target.files[0];
+    
+    //change the name of cover image
+    this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
     console.log('file', this.file);
     if (!this.isImageFile(this.file)) {
       Swal.fire({
@@ -305,13 +314,6 @@ export class ShopregisterComponent {
       return message;
     }
 
-    //check if the contact number contain only 10 digit
-    // if (contactNumber.length != 10) {
-    //   message = 'Please Enter the 10 digit Contact number';
-    //   return message;
-    // }
-
-    // Check if the contact number is valid
     const contactNumberRegex = /^\d{10}$/; // assuming a 10-digit number
 
     if (!contactNumberRegex.test(contactNumber)) {

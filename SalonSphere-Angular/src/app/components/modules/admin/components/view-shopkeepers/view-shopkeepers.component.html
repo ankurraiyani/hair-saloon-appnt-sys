@@ -1,0 +1,33 @@
+<div class="right">
+  <div
+    class="table-container owner-table"
+    *ngIf="shopOwners && shopOwners.length"
+  >
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Owner Name</th>
+          <th scope="col">Contact Number</th>
+          <th scope="col">Email</th>
+          <th scope="col">Number of shops</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (shopOwner of shopOwners; track shopOwner.fullName) {
+        <tr>
+          <td scope="row">{{ shopOwner.fullName }}</td>
+          <td>{{ shopOwner.contactNumber }}</td>
+          <td>{{ shopOwner.email }}</td>
+          <td>{{ shopOwner.numberOfShops }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="spinner-border text-success spinner disable" role="status">
+    <span class="sr-only"></span>
+  </div>
+  

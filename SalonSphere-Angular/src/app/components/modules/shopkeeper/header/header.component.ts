@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LogoutService } from '../../../services/logout/logout.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Cookie } from 'ng2-cookies';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+shopkeeperName: any=Cookie.get('name');
 
 
   constructor(private router: Router,private logoutService:LogoutService){}

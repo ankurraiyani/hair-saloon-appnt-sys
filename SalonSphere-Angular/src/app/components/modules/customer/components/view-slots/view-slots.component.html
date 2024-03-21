@@ -1,0 +1,107 @@
+<div class="main-div">
+  <div class="upper">
+    <div class="info">
+      <h1>Rahul Hair Saloon</h1>
+      <p>Ashoka Garden, Bhopal</p>
+    </div>
+    <div class="date">
+        <form >
+            <input type="date" id="date" name="date" [(ngModel)]="selectedDate">
+        </form>
+    </div>
+  </div>
+  <div class="down">
+    <div class="slots" *ngFor="let key of availableSlots.entries()">
+        <div class="left">
+          <h2>{{ key[0] }}</h2>
+        </div>
+        <div class="right">
+          <button class="button-37" *ngFor="let time of key[1]" role="button">{{ time }}</button>
+        </div>
+    </div>
+
+</div>
+</div>
+    
+    <!-- <div class="slots">
+      <div class="left">
+        <h2>Eqwal Khan</h2>
+      </div>
+      <div class="right">
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+      </div>
+    </div>
+    <div class="slots">
+      <div class="left">
+        <h2>Eqwal Khan</h2>
+      </div>
+      <div class="right">
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+      </div>
+    </div>
+    <div class="slots">
+      <div class="left">
+        <h2>Eqwal Khan</h2>
+      </div>
+      <div class="right">
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+        <button class="button-37" role="button">10:00-10:30</button>
+      </div>
+    </div> -->
+  

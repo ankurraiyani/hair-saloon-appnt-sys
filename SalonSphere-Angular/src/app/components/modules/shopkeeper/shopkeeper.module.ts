@@ -41,6 +41,9 @@ import { UpdateServiceComponent } from './components/update-service/update-servi
 import { NavbarComponent } from './navbar/navbar.component';
 import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
 import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
+import { DurationPipe } from './pipe/duration.pipe';
+import { PhoneNumberPipe } from './pipe/phone-number.pipe';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 
 
@@ -55,7 +58,10 @@ import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboa
     AddserviceComponent,
     UpdateServiceComponent,
     ViewShopServicesComponent,
-    ShopDashboardComponent
+    ShopDashboardComponent,
+    DurationPipe,
+    PhoneNumberPipe,
+    AddEmployeeComponent,
   ],
   imports: [
     CommonModule,

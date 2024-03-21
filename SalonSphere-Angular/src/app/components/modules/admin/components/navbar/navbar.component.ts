@@ -23,6 +23,8 @@ export class NavbarComponent {
   //       nav.classList.toggle("navclose");
   //   });
 
+  flag:boolean=false;
+
   constructor(private router: Router, private logoutService:LogoutService) {}
 
   public navigateViewUsers() {
@@ -40,6 +42,22 @@ export class NavbarComponent {
     this.router.navigate(['/admin/view-user']);
 
   }
+
+  expansion() {
+    const hover: NodeListOf<Element> = document.querySelectorAll('.nav-option');
+    hover.forEach((element) => {
+      element.classList.remove('active');
+    });
+    if (this.flag == false) {
+      this.flag = true;
+      return;
+    } else {
+      this.flag = false;
+      return;
+    }
+  }
+
+  
 
   public navigateViewRequests() {
 

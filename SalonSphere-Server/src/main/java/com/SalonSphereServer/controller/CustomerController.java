@@ -52,56 +52,22 @@ public class CustomerController {
 
 	// ==============================================================================================================
 
-	// Filtering based on servicename, serviceprice and distance
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/filter-shop")
-	public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
+    // Filtering based on servicename, serviceprice and distance
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/filter-shop")
+    public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
 
-		System.out.println("====Inside the customer Controller in filtershop===\n" + request);
-		// here we are checking whether all fields of FilterRequest are empty or not
-		if (request.getServiceName() != null && request.getDistance() == null && request.getPrice() == null) {
-			// here we calling a methodn from customerservoce which is
-			// filterByServiceNameAndCity
-			System.out.println("++++INSIDE THE CITY AND SERVICENAME FILLER IF CONDITION++++\n");
-			List<FilterResponse> filterRespons = customerService.filterByServiceNameAndCity(request.getServiceName(),
-					request.getCity());
+        System.out.println("====Inside the customer Controller in filtershop===\n" + request);
+        List<FilterResponse> filterRespons = customerService
+                .filterByCityAndServiceNameAndServicePriceAndDistance(request);
 
-			// here we check filterResponse is empty or not
-			if (!filterRespons.isEmpty())
-				return ResponseEntity.ok().body(filterRespons);
-			else
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        // here we check filterResponse is empty or not
+        System.out.println("=============This is filter respnse================>\n"+filterRespons);
+            return ResponseEntity.ok().body(filterRespons);
 
-		} else if (request.getServiceName() != null && request.getPrice() != null && request.getDistance() == null) {
-			// write code for filtering by category for service name and city
+    // =================================================================================================================
+}
 
-			System.out.println("++++INSIDE THE CITY,SERVICENAME AND SERVICEPRICERANGE FILLER ELSE IF CONDITION++++\n");
-			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePrice(
-					request.getCity(), request.getServiceName(), request.getPrice());
-
-			System.out.println("++++++Return++++\n" + filterRespons);
-			// here we check filterResponse is empty or not
-			if (!filterRespons.isEmpty())
-				return ResponseEntity.ok().body(filterRespons);
-			else
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		} else {
-
-			System.out.println(
-					"+++INSIDE THE CITY,SERVICENAME,SERVICEPRICERANGE AND DISTANCERANGE FILLER ELSE IF CONDITION++++\n");
-
-			// write code for filtering by category for service name , city , price range
-			// and distance
-			List<FilterResponse> filterRespons = customerService.filterByCityAndServiceNameAndServicePriceAndDistance(
-					request.getCity(), request.getServiceName(), request.getPrice(), request.getDistance());
-
-			// here we check filterResponse is empty or not
-			if (!filterRespons.isEmpty())
-				return ResponseEntity.ok().body(filterRespons);
-			else
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
 
 	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
 	// Through this method the user can give feedback to the provider
@@ -168,3 +134,5 @@ public class CustomerController {
 		return ResponseEntity.ok().body(new Response("Review Deleted Succeefully"));
 	}
 }
+		
+

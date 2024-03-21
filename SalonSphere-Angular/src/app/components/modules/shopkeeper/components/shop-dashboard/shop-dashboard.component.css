@@ -1,10 +1,16 @@
 h1 {
   background: -webkit-linear-gradient(#000000, #a39191);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bolder;
 }
-
+.edit{
+  width: 150px;
+  align-self: flex-end;
+  margin-right: 5px;
+  position: absolute;
+}
 .header{
   padding-left: 100px;
   padding-top: 10px;
@@ -40,22 +46,16 @@ h1 {
 .shopCard:hover {
   box-shadow: 0 0 8px rgb(140, 126, 161);
 }
-
-.edit {
-  margin-left: 240px;
-  transition: all 0.4s ease;
-}
-
-.edit:hover {
-  cursor: pointer;
-  scale: 1.2;
-}
 /* **************************** */
 
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+tr{
+  height: 50px;
 }
 
 /* **************************** */
@@ -66,6 +66,7 @@ h1 {
   margin: auto;
   width: 30%;
   align-items: center;
+  margin-bottom: 10px;
 }
 .button {
   position: relative;

@@ -64,6 +64,7 @@ public class ShopServices {
 			existingService.setServiceName(serviceInformation.getServiceName());
 			existingService.setServicePrice(serviceInformation.getServicePrice());
 			existingService.setShopId(serviceInformation.getShopId());
+			existingService.setServiceDuration(serviceInformation.getServiceDuration());
 			existingService.setCreateDate(serviceInformation.getCreateDate());
 
 			// Create a java.util.Date object

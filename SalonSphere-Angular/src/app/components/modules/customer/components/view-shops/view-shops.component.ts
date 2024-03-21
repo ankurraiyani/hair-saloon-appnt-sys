@@ -29,8 +29,13 @@ export class ViewShopsComponent implements OnInit {
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
-    this.city = localStorage.getItem('location');
-    console.log(this.city);
+    this.city = localStorage.getItem('loction');
+
+    //just for testing
+    localStorage.setItem('shopTiming', '10:30-18:30');
+    localStorage.setItem('shopId', 'c5b4f80f-7dd8-42c2-b2d4-4f8074487871');
+    localStorage.setItem('serviceTime', '30');
+
     this.showShopByCity(this.city);
   }
 
@@ -138,16 +143,20 @@ export class ViewShopsComponent implements OnInit {
         });
       });
   }
-
-  dropdownFilter(serviceName:any, renge:any, distence:any, city:any){
-
-    this.customerService.filterShops(serviceName,renge,distence,city).subscribe((response:any)=>{
-          console.log(response);
+  dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
+    this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log("Aman Bhai")
+        if (!response || response.length === 0) {
+          this.shops = [];
+        } else {
           this.shops = response;
-    },
-    error=>{
-      console.log("error occured");
-    })
-
+        }
+      },
+      (error) => {
+        console.log("Error occurred");
+      }
+    );
   }
 }

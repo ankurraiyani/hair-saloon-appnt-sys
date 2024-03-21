@@ -1,52 +1,61 @@
-<div class="container">
-<mat-card class="header">
-  <h1 >{{ shopData.shopName }}</h1>
-  <p>{{ shopData.address }}</p>
-  <p>{{ shopData.shopCity }}, {{shopData.district}}</p>
-</mat-card>
-<mat-tab-group>
-  <mat-tab label="Services">
-    <div class="cards">
-      <ng-container *ngIf="data && data.length">
-        <mat-card class="shopCard" *ngFor="let shop of data">
-          <div class="edit">
-            <mat-icon
+<div class="container" *ngIf="shopData">
+  <mat-card class="header">
+    <button class="edit" mat-raised-button routerLink="/shopkeeper/updateshop">
+      <mat-icon>edit</mat-icon> Edit Shop
+    </button>
+    <h1>{{ shopData.shopName }}</h1>
+    <p>{{ shopData.address }}</p>
+    <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
+  </mat-card>
+  <mat-tab-group>
+    <mat-tab label="Services">
+      <div class="cards">
+        <table class="table" *ngIf="data && data.length">
+          <thead>
+            <tr>
+              <th scope="col">Service Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let shop of data"
               (click)="saveId(shop.serviceId)"
               routerLink="/shopkeeper/updateService"
-              >edit</mat-icon
             >
+              <td scope="row">{{ shop.serviceName }}</td>
+              <td>{{ shop.servicePrice | currency : "INR" }}</td>
+              <td>{{ shop.serviceDuration | duration }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #noShops>
+          <div class="noshopCard">
+            <h2>No Services Added</h2>
+            <br />
+            <button class="button" routerLink="/shopkeeper/addservice">
+              <span class="button-content">Add Service</span>
+            </button>
           </div>
-          <h3><b>Service Name:</b> {{ shop.serviceName }}</h3>
-          <h3><b>Price:</b> ₹{{ shop.servicePrice }}</h3>
-          <h3><b>Duration:</b> {{ shop.serviceDuration }} Minutes⏳</h3>
-        </mat-card>
-      </ng-container>
+        </ng-template>
+      </div>
 
-      <ng-template #noShops>
-        <div class="noshopCard">
-          <h2>No Shops Added</h2>
-          <br />
-          <button class="button" routerLink="/shopkeeper/addservice">
-            <span class="button-content">Add Service</span>
-          </button>
-        </div>
-      </ng-template>
-    </div>
+      <div class="add-shop">
+        <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+        <button
+          mat-raised-button
+          class="button"
+          routerLink="/shopkeeper/addservice"
+        >
+          <span>Add Service</span>
+        </button>
+      </div>
+    </mat-tab>
 
-    <div class="add-shop">
-      <h2 *ngIf="!data || !data.length">No Shops Added</h2>
-      <button
-        mat-raised-button
-        class="button"
-        routerLink="/shopkeeper/addservice"
-      >
-        <span>Add Service</span>
-      </button>
-    </div>
-  </mat-tab>
+    <mat-tab label="Stats"> </mat-tab>
 
-  <mat-tab label="Stats"> </mat-tab>
-
-  <!-- Add more mat-tabs if needed -->
-</mat-tab-group>
+    <!-- Add more mat-tabs if needed -->
+  </mat-tab-group>
 </div>
