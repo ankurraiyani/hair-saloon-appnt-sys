@@ -43,7 +43,7 @@ import { ViewShopServicesComponent } from './components/view-shop-services/view-
 import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
 import { DurationPipe } from './pipe/duration.pipe';
 import { PhoneNumberPipe } from './pipe/phone-number.pipe';
-import { AddemployeeComponent } from './components/addemployee/addemployee/addemployee.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 
 
@@ -61,7 +61,7 @@ import { AddemployeeComponent } from './components/addemployee/addemployee/addem
     ShopDashboardComponent,
     DurationPipe,
     PhoneNumberPipe,
-    AddemployeeComponent
+    AddEmployeeComponent,
   ],
   imports: [
     CommonModule,
