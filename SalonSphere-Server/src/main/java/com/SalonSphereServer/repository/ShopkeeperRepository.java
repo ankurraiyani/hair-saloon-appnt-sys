@@ -46,10 +46,6 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query("UPDATE ShopInformation e SET e.status = :status WHERE e.shopEmail = :shopEmail")
 	void updateStatusByShopEmail(String shopEmail, String status);
 
-	// This method help to filering by shopCity
-	@Query(value = "SELECT * FROM shop_information WHERE shop_city = :city AND status = 'accepted'", nativeQuery = true)
-	List<ShopInformation> findShopByCity(@Param("city") String city);
-
 	@Query(value = "SELECT s.* FROM shop_information s INNER JOIN user_information u ON s.user_id = u.user_id WHERE s.user_id = :userId AND (LOWER(s.shop_name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.address) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_city) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_email) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.shop_contact_no) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(s.status) LIKE LOWER(CONCAT('%', :keyword, '%')))", nativeQuery = true)
 	List<ShopInformation> search(@Param("keyword") String keyword, @Param("userId") String userId);
 
@@ -57,25 +53,10 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query(value = "SELECT u.email FROM user_information u WHERE u.user_id = (SELECT s.user_id FROM shop_information s WHERE s.shop_email = :shopEmail)", nativeQuery = true)
 	String getOwnerEmailByShopEmail(@Param("shopEmail") String shopEmail);
 
-	// Through this methode we get all shops details like
-	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city and
-	// serviceName
-	@Query(value = "SELECT sh.shop_name, si.service_name, si.service_price, si.service_duration " +
-			"FROM shop_information sh " +
-			"INNER JOIN service_information si ON sh.shop_id = si.shop_id " +
-			"WHERE sh.shop_city = :city AND si.service_name = :serviceName", nativeQuery = true)
-	List<Object[]> findShopByCityAndSeviceName(@Param("city") String city, @Param("serviceName") String serviceName);
-
-	// Through this methode we get all shops details like
-	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city,
-	// serviceName and servicePriceRange like (100-200)
-	@Query(value = "SELECT sh.shop_name, si.service_name, si.service_price, si.service_duration " +
-			"FROM shop_information sh " +
-			"INNER JOIN service_information si ON sh.shop_id = si.shop_id " +
-			"WHERE sh.shop_city = :city AND si.service_name = :serviceName " +
-			"AND si.service_price BETWEEN :minPrice AND :maxPrice", nativeQuery = true)
-	List<Object[]> findShopByCityAndServiceNameAndServicePrice(@Param("city") String city,
-			@Param("serviceName") String serviceName, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice);
+	// ***************CODE FOR FILTERING*******************************
+	// This method help to filering by shopCity
+	@Query(value = "SELECT * FROM shop_information WHERE shop_city = :city AND status = 'accepted'", nativeQuery = true)
+	List<ShopInformation> findShopByCity(@Param("city") String city);
 
 	// Through this methode we get all shops details like
 	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city,
@@ -83,10 +64,14 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	@Query(value = "SELECT sh.shop_name, si.service_name, si.service_price, si.service_duration " +
 			"FROM shop_information sh " +
 			"INNER JOIN service_information si ON sh.shop_id = si.shop_id " +
-			"WHERE sh.shop_city = :city AND si.service_name = :serviceName " +
+			"WHERE sh.shop_city = :city AND (:serviceName IS NULL OR si.service_name = :serviceName) " +
 			"AND si.service_price BETWEEN :minPrice AND :maxPrice " +
-			"AND si.service_duration BETWEEN :minDistance AND :maxDistance", nativeQuery = true)
+			"AND si.service_duration BETWEEN :minDistance AND :maxDistance ORDER BY si.service_price ASC", nativeQuery = true)
 	List<Object[]> findShopByCityAndServiceNameAndServicePriceAndDistance(@Param("city") String city,
 			@Param("serviceName") String serviceName, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice,
 			@Param("minDistance") int minDistance, @Param("maxDistance") int maxDistance);
+
+	// ************************CODE FOR FILTERING ENDS
+	// HERE*****************************************
+
 }

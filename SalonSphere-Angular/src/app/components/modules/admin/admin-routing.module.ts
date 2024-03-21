@@ -6,6 +6,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ReviewShopComponent } from './components/review-shop/review-shop.component';
 import { adminGuardGuard } from '../../guards/admin/admin-guard.guard';
+import { ViewCustomersComponent } from './components/view-customers/view-customers.component';
+import { ViewShopkeepersComponent } from './components/view-shopkeepers/view-shopkeepers.component';
 
 
 
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: 'view-request', component: ViewRequestComponent},
       { path: 'view-user', component: ViewUserComponent},
       {path: 'review-shop', component: ReviewShopComponent},
+      {path: 'viewCustomers', component: ViewCustomersComponent},
+      {path: 'viewShopkeepers', component: ViewShopkeepersComponent},
     {path: '', redirectTo: '/admin/home', pathMatch: 'full'}
   ],
   },

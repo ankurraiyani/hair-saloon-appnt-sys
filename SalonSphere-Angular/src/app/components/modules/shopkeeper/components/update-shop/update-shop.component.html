@@ -1,12 +1,10 @@
 <div class="shop-container">
   <section class="container">
-    <button mat-button (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon> Back</button>
+    <button mat-button (click)="goBack()">
+      <mat-icon>keyboard_backspace</mat-icon> Back
+    </button>
     <h1>Update Shop Details</h1>
-    <form
-      [formGroup]="register"
-      
-      class="form"
-    >
+    <form [formGroup]="register" class="form">
       <div class="input-box">
         <label>Shop Name</label>
         <input
@@ -29,7 +27,11 @@
       <!-- ------------------------------------------------------------------- -->
       <div class="input-box">
         <label>Email Address</label>
-        <input type="text" value="{{ shopEmail }}" formControlName="shopEmail" />
+        <input
+          type="text"
+          value="{{ shopEmail }}"
+          formControlName="shopEmail"
+        />
       </div>
       <!-- ------------------------------------------------------------------- -->
       <div class="column">
@@ -53,7 +55,11 @@
       <div class="column">
         <div class="input-box">
           <label>Landmark</label>
-          <input type="text" value="{{ landmark }}" formControlName="landmark" />
+          <input
+            type="text"
+            value="{{ landmark }}"
+            formControlName="landmark"
+          />
         </div>
       </div>
       <!-- ------------------------------------------------------------------- -->
@@ -71,13 +77,13 @@
       <!-- ------------------------------------------------------------------- -->
       <div class="input-box">
         <mat-form-field>
-        <mat-label>City</mat-label>
-        <mat-select matNativeControl formControlName="shopCity">
-          <mat-option *ngFor="let city of cities" value="{{city.city}}">
-            {{ city.city }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-label>City</mat-label>
+          <mat-select matNativeControl formControlName="shopCity">
+            <mat-option *ngFor="let city of cities" value="{{ city.city }}">
+              {{ city.city }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <!-- ------------------------------------------------------------------- -->
       <div class="input-box">
@@ -92,15 +98,27 @@
       <!-- ------------------------------------------------------------------- -->
       <div class="input-box">
         <label>State</label>
-        <input type="text" placeholder="State" formControlName="state" readonly />
+        <input
+          type="text"
+          placeholder="State"
+          formControlName="state"
+          readonly
+        />
       </div>
       <!-- ------------------------------------------------------------------- -->
-  
-      <div class="actions"> 
-        <button mat-raised-button style="background-color: red;" (click)="deleteShop()">Delete</button>
-        <button style="background-color: green;"(click)="updateShopDetails()">Update</button>
-      </div>  
+
+      <div class="actions">
+        <button
+          mat-raised-button
+          style="background-color: red"
+          (click)="deleteShop()"
+        >
+          Delete
+        </button>
+        <button style="background-color: green" (click)="updateShopDetails()">
+          Update
+        </button>
+      </div>
     </form>
   </section>
-  </div>
-  
+</div>

@@ -138,16 +138,20 @@ export class ViewShopsComponent implements OnInit {
         });
       });
   }
-
-  dropdownFilter(serviceName:any, renge:any, distence:any, city:any){
-
-    this.customerService.filterShops(serviceName,renge,distence,city).subscribe((response:any)=>{
-          console.log(response);
+  dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
+    this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log("Aman Bhai")
+        if (!response || response.length === 0) {
+          this.shops = [];
+        } else {
           this.shops = response;
-    },
-    error=>{
-      console.log("error occured");
-    })
-
+        }
+      },
+      (error) => {
+        console.log("Error occurred");
+      }
+    );
   }
 }

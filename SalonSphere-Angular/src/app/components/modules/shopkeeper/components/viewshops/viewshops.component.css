@@ -1,24 +1,26 @@
 .shopContainer {
-  width: 75%;
+  /* width: 75%; */
   height: 100%;
   position: absolute;
-  right: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 10%;
+  padding-top: 3%;
+  margin-left: 22vw;
 }
 
 .tablecon{
-  width: 95%;
+  /* width: 95%; */
   height: auto;
 }
 
 .table{
+  border-radius: 15px;
   width: 100%;
   box-shadow: 0 0 8px rgb(140, 126, 161);
 }
 .table tr{
+  border-radius: 15px;
   height: 60px;
 }
 
@@ -33,6 +35,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 25%;
+  /* border-radius: 15px; */
 }
 .table td{
   background-color: #fff1df;
