@@ -71,21 +71,18 @@
         </div>
       </div>
     </div>
-    <div>
-      <select (change)="onServiceSelected($event)">
+    <div class="input-box">
+      <select style="height: 50px;" class="input-box" (change)="onServiceSelected($event)">
         <option value="">Select a service</option>
         <option *ngFor="let service of services" [value]="service">{{ service }}</option>
       </select>
     </div>
     
-    <div>
-      <h3>Selected Services:</h3>
-      <ul>
-        <li *ngFor="let selectedService of selectedServices">
-          {{ selectedService }}
-          <button (click)="removeService(selectedService)">X</button>
-        </li>
-      </ul>
+    <div class="input-box">
+      <label *ngFor="let selectedService of selectedServices" style="margin-left: 5px;">
+        
+          <a style=" background-color: beige; margin: 5px;" mat-raised-button> {{ selectedService }}  <a (click)="removeService(selectedService)"><mat-icon style="padding-top: 5px;">close</mat-icon></a></a>
+      </label>
     </div>
 
     <div class="column">

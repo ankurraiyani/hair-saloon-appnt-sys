@@ -116,6 +116,30 @@ export class AboutComponent {
       return;
     }
 
+    //check salary
+    message = this.validateSalary(this.EmpRegister.value.salary);
+
+    if (message != '') {
+      Swal.fire({
+        title: 'Error!',
+        text: message,
+        icon: 'error',
+      });
+      return;
+    }
+
+    //check address
+    message = this.validateAddress(this.EmpRegister.value.address);
+
+    if (message != '') {
+      Swal.fire({
+        title: 'Error!',
+        text: message,
+        icon: 'error',
+      });
+      return;
+    }
+
 
     // //if everything is okey then call the service method
     // this.registerService.registerUser(this.EmpRegister.value).subscribe((response) => {
@@ -213,7 +237,20 @@ export class AboutComponent {
     return message; // Return an empty string indicating success
   }
 
-  //Validate the name fields
+  validateSalary(salary: any): string {
+    let message = '';
+
+    //check if the contactNumber is empty or not
+    if (salary<0) {
+      message = 'Salary can not less than 0';
+      return message;
+    }
+
+    // If  validations pass
+    return message; // Return an empty string indicating success
+  }
+
+  //Validate the address fields
   validateAddress(address: any): string {
     let message = '';
     address = address.trim();
