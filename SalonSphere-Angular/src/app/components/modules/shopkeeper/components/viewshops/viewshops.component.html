@@ -1,26 +1,44 @@
-    <div class="shopContainer">
-      <div class="cards">
-      <ng-container *ngIf="data && data.length">
-        <mat-card class="shopCard" *ngFor="let shop of data">
-          <img [src]="shop.coverImage" alt="Cover Image" />
-          <h2>{{ shop.shopName }}</h2>
-          <h3>{{ shop.shopAddress }}</h3>
-          <h3>{{ shop.shopCity }}</h3>
-          <h3>{{ shop.shopEmail }}</h3>
-          <h3>{{ shop.shopContactNo }}</h3>
-          <h3>{{ shop.status }}</h3>
-        </mat-card>
-      </ng-container>
-    </div>
+<div class="shopContainer">
 
-    <div class="add-shop">
-        <h2 *ngIf="!data || !data.length">No Shops Added</h2>
-         <button class="button"routerLink="/shopkeeper/add-shop">
-            <span class="button-content">Add Shop</span>
-        </button>
-    </div>
-    </div>
+  <mat-card style="justify-content: center; align-items: center; display: flex; padding: 10px;">
+    <h1><b>Manage Shops</b></h1>
+  </mat-card>
 
-  
+  <div class="tablecon">
+
+   <table class="table">
+     <thead>
+       <tr>
+         <th scope="col">Shop Name</th>
+         <th scope="col">Address</th>
+         <th scope="col">City</th>
+         <th scope="col">Email</th>
+         <th scope="col">Contact No</th>
+         <th scope="col">Status</th>
+         
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let shop of data" (click)="showinfo(shop.shopEmail, shop.shopId)"
+       routerLink="/shopkeeper/shopDashboard">
+         <td scope="row"><b>{{ shop.shopName }}</b></td>
+         <td>{{ shop.shopAddress }}</td>
+         <td>{{ shop.shopCity }}</td>
+         <td>{{ shop.shopEmail }}</td>
+         <td>{{ shop.shopContactNo | phoneNumber}}</td>
+         <td>{{ shop.status }}</td>
+       </tr>
+       
+     </tbody>
+   </table>
 
 
+  </div>
+
+<div class="add-shop">
+ <h2 *ngIf="!data || !data.length">No Shops Added</h2>
+ <button class="button" routerLink="/shopkeeper/add-shop">
+   <span class="button-content">Add Shop</span>
+ </button>
+</div>
+</div>

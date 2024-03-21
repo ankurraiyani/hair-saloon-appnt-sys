@@ -10,9 +10,14 @@ import Swal from 'sweetalert2';
 import { ShopregisterService } from '../../../../services/shopregister/shopregister.service';
 import { PincodeService } from '../../../../services/common/pincode.service';
 import { ImageService } from '../../../../services/common/image.service';
-import { error } from 'console';
 import { Cookie } from 'ng2-cookies';
 import { CookieOptions, response } from 'express';
+
+interface Location {
+  city: string;
+  district: string;
+  state: string;
+}
 
 @Component({
   selector: 'app-shopregister',
@@ -30,6 +35,8 @@ export class ShopregisterComponent {
   ) {}
 
   file: any;
+  licence: any;
+  cities: Location[] = [];
 
   licenceFile: any;
   
@@ -45,6 +52,8 @@ export class ShopregisterComponent {
     coverImage: new FormControl(''),
     shopEmail: new FormControl('', Validators.required),
     shopContactNo: new FormControl('', Validators.required),
+    openingTime: new FormControl('', Validators.required),
+    closingTime: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     landmark: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
@@ -63,28 +72,43 @@ export class ShopregisterComponent {
       coverImage: [''],
       shopEmail: [''],
       shopContactNo: [''],
+      openingTime: [''],
+      closingTime: [''],
       address: [''],
       landmark: [''],
       pincode: [''],
       shopCity: [''],
       district: [''],
       state: [''],
-      // country: [''],
     });
   }
+  goBack(){
+    window.history.back();
+  }
+
 
   onPincodeChange(pincode: string) {
     console.log('Pincode Fn');
 
     this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
+      data[0].PostOffice.forEach((postOffice: any) => {
+        this.register.patchValue({
+          district: postOffice.District,
+          state: postOffice.State,
+        });
+      });
+
       if (data && data[0] && data[0].PostOffice) {
-        data[0].PostOffice.forEach((postOffice: any) => {
-          this.register.patchValue({
-            shopCity: postOffice.Name,
-            district: postOffice.District,
-            state: postOffice.State,
-            // country: postOffice.Country,
-          });
+        this.cities = data[0].PostOffice.map((postOffice: any) => ({
+          city: postOffice.Name,
+          district: postOffice.District,
+          state: postOffice.State,
+        }));
+
+        this.cities.forEach((city: Location) => {
+          console.log(
+            `City: ${city.city}, District: ${city.district}, State: ${city.state}`
+          );
         });
       } else {
         Swal.fire({
@@ -103,14 +127,24 @@ export class ShopregisterComponent {
     //change the name of cover image
     this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
     console.log('file', this.file);
+    if (!this.isImageFile(this.file)) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
+        icon: 'error',
+      });
+      return;
+    }
+    
+    this.file = new File([this.file], 'cover_image_' + this.imageId+ '.jpg');
+    console.log('Image file : ', this.file);
   }
 
   //licence uploading
   uploadLicence(event: any){
     this.licenceFile = event.target.files[0];
-    console.log("uploadLicence method called");
 
-    //change the name of licence document
+    //change ther name of licence document
     this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
 
     console.log(this.licenceFile);
@@ -209,7 +243,6 @@ export class ShopregisterComponent {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-
     this.shopregisterService.registerShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
@@ -218,6 +251,7 @@ export class ShopregisterComponent {
           text: 'Your Shop Registered successfully',
           icon: 'success',
         });
+        this.router.navigate(['/shopkeeper/view-shop']);
       },
       (
         // if any  error occured while registering user

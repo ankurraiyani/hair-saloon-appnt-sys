@@ -19,9 +19,10 @@ export class ShowShopsService {
     //set the token in header
     const token = Cookie.get('token');
     console.log(token);
+
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    return this.httpClient.get(`${this.baseURL}/city`, {headers});
+    return this.httpClient.get(this.baseURL+'/'+city, {headers});
   }
 
   

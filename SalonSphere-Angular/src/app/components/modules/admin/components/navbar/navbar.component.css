@@ -1,4 +1,9 @@
 
+.expansion{
+  /* background-color: rgb(218, 218, 218); */
+  margin-left: 20px;
+  margin-top: -10px;
+}
 
 .box-container {
   display: flex;

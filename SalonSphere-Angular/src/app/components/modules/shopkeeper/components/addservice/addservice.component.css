@@ -1,0 +1,48 @@
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+
+.container {
+  position: absolute;
+  margin-top: 10%;
+  margin-left: 30%;
+  width: 50vw;
+}
+
+.input-box label {
+  color: #333;
+}
+
+.input {
+  display: flex;
+  width: 900px;
+}
+
+.input-box {
+  margin: 5px;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+.delete_icon {
+  cursor: pointer;
+  margin-top: 45px;
+  color: red;
+}
+button {
+  margin: 5px;
+}
+

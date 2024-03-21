@@ -13,11 +13,9 @@ export class GetshopService {
   constructor(private http : HttpClient) {}
 
   getshop(data:any){
-    console.log("come inside the get shop");
-    const token = Cookie.get('token');
-    console.log(token);
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`,{ headers });
-  }
+    
+const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
+    return this.http.get(`${this.baseURL}/shopkeeper/show-shop/${data}`, {headers});
+  } 
 
 }

@@ -35,6 +35,9 @@ public class ServiceInformation {
 
     @Column(name = "service_price")
     private double servicePrice;
+    
+    @Column(name = "service_duration")
+    private int serviceDuration;
 
     @Column(name = "shop_id")
     private String shopId;

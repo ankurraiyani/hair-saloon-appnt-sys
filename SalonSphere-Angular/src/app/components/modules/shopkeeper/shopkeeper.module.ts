@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+// import { FormGroup,FormControl } from '@angular/forms';
 
 import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
 
@@ -7,24 +9,40 @@ import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+
 import { MatDividerModule } from '@angular/material/divider';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatOption } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
+
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 
 
 import { ShopkeeperDashboardComponent } from './components/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ViewshopsComponent } from './components/viewshops/viewshops.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { UpdateShopComponent } from './components/update-shop/update-shop.component';
+
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { AddserviceComponent } from './components/addservice/addservice.component';
+import { UpdateServiceComponent } from './components/update-service/update-service.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
+import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
+import { DurationPipe } from './pipe/duration.pipe';
+import { PhoneNumberPipe } from './pipe/phone-number.pipe';
 
 
 
@@ -32,17 +50,27 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
+    UpdateShopComponent,
     NavbarComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    AddserviceComponent,
+    UpdateServiceComponent,
+    ViewShopServicesComponent,
+    ShopDashboardComponent,
+    DurationPipe,
+    PhoneNumberPipe
   ],
   imports: [
     CommonModule,
     ShopkeeperRoutingModule,
     MatCardModule,
+    ReactiveFormsModule,
+    
 
 
     // Mat Imports
+    MatInputModule,
     MatTooltipModule,
     MatButtonModule,  
     MatCardModule,
@@ -55,7 +83,11 @@ import { HomeComponent } from './home/home.component';
     MatTableModule,
     MatExpansionModule,
     MatAccordion,
-    MatDialogModule
+    MatDialogModule,
+    MatOption,
+    MatSelectModule, 
+    MatTabsModule,
+    
   ]
 })
 export class ShopkeeperModule { }

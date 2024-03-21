@@ -10,6 +10,10 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
 import { ReviewShopComponent } from './components/review-shop/review-shop.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { MatIconModule } from '@angular/material/icon';
+import { ViewCustomersComponent } from './components/view-customers/view-customers.component';
+import { ViewShopkeepersComponent } from './components/view-shopkeepers/view-shopkeepers.component';
+
 
 @NgModule({
   declarations: [
@@ -20,11 +24,14 @@ import { HeaderComponent } from './components/header/header.component';
     ViewUserComponent,
     ReviewShopComponent,
     HeaderComponent,
-    ReviewShopComponent
+    ReviewShopComponent,
+    ViewCustomersComponent,
+    ViewShopkeepersComponent
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatIconModule
   ]
 })
 export class AdminModule { }

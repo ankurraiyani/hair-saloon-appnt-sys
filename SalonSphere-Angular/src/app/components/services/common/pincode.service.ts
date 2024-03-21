@@ -15,4 +15,6 @@ export class PincodeService {
     console.log(`${this.baseURL}`+pincode);
     return this.http.get(`${this.baseURL}`+pincode);
   }
+
+  
 }

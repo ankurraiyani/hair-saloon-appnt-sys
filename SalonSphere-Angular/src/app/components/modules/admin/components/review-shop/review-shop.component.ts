@@ -151,7 +151,7 @@ export class ReviewShopComponent implements OnInit {
     const imgURL = this.licenseDocument;
     console.log(imgURL);
     Swal.fire({
-      imageUrl: `../../../../../../assets/images/${imgURL}`,
+      imageUrl: '../../../../../../assets/images/'+imgURL+'.jpg',
       imageAlt: "Aman's Image",
     });
   }

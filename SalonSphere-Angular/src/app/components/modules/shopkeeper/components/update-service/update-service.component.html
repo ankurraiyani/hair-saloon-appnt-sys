@@ -1,0 +1,43 @@
+<section class="container">
+  <button mat-button (click)="goBack()"><mat-icon>keyboard_backspace</mat-icon> Back</button>
+    <h1>Update Service</h1>
+    <form
+      [formGroup]="updateServiceForm"
+      method="post"
+      class="form"
+    >
+      <div class="input-box">
+        <label>Service Name</label>
+        <input
+          type="text"
+          placeholder="Enter Service Name"
+          formControlName="serviceName"
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Service Price</label>
+        <input
+          type="text"
+          placeholder="Enter Service Price"
+          formControlName="servicePrice"
+          required
+        />
+      </div>
+      <div class="input-box">
+        <label>Duration</label>
+        <input
+          type="text"
+          placeholder="Enter Service Duration"
+          formControlName="serviceDuration"
+          required
+          
+        />
+      </div>
+      <div class="actions">
+
+        <button mat-raised-button style="background-color: red;" (click)="deleteService()">Delete</button>
+        <button style="background-color: green;"(click)="updateservice()">Update</button>
+      </div>
+    </form>
+  </section>

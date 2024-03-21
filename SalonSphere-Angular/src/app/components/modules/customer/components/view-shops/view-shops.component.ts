@@ -22,30 +22,10 @@ export class ViewShopsComponent implements OnInit {
   serviceName:any = null;
   renge:any = null;
   distence:any = null;
-  city:any = '';
+  city:any = localStorage.getItem('location');
 
 
-  public shops: shop[] = [{
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '30 min',
-    price: 200
-  },
-  {
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '',
-    price: 0
-  },
-  {
-    shopName: 'Rahul Hair Salon',
-    location: 'Ashoka Garden, Bhopal Madhya Pradesh',
-    coverImage: '../../../../../../assets/images/rahulsalon.jpg',
-    timeDuration: '30 min',
-    price: 200
-  }];
+  public shops: shop[] = [];
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
@@ -163,16 +143,20 @@ export class ViewShopsComponent implements OnInit {
         });
       });
   }
-
-  dropdownFilter(serviceName:any, renge:any, distence:any, city:any){
-
-    this.customerService.filterShops(serviceName,renge,distence,city).subscribe((response:any)=>{
-          console.log(response);
+  dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
+    this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log("Aman Bhai")
+        if (!response || response.length === 0) {
+          this.shops = [];
+        } else {
           this.shops = response;
-    },
-    error=>{
-      console.log("error occured");
-    })
-
+        }
+      },
+      (error) => {
+        console.log("Error occurred");
+      }
+    );
   }
 }
