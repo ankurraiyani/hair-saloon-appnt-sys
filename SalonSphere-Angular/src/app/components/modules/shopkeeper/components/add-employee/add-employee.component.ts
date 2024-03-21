@@ -1,20 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { RegisterService } from '../../../../services/register/register.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AddshopService } from '../services/addshopservice/addshop.service';
-import { Cookie } from 'ng2-cookies';
-import { GetshopService } from '../services/getshop/getshop.service';
-import { FetchshopInfoService } from '../services/fetchshopInfo/fetchshop-info.service';
-import { PincodeService } from '../services/common/pincode.service';
-import { ShopregisterService } from '../services/shopregister/shopregister.service';
-import { ImageService } from '../services/common/image.service';
-import { UpdateShopService } from '../services/updateShop/update-shop.service';
-import { DeleteShopService } from '../services/deleteShop/delete-shop.service';
-import { GetServiceInfoService } from '../services/fetchShopServices/get-service-info.service';
-import {MatTableModule} from '@angular/material/table';
-import { RegisterService } from '../services/register/register.service';
-
 
 interface shopData {
   shopName: string;
@@ -22,12 +10,13 @@ interface shopData {
   createdDate: string;
 }
 
+
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css'
+  selector: 'app-add-employee',
+  templateUrl: './add-employee.component.html',
+  styleUrl: './add-employee.component.css'
 })
-export class AboutComponent {
+export class AddEmployeeComponent {
 
   selectedServices: string[] = [];
   services: string[] = ['Service 1', 'Service 2', 'Service 3']; 
