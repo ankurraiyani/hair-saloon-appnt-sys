@@ -1,10 +1,179 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ShowShopsService } from '../services/customer/show-shops.service';
+import Swal from 'sweetalert2';
 
+
+
+interface shop {
+  shopName: string;
+  location: string;
+  coverImage: string;
+  timeDuration: string;
+  price: number;
+}
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+  constructor(private customerService: ShowShopsService) {}
 
+  //variable which track the dropdown lists
+  serviceName:any = null;
+  renge:any = null;
+  distence:any = null;
+  city:any = localStorage.getItem('location');
+
+  services: string[] = [
+    'Hair Cutting',
+    'Manicure',
+    'Pedicure',
+    'Facial',
+    'Massage',
+    'Waxing',
+    'Threading',
+    'Makeup',
+    'Hair Styling',
+    'Eyebrow Shaping',
+    'Eyelash Extensions',
+    'Nail Extensions',
+    'Hair Extensions',
+    'Body Waxing',
+    'Bridal Makeup',
+    'Facial Cleansing',
+    'Permanent Makeup',
+    'Henna Tattoo',
+    'Hot Stone Massage',
+    'Deep Tissue Massage'
+  ];
+  public shops: shop[] = [];
+
+  //show the list of the shop on besis of the city when ever the page will load
+  ngOnInit(): void {
+    this.city = localStorage.getItem('location');
+    console.log(this.city);
+    this.showShopByCity(this.city);
+  }
+
+  //call the service method and get all the shops by using city
+  public showShopByCity(loction: any) {
+    this.customerService.showShopsByCity(loction).subscribe(
+      (response: any) => {
+        console.log(response);
+        if (response == null) {
+          Swal.fire({
+            title: 'Not Found',
+            text: 'There is no any shop in this city',
+            icon: 'error',
+          });
+        } else {
+          this.shops = response;
+        }
+      },
+      (error) => {
+        console.log('error occure');
+      }
+    );
+  }
+
+  //DOM Menuplation for Servive Dropdown
+  showServiceDropdown() {
+
+    const selected = document.querySelector('.service-selected');
+    const optionsContainer = document.querySelector('.service');
+    const optionsList = document.querySelectorAll('.service-option');
+
+    if (selected && optionsContainer)
+      optionsList.forEach((o) => {
+        o.addEventListener('click', () => {
+          const lebel = o.querySelector('label');
+          if (lebel) {
+            selected.innerHTML = lebel.innerHTML;
+            this.serviceName = lebel.innerHTML;
+          }
+          optionsContainer.classList.remove('active');
+
+          //call the dropdownFilter method which filter the shop by using service Name
+          this.dropdownFilter(this.serviceName, this.renge, this.distence,this.city);
+
+          setTimeout(() => {
+            optionsContainer.classList.add('active');
+          }, 1000);
+        });
+      });
+  }
+
+  //DOM Menuplation for Renge Dropdown
+  showRengeDropdown() {
+
+    const selected = document.querySelector('.renge-selected');
+    const optionsContainer = document.querySelector('.renge');
+    const optionsList = document.querySelectorAll('.renge-option');
+
+    if (selected && optionsContainer)
+      optionsList.forEach((o) => {
+        console.log('aman');
+        o.addEventListener('click', () => {
+          const lebel = o.querySelector('label');
+          if (lebel) {
+            selected.innerHTML = lebel.innerHTML;
+            this.renge = lebel.innerHTML;
+          }
+          optionsContainer.classList.remove('active');
+
+          //call the dropdownFilter method which filter the shop by using Renge
+          this.dropdownFilter(this.serviceName, this.renge, this.distence, this.city);
+
+          setTimeout(() => {
+            optionsContainer.classList.add('active');
+          }, 1000);
+        });
+      });
+  }
+
+  //DOM menuplation for Distence Dropdown
+  showDistenceDropdown() {
+
+    const selected = document.querySelector('.distence-selected');
+    const optionsContainer = document.querySelector('.distence');
+    const optionsList = document.querySelectorAll('.distence-option');
+
+    if (selected && optionsContainer)
+      optionsList.forEach((o) => {
+        console.log('aman');
+        o.addEventListener('click', () => {
+          const lebel = o.querySelector('label');
+          if (lebel) {
+            selected.innerHTML = lebel.innerHTML;
+            this.distence= lebel.innerHTML;
+          }
+          optionsContainer.classList.remove('active');
+
+          
+          //call the dropdownFilter method which filter the shop by using distence
+          this.dropdownFilter(this.serviceName, this.renge, this.distence, this.city);
+
+          setTimeout(() => {
+            optionsContainer.classList.add('active');
+          }, 1000);
+        });
+      });
+  }
+  dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
+    this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
+      (response: any) => {
+        console.log(response);
+        console.log("Aman Bhai")
+        if (!response || response.length === 0) {
+          this.shops = [];
+        } else {
+          this.shops = response;
+        }
+      },
+      (error) => {
+        console.log("Error occurred");
+      }
+    );
+  }
 }
