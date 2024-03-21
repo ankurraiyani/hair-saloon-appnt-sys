@@ -1,62 +1,42 @@
-<div class="navcontainer"> 
-    <nav class="nav"> 
-        <div class="nav-upper-options"> 
-            <div (click)="navigateHome()" class="nav-option option1 active"> 
-                <img src= 
-"https://cdn-icons-png.flaticon.com/128/4116/4116414.png"
-                    class="nav-img" 
-                    alt="dashboard"> 
-                <h3> Home</h3> 
-            </div> 
+<div class="navcontainer">
+  <nav class="nav">
+    <div class="nav-upper-options">
+      <div (click)="navigateHome()" class="nav-option option1 active">
+        <mat-icon>dashboard</mat-icon>
+        <h3>Home</h3>
+      </div>
 
-            <div (click)="navigateViewUsers()" class="option2 nav-option"> 
-                <img src= 
-"https://cdn-icons-png.flaticon.com/128/13884/13884427.png"
-                    class="nav-img" 
-                    alt="articles"> 
-                <h3>View Users</h3> 
-            </div> 
+      <!-- Manage Shop Button in the Menu bar -->
+      <div class="nav-option option2 active" (click)="expansion()">
+        <mat-icon>manage_accounts</mat-icon>
+        <h3>Manage Users</h3>
+      </div>
 
-            <div class="nav-option option3"> 
-                <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
-                    class="nav-img" 
-                    alt="report"> 
-                <h3> Report</h3> 
-            </div> 
+      <div class="expansion" *ngIf="flag == true">
+        <div routerLink="/admin/viewCustomers" class="option2 nav-option">
+          <mat-icon>visibility</mat-icon>
+          <h3>Customer</h3>
+        </div>
 
-            <div  (click)="navigateViewRequests()" class="nav-option option4"> 
-                <img src= 
-"https://cdn-icons-png.flaticon.com/128/1436/1436756.png"
-                    class="nav-img" 
-                    alt="institution"> 
-                <h3>View Requests</h3>
-            </div> 
+        <div routerLink="/admin/viewShopkeepers" class="option2 nav-option">
+          <mat-icon>visibility</mat-icon>
+          <h3>Shopkeeper</h3>
+        </div>
+      </div>
 
-            <div class="nav-option option5"> 
-                <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-                    class="nav-img" 
-                    alt="blog"> 
-                <h3> Profile</h3> 
-            </div> 
+      <div (click)="navigateViewRequests()" class="nav-option option4">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <h3>View Requests</h3>
+      </div>
 
-            <div class="nav-option option6"> 
-                <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
-                    class="nav-img" 
-                    alt="settings"> 
-                <h3> Settings</h3> 
-            </div> 
-
-            <div (click)="navigateLogout()" class="nav-option option7 logout"> 
-                <img src= 
-"https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-                    class="nav-img" 
-                    alt="logout"> 
-                <h3>Logout</h3> 
-            </div> 
-
-        </div> 
-    </nav> 
-</div> 
+      <div (click)="navigateLogout()" class="nav-option option7 logout">
+        <img
+          src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+          class="nav-img"
+          alt="logout"
+        />
+        <h3>Logout</h3>
+      </div>
+    </div>
+  </nav>
+</div>

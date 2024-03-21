@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.SalonSphereServer.dto.CustomerDTO;
@@ -11,6 +13,7 @@ import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.repository.UserRepository;
+import com.SalonSphereServer.request.FilterRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 
@@ -65,69 +68,36 @@ public class CustomerService {
 	}
 
 	// ===========================================================================================================
-
-	// Throuhg this method we filter on service name and city
-	public List<FilterResponse> filterByServiceNameAndCity(String typeOfService, String city) {
-		List<Object[]> shops = shopkeeperRepository.findShopByCityAndSeviceName(city, typeOfService);
-		List<FilterResponse> responseList = new ArrayList<>();
-		for (Object[] obj : shops) {
-			FilterResponse filterResponse = new FilterResponse();
-			filterResponse.setShopName((String) obj[0]);
-			filterResponse.setServiceName((String) obj[1]);
-			double price = (double) obj[2];
-			// Explicit type casting double to int
-			int roundedPrice = (int) price;
-			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[3]);
-			responseList.add(filterResponse);
-		}
-		return responseList;
-	}
-
-	// ==============================================================================================================
-
-	// Throuhg this method we filter on city,service name and priceRange(100-200)
-	public List<FilterResponse> filterByCityAndServiceNameAndServicePrice(String city, String serviceName,
-			String price_Range) {
-
-		// Split the
-		String priceRange[] = price_Range.split("-");
-		int priceMin = Integer.parseInt(priceRange[0].trim());
-		int priceMax = Integer.parseInt(priceRange[1].trim());
-
-		List<Object[]> shops = shopkeeperRepository.findShopByCityAndServiceNameAndServicePrice(city, serviceName,
-				priceMin, priceMax);
-		List<FilterResponse> responseList = new ArrayList<>();
-		for (Object[] obj : shops) {
-			FilterResponse filterResponse = new FilterResponse();
-			filterResponse.setShopName((String) obj[0]);
-			filterResponse.setServiceName((String) obj[1]);
-			double price = (double) obj[2];
-			// Explicit type casting double to int
-			int roundedPrice = (int) price;
-			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[3]);
-			responseList.add(filterResponse);
-		}
-		return responseList;
-	}
-
-	// ==============================================================================================================
-
 	// Throuhg this method we filter on city,serviceName,priceRange(100-200) and distanceRange (5-10).Distance always in meter
-	public List<FilterResponse> filterByCityAndServiceNameAndServicePriceAndDistance(String city, String serviceName,String price,String distance) {
+	public List<FilterResponse> filterByCityAndServiceNameAndServicePriceAndDistance(FilterRequest request) {
 
-		// Split the priceRange
-		String priceRange[] = price.split("-");
-		int priceMin = Integer.parseInt(priceRange[0].trim());
-		int priceMax = Integer.parseInt(priceRange[1].trim());
+		int minPrice, maxPrice;
+		int minDistance, maxDistance;
+		if (request.getServiceName() == null) {
+		}
+		if (request.getPrice() == null) {
 
-		// Split the distanceRange
-		String distanceRange[] = distance.split("-");
-		int distanceMin = Integer.parseInt(distanceRange[0].trim());
-		int distanceMax = Integer.parseInt(distanceRange[1].trim());
+			minPrice = 0;
+			maxPrice = 100000;
+		} else {
 
-		List<Object[]> shops = shopkeeperRepository.findShopByCityAndServiceNameAndServicePriceAndDistance(city, serviceName, priceMin, priceMax, distanceMin, distanceMax);
+			String priceRange[] = request.getPrice().split("-");
+			minPrice = Integer.parseInt(priceRange[0].trim());
+			maxPrice = Integer.parseInt(priceRange[1].trim());
+
+		}
+		if (request.getDistance() == null) {
+			minDistance = 0;
+			maxDistance = 10000000;
+		} else {
+			String distanceRange[] = request.getDistance().split("-");
+			minDistance = Integer.parseInt(distanceRange[0].trim());
+			maxDistance = Integer.parseInt(distanceRange[1].trim());
+		}
+
+		List<Object[]> shops = shopkeeperRepository.findShopByCityAndServiceNameAndServicePriceAndDistance(
+				request.getCity(), request.getServiceName(), minPrice, maxPrice, minDistance, maxDistance);
+
 		List<FilterResponse> responseList = new ArrayList<>();
 		for (Object[] obj : shops) {
 			FilterResponse filterResponse = new FilterResponse();
