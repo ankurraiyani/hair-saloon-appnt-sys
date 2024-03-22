@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 
+
 @Component({
   selector: 'app-review-shop',
   templateUrl: './review-shop.component.html',
@@ -148,11 +149,13 @@ export class ReviewShopComponent implements OnInit {
 
   public viewLicence() {
     //get image URL which has been come from backend
-    const imgURL = this.licenseDocument;
+    const imgURL = this.shopContactNo;
     console.log(imgURL);
     Swal.fire({
-      imageUrl: '../../../../../../assets/images/'+imgURL+'.jpg',
+      imageUrl: '../../../../../../assets/images/'+'licence_' + imgURL+'.jpg',
       imageAlt: "Aman's Image",
+      imageHeight: 550,
+      imageWidth: 500,
     });
   }
 }
