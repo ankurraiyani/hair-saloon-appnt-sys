@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.SalonSphereServer.jwtsecurity.JwtAuthenticationEntryPoint;
 import com.SalonSphereServer.jwtsecurity.JwtAuthenticationFilter;
 
+import jakarta.annotation.security.PermitAll;
+
 @Configuration
 public class SecurityConfiguration {
 
@@ -37,7 +39,8 @@ public class SecurityConfiguration {
 
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll()
-						.requestMatchers("/register").permitAll().anyRequest().authenticated())
+						.requestMatchers("/register").permitAll().requestMatchers("/view-slots").permitAll()
+						.anyRequest().authenticated())
 				.exceptionHandling(ex -> ex.authenticationEntryPoint(point))
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

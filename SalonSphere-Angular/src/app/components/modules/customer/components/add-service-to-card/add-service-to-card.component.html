@@ -1,131 +1,16 @@
 <div class="main-div">
   <div class="services">
-    <!-- <div class="service">
-        
-        <div class="left">
-          <h1>Hair Cutting</h1>
-
-          <h3>Hair Cut For Men</h3>
-
-          <div class="price-time">
-            <div class="price">
-              <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="">
-            <p>200 Rs</p>
-          </div>
-          <div class="time">
-            <div class="circle"></div>
-            <p >30 min</p>
-          </div>
-          </div>
-          <p>Profession hair cut that suits your face shape</p>
-        </div>
-
-        <div class="right">
-          <div class="img">
-            <img src="https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg" alt="img">
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-
-      </div>
-
-      <div class="service">
-        
-        <div class="left">
-          <h1>Hair Cutting</h1>
-
-          <h3>Hair Cut For Men</h3>
-
-          <div class="price-time">
-            <div class="price">
-              <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="">
-            <p>200 Rs</p>
-          </div>
-          <div class="time">
-            <div class="circle"></div>
-            <p >30 min</p>
-          </div>
-          </div>
-          <p>Profession hair cut that suits your face shape</p>
-        </div>
-
-        <div class="right">
-          <div class="img">
-            <img src="https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg" alt="img">
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-
-      </div>
-
-      <div class="service">
-        
-        <div class="left">
-          <h1>Hair Cutting</h1>
-
-          <h3>Hair Cut For Men</h3>
-
-          <div class="price-time">
-            <div class="price">
-              <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="">
-            <p>200 Rs</p>
-          </div>
-          <div class="time">
-            <div class="circle"></div>
-            <p >30 min</p>
-          </div>
-          </div>
-          <p>Profession hair cut that suits your face shape</p>
-        </div>
-
-        <div class="right">
-          <div class="img">
-            <img src="https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg" alt="img">
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-
-      </div> -->
-    <!-- <div class="service">
-        
-        <div class="left">
-          <h1>Hair Cutting</h1>
-
-          <h3>Hair Cut For Men</h3>
-
-          <div class="price-time">
-            <div class="price">
-              <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="">
-            <p>200 Rs</p>
-          </div>
-          <div class="time">
-            <div class="circle"></div>
-            <p >30 min</p>
-          </div>
-          </div>
-          <p>Profession hair cut that suits your face shape</p>
-        </div>
-
-        <div class="right">
-          <div class="img">
-            <img src="https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg" alt="img">
-          </div>
-          <button class="add-btn">Add</button>
-        </div>
-
-      </div> -->
     <div class="service" *ngFor="let service of services">
       <div class="left">
         <h1>{{ service.title }}</h1>
         <h3>{{ service.type }}</h3>
         <div class="price-time">
           <div class="price">
-            <img [src]="service.priceImageUrl" alt="" />
-            <p>{{ service.price }}</p>
+           
+            <p>{{ service.price | currency : "INR" }}</p>
           </div>
           <div class="time">
-            <div class="circle"></div>
-            <p>{{ service.duration }}</p>
+            <p>{{ service.duration | duration}}</p>
           </div>
         </div>
         <p>{{ service.description }}</p>
@@ -140,12 +25,12 @@
   </div>
 
   <div class="card">
-    <span>Rahul Hair Salon</span>
+    <span class="span">Rahul Hair Salon</span>
 
     <p>Address - Ashoka Garden Bhopal, Madhya Pradesh</p>
 
     
-    <div class="products" *ngIf="cart.length">
+    <!-- <div class="products" *ngIf="cart.length">
       <div class="product" *ngFor="let product of cart">
         <div class="product-details">
           <h3>{{ product.title }}</h3>
@@ -157,7 +42,7 @@
             <p>{{ product.price }}</p>
           </div>
         </div>
-        <button class="product-btn">1</button>
+        <button class="product-btn"><span (click)="removeItem(product)">-</span>{{getFrequency(product)}}<span (click)="addItem(product)">+</span></button>
       </div>
     </div>
     <button class="total" *ngIf="cart.length">
@@ -169,10 +54,32 @@
         <p style="color: black">{{ totalAmount }}</p>
       </div>
       <p style="color: black">View Cart</p>
+    </button> -->
+    <div class="products" *ngIf="serviceCountMap.size">
+      <div class="product" *ngFor="let entry of serviceCountMap.entries()">
+        <div class="product-details">
+          <h3>{{ entry[0].title }}</h3>
+          <div class="price">
+            
+            <p>{{ entry[0].price | currency : "INR" }}</p>
+          </div>
+        </div>
+        <button class="product-btn">
+          <span (click)="removeItem(entry[0])">-</span>{{ entry[1] }}<span (click)="addItem(entry[0])">+</span>
+        </button>
+      </div>
+    </div>
+    
+    <button class="total" *ngIf="serviceCountMap.size">
+      <div class="price">
+        
+        <p style="color: black">{{ totalAmount |currency : "INR" }}</p>
+      </div>
+      <p style="color: black">View Cart</p>
     </button>
 
 
-    <div class="product-card" *ngIf="!cart.length">
+    <div class="product-card" *ngIf="!serviceCountMap.size">
       <div class="empty-product">
         <img src="../../../../../../assets/images/empty product.svg" alt="" />
       </div>

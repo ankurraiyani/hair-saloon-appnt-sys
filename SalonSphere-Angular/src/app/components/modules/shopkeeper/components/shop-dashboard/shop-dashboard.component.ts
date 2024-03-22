@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
-import { GetshopService } from '../../../../services/getshop/getshop.service';
-import { Cookie } from 'ng2-cookies';
 import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
 
 @Component({

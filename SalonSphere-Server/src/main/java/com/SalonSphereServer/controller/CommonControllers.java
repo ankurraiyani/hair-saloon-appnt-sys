@@ -1,5 +1,8 @@
 package com.SalonSphereServer.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.jwtsecurity.JwtHelper;
+import com.SalonSphereServer.request.AppointmentRequest;
 import com.SalonSphereServer.request.LoginRequest;
 import com.SalonSphereServer.response.LoginResponse;
 import com.SalonSphereServer.response.RegisterResponse;
+import com.SalonSphereServer.service.CustomerService;
 import com.SalonSphereServer.service.UserService;
 
 @RestController
 public class CommonControllers {
+	
+	@Autowired
+	private CustomerService customerService;
 
 	@Autowired
 	private UserService userService;
@@ -82,5 +90,17 @@ public class CommonControllers {
 		} catch (BadCredentialsException ex) {
 			throw new BadCredentialsException("invalid user and password");
 		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/view-slots")
+	public ResponseEntity<Map<String, List<String>>> getAllAvilableSlots(@RequestBody AppointmentRequest appointmentRequest) {
+		
+		System.out.println("============================================"+appointmentRequest);
+		
+		Map<String, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration());
+		
+		return new ResponseEntity<>(avilableSlots, HttpStatus.OK);
+		
 	}
 }
