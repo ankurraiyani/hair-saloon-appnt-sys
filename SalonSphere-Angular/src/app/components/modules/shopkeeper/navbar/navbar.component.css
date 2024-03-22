@@ -14,8 +14,8 @@ h1{
 }
 .gradient-text {
   background: linear-gradient(to right, #e32222, #1979f6);
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
  }
 .box-container {
