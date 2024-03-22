@@ -1,8 +1,13 @@
 <div class="container" *ngIf="shopData">
   <mat-card class="header">
+    <div class="btnclass">
     <button class="edit" mat-raised-button routerLink="/shopkeeper/updateshop">
       <mat-icon>edit</mat-icon> Edit Shop
     </button>
+    <button class="addEmp" mat-raised-button routerLink="/shopkeeper/addEmployee">
+      <mat-icon>add</mat-icon> Add Emp
+    </button>
+  </div>
     <h1>{{ shopData.shopName }}</h1>
     <p>{{ shopData.address }}</p>
     <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
