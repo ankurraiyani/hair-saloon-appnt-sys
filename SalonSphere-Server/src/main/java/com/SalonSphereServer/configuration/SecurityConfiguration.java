@@ -14,8 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.SalonSphereServer.jwtsecurity.JwtAuthenticationEntryPoint;
 import com.SalonSphereServer.jwtsecurity.JwtAuthenticationFilter;
 
-import jakarta.annotation.security.PermitAll;
-
 @Configuration
 public class SecurityConfiguration {
 

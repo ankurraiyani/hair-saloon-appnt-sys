@@ -1,5 +1,5 @@
 .shopContainer {
-  /* width: 75%; */
+  width: 75%;
   height: 100%;
   position: absolute;
   display: flex;
@@ -36,9 +36,6 @@
   justify-content: space-between;
   margin-top: 25%;
   /* border-radius: 15px; */
-}
-.table td{
-  background-color: #fff1df;
 }
 
 /* **************************** */
