@@ -589,10 +589,3 @@ header {
       width: 180px;
     }
   }
-  
-
-  @media  (max-width:700px) and (min-width:200px) {
-      .header{
-        width: 100vw;
-      }
-  }

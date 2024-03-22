@@ -21,17 +21,21 @@
               <th scope="col">Service Name</th>
               <th scope="col">Price</th>
               <th scope="col">Duration</th>
+              <th scope="col">&nbsp;&nbsp;&nbsp;Edit</th>
+              <th scope="col">&nbsp;Delete</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              *ngFor="let shop of data"
-              (click)="saveId(shop.serviceId)"
-              routerLink="/shopkeeper/updateService"
-            >
+              *ngFor="let shop of data" >
               <td scope="row">{{ shop.serviceName }}</td>
               <td>{{ shop.servicePrice | currency : "INR" }}</td>
               <td>{{ shop.serviceDuration | shopkeeperDuration }}</td>
+              <td><a mat-button color="primary" (click)="saveId(shop.serviceId)"
+                routerLink="/shopkeeper/updateService"><mat-icon>edit</mat-icon></a>
+              </td>
+              <td><a mat-button color="warn" (click)="deleteService()"><mat-icon>delete</mat-icon></a>
+              </td>
             </tr>
           </tbody>
         </table>
