@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowShopsService } from '../../../../services/customer/show-shops.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 interface shop {
@@ -9,6 +10,8 @@ interface shop {
   coverImage: string;
   timeDuration: string;
   price: number;
+  shopId: string;
+  shopTiming:string;
 }
 @Component({
   selector: 'app-view-shops',
@@ -16,7 +19,7 @@ interface shop {
   styleUrl: './view-shops.component.css',
 })
 export class ViewShopsComponent implements OnInit {
-  constructor(private customerService: ShowShopsService) {}
+  constructor(private customerService: ShowShopsService, private router:Router) {}
 
   //variable which track the dropdown lists
   serviceName:any = null;
@@ -29,18 +32,14 @@ export class ViewShopsComponent implements OnInit {
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
-    this.city = localStorage.getItem('loction');
-
-    //just for testing
-    localStorage.setItem('shopTiming', '10:30-18:30');
-    localStorage.setItem('shopId', 'c5b4f80f-7dd8-42c2-b2d4-4f8074487871');
-    localStorage.setItem('serviceTime', '30');
+    this.city = localStorage.getItem('location');
 
     this.showShopByCity(this.city);
   }
 
   //call the service method and get all the shops by using city
   public showShopByCity(loction: any) {
+    console.log("+++++++++++++++++++++++++"+loction);
     this.customerService.showShopsByCity(loction).subscribe(
       (response: any) => {
         console.log(response);
@@ -143,6 +142,7 @@ export class ViewShopsComponent implements OnInit {
         });
       });
   }
+
   dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
     this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
       (response: any) => {
@@ -158,5 +158,15 @@ export class ViewShopsComponent implements OnInit {
         console.log("Error occurred");
       }
     );
+  }
+  
+  navigate(s:shop){
+
+    localStorage.setItem('shopId',s.shopId );
+    localStorage.setItem('shopTiming', s.shopTiming);
+    localStorage.setItem('shopName', s.shopName);
+    localStorage.setItem('shopAddress',s.location);
+
+    this.router.navigate(['/customer/add-service-to-card']);
   }
 }

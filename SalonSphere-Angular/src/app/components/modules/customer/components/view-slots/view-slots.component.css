@@ -106,3 +106,16 @@ img{
       padding: 10px 30px;
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    .upper{
+        gap: 25%;
+    }
+  }
+  @media screen  and (max-width: 780px){
+    .upper{
+        flex-direction: column;
+        gap: 40px;
+        justify-content: center;
+    }
+  }

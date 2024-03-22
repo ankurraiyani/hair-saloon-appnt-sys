@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { count } from 'node:console';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
 
 // Define the Service interface
 interface Service {
-  title: string;
+  serviceName: string;
   type: string;
-  price: number;
-  duration: string;
+  servicePrice: number;
+  serviceDuration: number;
   description: string;
   priceImageUrl: string;
   imageUrl: string;
@@ -17,49 +19,33 @@ interface Service {
   templateUrl: './add-service-to-card.component.html',
   styleUrl: './add-service-to-card.component.css',
 })
-export class AddServiceToCardComponent {
+export class AddServiceToCardComponent implements OnInit {
   // Define the services array using the Service interface
-  services: Service[] = [
-    {
-      title: 'Hair Cutting',
-      type: 'Hair Cut For Men',
-      price: 200,
-      duration: '30 min',
-      description: 'Profession hair cut that suits your face shape',
-      priceImageUrl:
-        'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-    {
-      title: 'Hair Styling',
-      type: 'Hair Style For Women',
-      price: 300,
-      duration: '45 min',
-      description: 'Professional hair styling to enhance your appearance',
-      priceImageUrl:
-        'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-    {
-      title: 'Beard Trimming',
-      type: 'Beard Grooming',
-      price: 150,
-      duration: '20 min',
-      description: 'Expert trimming and shaping for your beard',
-      priceImageUrl:
-        'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-  ];
+  services: Service[] = [];
 
   serviceCountMap: Map<Service, number> = new Map<Service, number>();
   
   totalAmount: number = 0;
 
-  constructor() {}
+  totalDuration: number = 0;
+
+  serviceName: string = '';
+
+  shopName: string|null = localStorage.getItem('shopName');
+
+  shopAddress: string|null = localStorage.getItem('shopAddress');
+
+
+  constructor(private router:Router, private getShopServices:GetServiceInfoService) {}
+  ngOnInit(): void {
+
+    this.getShopServices.fetchAllServices(localStorage.getItem('shopId')).subscribe((response: any) => {
+      
+      this.services = response;
+      console.log(response);
+      
+    });
+  }
 
   addToCart(service: Service) {
     // Print the data of the selected service to the console
@@ -77,7 +63,9 @@ export class AddServiceToCardComponent {
     }
   
     // Increment the total amount
-    this.totalAmount += service.price;
+    this.totalAmount += service.servicePrice;
+    this.totalDuration += service.serviceDuration;
+    this.serviceName += service.serviceName + ', ';
   }
 
   removeItem(product: Service) {
@@ -89,8 +77,9 @@ export class AddServiceToCardComponent {
       } else {
         this.serviceCountMap.delete(product);
       }
-      this.totalAmount -= product.price;
     }
+    this.totalAmount -= product.servicePrice;
+    this.totalDuration -= product.serviceDuration;
   }
 
   addItem(product: Service) {
@@ -104,7 +93,24 @@ export class AddServiceToCardComponent {
       this.serviceCountMap.set(product, 1);
     }
 
-    this.totalAmount += product.price;
+    this.totalAmount += product.servicePrice;
+    this.totalDuration += product.serviceDuration;
+  }
+
+  navigateLogin(){
+    if(this.totalDuration == 0 || this.totalAmount == 0){
+      Swal.fire({
+        title: 'Sorry',
+        text: 'You have not choose any service at',
+        icon: 'warning'
+      });
+      return ;
+    }
+    else{
+      localStorage.setItem('serviceTime',''+this.totalDuration);
+      localStorage.setItem('serviceName', this.serviceName);
+      this.router.navigate(['/customer/view-slots']);
+    }
   }
 
 }

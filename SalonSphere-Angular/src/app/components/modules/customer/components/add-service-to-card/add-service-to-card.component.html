@@ -2,16 +2,16 @@
   <div class="services">
     <div class="service" *ngFor="let service of services">
       <div class="left">
-        <h1>{{ service.title }}</h1>
+        <h1>{{ service.serviceName }}</h1>
         <h3>{{ service.type }}</h3>
         <div class="price-time">
           <div class="price">
             <img [src]="service.priceImageUrl" alt="" />
-            <p>{{ service.price }}</p>
+            <p>{{ service.servicePrice }}</p>
           </div>
           <div class="time">
             <div class="circle"></div>
-            <p>{{ service.duration }}</p>
+            <p>{{ service.serviceDuration }}</p>
           </div>
         </div>
         <p>{{ service.description }}</p>
@@ -26,9 +26,9 @@
   </div>
 
   <div class="card">
-    <span class="span">Rahul Hair Salon</span>
+    <span class="span">{{shopName}}</span>
 
-    <p>Address - Ashoka Garden Bhopal, Madhya Pradesh</p>
+    <p>Address - {{shopAddress}}</p>
 
     
     <!-- <div class="products" *ngIf="cart.length">
@@ -59,10 +59,10 @@
     <div class="products" *ngIf="serviceCountMap.size">
       <div class="product" *ngFor="let entry of serviceCountMap.entries()">
         <div class="product-details">
-          <h3>{{ entry[0].title }}</h3>
+          <h3>{{ entry[0].serviceName }}</h3>
           <div class="price">
             <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
-            <p>{{ entry[0].price }}</p>
+            <p>{{ entry[0].servicePrice }}</p>
           </div>
         </div>
         <button class="product-btn">
@@ -71,7 +71,7 @@
       </div>
     </div>
     
-    <button class="total" *ngIf="serviceCountMap.size">
+    <button (click)="navigateLogin()" class="total" *ngIf="serviceCountMap.size">
       <div class="price">
         <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
         <p style="color: black">{{ totalAmount }}</p>

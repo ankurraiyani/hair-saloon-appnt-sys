@@ -1,6 +1,5 @@
 package com.SalonSphereServer.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.SalonSphereServer.repository.ShopkeeperRepository;
 import com.SalonSphereServer.request.FilterRequest;
+import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 import com.SalonSphereServer.service.CustomerService;
@@ -56,9 +55,18 @@ public class CustomerController {
 				.filterByCityAndServiceNameAndServicePriceAndDistance(request);
 
 		// here we check filterResponse is empty or not
-		System.out.println("This is filter respnse7777777777777777777777777777777777777777777777777777777777777\n"+filterRespons);
-			return ResponseEntity.ok().body(filterRespons);
+		System.out.println("This is filter respnse7777777777777777777777777777777777777777777777777777777777777\n"
+				+ filterRespons);
+		return ResponseEntity.ok().body(filterRespons);
 
-	// =================================================================================================================
-}
+		// =================================================================================================================
+	}
+	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@PostMapping("/book-slot")
+//	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest){
+//		
+//		return new ResponseEntity<>(true, HttpStatus.OK);
+//		 
+//	}
 }

@@ -37,6 +37,7 @@ export class ShopregisterComponent {
   file: any;
   licence: any;
   cities: Location[] = [];
+  shopName: string = '';
 
   licenceFile: any;
   
@@ -82,6 +83,7 @@ export class ShopregisterComponent {
       state: [''],
     });
   }
+
   goBack(){
     window.history.back();
   }
@@ -123,20 +125,9 @@ export class ShopregisterComponent {
   // Image Uploading 
   uploadFile(event: any): void {
     this.file = event.target.files[0];
-    
-    //change the name of cover image
-    this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
-    console.log('file', this.file);
-    if (!this.isImageFile(this.file)) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
-        icon: 'error',
-      });
-      return;
-    }
-    
-    this.file = new File([this.file], 'cover_image_' + this.imageId+ '.jpg');
+
+    //change the name of cover imaged
+    this.file = new File([this.file], 'cover_image_'+this.register.value.shopName?.split(' ')[0]+'.jpg');
     console.log('Image file : ', this.file);
   }
 
@@ -145,10 +136,8 @@ export class ShopregisterComponent {
     this.licenceFile = event.target.files[0];
 
     //change ther name of licence document
-    this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
-
+    this.licenceFile = new File([this.licenceFile],'licence_'+this.register.value.shopName?.split(' ')[0]+'.jpg');
     console.log(this.licenceFile);
-    return;
   }
 
   isImageFile(file: File): boolean {
@@ -160,8 +149,8 @@ export class ShopregisterComponent {
   doSubmit() {
     // alert('values comes');
     
-    this.register.value.licenseDocument= 'licence_'+this.imageId+'.jpg';
-    this.register.value.coverImage= 'cover_image_'+this.imageId+'.jpg';
+    this.register.value.licenseDocument= 'licence_'+this.register.value.shopName?.split(' ')[0]+'.jpg';
+    this.register.value.coverImage= 'cover_image_'+this.register.value.shopName?.split(' ')[0]+'.jpg';
     console.log(this.register.value);
 
     //check first name and last name
@@ -215,6 +204,7 @@ export class ShopregisterComponent {
   
 
     this.upload.uploadImage(formData).subscribe((data: any) => {
+      console.log("cover image upload successfully");
       console.log(data);
     },
     error=>{
@@ -228,6 +218,7 @@ export class ShopregisterComponent {
   //send image to backend for storing in folder structure
     formData.set('file', this.licenceFile);
     this.upload.uploadImage(formData).subscribe(response=>{
+      console.log("licence image upload successfully");
       console.log(response);
     },
     error=>{

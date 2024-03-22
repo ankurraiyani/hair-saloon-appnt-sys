@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { SlotService } from '../../../../services/slots/slot.service';
 import { response } from 'express';
+import { BookSlotService } from '../../../../services/slot-booking/book-slot.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-slots',
@@ -21,18 +23,16 @@ export class ViewSlotsComponent {
   
 
   selectedDate: string;
+  minDate: string = '';
+  maxDate: string = '';
 
 
   availableSlots: Map<string, string[]> = new Map<string, string[]>();
 
-  constructor(private calendar: NgbCalendar, private slotService: SlotService) {
-    this.selectedDate = this.getTodayDate();
+  constructor(private calendar: NgbCalendar, private slotService: SlotService, private slotBooking:BookSlotService) {
+    this.selectedDate = this.minDate = this.getTodayDate();
+    this.maxDate = this.getMaxDate();
     console.log(this.info);
-
-     // Initialize availableSlots with some custom data
-    //  this.availableSlots.set('User1', ['10:00-10:30', '11:00-11:30', '14:00-14:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30', '15:00-15:30']);
-    //  this.availableSlots.set('User2', ['09:00-09:30', '12:00-12:30', '15:00-15:30']);
-    //  this.availableSlots.set('User3', ['08:00-08:30', '13:00-13:30', '16:00-16:30']);
 
     // call the service which will give all the available slots 
     this.slotService.getAllAvilableSlots(this.info).subscribe((response:any)=>{
@@ -62,5 +62,55 @@ export class ViewSlotsComponent {
   addLeadingZero(value: number): string {
     return value < 10 ? '0' + value : value.toString();
   }
+
+  getMaxDate(): string {
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 7); // Add 7 days
+    return maxDate.toISOString().split('T')[0];
+  }
+  
+  
+
+// Function to extract empId
+ getEmpId(jsonData: string): string {
+  const data = jsonData.split(',')[0]; // Split the string and get the first part
+  return data.substring(1); // Remove the opening square bracket
+}
+
+// Function to extract name
+ getName(jsonData: string): string {
+  const data = jsonData.split(',')[1]; // Split the string and get the second part
+  return data.trim().slice(0, -1); // Remove any leading/trailing whitespace and remove the closing square bracket
+}
+
+bookSlot(slotTime: any, empId: any) {
+  console.log(slotTime);
+  console.log(empId);
+  console.log(localStorage.getItem("serviceName"));
+  console.log(localStorage.getItem("serviceTime"));
+  console.log(this.selectedDate);
+
+  const slotInfo = { // Correct declaration with object literal {}
+    slotTime: slotTime, // Use : for assignment
+    empId: empId, // Use : for assignment
+    serviceName: localStorage.getItem("serviceName"), // Get value from localStorage
+    serviceTime: localStorage.getItem("serviceTime"), // Get value from localStorage
+    date: this.selectedDate
+  };
+  
+  this.slotBooking.bookSlot(slotInfo).subscribe(
+    (response: any) => {
+      console.log(response);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: 'Your slot has been booked.'
+      });
+    },
+    error => {
+      alert("error occurred");
+    }
+  );
+}
   
 }

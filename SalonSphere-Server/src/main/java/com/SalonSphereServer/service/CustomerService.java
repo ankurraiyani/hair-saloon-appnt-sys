@@ -51,21 +51,25 @@ public class CustomerService {
 		return cutomers;
 	}
 
-	public Map<String, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime) {
+	public Map<List<String>, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime) {
 
 		List<Object[]> shopEmployees = shopEmployeeRepository.findShopEmplooyesByShopId(shopId);
 
-		Map<String, List<String>> avilableSlots = new HashMap<String, List<String>>();
+		Map<List<String>, List<String>> avilableSlots = new HashMap<List<String>, List<String>>();
 
 		for (Object[] employeeData : shopEmployees) {
 
 			String employeeName = (String) employeeData[1];
 			String employeeId = (String) employeeData[0];
+			
+			List<String> employeeInfo = new ArrayList<String>();
+			employeeInfo.add(employeeId);
+			employeeInfo.add(employeeName);
 
 			List<String> bookedSlots = slotRepository.findAllSlotTimeByEmployeeId(employeeId);
 
 			List<String> list = geeAllAbilableSlots(serviceTime, bookedSlots, shopTiming);
-			avilableSlots.put(employeeName, list);
+			avilableSlots.put(employeeInfo, list);
 		}
 
 		return avilableSlots;
