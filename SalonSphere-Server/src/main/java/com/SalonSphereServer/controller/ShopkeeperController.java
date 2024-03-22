@@ -64,7 +64,7 @@ public class ShopkeeperController {
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
 		else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new Response("Error while Updating Shop"));
+					.body(new Response("Error while adding Shop"));
 	}
 
 	// Through this api we will get shops information through id

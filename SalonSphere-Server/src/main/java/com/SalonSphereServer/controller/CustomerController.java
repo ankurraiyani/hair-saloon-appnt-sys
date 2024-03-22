@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.entity.Feedback;
@@ -24,7 +25,7 @@ import com.SalonSphereServer.service.FeedbackService;
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-// @RequestMapping("/customer")
+ @RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class CustomerController {
 	@Autowired
 	private FeedbackRepository feedbackRepository;
 
-	// ============================================================================================================
+	// ========================================CODE FOR FILLTER===========================================
 	// Filter shops by given city
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/filter-by-city/{city}")
@@ -50,29 +51,25 @@ public class CustomerController {
 			return new ResponseEntity<>(filterResponse, HttpStatus.NOT_FOUND);
 	}
 
-	// ==============================================================================================================
+	// Filtering based on servicename, serviceprice and distance
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/filter-shop")
+	public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
 
-    // Filtering based on servicename, serviceprice and distance
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/filter-shop")
-    public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
+		System.out.println("====Inside the customer Controller in filtershop===\n" + request);
+		List<FilterResponse> filterRespons = customerService
+				.filterByCityAndServiceNameAndServicePriceAndDistance(request);
 
-        System.out.println("====Inside the customer Controller in filtershop===\n" + request);
-        List<FilterResponse> filterRespons = customerService
-                .filterByCityAndServiceNameAndServicePriceAndDistance(request);
+		System.out.println("=============This is filter respnse================>\n" + filterRespons);
+		return ResponseEntity.ok().body(filterRespons);
 
-        // here we check filterResponse is empty or not
-        System.out.println("=============This is filter respnse================>\n"+filterRespons);
-            return ResponseEntity.ok().body(filterRespons);
-
-    // =================================================================================================================
-}
-
+	}
+	// ========================================END OF FILLTER===========================================
 
 	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
 	// Through this method the user can give feedback to the provider
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/feedback")
+	@PostMapping("/add-feedback")
 	public ResponseEntity<Response> addFeedBack(@RequestBody Feedback feedback) {
 
 		System.out.println("=====INSIDE THE COUSTOMERCONTROLLER ADDFEEDBACK======\n" + feedback);
@@ -133,6 +130,6 @@ public class CustomerController {
 		feedbackRepository.deleteById(reviewId);
 		return ResponseEntity.ok().body(new Response("Review Deleted Succeefully"));
 	}
-}
-		
 
+	// ================END FOR FEEDBACK/REVIEW/RATING===========================
+}

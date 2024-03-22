@@ -29,7 +29,7 @@ export class ViewShopsComponent implements OnInit {
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
-    this.city = localStorage.getItem('loction');
+    this.city = localStorage.getItem('location');
 
     //just for testing
     localStorage.setItem('shopTiming', '10:30-18:30');
@@ -40,8 +40,8 @@ export class ViewShopsComponent implements OnInit {
   }
 
   //call the service method and get all the shops by using city
-  public showShopByCity(loction: any) {
-    this.customerService.showShopsByCity(loction).subscribe(
+  public showShopByCity(location: any) {
+    this.customerService.showShopsByCity(location).subscribe(
       (response: any) => {
         console.log(response);
         if (response == null) {

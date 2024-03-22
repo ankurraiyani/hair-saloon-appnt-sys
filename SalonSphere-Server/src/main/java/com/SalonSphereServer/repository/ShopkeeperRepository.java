@@ -61,7 +61,7 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	// Through this methode we get all shops details like
 	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city,
 	// serviceName,servicePriceRange like (100-200) and distance like(100m-200m)
-	@Query(value = "SELECT sh.shop_name, si.service_name, si.service_price, si.service_duration " +
+	@Query(value = "SELECT sh.shop_name, sh.shop_id, sh.shop_timing, si.service_name, si.service_price, si.service_duration " +
 			"FROM shop_information sh " +
 			"INNER JOIN service_information si ON sh.shop_id = si.shop_id " +
 			"WHERE sh.shop_city = :city AND (:serviceName IS NULL OR si.service_name = :serviceName) " +
