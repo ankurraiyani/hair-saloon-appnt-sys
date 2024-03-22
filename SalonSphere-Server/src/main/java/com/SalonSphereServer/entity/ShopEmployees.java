@@ -1,6 +1,7 @@
 package com.SalonSphereServer.entity;
 
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
