@@ -29,7 +29,7 @@ export class ViewShopsComponent implements OnInit {
 
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
-    this.city = localStorage.getItem('loction');
+    this.city = localStorage.getItem('location');
 
     //just for testing
     localStorage.setItem('shopTiming', '10:30-18:30');
