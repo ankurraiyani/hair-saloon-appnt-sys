@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowShopsService } from '../../../../services/customer/show-shops.service';
+
 import Swal from 'sweetalert2';
 
 
@@ -40,8 +41,8 @@ export class ViewShopsComponent implements OnInit {
   }
 
   //call the service method and get all the shops by using city
-  public showShopByCity(loction: any) {
-    this.customerService.showShopsByCity(loction).subscribe(
+  public showShopByCity(location: any) {
+    this.customerService.showShopsByCity(location).subscribe(
       (response: any) => {
         console.log(response);
         if (response == null) {

@@ -100,6 +100,7 @@ public class ShopkeeperService {
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");	
+			shopInformation.setShopCity(shopInformation.getShopCity().trim());
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -161,7 +162,7 @@ public class ShopkeeperService {
 			existingShop.setShopStatus(shopInformation.isShopStatus());
 			existingShop.setShopEmail(shopInformation.getShopEmail());
 			existingShop.setShopContactNo(shopInformation.getShopContactNo());
-			existingShop.setShopCity(shopInformation.getShopCity());
+			existingShop.setShopCity(shopInformation.getShopCity().trim());
 
 			// Create a java.util.Date object
 			java.util.Date utilDate = new java.util.Date();
