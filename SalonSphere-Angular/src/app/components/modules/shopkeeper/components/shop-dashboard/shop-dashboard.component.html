@@ -1,13 +1,24 @@
 <div class="container" *ngIf="shopData">
   <mat-card class="header">
+
+    <!-- <img src="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images\\${{shopData.coverImage}}" alt="Oh"> -->
+
     <div class="btnclass">
-    <button class="edit" mat-raised-button routerLink="/shopkeeper/updateshop">
-      <mat-icon>edit</mat-icon> Edit Shop
-    </button>
-    <button class="addEmp" mat-raised-button routerLink="/shopkeeper/addEmployee">
-      <mat-icon>add</mat-icon> Add Emp
-    </button>
-  </div>
+      <button
+        class="edit"
+        mat-raised-button
+        routerLink="/shopkeeper/updateshop"
+      >
+        <mat-icon>edit</mat-icon> Edit Shop
+      </button>
+      <button
+        class="addEmp"
+        mat-raised-button
+        routerLink="/shopkeeper/addEmployee"
+      >
+        <mat-icon>add</mat-icon> Add Emp
+      </button>
+    </div>
     <h1>{{ shopData.shopName }}</h1>
     <p>{{ shopData.address }}</p>
     <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
@@ -26,15 +37,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let shop of data" >
+            <tr *ngFor="let shop of data">
               <td scope="row">{{ shop.serviceName }}</td>
               <td>{{ shop.servicePrice | currency : "INR" }}</td>
               <td>{{ shop.serviceDuration | shopkeeperDuration }}</td>
-              <td><a mat-button color="primary" (click)="saveId(shop.serviceId)"
-                routerLink="/shopkeeper/updateService"><mat-icon>edit</mat-icon></a>
+              <td>
+                <a
+                  mat-button
+                  color="primary"
+                  (click)="saveId(shop.serviceId)"
+                  routerLink="/shopkeeper/updateService"
+                  ><mat-icon>edit</mat-icon></a
+                >
               </td>
-              <td><a mat-button color="warn" (click)="deleteService()"><mat-icon>delete</mat-icon></a>
+              <td>
+                <a mat-button color="warn" (click)="deleteService()"
+                  ><mat-icon>delete</mat-icon></a
+                >
               </td>
             </tr>
           </tbody>
@@ -63,6 +82,7 @@
       </div>
     </mat-tab>
 
+    <mat-tab label="Employees"> </mat-tab>
     <mat-tab label="Stats"> </mat-tab>
 
     <!-- Add more mat-tabs if needed -->

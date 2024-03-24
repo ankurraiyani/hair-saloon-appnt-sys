@@ -30,31 +30,7 @@
     <p>Address - Ashoka Garden Bhopal, Madhya Pradesh</p>
 
     
-    <!-- <div class="products" *ngIf="cart.length">
-      <div class="product" *ngFor="let product of cart">
-        <div class="product-details">
-          <h3>{{ product.title }}</h3>
-          <div class="price">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg"
-              alt=""
-            />
-            <p>{{ product.price }}</p>
-          </div>
-        </div>
-        <button class="product-btn"><span (click)="removeItem(product)">-</span>{{getFrequency(product)}}<span (click)="addItem(product)">+</span></button>
-      </div>
-    </div>
-    <button class="total" *ngIf="cart.length">
-      <div class="price">
-        <img
-          src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg"
-          alt=""
-        />
-        <p style="color: black">{{ totalAmount }}</p>
-      </div>
-      <p style="color: black">View Cart</p>
-    </button> -->
+    
     <div class="products" *ngIf="serviceCountMap.size">
       <div class="product" *ngFor="let entry of serviceCountMap.entries()">
         <div class="product-details">
