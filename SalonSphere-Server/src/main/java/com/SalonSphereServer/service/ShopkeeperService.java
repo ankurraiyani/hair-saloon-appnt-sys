@@ -96,7 +96,8 @@ public class ShopkeeperService {
 
 			shopInformation.setCreateDate(sqlDate);
 			shopInformation.setModifyDate(sqlDate);
-
+			System.out.println("licence =>"+shopInformation.getLicenseDocument());
+			System.out.println("cover image =>"+shopInformation.getCoverImage());
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");
@@ -163,7 +164,7 @@ public class ShopkeeperService {
 			existingShop.setShopStatus(shopInformation.isShopStatus());
 			existingShop.setShopEmail(shopInformation.getShopEmail());
 			existingShop.setShopContactNo(shopInformation.getShopContactNo());
-			existingShop.setShopCity(shopInformation.getShopCity());
+			existingShop.setShopCity(shopInformation.getShopCity().trim());
 
 			// Create a java.util.Date object
 			java.util.Date utilDate = new java.util.Date();

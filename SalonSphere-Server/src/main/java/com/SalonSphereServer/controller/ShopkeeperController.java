@@ -31,7 +31,6 @@ import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
 import com.SalonSphereServer.entity.ShopEmployees;
 import com.SalonSphereServer.entity.ShopInformation;
-import com.SalonSphereServer.repository.ShopServicesRepository;
 import com.SalonSphereServer.response.Response;
 import com.SalonSphereServer.service.EmailService;
 import com.SalonSphereServer.service.ShopEmployeeService;
@@ -48,8 +47,7 @@ public class ShopkeeperController {
 	private ShopkeeperService shopkeeperService;
 	@Autowired
 	private ShopServices shopServices;
-	@Autowired
-	private ShopServicesRepository shopServicesRepository;
+	
 	@Autowired
 	private ShopEmployeeService shopEmployeeService;
 
@@ -134,6 +132,7 @@ public class ShopkeeperController {
 
 		try {
 			String originalFileName = file.getOriginalFilename();
+			System.out.println(originalFileName);
 			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
 			Files.write(fileNameAndPath, file.getBytes());
 

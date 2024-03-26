@@ -55,8 +55,8 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 
 	// ***************CODE FOR FILTERING*******************************
 	// This method help to filering by shopCity
-	@Query(value = "SELECT * FROM shop_information WHERE shop_city = :city AND status = 'accepted'", nativeQuery = true)
-	List<ShopInformation> findShopByCity(@Param("city") String city);
+	@Query(value = "SELECT * FROM shop_information WHERE district = :shopDistrict AND status = 'accepted'", nativeQuery = true)
+	List<ShopInformation> findShopByCity(@Param("shopDistrict") String shopDistrict);
 
 	// Through this methode we get all shops details like
 	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city,

@@ -34,9 +34,12 @@ export class ShopregisterComponent {
     private upload: ImageService
   ) {}
 
-  file: any;
+  coverImage: any;
   licence: any;
   cities: Location[] = [];
+
+  licenceCNF:boolean = false;
+  coverCNF:boolean = false;
 
   licenceFile: any;
   
@@ -121,40 +124,41 @@ export class ShopregisterComponent {
   }
 
   // Image Uploading 
-  uploadFile(event: any): void {
-    this.file = event.target.files[0];
-    
-    //change the name of cover image
-    this.file = new File([this.file], 'cover_image_'+this.imageId+'.jpg');
-    console.log('file', this.file);
-    if (!this.isImageFile(this.file)) {
-      Swal.fire({
-        title: 'Error!',
-        text: 'Invalid file format. Please upload a JPEG, JPG, or PNG image.',
-        icon: 'error',
-      });
-      return;
-    }
-    
-    this.file = new File([this.file], 'cover_image_' + this.imageId+ '.jpg');
-    console.log('Image file : ', this.file);
-  }
+  uploadFile(event: any){    
+    console.log("call upload file function")
 
+    this.coverImage = event.target.files[0];
+
+          this.coverCNF=true;
+    //change the name of cover image
+    this.coverImage = new File([this.coverImage], 'cover_image_'+this.register.value.shopContactNo+'.jpg');
+
+    console.log('file', this.coverImage);
+    return
+    
+  }
+// //////////////////////////////////////////////////////////////////////////////////////////
   //licence uploading
   uploadLicence(event: any){
     this.licenceFile = event.target.files[0];
+    console.log("call upload licence function")
 
+    this.licenceCNF = true;
     //change ther name of licence document
-    this.licenceFile = new File([this.licenceFile],'licence_'+this.imageId+'.jpg');
-
+    this.licenceFile = new File([this.licenceFile],'licence_'+this.register.value.shopContactNo+'.jpg');
+    
     console.log(this.licenceFile);
+    
     return;
   }
+
+  // //////////////////////////////////////////////////////////////////////////////////////////
 
   isImageFile(file: File): boolean {
     const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
     return allowedFormats.includes(file.type);
   }
+
 
   //Validate the data of the form and send the data to the service
   doSubmit() {
@@ -211,7 +215,7 @@ export class ShopregisterComponent {
 
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
-    formData.set('file', this.file);
+    formData.set('file', this.coverImage);
   
 
     this.upload.uploadImage(formData).subscribe((data: any) => {
