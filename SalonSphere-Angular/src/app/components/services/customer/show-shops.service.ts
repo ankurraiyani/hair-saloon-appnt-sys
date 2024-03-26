@@ -17,6 +17,7 @@ export class ShowShopsService {
   showShopsByCity(city:any){
  
     //set the token in header
+    console.log("service main aya hai");
     const token = Cookie.get('token');
     console.log(token);
 

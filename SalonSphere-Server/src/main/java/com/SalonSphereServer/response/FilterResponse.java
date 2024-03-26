@@ -18,4 +18,6 @@ public class FilterResponse {
     private String serviceName;
     private int servicePrice;
     private int  serviceDuration;
+    private String shopId;
+    private String shopTiming;
 }

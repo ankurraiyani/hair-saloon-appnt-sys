@@ -162,7 +162,6 @@ public class Users implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.role);
-
 		return Arrays.asList(simpleGrantedAuthority);
 	}
 

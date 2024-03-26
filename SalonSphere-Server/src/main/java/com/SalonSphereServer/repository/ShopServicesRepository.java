@@ -15,13 +15,19 @@ import com.SalonSphereServer.entity.ServiceInformation;
 public interface ShopServicesRepository extends JpaRepository<ServiceInformation, Integer> {
 
     @Transactional
-   // void updateIsDeleteById(int serviceId, boolean isDelete);
-    
     @Modifying
     @Query("UPDATE ServiceInformation s SET s.isDelete = :isDelete WHERE s.id = :id")
     void updateIsDeleteById(@Param("isDelete") boolean isDelete, @Param("id") int id);
 
+    // find all services based on shop_id
     @Query(value = "SELECT * FROM service_information WHERE shop_id = :shopId and isdelete = 0", nativeQuery = true)
     List<ServiceInformation> findAllServicesByShopId(@Param("shopId") String shopId);
 
+    // Custom query using @Query to select service names by shop ID
+    // @Query("SELECT s.serviceName FROM ServiceInformation s WHERE s.shopId = :shopId")
+    // List<String> findServiceNamesByShopId(String shopId);
+
+    @Query("SELECT s.serviceId, s.serviceName FROM ServiceInformation s WHERE s.shopId = :shopId")
+    List<Object[]> findServiceIdAndNameByShopId(String shopId);
+    
 }
