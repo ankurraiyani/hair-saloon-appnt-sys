@@ -42,8 +42,6 @@ export class ShopregisterComponent {
   coverCNF:boolean = false;
 
   licenceFile: any;
-  
-  imageId:string=Cookie.get('userId');
   licenceName: string='';
 
 
