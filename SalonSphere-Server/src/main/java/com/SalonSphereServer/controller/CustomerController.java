@@ -25,7 +25,7 @@ import com.SalonSphereServer.service.FeedbackService;
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
- @RequestMapping("/customer")
+@RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
@@ -45,6 +45,7 @@ public class CustomerController {
 
 		// wriet code for fiter according to city
 		List<FilterResponseByCity> filterResponse = customerService.filterByCity(city);
+		System.out.println("This is filter Response"+filterResponse);
 		if (filterResponse != null)
 			return ResponseEntity.ok().body(filterResponse);
 		else
