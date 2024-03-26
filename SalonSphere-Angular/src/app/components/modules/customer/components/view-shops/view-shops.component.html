@@ -13,12 +13,20 @@
                 id="automobiles"
                 name="category"
               />
-              <label for="automobiles">Hair Cutting</label>
+              <label for="automobiles">Haircut</label>
             </div>
 
             <div class="option service-option">
               <input type="radio" class="radio" />
               <label for="film">Manicure</label>
+            </div>
+            <div class="option service-option">
+              <input type="radio" class="radio" />
+              <label for="film">Beard</label>
+            </div>
+            <div class="option service-option">
+              <input type="radio" class="radio" />
+              <label for="film">Hair Coloring</label>
             </div>
 
             <div class="option service-option">
@@ -105,62 +113,62 @@
 
         <!-- 2st -->
 
-        <div class="select-box" (click)="showRengeDropdown()">
-          <div class="options-container renge active">
-            <div class="option renge-option">
+        <div class="select-box" (click)="showrangeDropdown()">
+          <div class="options-container range active">
+            <div class="option range-option">
               <input type="radio" class="radio" id="100-200" name="category" />
               <label for="100-200">100 - 200</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="200-300" name="category" />
               <label for="200-300">200 - 300</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="200-300" name="category" />
               <label for="200-300">300 - 400 </label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="300-400" name="category" />
               <label for="300-400">400 - 500</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="500-600" name="category" />
               <label for="500-600">500 - 600</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="600-700" name="category" />
               <label for="600-700">600 - 700</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="700-800" name="category" />
               <label for="700-800">700 - 800</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="800-900" name="category" />
               <label for="800-900">800 - 900</label>
             </div>
 
-            <div class="option renge-option">
+            <div class="option range-option">
               <input type="radio" class="radio" id="900-1000" name="category" />
               <label for="900-1000">900 - 1000</label>
             </div>
           </div>
 
-          <div class="selected renge-selected">Price Range</div>
+          <div class="selected range-selected">Price Range</div>
         </div>
 
         <!-- 3rd -->
 
-        <div class="select-box" (click)="showDistenceDropdown()">
-          <div class="options-container distence active">
-            <div class="option distence-option">
+        <div class="select-box" (click)="showdistanceDropdown()">
+          <div class="options-container distance active">
+            <div class="option distance-option">
               <input
                 type="radio"
                 class="radio"
@@ -170,17 +178,17 @@
               <label for="100m-500m">100m - 500m</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="500m-1km" name="category" />
               <label for="500m-1km">500m - 1 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="1km-2km" name="category" />
               <label for="1km-2km">1 Km - 2 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input
                 type="radio"
                 class="radio"
@@ -190,33 +198,33 @@
               <label for="2km-3km">2 Km - 3 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="3km-4km" name="category" />
               <label for="3km-4km">3 Km - 4 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="4km-5km" name="category" />
               <label for="4km-5km">4 Km - 5 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="5km-6km" name="category" />
               <label for="5km-6km">5 Km - 6 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="6km-7km" name="category" />
               <label for="6km-7km">6 Km - 7 Km</label>
             </div>
 
-            <div class="option distence-option">
+            <div class="option distance-option">
               <input type="radio" class="radio" id="7km-8km" name="category" />
               <label for="7km-8km">7 Km - 8 Km</label>
             </div>
           </div>
 
-          <div class="selected distence-selected">Distance</div>
+          <div class="selected distance-selected">Distance</div>
         </div>
       </div>
     </nav>
@@ -250,6 +258,7 @@
               <button
                 routerLink="/customer/add-service-to-card"
                 class="book-btn"
+                (click)="getShopId(shop.shopId,shop.shopName)"
               >
                 Book Now
               </button>

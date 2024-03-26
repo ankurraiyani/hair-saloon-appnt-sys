@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
+import { Cookie } from 'ng2-cookies';
 
 // Define the Service interface
 interface Service {
-  title: string;
-  type: string;
-  price: number;
-  duration: number;
-  description: string;
-  // priceImageUrl: string;
-  imageUrl: string;
+  serviceName: any;
+  servicePrice: any;
+  serviceDuration: any;
 }
 
 @Component({
@@ -16,49 +14,21 @@ interface Service {
   templateUrl: './add-service-to-card.component.html',
   styleUrl: './add-service-to-card.component.css',
 })
-export class AddServiceToCardComponent {
+export class AddServiceToCardComponent implements OnInit {
   // Define the services array using the Service interface
-  services: Service[] = [
-    {
-      title: 'Hair Cutting',
-      type: 'Hair Cut For Men',
-      price: 200,
-      duration: 65,
-      description: 'Profession hair cut that suits your face shape',
-      // priceImageUrl:
-      //   'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-    {
-      title: 'Hair Styling',
-      type: 'Hair Style For Women',
-      price: 300,
-      duration: 20,
-      description: 'Professional hair styling to enhance your appearance',
-      // priceImageUrl:
-      //   'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-    {
-      title: 'Beard Trimming',
-      type: 'Beard Grooming',
-      price: 150,
-      duration: 20,
-      description: 'Expert trimming and shaping for your beard',
-      // priceImageUrl:
-      //   'https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg',
-      imageUrl:
-        'https://www.shutterstock.com/image-photo/male-client-getting-haircut-by-260nw-568819498.jpg',
-    },
-  ];
+  services: Service[] = [];
 
   serviceCountMap: Map<Service, number> = new Map<Service, number>();
-  
+  shopName:any;
   totalAmount: number = 0;
 
-  constructor() {}
+  constructor(private fetchService:GetServiceInfoService, ) {}
+  ngOnInit(): void {
+    this.fetchService.fetchAllServices(localStorage.getItem('shopId')).subscribe((data:any)=>{
+      this.services = data;
+      this.shopName = localStorage.getItem('shopName');
+    })
+  }
 
   addToCart(service: Service) {
     // Print the data of the selected service to the console
@@ -76,7 +46,7 @@ export class AddServiceToCardComponent {
     }
   
     // Increment the total amount
-    this.totalAmount += service.price;
+    this.totalAmount += service.servicePrice;
   }
 
   removeItem(product: Service) {
@@ -88,7 +58,7 @@ export class AddServiceToCardComponent {
       } else {
         this.serviceCountMap.delete(product);
       }
-      this.totalAmount -= product.price;
+      this.totalAmount -= product.servicePrice;
     }
   }
 
@@ -103,7 +73,7 @@ export class AddServiceToCardComponent {
       this.serviceCountMap.set(product, 1);
     }
 
-    this.totalAmount += product.price;
+    this.totalAmount += product.servicePrice;
   }
 
 }
