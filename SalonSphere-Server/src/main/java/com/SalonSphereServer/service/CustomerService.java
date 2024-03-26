@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.repository.ShopEmployeeRepository;
 import com.SalonSphereServer.repository.SlotRepository;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
@@ -24,15 +25,14 @@ public class CustomerService {
 
 	@Autowired
 	private UserRepository userRepository;
-
 	@Autowired
 	private ShopEmployeeRepository shopEmployeeRepository;
-
 	@Autowired
 	private SlotRepository slotRepository;
-
 	@Autowired
 	private ShopkeeperRepository shopKeeperRepository;
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	// call the userRepository method and fetch all the customer data from database
 	public List<CustomerDTO> getAllCustomers() {
@@ -76,17 +76,17 @@ public class CustomerService {
 		List<String> avilableSlots = new ArrayList<String>();
 
 		// Set the opening time
-		
-		int openingTime = Integer.parseInt(""+shopTiming.charAt(0)+shopTiming.charAt(1));
-		int startMinute = Integer.parseInt(""+shopTiming.charAt(3)+shopTiming.charAt(4));
-		int endMinute = Integer.parseInt(""+shopTiming.charAt(9)+shopTiming.charAt(10));
+
+		int openingTime = Integer.parseInt("" + shopTiming.charAt(0) + shopTiming.charAt(1));
+		int startMinute = Integer.parseInt("" + shopTiming.charAt(3) + shopTiming.charAt(4));
+		int endMinute = Integer.parseInt("" + shopTiming.charAt(9) + shopTiming.charAt(10));
 		// Set the closing time
-		int closingTime = Integer.parseInt(""+shopTiming.charAt(6)+shopTiming.charAt(7));
+		int closingTime = Integer.parseInt("" + shopTiming.charAt(6) + shopTiming.charAt(7));
 
 		// Convert opening time to total minutes
 		int totalMinutes = openingTime * 60 + startMinute;
 
-		while ((totalMinutes + serviceTime) <= closingTime * 60+endMinute) {
+		while ((totalMinutes + serviceTime) <= closingTime * 60 + endMinute) {
 			// Calculate end time
 			int endHourSlot = (totalMinutes + serviceTime) / 60;
 			int endMinuteSlot = (totalMinutes + serviceTime) % 60;
@@ -184,9 +184,11 @@ public class CustomerService {
 	}
 
 	// ===========================================================================================================
-	// Throuhg this method we filter on city,serviceName,priceRange(100-200) and distanceRange (5-10).Distance always in meter
+	// Throuhg this method we filter on city,serviceName,priceRange(100-200) and
+	// distanceRange (5-10).Distance always in meter
 	public List<FilterResponse> filterByCityAndServiceNameAndServicePriceAndDistance(FilterRequest request) {
 
+		System.out.println("*********inside customerservice filter shop**********");
 		int minPrice, maxPrice;
 		int minDistance, maxDistance;
 		if (request.getServiceName() == null) {
@@ -220,14 +222,19 @@ public class CustomerService {
 			filterResponse.setShopName((String) obj[0]);
 			filterResponse.setShopId((String) obj[1]);
 			filterResponse.setShopTiming((String) obj[2]);
-			filterResponse.setServiceName((String) obj[3]);
-			double price1 = (double) obj[4];
+			filterResponse.setLocation((String) obj[3] + ", " + (String) obj[4] + ", " + (String) obj[5]); // Set shop city, district and state
+			filterResponse.setCoverImage((String) obj[6]);
+			filterResponse.setServiceName((String) obj[7]);
+			double price1 = (double) obj[8];
 			// Explicit type casting double to int
 			int roundedPrice = (int) price1;
 			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[5]);
+			filterResponse.setServiceDuration((int) obj[9]);
+			// calculate rating  by adding all the ratings and dividing it with total number of reviews
+			filterResponse.setRating(feedbackRepository.getAverageRatingByShopId(filterResponse.getShopId()));
 			responseList.add(filterResponse);
-		}
+
+		}		
 		return responseList;
 	}
 }

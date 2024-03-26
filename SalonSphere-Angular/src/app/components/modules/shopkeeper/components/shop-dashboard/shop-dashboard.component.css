@@ -7,9 +7,15 @@ h1 {
 }
 .edit{
   width: 150px;
-  align-self: flex-end;
   margin-right: 5px;
+}
+.addEmp{
+  width: 150px;
+  margin-right: 5px;
+}
+.btnclass{
   position: absolute;
+  align-self: flex-end;
 }
 .header{
   padding-left: 100px;

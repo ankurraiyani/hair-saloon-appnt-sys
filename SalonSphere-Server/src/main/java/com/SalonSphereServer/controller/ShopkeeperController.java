@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -125,29 +124,14 @@ public class ShopkeeperController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Map<String, String>> uploadDocument(@RequestParam("file") MultipartFile file)
-			throws IOException {
+	public ResponseEntity<Response> uploadDocument(@RequestParam("file") MultipartFile file) throws IOException {
 
 		System.out.println("================================================come inside the controller");
+		String originalFileName = file.getOriginalFilename();
+		Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
+		Files.write(fileNameAndPath, file.getBytes());
 
-		try {
-			String originalFileName = file.getOriginalFilename();
-			System.out.println(originalFileName);
-			Path fileNameAndPath = Paths.get(uploadDirectory, originalFileName);
-			Files.write(fileNameAndPath, file.getBytes());
-
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "success");
-			response.put("message", "Image uploaded successfully");
-
-			return ResponseEntity.status(HttpStatus.OK).body(response);
-		} catch (Exception e) {
-			Map<String, String> response = new HashMap<>();
-			response.put("status", "error");
-			response.put("message", "Image upload failed");
-
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
+		return ResponseEntity.status(HttpStatus.OK).body(new Response("Image Uploaded Successfully"));
 	}
 
 	// this Api used for fetch the files or images

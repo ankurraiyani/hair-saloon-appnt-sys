@@ -164,8 +164,8 @@ export class ShopregisterComponent {
   doSubmit() {
     // alert('values comes');
     
-    this.register.value.licenseDocument= 'licence_'+this.imageId+'.jpg';
-    this.register.value.coverImage= 'cover_image_'+this.imageId+'.jpg';
+    this.register.value.licenseDocument= 'licence_'+this.register.value.shopContactNo+'.jpg';
+    this.register.value.coverImage= 'cover_image_'+this.register.value.shopContactNo+'.jpg';
     console.log(this.register.value);
 
     //check first name and last name

@@ -26,4 +26,8 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
     @Query("UPDATE Feedback f SET f.likes = :likes WHERE f.reviewId = :reviewId")
     void updateLikesByReviewId(int likes, int reviewId);
 
+    // Custom query to calculate the average rating for a specific shop ID
+    @Query(value = "SELECT AVG(f.rating) FROM Feedback f WHERE f.shopId = :shopId")
+    Double getAverageRatingByShopId(String shopId);
+
 }

@@ -96,8 +96,10 @@ public class ShopkeeperService {
 
 			shopInformation.setCreateDate(sqlDate);
 			shopInformation.setModifyDate(sqlDate);
-			System.out.println("licence =>"+shopInformation.getLicenseDocument());
-			System.out.println("cover image =>"+shopInformation.getCoverImage());
+
+			shopInformation.setCoverImage(shopInformation.getCoverImage());
+			shopInformation.setLicenseDocument(shopInformation.getLicenseDocument());
+
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");

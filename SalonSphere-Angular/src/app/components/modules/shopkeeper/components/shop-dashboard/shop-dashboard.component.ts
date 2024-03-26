@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
 import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
+import Swal from 'sweetalert2';
+import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -10,7 +12,8 @@ import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchsh
 export class ShopDashboardComponent  implements OnInit{
   constructor(
     private fetchshopInfo: FetchshopInfoService,
-    private getShopServices: GetServiceInfoService
+    private getShopServices: GetServiceInfoService,
+    private removeService: DeleteServiceService
   ) {}
 
   data: any[] = [];
@@ -22,7 +25,7 @@ export class ShopDashboardComponent  implements OnInit{
       .fetchshopInfo(localStorage.getItem('shopEmail'))
       .subscribe((data: any) => {
         this.shopData = data;
-        console.log(this.shopData.shopId);
+        console.log(this.shopData.coverImage);
       });
 
     this.getShopServices
@@ -40,4 +43,33 @@ export class ShopDashboardComponent  implements OnInit{
     console.log(serviceId);
     localStorage.setItem('serviceId', serviceId);
   }
+
+  deleteService() {
+    Swal.fire({
+      title: 'Are you sure you want to delete this Service?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.confirmDeleteService();
+      }
+    });
+  }
+
+  confirmDeleteService() {
+    this.removeService
+      .deleteService(localStorage.getItem('serviceId'))
+      .subscribe(
+        (data: any) => {
+          // Handle successful deletion
+          Swal.fire('Service deleted!', '', 'success');
+        },
+        (error) => {
+          // Handle error
+          Swal.fire('Error', 'Failed to delete the service', 'error');
+        }
+      );
+  }
+
 }

@@ -61,7 +61,7 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 	// Through this methode we get all shops details like
 	// (shopname,serviceName,servicePrice and serviceDuration) by shop_city,
 	// serviceName,servicePriceRange like (100-200) and distance like(100m-200m)
-	@Query(value = "SELECT sh.shop_name, sh.shop_id, sh.shop_timing, si.service_name, si.service_price, si.service_duration "
+	@Query(value = "SELECT sh.shop_name, sh.shop_id, sh.shop_timing,sh.shop_city, sh.district, sh.state, sh.shop_cover_image, si.service_name, si.service_price, si.service_duration "
 			+
 			"FROM shop_information sh " +
 			"INNER JOIN service_information si ON sh.shop_id = si.shop_id " +
@@ -72,8 +72,7 @@ public interface ShopkeeperRepository extends JpaRepository<ShopInformation, Str
 			@Param("serviceName") String serviceName, @Param("minPrice") int minPrice, @Param("maxPrice") int maxPrice,
 			@Param("minDistance") int minDistance, @Param("maxDistance") int maxDistance);
 
-	// ******************* FOR FILTERING ENDS
-	// HERE*****************************************
+	// ************** FOR FILTERING ENDS HERE*********************************
 
 	// Custom query method to check if a shop exists based on shop ID
 	boolean existsByShopId(String shopId);
