@@ -15,7 +15,6 @@ import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboa
 const routes: Routes = [
   {
     path: '',
-    canActivate: [shopGuardGuard],
     component: ShopkeeperDashboardComponent,
     children: [
       { path: 'view-shop', component: ViewshopsComponent },

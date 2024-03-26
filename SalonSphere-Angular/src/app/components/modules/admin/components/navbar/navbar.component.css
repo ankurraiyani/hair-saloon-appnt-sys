@@ -2,7 +2,7 @@
 .expansion{
   /* background-color: rgb(218, 218, 218); */
   margin-left: 20px;
-  margin-top: -10px;
+  margin-top: -62px;
 }
 
 .box-container {
@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 70px;
 }
 
 .active {

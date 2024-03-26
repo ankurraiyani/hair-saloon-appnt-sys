@@ -15,10 +15,14 @@
 }
 
 .container {
+  width: 75%;
+  height: 100%;
   position: absolute;
-  margin-top: 10%;
-  margin-left: 30%;
-  width: 50vw;
+  right: 0;
+  padding: 3%;
+  background-color: aliceblue;
+  padding-top: 200px;
+  padding-left: 6%;
 }
 
 .input-box label {

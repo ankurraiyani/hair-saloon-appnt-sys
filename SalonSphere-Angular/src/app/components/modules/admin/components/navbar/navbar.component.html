@@ -7,18 +7,18 @@
       </div>
 
       <!-- Manage Shop Button in the Menu bar -->
-      <div class="nav-option option2 active" (click)="expansion()">
+      <div class="nav-option option2" (click)="expansion()">
         <mat-icon>manage_accounts</mat-icon>
         <h3>Manage Users</h3>
       </div>
 
       <div class="expansion" *ngIf="flag == true">
-        <div routerLink="/admin/viewCustomers" class="option2 nav-option">
+        <div routerLink="/admin/viewCustomers" class="nav-option">
           <mat-icon>visibility</mat-icon>
           <h3>Customer</h3>
         </div>
 
-        <div routerLink="/admin/viewShopkeepers" class="option2 nav-option">
+        <div routerLink="/admin/viewShopkeepers" class="nav-option">
           <mat-icon>visibility</mat-icon>
           <h3>Shopkeeper</h3>
         </div>
