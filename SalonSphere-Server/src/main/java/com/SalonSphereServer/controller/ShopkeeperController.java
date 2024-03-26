@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.SalonSphereServer.dto.ShopServiceDTO;
 import com.SalonSphereServer.dto.ShowShopDto;
 import com.SalonSphereServer.entity.ServiceInformation;
+import com.SalonSphereServer.entity.ShopEmployees;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.response.Response;
 import com.SalonSphereServer.service.EmailService;
+import com.SalonSphereServer.service.ShopEmployeeService;
 import com.SalonSphereServer.service.ShopServices;
 import com.SalonSphereServer.service.ShopkeeperService;
 
@@ -41,9 +44,11 @@ public class ShopkeeperController {
 
 	@Autowired
 	private ShopkeeperService shopkeeperService;
-
 	@Autowired
 	private ShopServices shopServices;
+	
+	@Autowired
+	private ShopEmployeeService shopEmployeeService;
 
 	@SuppressWarnings("unused")
 	@Autowired
@@ -62,7 +67,7 @@ public class ShopkeeperController {
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
 		else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(new Response("Error while Updating Shop"));
+					.body(new Response("Error while adding Shop"));
 	}
 
 	// Through this api we will get shops information through id
@@ -114,7 +119,8 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
+	// Taking Image as multipart input and uploading in the below destination
+	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -220,9 +226,11 @@ public class ShopkeeperController {
 		}
 	}
 
+	// Through this method we get infromation about particular services like service
+	// name , price duration etc.
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/getService/{serviceId}")
-	public ResponseEntity<ShopServiceDTO> getServiceById(@PathVariable int serviceId) {
+	public ResponseEntity<ShopServiceDTO> getServiceInfoByServiceId(@PathVariable int serviceId) {
 		System.out.println(
 				"===========================inside shop keeper controllere show services =====================");
 		ShopServiceDTO service = shopServices.getService(serviceId);
@@ -230,6 +238,36 @@ public class ShopkeeperController {
 			return new ResponseEntity<>(service, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(service, HttpStatus.NOT_FOUND);
+	}
+
+	// =====================START API's FOR EMPLYEE===========================
+
+	// Getting all service name in particular shop based on shopid.
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/get-service-name/{shop_id}")
+	public ResponseEntity<Map<Integer, String>> getAllServiceNameByShopId(@PathVariable String shop_id) {
+		Map<Integer, String> serviceMap = shopServices.getAllServiceNameByShopId(shop_id);
+		if (!serviceMap.isEmpty()) {
+			return ResponseEntity.ok(serviceMap);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	// Adding new Emplyee in shop
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/addemp")
+	@Secured("shopkeeper")
+	public ResponseEntity<Response> addEmp(@RequestBody ShopEmployees shopEmployees) {
+
+		// Call service method to add shop
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shopEmployees);
+		boolean isAdd = shopEmployeeService.addEmp(shopEmployees);
+		if (isAdd)
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Employee added Successfully"));
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error while adding employee"));
 	}
 
 }

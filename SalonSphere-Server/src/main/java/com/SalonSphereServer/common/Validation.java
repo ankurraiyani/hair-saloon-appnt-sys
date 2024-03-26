@@ -40,7 +40,6 @@ public class Validation {
 		} else {
 			return false;
 		}
-
 	}
 
 	// validate last name
@@ -51,16 +50,14 @@ public class Validation {
 		} else {
 			return false;
 		}
-
 	}
 
 	// validate password
 	public static boolean passwordValidation(String password) {
 
-//        String passwordregex = "^(?=.*[!@#$%^&*()-+=])(?=\\S+$).{6,}$";
-//
-//        Pattern pattern = Pattern.compile(passwordregex);
-//        Matcher matcher3 = pattern.matcher(password);
+		// String passwordregex = "^(?=.*[!@#$%^&*()-+=])(?=\\S+$).{6,}$";
+		// Pattern pattern = Pattern.compile(passwordregex);
+		// Matcher matcher3 = pattern.matcher(password);
 
 		if (password.length() >= 6 && password.length() <= 16) {
 			return true;
@@ -75,7 +72,7 @@ public class Validation {
 
 		if (address == null)
 			return false;
-		else if (address.length() >= 8)
+		else if (address.length() >= 5)
 			return true;
 		return false;
 	}
@@ -83,9 +80,21 @@ public class Validation {
 	// Address Validation
 	public static boolean pincodeValidation(int pinc) {
 
-		String pincode=pinc+"";
+		String pincode = pinc + "";
 		if (pincode.length() == 6)
 			return true;
 		return false;
+	}
+
+	// valdition for feedback message
+	public  static boolean feedbackMessageValidation(String msg) {
+		String messageRegex = "^(?!\\s+$)(?!\\p{Punct}+$).{5,}$";
+		Pattern pattern = Pattern.compile(messageRegex);
+		Matcher matcher = pattern.matcher(msg);
+		if (matcher.matches()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

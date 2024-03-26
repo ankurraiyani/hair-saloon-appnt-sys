@@ -17,4 +17,6 @@ public class FilterResponseByCity {
     private String shopName;
     private String location;
     private String coverImage;
+    private String shopId;
+    private String shopTiming;
 }

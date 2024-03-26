@@ -30,25 +30,25 @@ public class ServiceInformation {
     @Column(name = "service_id")
     private int serviceId;
 
-    @Column(name = "service_name")
+    @Column(name = "service_name",nullable = false)
     private String serviceName;
 
-    @Column(name = "service_price")
+    @Column(name = "service_price", nullable=false)
     private double servicePrice;
     
-    @Column(name = "service_duration")
+    @Column(name = "service_duration", nullable=false)
     private int serviceDuration;
 
-    @Column(name = "shop_id")
+    @Column(name = "shop_id", nullable=false)
     private String shopId;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable=false, updatable=false)
     private Date createDate;
 
-    @Column(name = "modify_date")
+    @Column(name = "modify_date", nullable=true)
     private Date modifyDate;
 
-    @Column(name = "isdelete")
+    @Column(name = "isdelete", nullable=false)
     private boolean isDelete;
 
 }

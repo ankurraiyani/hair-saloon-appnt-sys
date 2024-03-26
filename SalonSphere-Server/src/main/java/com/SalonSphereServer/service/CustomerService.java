@@ -172,9 +172,10 @@ public class CustomerService {
 				FilterResponseByCity fResponse = new FilterResponseByCity();
 
 				fResponse.setShopName(s.getShopName());
-				fResponse.setLocation(
-						s.getAddress() + " " + s.getLandmark() + " " + s.getState());
+				fResponse.setLocation(s.getAddress() + " " + s.getLandmark() + " " + s.getState());
 				fResponse.setCoverImage(s.getCoverImage());
+				fResponse.setShopId(s.getShopId());
+				fResponse.setShopTiming(s.getShopTiming());
 				filterResponse.add(fResponse);
 			}
 			return filterResponse;
@@ -217,12 +218,14 @@ public class CustomerService {
 		for (Object[] obj : shops) {
 			FilterResponse filterResponse = new FilterResponse();
 			filterResponse.setShopName((String) obj[0]);
-			filterResponse.setServiceName((String) obj[1]);
-			double price1 = (double) obj[2];
+			filterResponse.setShopId((String) obj[1]);
+			filterResponse.setShopTiming((String) obj[2]);
+			filterResponse.setServiceName((String) obj[3]);
+			double price1 = (double) obj[4];
 			// Explicit type casting double to int
 			int roundedPrice = (int) price1;
 			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[3]);
+			filterResponse.setServiceDuration((int) obj[5]);
 			responseList.add(filterResponse);
 		}
 		return responseList;

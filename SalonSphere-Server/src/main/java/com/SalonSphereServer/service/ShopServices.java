@@ -1,7 +1,9 @@
 package com.SalonSphereServer.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,10 @@ public class ShopServices {
 	@Autowired
 	private ShopServicesRepository servicesRepository;
 
+	// adding service to the shop
 	public boolean addShopServices(@NonNull List<ServiceInformation> serviceInformation) {
 
 		List<ServiceInformation> serviceInformationList = new ArrayList<>();
-
 		for (ServiceInformation serviceInformation2 : serviceInformation) {
 			// Validation Check
 			System.out.println("=validation=>" + Validation.firstNameValidation(serviceInformation2.getServiceName()));
@@ -43,15 +45,13 @@ public class ShopServices {
 				serviceInformationList.add(serviceInformation2);
 			}
 		}
-		System.out.println("==LIST SIZE===\n" + serviceInformationList.isEmpty());
-		System.out.println("====================================\n" + serviceInformationList);
 		List<ServiceInformation> sInformation = servicesRepository.saveAll(serviceInformationList);
-		System.out.println("Result===============================\n" + sInformation);
 		if (!sInformation.isEmpty())
 			return true;
 		return false;
 	}
 
+	// updating services
 	public boolean updateService(ServiceInformation serviceInformation) {
 		// Retrieve the service from the database
 		ServiceInformation existingService = servicesRepository.findById(serviceInformation.getServiceId())
@@ -100,26 +100,38 @@ public class ShopServices {
 			ShopServiceDTO temp = new ShopServiceDTO();
 			temp.setServiceId(s.getServiceId());
 			temp.setServiceName(s.getServiceName());
-			temp.setServicePrice(s.getServicePrice());	
-            temp.setServiceDuration(s.getServiceDuration());		
-			
+			temp.setServicePrice(s.getServicePrice());
+			temp.setServiceDuration(s.getServiceDuration());
+
 			serviceList.add(temp);
 		}
 
 		return serviceList;
 	}
 
-    public ShopServiceDTO getService(int serviceId){
+	// getting service info based on serviceid
+	public ShopServiceDTO getService(int serviceId) {
 
-        Optional<ServiceInformation> dto = servicesRepository.findById(serviceId);
-        ShopServiceDTO serviceDTO=new ShopServiceDTO();
-        ServiceInformation sdto = dto.get();
-        serviceDTO.setServiceId(serviceId);
-        serviceDTO.setServiceName(sdto.getServiceName());
-        serviceDTO.setServicePrice(sdto.getServicePrice());
-        serviceDTO.setServiceDuration(sdto.getServiceDuration());
-        serviceDTO.setCreateDate(sdto.getCreateDate());
-        return serviceDTO;
+		Optional<ServiceInformation> dto = servicesRepository.findById(serviceId);
+		ShopServiceDTO serviceDTO = new ShopServiceDTO();
+		ServiceInformation sdto = dto.get();
+		serviceDTO.setServiceId(serviceId);
+		serviceDTO.setServiceName(sdto.getServiceName());
+		serviceDTO.setServicePrice(sdto.getServicePrice());
+		serviceDTO.setServiceDuration(sdto.getServiceDuration());
+		serviceDTO.setCreateDate(sdto.getCreateDate());
+		return serviceDTO;
+	}
+
+	// Getting all service name alog with service id in particular shop based on shopid.
+	public Map<Integer, String>getAllServiceNameByShopId(String shopId) {		
+        List<Object[]> resultList = servicesRepository.findServiceIdAndNameByShopId(shopId);
+        Map<Integer, String> serviceMap = new HashMap<>();
+        for (Object[] result : resultList) {
+            Integer serviceId = (Integer) result[0];
+            String serviceName = (String) result[1];
+            serviceMap.put(serviceId, serviceName);
+        }
+        return serviceMap;
     }
-
 }
