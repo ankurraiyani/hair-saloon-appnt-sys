@@ -103,7 +103,7 @@ public class CommonControllers {
 		
 		System.out.println("============================================"+appointmentRequest);
 		
-		Map<List<String>, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration());
+		Map<List<String>, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration(), appointmentRequest.getDate());
 		
 		return new ResponseEntity<>(avilableSlots, HttpStatus.OK);
 		
