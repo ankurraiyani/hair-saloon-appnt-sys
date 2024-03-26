@@ -208,7 +208,6 @@ public class ShopkeeperController {
 	}
 
 	// Through this api we will get shops information through shopEmail
-	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
 	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {
