@@ -48,6 +48,7 @@ import { PhoneNumberPipe } from './pipe/phone-number.pipe';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { DurationPipe } from './pipe/duration.pipe';
 import { ShopkeeperDurationPipe } from './pipe/shopkeeper-duration.pipe';
+import { RequestAgainComponent } from './components/request-again/request-again.component';
 
 
 
@@ -67,7 +68,8 @@ import { ShopkeeperDurationPipe } from './pipe/shopkeeper-duration.pipe';
     PhoneNumberPipe,
     AddEmployeeComponent,
     ShopkeeperDurationPipe,
-    ShopkeeperDurationPipe
+    ShopkeeperDurationPipe,
+    RequestAgainComponent
 
   ],
   imports: [

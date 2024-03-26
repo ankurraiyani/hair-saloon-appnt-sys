@@ -270,4 +270,14 @@ public class ShopkeeperController {
 					.body(new Response("Error while adding employee"));
 	}
 
+
+	//this API for change the status through ShopEmail for Re-apply request when requst rejected
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/changeStatus")
+	@Secured("shopkeeper")
+	public ResponseEntity<String> changeStatus(@RequestParam String shopEmail,@RequestParam String status){
+		shopkeeperService.updateStatus(shopEmail, status);
+		
+		return ResponseEntity.status(HttpStatus.FOUND).body("Status changed Sucessfully");
+	}
 }
