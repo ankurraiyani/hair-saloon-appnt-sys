@@ -25,7 +25,7 @@ export class ShopDashboardComponent  implements OnInit{
       .fetchshopInfo(localStorage.getItem('shopEmail'))
       .subscribe((data: any) => {
         this.shopData = data;
-        console.log(this.shopData.shopId);
+        console.log(this.shopData.coverImage);
       });
 
     this.getShopServices
