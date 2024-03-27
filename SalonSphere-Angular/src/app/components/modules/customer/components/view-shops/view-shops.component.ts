@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShowShopsService } from '../../../../services/customer/show-shops.service';
 
 import Swal from 'sweetalert2';
+import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
+import { Router } from '@angular/router';
 
 
 interface shop {
@@ -10,6 +12,9 @@ interface shop {
   coverImage: string;
   timeDuration: string;
   price: number;
+  rating:any;
+  shopId:any;
+  shopTiming:string;
 }
 @Component({
   selector: 'app-view-shops',
@@ -17,12 +22,12 @@ interface shop {
   styleUrl: './view-shops.component.css',
 })
 export class ViewShopsComponent implements OnInit {
-  constructor(private customerService: ShowShopsService) {}
+  constructor(private customerService: ShowShopsService, private router:Router) {}
 
   //variable which track the dropdown lists
   serviceName:any = null;
-  renge:any = null;
-  distence:any = null;
+  range:any = null;
+  distance:any = null;
   city:any = localStorage.getItem('location');
 
 
@@ -31,13 +36,14 @@ export class ViewShopsComponent implements OnInit {
   //show the list of the shop on besis of the city when ever the page will load
   ngOnInit(): void {
     this.city = localStorage.getItem('location');
-
-    //just for testing
-    localStorage.setItem('shopTiming', '10:30-18:30');
-    localStorage.setItem('shopId', 'c5b4f80f-7dd8-42c2-b2d4-4f8074487871');
-    localStorage.setItem('serviceTime', '30');
-
     this.showShopByCity(this.city);
+  }
+
+  getShopId(shopId:any,shopName:any,shopTiming:any){
+    localStorage.setItem('shopId',shopId);
+    localStorage.setItem('shopName',shopName);
+    localStorage.setItem('shopTiming',shopTiming);
+
   }
 
   //call the service method and get all the shops by using city
@@ -79,7 +85,7 @@ export class ViewShopsComponent implements OnInit {
           optionsContainer.classList.remove('active');
 
           //call the dropdownFilter method which filter the shop by using service Name
-          this.dropdownFilter(this.serviceName, this.renge, this.distence,this.city);
+          this.dropdownFilter(this.serviceName, this.range, this.distance,this.city);
 
           setTimeout(() => {
             optionsContainer.classList.add('active');
@@ -88,12 +94,12 @@ export class ViewShopsComponent implements OnInit {
       });
   }
 
-  //DOM Menuplation for Renge Dropdown
-  showRengeDropdown() {
+  //DOM Menuplation for range Dropdown
+  showrangeDropdown() {
 
-    const selected = document.querySelector('.renge-selected');
-    const optionsContainer = document.querySelector('.renge');
-    const optionsList = document.querySelectorAll('.renge-option');
+    const selected = document.querySelector('.range-selected');
+    const optionsContainer = document.querySelector('.range');
+    const optionsList = document.querySelectorAll('.range-option');
 
     if (selected && optionsContainer)
       optionsList.forEach((o) => {
@@ -102,12 +108,12 @@ export class ViewShopsComponent implements OnInit {
           const lebel = o.querySelector('label');
           if (lebel) {
             selected.innerHTML = lebel.innerHTML;
-            this.renge = lebel.innerHTML;
+            this.range = lebel.innerHTML;
           }
           optionsContainer.classList.remove('active');
 
-          //call the dropdownFilter method which filter the shop by using Renge
-          this.dropdownFilter(this.serviceName, this.renge, this.distence, this.city);
+          //call the dropdownFilter method which filter the shop by using range
+          this.dropdownFilter(this.serviceName, this.range, this.distance, this.city);
 
           setTimeout(() => {
             optionsContainer.classList.add('active');
@@ -116,12 +122,12 @@ export class ViewShopsComponent implements OnInit {
       });
   }
 
-  //DOM menuplation for Distence Dropdown
-  showDistenceDropdown() {
+  //DOM menuplation for distance Dropdown
+  showdistanceDropdown() {
 
-    const selected = document.querySelector('.distence-selected');
-    const optionsContainer = document.querySelector('.distence');
-    const optionsList = document.querySelectorAll('.distence-option');
+    const selected = document.querySelector('.distance-selected');
+    const optionsContainer = document.querySelector('.distance');
+    const optionsList = document.querySelectorAll('.distance-option');
 
     if (selected && optionsContainer)
       optionsList.forEach((o) => {
@@ -130,13 +136,13 @@ export class ViewShopsComponent implements OnInit {
           const lebel = o.querySelector('label');
           if (lebel) {
             selected.innerHTML = lebel.innerHTML;
-            this.distence= lebel.innerHTML;
+            this.distance= lebel.innerHTML;
           }
           optionsContainer.classList.remove('active');
 
           
-          //call the dropdownFilter method which filter the shop by using distence
-          this.dropdownFilter(this.serviceName, this.renge, this.distence, this.city);
+          //call the dropdownFilter method which filter the shop by using distance
+          this.dropdownFilter(this.serviceName, this.range, this.distance, this.city);
 
           setTimeout(() => {
             optionsContainer.classList.add('active');
@@ -144,8 +150,8 @@ export class ViewShopsComponent implements OnInit {
         });
       });
   }
-  dropdownFilter(serviceName: any, renge: any, distence: any, city: any) {
-    this.customerService.filterShops(serviceName, renge, distence, city).subscribe(
+  dropdownFilter(serviceName: any, range: any, distance: any, city: any) {
+    this.customerService.filterShops(serviceName, range, distance, city).subscribe(
       (response: any) => {
         console.log(response);
         console.log("Aman Bhai")
@@ -159,5 +165,15 @@ export class ViewShopsComponent implements OnInit {
         console.log("Error occurred");
       }
     );
+  }
+  
+  navigate(s:shop){
+
+    localStorage.setItem('shopId',s.shopId );
+    localStorage.setItem('shopTiming', s.shopTiming);
+    localStorage.setItem('shopName', s.shopName);
+    localStorage.setItem('shopAddress',s.location);
+
+    this.router.navigate(['/customer/add-service-to-card']);
   }
 }

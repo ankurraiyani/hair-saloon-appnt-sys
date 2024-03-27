@@ -1,0 +1,69 @@
+<div class="container" *ngIf="shopData">
+  <mat-card class="header">
+    <img
+      src="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images\\${{
+        shopData.coverImage
+      }}"
+      alt="Oh"
+    />
+    <h1>{{ shopData.shopName }}</h1>
+    <p>{{ shopData.address }}</p>
+    <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
+  </mat-card>
+  <mat-tab-group>
+    <mat-tab label="Services">
+      <div class="cards">
+        <table class="table" *ngIf="data && data.length">
+          <thead>
+            <tr>
+              <th scope="col">Service Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let shop of data">
+              <td scope="row">{{ shop.serviceName }}</td>
+              <td>{{ shop.servicePrice | currency : "INR" }}</td>
+              <td>{{ shop.serviceDuration | duration }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #noShops>
+          <div class="noshopCard">
+            <h2>No Services Added</h2>
+            <br />
+          </div>
+        </ng-template>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Reviews" class="reviewContainer">
+      <mat-card class="reviews" *ngFor="let review of reviews">
+        <mat-card-content>
+          <div class="header">
+            <h5 class="review-date">{{ review.reviewDate | timeSince }} ago</h5>
+            <h3 class="customer-name">
+              <mat-icon>account_circle</mat-icon>&nbsp;{{ review.customerName }}
+            </h3>
+            <div class="rating">
+              <!-- Display filled stars based on review.rating -->
+              <mat-icon class="star" *ngFor="let star of getFilledStars(review.rating)">star</mat-icon>
+              <!-- Display empty stars for remaining rating -->
+              <mat-icon class="star_border" *ngFor="let star of getEmptyStars(review.rating)">star_border</mat-icon>
+            </div>
+          </div>
+          <h3 class="review-message">
+            <i>{{ review.reviewMessage }}</i>
+          </h3>
+          
+          
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <!-- <mat-tab label="Stats"> </mat-tab> -->
+
+    <!-- Add more mat-tabs if needed -->
+  </mat-tab-group>
+</div>

@@ -19,6 +19,6 @@ export class SlotService {
       const token = Cookie.get('token');
       const headers = new HttpHeaders().set('Authorization', 'Bearer ' +token);
       console.log(headers);
-      return this.httpClient.post(`${this.baseURL}`, info);
+      return this.httpClient.post(`${this.baseURL}`, info,{headers});
     }
 }

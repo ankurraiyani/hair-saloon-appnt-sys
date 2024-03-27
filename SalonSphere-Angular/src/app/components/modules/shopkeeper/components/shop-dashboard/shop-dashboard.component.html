@@ -81,7 +81,35 @@
         </button>
       </div>
     </mat-tab>
-
+    <mat-tab label="Reviews" class="reviewContainer">
+      <mat-card class="reviews" *ngFor="let review of reviews">
+        <mat-card-content>
+          <div class="header_review">
+            <h5 class="review-date">{{ review.reviewDate | timeSince }} ago</h5>
+            <h3 class="customer-name">
+              <mat-icon>account_circle</mat-icon>&nbsp;{{ review.customerName }}
+            </h3>
+            <div class="rating">
+              <!-- Display filled stars based on review.rating -->
+              <mat-icon
+                class="star"
+                *ngFor="let star of getFilledStars(review.rating)"
+                >star</mat-icon
+              >
+              <!-- Display empty stars for remaining rating -->
+              <mat-icon
+                class="star_border"
+                *ngFor="let star of getEmptyStars(review.rating)"
+                >star_border</mat-icon
+              >
+            </div>
+          </div>
+          <h3 class="review-message">
+            <i>{{ review.reviewMessage }}</i>
+          </h3>
+        </mat-card-content>
+      </mat-card>
+    </mat-tab>
     <mat-tab label="Employees"> </mat-tab>
     <mat-tab label="Stats"> </mat-tab>
 

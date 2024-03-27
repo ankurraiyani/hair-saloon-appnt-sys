@@ -471,6 +471,8 @@ select {
 
 .select-box:hover .active{
   transition: all 0.3s  ease-in-out;
+  /* transform: rotateX(180deg); */
+  top: -6px;
   display: block;
 
 }

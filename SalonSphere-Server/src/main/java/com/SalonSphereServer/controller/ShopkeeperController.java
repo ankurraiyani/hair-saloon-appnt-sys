@@ -63,6 +63,7 @@ public class ShopkeeperController {
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop);
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
+		System.out.println("==========================="+isAdd);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
 		else
@@ -119,7 +120,8 @@ public class ShopkeeperController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Shop Deleted Successfully"));
 	}
 
-	public static String uploadDirectory = "D:\\SaloonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
+	// Taking Image as multipart input and uploading in the below destination
+	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -213,7 +215,6 @@ public class ShopkeeperController {
 	}
 
 	// Through this api we will get shops information through shopEmail
-	@SuppressWarnings("null")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/getshopbyemail")
 	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {

@@ -22,9 +22,12 @@ h1 {
   padding-top: 10px;
 }
 .container{
-  margin-top: 50px ;
-  margin-left: 22vw;
-  width: 75vw;
+  width: 75%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  padding: 3%;
+  background-color: aliceblue;
 }
 .shopContainer {
   width: 75%;
@@ -42,8 +45,6 @@ h1 {
   margin: 30px;
   border-radius: 25px;
   justify-content: center;
-  /* align-items: center; */
-  background-color: #f5f5f5;
   color: #000;
   padding-left: 15px;
   transition: all 0.35s ease;
@@ -96,6 +97,9 @@ tr{
   z-index: 1;
 }
 
+tr{
+  cursor: pointer;
+}
 .button::before {
   content: "";
   position: absolute;
@@ -124,3 +128,50 @@ tr{
   /* background-color: #e40d0daf; */
   color: #000;
 }
+
+
+.reviewContainer container {
+  position: absolute;
+  margin-top: 6%;
+  margin-left: 7%;
+}
+
+.reviews {
+  background-color: rgba(66, 99, 116, 0.599);
+  margin: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.header_review{
+  display: flex;
+  flex-direction: column;
+}
+.star{
+  color: gold;
+}
+
+.customer-name{
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 20px;
+}
+
+.review-date, .rating{
+  display: flex;
+  position: absolute;
+  justify-content: end;
+  align-self: flex-end;
+}
+
+.review-message{
+  margin-left: 30px;
+}
+
+.rating{
+  margin-top: 20px;
+}
+

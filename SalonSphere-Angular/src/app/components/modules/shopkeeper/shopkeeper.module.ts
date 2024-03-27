@@ -46,8 +46,11 @@ import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboa
 // import { DurationPipe } from './pipe/duration.pipe';
 import { PhoneNumberPipe } from './pipe/phone-number.pipe';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
-import { DurationPipe } from './pipe/duration.pipe';
+// import { DurationPipe } from './pipe/duration.pipe';
 import { ShopkeeperDurationPipe } from './pipe/shopkeeper-duration.pipe';
+import { TimeSincePipe } from '../shopkeeper/pipe/time-since.pipe';
+
+
 import { RequestAgainComponent } from './components/request-again/request-again.component';
 
 
@@ -68,7 +71,7 @@ import { RequestAgainComponent } from './components/request-again/request-again.
     PhoneNumberPipe,
     AddEmployeeComponent,
     ShopkeeperDurationPipe,
-    ShopkeeperDurationPipe,
+    TimeSincePipe,
     RequestAgainComponent
 
   ],

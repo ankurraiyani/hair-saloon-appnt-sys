@@ -17,7 +17,6 @@ import { RequestAgainComponent } from './components/request-again/request-again.
 const routes: Routes = [
   {
     path: '',
-    canActivate: [shopGuardGuard],
     component: ShopkeeperDashboardComponent,
     children: [
       { path: 'view-shop', component: ViewshopsComponent },

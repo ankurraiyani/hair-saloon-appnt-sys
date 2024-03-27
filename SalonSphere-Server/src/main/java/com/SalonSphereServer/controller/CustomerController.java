@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.entity.Feedback;
 import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.request.FilterRequest;
+import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 import com.SalonSphereServer.response.Response;
@@ -25,7 +27,7 @@ import com.SalonSphereServer.service.FeedbackService;
 // This is Shopkeerper related  controller class  for handling shopkeeper related API
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
- @RequestMapping("/customer")
+@RequestMapping("/customer")
 public class CustomerController {
 
 	@Autowired
@@ -45,6 +47,7 @@ public class CustomerController {
 
 		// wriet code for fiter according to city
 		List<FilterResponseByCity> filterResponse = customerService.filterByCity(city);
+		System.out.println("This is filter Response"+filterResponse);
 		if (filterResponse != null)
 			return ResponseEntity.ok().body(filterResponse);
 		else
@@ -83,7 +86,7 @@ public class CustomerController {
 	// Through this controller we get all leatest feedback in deasending order by
 	// date from the database by shopid
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/get-all-feedback/{shopId}")
+	@GetMapping("/get-all-feedback/{shopId}")
 	public ResponseEntity<List<Feedback>> getAllFeedbackByShopId(@PathVariable String shopId) {
 
 		System.out.println("=====INSIDE THE COUSTOMERCONTROLLER getAllFeedbackByShopId======\n" + shopId);
@@ -132,4 +135,16 @@ public class CustomerController {
 	}
 
 	// ================END FOR FEEDBACK/REVIEW/RATING===========================
-}
+		// here we check filterResponse is empty or not
+		
+		// =================================================================================================================
+	}
+	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@PostMapping("/book-slot")
+//	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest){
+//		
+//		return new ResponseEntity<>(true, HttpStatus.OK);
+//		 
+//	}
+

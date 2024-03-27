@@ -1,65 +1,58 @@
 <div class="main-div">
-  <div class="services">
+  <div class="services" *ngIf="services && services.length">
     <div class="service" *ngFor="let service of services">
       <div class="left">
-        <h1>{{ service.title }}</h1>
-        <h3>{{ service.type }}</h3>
+        <h1>{{ service.serviceName }}</h1>
         <div class="price-time">
           <div class="price">
-           
-            <p>{{ service.price | currency : "INR" }}</p>
+            <p>{{ service.servicePrice | currency : "INR" }}</p>
           </div>
           <div class="time">
-            <p>{{ service.duration | duration}}</p>
+            <p>{{ service.serviceDuration | duration }}</p>
           </div>
         </div>
-        <p>{{ service.description }}</p>
       </div>
       <div class="right">
-        <div class="img">
-          <img [src]="service.imageUrl" alt="img" />
-        </div>
         <button class="add-btn" (click)="addToCart(service)">Add</button>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <span class="span">Rahul Hair Salon</span>
-
-    <p>Address - Ashoka Garden Bhopal, Madhya Pradesh</p>
-
-    
-    
+    <span class="span">{{ shopName }}</span>
     <div class="products" *ngIf="serviceCountMap.size">
       <div class="product" *ngFor="let entry of serviceCountMap.entries()">
         <div class="product-details">
-          <h3>{{ entry[0].title }}</h3>
+          <h3>{{ entry[0].serviceName }}</h3>
           <div class="price">
-            
-            <p>{{ entry[0].price | currency : "INR" }}</p>
+            <p>{{ entry[0].servicePrice | currency : "INR" }}</p>
           </div>
         </div>
         <button class="product-btn">
-          <span (click)="removeItem(entry[0])">-</span>{{ entry[1] }}<span (click)="addItem(entry[0])">+</span>
+          <span (click)="removeItem(entry[0])">-</span>{{ entry[1]
+          }}<span (click)="addItem(entry[0])">+</span>
         </button>
       </div>
     </div>
-    
+
     <button class="total" *ngIf="serviceCountMap.size">
-      <div class="price">
-        
-        <p style="color: black">{{ totalAmount |currency : "INR" }}</p>
+      <button
+        (click)="navigateLogin()"
+        class="total"
+        *ngIf="serviceCountMap.size"
+      >
+        <div class="price">
+          <p style="color: black">{{ totalAmount | currency : "INR" }}</p>
+        </div>
+        <p style="color: black">View Cart</p>
+      </button>
+
+      <div class="product-card" *ngIf="!serviceCountMap.size">
+        <div class="empty-product">
+          <img src="../../../../../../assets/images/empty product.svg" alt="" />
+        </div>
+        <p>No item in your card</p>
       </div>
-      <p style="color: black">View Cart</p>
     </button>
-
-
-    <div class="product-card" *ngIf="!serviceCountMap.size">
-      <div class="empty-product">
-        <img src="../../../../../../assets/images/empty product.svg" alt="" />
-      </div>
-      <p>No item in your card</p>
-    </div>
   </div>
 </div>

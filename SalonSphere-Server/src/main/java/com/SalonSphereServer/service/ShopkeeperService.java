@@ -105,8 +105,14 @@ public class ShopkeeperService {
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");
-			// for tempory setting time.
-			shopInformation.setShopTiming("10:00-7:00");
+			shopInformation.setShopCity(shopInformation.getShopCity().trim());
+			System.out.println("licence =>"+shopInformation.getLicenseDocument());
+			System.out.println("cover image =>"+shopInformation.getCoverImage());
+			// This line tell shop is create and its status is pending admin approval
+			// pending means not approved yet
+			shopInformation.setStatus("Pending");
+
+			
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -143,7 +149,6 @@ public class ShopkeeperService {
 	}
 
 	// Through this method we upadte shopInformation to the database
-	@SuppressWarnings("null")
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
 		Optional<ShopInformation> existingShopOptional = shopkeeperRepository.findById(shopInformation.getShopId());
