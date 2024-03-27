@@ -301,17 +301,10 @@ public class ShopkeeperService {
 			shopInformation.setModifyDate(sqlDate);
 			shopInformation.setCreateDate(sqlDate);
 
-			// Cheking cover image and licence document name is null or not if null then set
-			// default name
-			// if (shopInformation.getCoverImage() == null && shopInformation.getLicenseDocument() == null) {
-			// 	shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
-			// 	shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
-			// } else if (shopInformation.getCoverImage() == null) {
-			// 	shopInformation.setCoverImage(shopInformation.getShopId() + shopInformation.getCoverImage());
-			// } else if (shopInformation.getLicenseDocument() == null) {
-			// 	shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
-			// }
-
+			// Cheking licence document name is null or not if null then set
+			 if (shopInformation.getLicenseDocument() == null) {
+				shopInformation.setLicenseDocument(shopInformation.getShopId() + shopInformation.getLicenseDocument());
+			}
 
 			shopInformation.setStatus("Pending");
 			shopInformation.setShopTiming("10:00-22:00");
