@@ -4,8 +4,6 @@ import { ShopReviewService } from '../../../../services/shop-review/shop-review.
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-
-
 @Component({
   selector: 'app-review-shop',
   templateUrl: './review-shop.component.html',

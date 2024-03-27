@@ -1,17 +1,16 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { ShopregisterService } from '../../../../services/shopregister/shopregister.service';
+import { Component, OnInit } from '@angular/core';
+import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
 import { PincodeService } from '../../../../services/common/pincode.service';
+import { Router } from '@angular/router';
+import { ShopregisterService } from '../../../../services/shopregister/shopregister.service';
 import { ImageService } from '../../../../services/common/image.service';
+import { UpdateShopService } from '../../../../services/updateShop/update-shop.service';
+import { DeleteShopService } from '../../../../services/deleteShop/delete-shop.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cookie } from 'ng2-cookies';
-import { CookieOptions, response } from 'express';
+import Swal from 'sweetalert2';
+import { RequestAgainService } from '../../../../services/requestAgain/request-again.service';
+import { log } from 'console';
 
 interface Location {
   city: string;
@@ -20,118 +19,57 @@ interface Location {
 }
 
 @Component({
-  selector: 'app-shopregister',
-  templateUrl: './shopregister.component.html',
-  styleUrl: './shopregister.component.css',
+  selector: 'app-request-again',
+  templateUrl: './request-again.component.html',
+  styleUrl: './request-again.component.css'
 })
-export class ShopregisterComponent {
+export class RequestAgainComponent implements OnInit {
+  //------------------CONSTRUCTOR---------------------------------------------------------
   constructor(
-    private formBuilder: FormBuilder,
+    private fetchshopInfo: FetchshopInfoService,
+    private postalCodeService: PincodeService,
     private router: Router,
     private shopregisterService: ShopregisterService,
-    private postalCodeService: PincodeService,
-    private fb: FormBuilder,
-    private upload: ImageService
+    private upload: ImageService,
+    private requestagain : RequestAgainService
   ) {}
 
-  coverImage: any;
-  licence: any;
+  // --------------------------------------------------------------------------------------
+
   cities: Location[] = [];
+  file: any;
+
 
   licenceCNF:boolean = false;
-  coverCNF:boolean = false;
 
   licenceFile: any;
   licenceName: string='';
-
 
   register = new FormGroup({
     userId: new FormControl(Cookie.get('userId')),
     shopName: new FormControl('', Validators.required),
     licenceNo: new FormControl('', Validators.required),
-    licenseDocument: new FormControl(''),
-    coverImage: new FormControl(''),
+    licenceDocument: new FormControl(''),
     shopEmail: new FormControl('', Validators.required),
     shopContactNo: new FormControl('', Validators.required),
-    openingTime: new FormControl('', Validators.required),
-    closingTime: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
     landmark: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
     shopCity: new FormControl('', Validators.required),
     district: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
-    shopTiming: new FormControl(''),
+
+    shopId: new FormControl(localStorage.getItem('shopId')),
     // country: new FormControl('',Validators.required),
   });
 
-  ngOnInit(): void {
-    this.register = this.formBuilder.group({
-      userId: [Cookie.get('userId')],
-      shopName: [''],
-      licenceNo: [''],
-      licenseDocument: [''],
-      coverImage: [''],
-      shopEmail: [''],
-      shopContactNo: [''],
-      openingTime: [''],
-      closingTime: [''],
-      address: [''],
-      landmark: [''],
-      pincode: [''],
-      shopCity: [''],
-      district: [''],
-      state: [''],
-      shopTiming:['']
-    });
-  }
-  goBack(){
+  goBack() {
+    localStorage.removeItem('shopId');
+
     window.history.back();
   }
 
-
-  onPincodeChange(pincode: string) {
-    console.log('Pincode Fn');
-
-    this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
-      data[0].PostOffice.forEach((postOffice: any) => {
-        this.register.patchValue({
-          district: postOffice.District,
-          state: postOffice.State,
-        });
-      });
-
-      if (data && data[0] && data[0].PostOffice) {
-        this.cities = data[0].PostOffice.map((postOffice: any) => ({
-          city: postOffice.Name,
-          district: postOffice.District,
-          state: postOffice.State,
-        }));
-      } else {
-        Swal.fire({
-          title: 'Error!',
-          text: 'Pincode does not exist !!!',
-          icon: 'info',
-        });
-      }
-    });
-  }
-
-  // Image Uploading 
-  uploadFile(event: any){    
-    console.log("call upload file function")
-
-    this.coverImage = event.target.files[0];
-
-          this.coverCNF=true;
-    //change the name of cover image
-    this.coverImage = new File([this.coverImage], 'cover_image_'+this.register.value.shopContactNo+'.jpg');
-
-    console.log('file', this.coverImage);
-    return
-    
-  }
-// //////////////////////////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////////////////////////
   //licence uploading
   uploadLicence(event: any){
     this.licenceFile = event.target.files[0];
@@ -140,29 +78,18 @@ export class ShopregisterComponent {
     this.licenceCNF = true;
     //change ther name of licence document
     this.licenceFile = new File([this.licenceFile],'licence_'+this.register.value.shopContactNo+'.jpg');
+
     
     console.log(this.licenceFile);
     
     return;
   }
 
-  // //////////////////////////////////////////////////////////////////////////////////////////
-
-  isImageFile(file: File): boolean {
-    const allowedFormats = ['image/jpeg', 'image/jpg', 'image/png'];
-    return allowedFormats.includes(file.type);
-  }
-
-
-  //Validate the data of the form and send the data to the service
-  doSubmit() {
+  updateShopDetails() {
     // alert('values comes');
-    
-    this.register.value.licenseDocument= 'licence_'+this.register.value.shopContactNo+'.jpg';
-    this.register.value.coverImage= 'cover_image_'+this.register.value.shopContactNo+'.jpg';
-    console.log(this.register.value);
+    console.log('On submit', this.register.value);
 
-    this.register.value.shopTiming = this.register.value.openingTime+'-'+this.register.value.closingTime; 
+    this.register.value.licenceDocument= 'licence_'+this.register.value.shopContactNo+'.jpg';
 
     //check first name and last name
     let message = this.validateName(this.register.value.shopName);
@@ -209,21 +136,27 @@ export class ShopregisterComponent {
       return;
     }
 
+    //if everything is okey then call the service method
+    console.log('API CAlling', this.register.value);
+    this.requestagain.refactorShop(this.register.value).subscribe(
+      (response: any) => {
+        console.log('Response from server : ', response);
+
+        //and Navigate to the login page
+        this.router.navigate(['/shopkeeper/view-shop']);
+      },
+      (error: any) => {
+        console.log(error)
+        Swal.fire({
+          title: 'Oops',
+          text: 'Caught an Error',
+          icon: 'error',
+        });
+      }
+    );
+
     // creating formdata to send image to backend for storing in folder structure
     let formData = new FormData();
-    formData.set('file', this.coverImage);
-  
-
-    this.upload.uploadImage(formData).subscribe((data: any) => {
-      console.log(data);
-    },
-    error=>{
-      Swal.fire({
-        title: 'Error!',
-        text: 'error occured while uploading the image',
-        icon: 'error',
-      });
-  });
 
   //send image to backend for storing in folder structure
     formData.set('file', this.licenceFile);
@@ -239,33 +172,9 @@ export class ShopregisterComponent {
     });
 
 
-
-
-    //if everything is okey then call the service method
-    console.log('API CAlling', this.register.value);
-    this.shopregisterService.registerShop(this.register.value).subscribe(
-      (response: any) => {
-        console.log('Response from server : ', response);
-        Swal.fire({
-          title: 'Shop Registered!!',
-          text: 'Your Shop Registered successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/shopkeeper/view-shop']);
-      },
-      (
-        // if any  error occured while registering user
-        error: any
-      ) => {
-        Swal.fire({
-          title: 'Server Error',
-          text: 'Your Email or Shop is already registered',
-          icon: 'error',
-        });
-      }
-    );
   }
 
+  //-----------------Validations-------------------------------------
   //Validate the name fields
   validateName(shopName: any): string {
     let message = '';
@@ -314,6 +223,13 @@ export class ShopregisterComponent {
       return message;
     }
 
+    //check if the contact number contain only 10 digit
+    // if (contactNumber.length != 10) {
+    //   message = 'Please Enter the 10 digit Contact number';
+    //   return message;
+    // }
+
+    // Check if the contact number is valid
     const contactNumberRegex = /^\d{10}$/; // assuming a 10-digit number
 
     if (!contactNumberRegex.test(contactNumber)) {
@@ -343,13 +259,74 @@ export class ShopregisterComponent {
     // If all validations pass
     return message; // Return an empty string indicating success
   }
+  shopName: string | null = '';
+  pincode: string | null = '';
+  state: string | null = '';
+  district: string | null = '';
+  landmark: string | null = '';
+  address: string | null = '';
+  licenceNo: string | null = '';
+  shopStatus: string | null = '';
+  shopEmail: string | null = '';
+  shopContactNo: string | null = '';
+  shopCity: string | null = '';
+  shopId: string = '';
+
+  onPincodeChange(pincode: string) {
+    console.log('Pincode Fn');
+
+    this.postalCodeService.fetchaddress(pincode).subscribe((data: any) => {
+      data[0].PostOffice.forEach((postOffice: any) => {
+        this.register.patchValue({
+          district: postOffice.District,
+          state: postOffice.State,
+        });
+      });
+
+      if (data && data[0] && data[0].PostOffice) {
+        this.cities = data[0].PostOffice.map((postOffice: any) => ({
+          city: postOffice.Name,
+          district: postOffice.District,
+          state: postOffice.State,
+        }));
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Pincode does not exist !!!',
+          icon: 'info',
+        });
+      }
+    });
+  }
+  ngOnInit(): void {
+    this.fetchshopInfo
+      .fetchshopInfo(localStorage.getItem('shopEmail'))
+      .subscribe((data: any) => {
+        this.shopName = data.shopName;
+        this.pincode = data.pincode;
+        this.state = data.state;
+        this.district = data.district;
+        this.landmark = data.landmark;
+        this.address = data.address;
+        this.licenceNo = data.licenceNo;
+        this.shopStatus = data.shopStatus;
+        this.shopEmail = data.shopEmail;
+        this.shopContactNo = data.shopContactNo;
+        this.shopCity = data.shopCity;
+        this.shopId = data.shopId;
+        console.log('From Over Init', data);
+        localStorage.setItem('shopId', this.shopId);
+      });
+    this.fetchshopInfo
+      .fetchshopInfo(localStorage.getItem('shopEmail'))
+      .subscribe((data: any) => {
+        this.register.patchValue(data); // Patch form values with fetched data
+        console.log('From Init', this.register.value);
+      });
+  }
 
   searchByPincode(data: string) {
     console.log('Inside method' + data);
     this.onPincodeChange(data);
-    // if (this.register.invalid) {
-    //   return;
-    // }
-    // const pincode = this.register.get('pincode')?.value;
   }
 }

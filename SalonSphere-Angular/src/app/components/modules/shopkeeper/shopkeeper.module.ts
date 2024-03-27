@@ -51,6 +51,7 @@ import { ShopkeeperDurationPipe } from './pipe/shopkeeper-duration.pipe';
 import { TimeSincePipe } from '../shopkeeper/pipe/time-since.pipe';
 
 
+import { RequestAgainComponent } from './components/request-again/request-again.component';
 
 
 
@@ -70,7 +71,8 @@ import { TimeSincePipe } from '../shopkeeper/pipe/time-since.pipe';
     PhoneNumberPipe,
     AddEmployeeComponent,
     ShopkeeperDurationPipe,
-    TimeSincePipe
+    TimeSincePipe,
+    RequestAgainComponent
 
   ],
   imports: [

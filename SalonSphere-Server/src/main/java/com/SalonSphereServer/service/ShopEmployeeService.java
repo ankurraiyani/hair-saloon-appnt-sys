@@ -24,6 +24,7 @@ public class ShopEmployeeService {
     private EmployeeServiceRepository employeeServiceRepository;
 
     // Through this method we add employee in salon
+    @SuppressWarnings("null")
     public boolean addEmp(ShopEmployees emp) {
         boolean exists = shopkeeperRepository.existsById(emp.getShopId());
         // Validation Employe

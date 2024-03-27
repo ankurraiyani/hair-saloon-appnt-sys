@@ -19,10 +19,17 @@ export class ViewshopsComponent {
     });
   }
 
+  requestAgain(email: string,shopId:any){
+    console.log('This Shop is ' + shopId);
+    localStorage.setItem('shopEmail', email);
+    localStorage.setItem('shopId', shopId);
+  }
+
   showinfo(email: string,shopId:any) {
     console.log('This Shop is ' + shopId);
     localStorage.setItem('shopEmail', email);
     localStorage.setItem('shopId', shopId);
+    
   }
 }
 

@@ -72,8 +72,8 @@
           </div>
         </div>
       </div>
-      <div class="input-box">
-        <select style="height: 50px;" class="input-box" (change)="onServiceSelected($event)">
+      <div  class="input-box">
+        <select formControlName="selectedServices" style="height: 50px;" class="input-box" (change)="onServiceSelected($event)">
           <option value="">Select a service</option>
           <option *ngFor="let service of services" [value]="service">{{ service }}</option>
         </select>

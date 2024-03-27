@@ -12,6 +12,7 @@ import { ViewShopServicesComponent } from './components/view-shop-services/view-
 import { UpdateServiceComponent } from './components/update-service/update-service.component';
 import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { RequestAgainComponent } from './components/request-again/request-again.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
       { path: 'showServices', component: ViewShopServicesComponent },
       { path: 'updateService', component: UpdateServiceComponent },
       { path: 'shopDashboard', component: ShopDashboardComponent },
-      { path: 'addEmployee', component:AddEmployeeComponent}
+      { path: 'addEmployee', component:AddEmployeeComponent},
+      { path: 'requestAgain',component:RequestAgainComponent}
     ],
   },
 ];

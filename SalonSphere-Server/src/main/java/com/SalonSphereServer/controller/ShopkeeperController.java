@@ -271,4 +271,22 @@ public class ShopkeeperController {
 					.body(new Response("Error while adding employee"));
 	}
 
+
+	//this API for change the status through ShopEmail for Re-apply request when requst rejected
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping(value = "/requestAgain", produces = MediaType.APPLICATION_JSON_VALUE)
+	@Secured("shopkeeper")
+	public ResponseEntity<Response> requestAgain(@RequestBody ShopInformation shop) {
+
+		// Call service method to requst again 
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop);
+		boolean isAdd = shopkeeperService.requestAgain(shop);
+		if (isAdd){
+			System.out.println("This is refactor service************************************************");
+			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully sent request for apply"));
+		}
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new Response("Error while sending requestAgain requst"));
+	}
 }
