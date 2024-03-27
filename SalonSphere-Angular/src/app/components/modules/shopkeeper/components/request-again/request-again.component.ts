@@ -9,6 +9,8 @@ import { DeleteShopService } from '../../../../services/deleteShop/delete-shop.s
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Cookie } from 'ng2-cookies';
 import Swal from 'sweetalert2';
+import { RequestAgainService } from '../../../../services/requestAgain/request-again.service';
+import { log } from 'console';
 
 interface Location {
   city: string;
@@ -29,7 +31,7 @@ export class RequestAgainComponent implements OnInit {
     private router: Router,
     private shopregisterService: ShopregisterService,
     private upload: ImageService,
-    private updateShop: UpdateShopService,
+    private requestagain : RequestAgainService
   ) {}
 
   // --------------------------------------------------------------------------------------
@@ -48,7 +50,6 @@ export class RequestAgainComponent implements OnInit {
     shopName: new FormControl('', Validators.required),
     licenceNo: new FormControl('', Validators.required),
     licenceDocument: new FormControl(''),
-    coverImage: new FormControl(''),
     shopEmail: new FormControl('', Validators.required),
     shopContactNo: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
@@ -77,6 +78,7 @@ export class RequestAgainComponent implements OnInit {
     this.licenceCNF = true;
     //change ther name of licence document
     this.licenceFile = new File([this.licenceFile],'licence_'+this.register.value.shopContactNo+'.jpg');
+
     
     console.log(this.licenceFile);
     
@@ -86,6 +88,8 @@ export class RequestAgainComponent implements OnInit {
   updateShopDetails() {
     // alert('values comes');
     console.log('On submit', this.register.value);
+
+    this.register.value.licenceDocument= 'licence_'+this.register.value.shopContactNo+'.jpg';
 
     //check first name and last name
     let message = this.validateName(this.register.value.shopName);
@@ -134,7 +138,7 @@ export class RequestAgainComponent implements OnInit {
 
     //if everything is okey then call the service method
     console.log('API CAlling', this.register.value);
-    this.updateShop.updateShop(this.register.value).subscribe(
+    this.requestagain.refactorShop(this.register.value).subscribe(
       (response: any) => {
         console.log('Response from server : ', response);
 
@@ -142,6 +146,7 @@ export class RequestAgainComponent implements OnInit {
         this.router.navigate(['/shopkeeper/view-shop']);
       },
       (error: any) => {
+        console.log(error)
         Swal.fire({
           title: 'Oops',
           text: 'Caught an Error',
@@ -262,7 +267,6 @@ export class RequestAgainComponent implements OnInit {
   address: string | null = '';
   licenceNo: string | null = '';
   shopStatus: string | null = '';
-  coverImage: string | null = '';
   shopEmail: string | null = '';
   shopContactNo: string | null = '';
   shopCity: string | null = '';
@@ -306,7 +310,6 @@ export class RequestAgainComponent implements OnInit {
         this.address = data.address;
         this.licenceNo = data.licenceNo;
         this.shopStatus = data.shopStatus;
-        this.coverImage = data.coverImage;
         this.shopEmail = data.shopEmail;
         this.shopContactNo = data.shopContactNo;
         this.shopCity = data.shopCity;

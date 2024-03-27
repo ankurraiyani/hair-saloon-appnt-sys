@@ -7,18 +7,13 @@ import { Cookie } from 'ng2-cookies';
 })
 export class RequestAgainService {
 
-  baseURL:string = "http://localhost:8081/shopkeeper/updateshop";
-  url2:string = "http://localhost:8081/shopkeeper/changeStatus";
+  baseURL:string = "http://localhost:8081/shopkeeper/requestAgain";
+  
   constructor(private http:HttpClient) { }
 
-  updateShop(data:any){
+  refactorShop(data:any){
 
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
     return this.http.post(`${this.baseURL}`, data,{ headers});
-  }
-
-  changeStatus(data:any){
-    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
-    return this.http.post(`${this.url2}`, data,{ headers})
   }
 }
