@@ -16,7 +16,6 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 const routes: Routes = [
   {
     path: '',
-    canActivate: [shopGuardGuard],
     component: ShopkeeperDashboardComponent,
     children: [
       { path: 'view-shop', component: ViewshopsComponent },

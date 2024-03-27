@@ -63,6 +63,7 @@ export class ShopregisterComponent {
     shopCity: new FormControl('', Validators.required),
     district: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
+    shopTiming: new FormControl(''),
     // country: new FormControl('',Validators.required),
   });
 
@@ -83,6 +84,7 @@ export class ShopregisterComponent {
       shopCity: [''],
       district: [''],
       state: [''],
+      shopTiming:['']
     });
   }
   goBack(){
@@ -107,12 +109,6 @@ export class ShopregisterComponent {
           district: postOffice.District,
           state: postOffice.State,
         }));
-
-        this.cities.forEach((city: Location) => {
-          console.log(
-            `City: ${city.city}, District: ${city.district}, State: ${city.state}`
-          );
-        });
       } else {
         Swal.fire({
           title: 'Error!',
@@ -167,6 +163,8 @@ export class ShopregisterComponent {
     this.register.value.licenseDocument= 'licence_'+this.register.value.shopContactNo+'.jpg';
     this.register.value.coverImage= 'cover_image_'+this.register.value.shopContactNo+'.jpg';
     console.log(this.register.value);
+
+    this.register.value.shopTiming = this.register.value.openingTime+'-'+this.register.value.closingTime; 
 
     //check first name and last name
     let message = this.validateName(this.register.value.shopName);

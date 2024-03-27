@@ -48,6 +48,9 @@ export class NavbarComponent {
     hover.forEach((element) => {
       element.classList.remove('active');
     });
+     //add the active class to current clicked button
+     const home = document.querySelector('.option2');
+     home?.classList.add('active');
     if (this.flag == false) {
       this.flag = true;
       return;

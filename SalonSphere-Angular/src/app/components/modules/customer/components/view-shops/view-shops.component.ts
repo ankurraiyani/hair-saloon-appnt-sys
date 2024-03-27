@@ -3,6 +3,7 @@ import { ShowShopsService } from '../../../../services/customer/show-shops.servi
 
 import Swal from 'sweetalert2';
 import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
+import { Router } from '@angular/router';
 
 
 interface shop {
@@ -13,6 +14,7 @@ interface shop {
   price: number;
   rating:any;
   shopId:any;
+  shopTiming:string;
 }
 @Component({
   selector: 'app-view-shops',
@@ -20,7 +22,7 @@ interface shop {
   styleUrl: './view-shops.component.css',
 })
 export class ViewShopsComponent implements OnInit {
-  constructor(private customerService: ShowShopsService) {}
+  constructor(private customerService: ShowShopsService, private router:Router) {}
 
   //variable which track the dropdown lists
   serviceName:any = null;
@@ -37,9 +39,11 @@ export class ViewShopsComponent implements OnInit {
     this.showShopByCity(this.city);
   }
 
-  getShopId(shopId:any,shopName:any){
+  getShopId(shopId:any,shopName:any,shopTiming:any){
     localStorage.setItem('shopId',shopId);
-    localStorage.setItem('shopName',shopName)
+    localStorage.setItem('shopName',shopName);
+    localStorage.setItem('shopTiming',shopTiming);
+
   }
 
   //call the service method and get all the shops by using city
@@ -161,5 +165,15 @@ export class ViewShopsComponent implements OnInit {
         console.log("Error occurred");
       }
     );
+  }
+  
+  navigate(s:shop){
+
+    localStorage.setItem('shopId',s.shopId );
+    localStorage.setItem('shopTiming', s.shopTiming);
+    localStorage.setItem('shopName', s.shopName);
+    localStorage.setItem('shopAddress',s.location);
+
+    this.router.navigate(['/customer/add-service-to-card']);
   }
 }

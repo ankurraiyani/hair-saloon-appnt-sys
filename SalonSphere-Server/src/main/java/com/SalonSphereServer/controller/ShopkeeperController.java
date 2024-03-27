@@ -63,6 +63,7 @@ public class ShopkeeperController {
 		// Call service method to add shop
 		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shop);
 		boolean isAdd = shopkeeperService.addShopInformation(shop);
+		System.out.println("==========================="+isAdd);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Successfully added Shop"));
 		else
@@ -120,7 +121,7 @@ public class ShopkeeperController {
 	}
 
 	// Taking Image as multipart input and uploading in the below destination
-	public static String uploadDirectory = "D:\\SalonSphere Project\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
+	public static String uploadDirectory = "D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images";
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value = "/uploadDocument", produces = MediaType.APPLICATION_JSON_VALUE)

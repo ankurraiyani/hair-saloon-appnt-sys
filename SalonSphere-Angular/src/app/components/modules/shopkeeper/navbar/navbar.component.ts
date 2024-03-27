@@ -16,24 +16,21 @@ export class NavbarComponent {
   constructor(private router: Router, private logoutService: LogoutService) {}
 
   public navigateAddShop() {
-    //remove the active class
-    const hover: NodeListOf<Element> = document.querySelectorAll('.nav-option');
-    hover.forEach((element) => {
-      element.classList.remove('active');
-    });
-
-    //add the active class to current clicked button
-    const home = document.querySelector('.option2');
-    home?.classList.add('active');
+   
 
     this.router.navigate(['/shopkeeper/add-shop']);
   }
 
   expansion() {
-    const hover: NodeListOf<Element> = document.querySelectorAll('.nav-option');
-    hover.forEach((element) => {
-      element.classList.remove('active');
-    });
+     //remove the active class
+     const hover: NodeListOf<Element> = document.querySelectorAll('.nav-option');
+     hover.forEach((element) => {
+       element.classList.remove('active');
+     });
+ 
+     //add the active class to current clicked button
+     const home = document.querySelector('.option2');
+     home?.classList.add('active');
     if (this.flag == false) {
       this.flag = true;
       return;

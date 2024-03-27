@@ -231,9 +231,10 @@
   </div>
 
   <div class="main">
-    <div class="cards">
+    <div class="cards" routerLink="/customer/view-shop">
       <ng-container *ngIf="shops && shops.length">
         <div class="card" *ngFor="let shop of shops">
+          <div class="viewShop" (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming)">
           <h2>{{ shop.shopName }}</h2>
 
           <div class="content">
@@ -258,7 +259,7 @@
               <button
                 routerLink="/customer/add-service-to-card"
                 class="book-btn"
-                (click)="getShopId(shop.shopId,shop.shopName)"
+                (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming)"
               >
                 Book Now
               </button>
@@ -272,10 +273,10 @@
                   alt="img"
                 />
               </div>
-              <strong class="rating">Review/Ratings: <span>{{shop.rating | number: '1.1-1'}}</span></strong>
-              <a href="#" class="btn btn-reviews">Read Reviews</a>
+              <strong class="rating">Rating: <span>{{shop.rating | number: '1.1-1'}}</span></strong>
             </div>
           </div>
+        </div>
         </div>
       </ng-container>
     </div>

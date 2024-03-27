@@ -3,7 +3,6 @@
     <div class="service" *ngFor="let service of services">
       <div class="left">
         <h1>{{ service.serviceName }}</h1>
-        <!-- <h3>{{ service.type }}</h3> -->
         <div class="price-time">
           <div class="price">
             <p>{{ service.servicePrice | currency : "INR" }}</p>
@@ -37,17 +36,23 @@
     </div>
 
     <button class="total" *ngIf="serviceCountMap.size">
-      <div class="price">
-        <p style="color: black">{{ totalAmount | currency : "INR" }}</p>
-      </div>
-      <p style="color: black">View Cart</p>
-    </button>
+      <button
+        (click)="navigateLogin()"
+        class="total"
+        *ngIf="serviceCountMap.size"
+      >
+        <div class="price">
+          <p style="color: black">{{ totalAmount | currency : "INR" }}</p>
+        </div>
+        <p style="color: black">View Cart</p>
+      </button>
 
-    <div class="product-card" *ngIf="!serviceCountMap.size">
-      <div class="empty-product">
-        <img src="../../../../../../assets/images/empty product.svg" alt="" />
+      <div class="product-card" *ngIf="!serviceCountMap.size">
+        <div class="empty-product">
+          <img src="../../../../../../assets/images/empty product.svg" alt="" />
+        </div>
+        <p>No item in your card</p>
       </div>
-      <p>No item in your card</p>
-    </div>
+    </button>
   </div>
 </div>

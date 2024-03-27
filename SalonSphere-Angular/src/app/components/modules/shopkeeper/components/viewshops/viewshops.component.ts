@@ -23,8 +23,6 @@ export class ViewshopsComponent {
     console.log('This Shop is ' + shopId);
     localStorage.setItem('shopEmail', email);
     localStorage.setItem('shopId', shopId);
-    
-    
   }
 }
 

@@ -109,8 +109,8 @@ public class ShopkeeperService {
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
 			shopInformation.setStatus("Pending");
-			// for tempory setting time.
-			shopInformation.setShopTiming("10:00-7:00");
+
+			
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully

@@ -6,28 +6,40 @@ import { HomeComponent } from './components/home/home.component';
 import { ViewShopsComponent } from './components/view-shops/view-shops.component';
 import { AddServiceToCardComponent } from './components/add-service-to-card/add-service-to-card.component';
 import { ViewSlotsComponent } from './components/view-slots/view-slots.component';
+import { ShopInfoComponent } from './components/shop-info/shop-info.component';
 
 const routes: Routes = [
-  {path:'', component: CustomerDashboardComponent,
-  children :[
   {
-    path:'home', component: HomeComponent
+    path: '',
+    component: CustomerDashboardComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+      {
+        path: 'view-shops',
+        component: ViewShopsComponent,
+      },
+      {
+        path: 'add-service-to-card',
+        component: AddServiceToCardComponent,
+      },
+      {
+        path: 'view-slots',
+        component: ViewSlotsComponent,
+      },
+      {
+        path: 'view-shop',
+        component: ShopInfoComponent,
+      },
+      { path: '', redirectTo: '/customer/home', pathMatch: 'full' },
+    ],
   },
-  {
-    path: 'view-shops', component: ViewShopsComponent
-  },{
-    path: 'add-service-to-card', component:AddServiceToCardComponent
-  },
-  {
-    path: 'view-slots', component: ViewSlotsComponent
-  },
-  {path:'', redirectTo: '/customer/home', pathMatch: 'full'}
-  ],
-}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CustomerRoutingModule { }
+export class CustomerRoutingModule {}

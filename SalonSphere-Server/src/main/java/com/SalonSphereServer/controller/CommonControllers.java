@@ -20,9 +20,11 @@ import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.jwtsecurity.JwtHelper;
 import com.SalonSphereServer.request.AppointmentRequest;
 import com.SalonSphereServer.request.LoginRequest;
+import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.LoginResponse;
 import com.SalonSphereServer.response.RegisterResponse;
 import com.SalonSphereServer.service.CustomerService;
+import com.SalonSphereServer.service.SlotBookingService;
 import com.SalonSphereServer.service.UserService;
 
 @RestController
@@ -42,6 +44,9 @@ public class CommonControllers {
 
 	@Autowired
 	private AuthenticationManager manager;
+	
+	@Autowired
+	private SlotBookingService slotBookingService;
 
 	//this API for registration with validation
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -94,13 +99,23 @@ public class CommonControllers {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/view-slots")
-	public ResponseEntity<Map<String, List<String>>> getAllAvilableSlots(@RequestBody AppointmentRequest appointmentRequest) {
+	public ResponseEntity<Map<List<String>, List<String>>> getAllAvilableSlots(@RequestBody AppointmentRequest appointmentRequest) {
 		
 		System.out.println("============================================"+appointmentRequest);
 		
-		Map<String, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration());
+		Map<List<String>, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration());
 		
 		return new ResponseEntity<>(avilableSlots, HttpStatus.OK);
 		
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/book-slots")
+	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest){
+		
+		System.out.println("++++++++++++++++++++++++++++++++++++hello aman");
+	    slotBookingService.bookSlot(slotBookingRequest);
+		return new ResponseEntity<>(true, HttpStatus.OK);
+		 
 	}
 }

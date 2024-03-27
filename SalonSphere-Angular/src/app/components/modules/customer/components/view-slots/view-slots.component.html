@@ -5,25 +5,27 @@
       <p>Ashoka Garden, Bhopal</p>
     </div>
     <div class="date">
-        <form >
-            <input type="date" id="date" name="date" [(ngModel)]="selectedDate">
+
+      <form >
+            <input type="date" id="date" name="date" [min]="minDate" [max]="maxDate" [(ngModel)]="selectedDate">
         </form>
+
     </div>
   </div>
   <div class="down">
     <div class="slots" *ngFor="let key of availableSlots.entries()">
         <div class="left">
-          <h2>{{ key[0] }}</h2>
+          <h2>{{ getName(key[0]) }}</h2>
         </div>
         <div class="right">
-          <button class="button-37" *ngFor="let time of key[1]" role="button">{{ time }}</button>
+          <button class="button-37" *ngFor="let time of key[1]" id="btn" role="button" (click)="bookSlot(time, getEmpId(key[0]))">{{ time }}</button>
         </div>
     </div>
 
 </div>
 </div>
-    
-    <!-- <div class="slots">
+
+<!-- <div class="slots">
       <div class="left">
         <h2>Eqwal Khan</h2>
       </div>
@@ -104,4 +106,3 @@
         <button class="button-37" role="button">10:00-10:30</button>
       </div>
     </div> -->
-  

@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
-import { Cookie } from 'ng2-cookies';
 
 // Define the Service interface
 interface Service {
-  serviceName: any;
-  servicePrice: any;
-  serviceDuration: any;
+  serviceName: string;
+  type: string;
+  servicePrice: number;
+  serviceDuration: number;
+  description: string;
+  priceImageUrl: string;
+  imageUrl: string;
 }
 
 @Component({
@@ -19,15 +24,26 @@ export class AddServiceToCardComponent implements OnInit {
   services: Service[] = [];
 
   serviceCountMap: Map<Service, number> = new Map<Service, number>();
-  shopName:any;
   totalAmount: number = 0;
 
-  constructor(private fetchService:GetServiceInfoService, ) {}
+  totalDuration: number = 0;
+
+  serviceName: string = '';
+
+  shopName: string|null = localStorage.getItem('shopName');
+
+  shopAddress: string|null = localStorage.getItem('shopAddress');
+
+
+  constructor(private router:Router, private getShopServices:GetServiceInfoService) {}
   ngOnInit(): void {
-    this.fetchService.fetchAllServices(localStorage.getItem('shopId')).subscribe((data:any)=>{
-      this.services = data;
-      this.shopName = localStorage.getItem('shopName');
-    })
+
+    this.getShopServices.fetchAllServices(localStorage.getItem('shopId')).subscribe((response: any) => {
+      
+      this.services = response;
+      console.log(response);
+      
+    });
   }
 
   addToCart(service: Service) {
@@ -47,6 +63,8 @@ export class AddServiceToCardComponent implements OnInit {
   
     // Increment the total amount
     this.totalAmount += service.servicePrice;
+    this.totalDuration += service.serviceDuration;
+    this.serviceName += service.serviceName + ', ';
   }
 
   removeItem(product: Service) {
@@ -58,8 +76,9 @@ export class AddServiceToCardComponent implements OnInit {
       } else {
         this.serviceCountMap.delete(product);
       }
-      this.totalAmount -= product.servicePrice;
     }
+    this.totalAmount -= product.servicePrice;
+    this.totalDuration -= product.serviceDuration;
   }
 
   addItem(product: Service) {
@@ -74,6 +93,23 @@ export class AddServiceToCardComponent implements OnInit {
     }
 
     this.totalAmount += product.servicePrice;
+    this.totalDuration += product.serviceDuration;
+  }
+
+  navigateLogin(){
+    if(this.totalDuration == 0 || this.totalAmount == 0){
+      Swal.fire({
+        title: 'Sorry',
+        text: 'You have not choose any service at',
+        icon: 'warning'
+      });
+      return ;
+    }
+    else{
+      localStorage.setItem('serviceTime',''+this.totalDuration);
+      localStorage.setItem('serviceName', this.serviceName);
+      this.router.navigate(['/customer/view-slots']);
+    }
   }
 
 }

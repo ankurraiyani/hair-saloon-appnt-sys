@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
-import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
 import Swal from 'sweetalert2';
+import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchshop-info.service';
+import { GetServiceInfoService } from '../../../../services/fetchShopServices/get-service-info.service';
 import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 import { FetchReviewsService } from '../../../../services/viewReviews/fetch-reviews.service';
 
 @Component({
-  selector: 'app-shop-dashboard',
-  templateUrl: './shop-dashboard.component.html',
-  styleUrl: './shop-dashboard.component.css',
+  selector: 'app-shop-info',
+  templateUrl: './shop-info.component.html',
+  styleUrl: './shop-info.component.css',
 })
-export class ShopDashboardComponent  implements OnInit{
+export class ShopInfoComponent implements OnInit {
   constructor(
     private fetchshopInfo: FetchshopInfoService,
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
-    private reviewService: FetchReviewsService,
+    private reviewService: FetchReviewsService
   ) {}
 
   data: any[] = [];
   reviews: any[] = [];
 
   shopData: any;
-    amount:any;
+  amount: any;
   ngOnInit(): void {
     this.fetchshopInfo
       .fetchshopInfo(localStorage.getItem('shopEmail'))
@@ -37,7 +37,7 @@ export class ShopDashboardComponent  implements OnInit{
         this.data = data;
         this.amount = data.servicePrice;
 
-        console.log("Hello This is get Shop By email",data);
+        console.log(data);
       });
 
       this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
@@ -49,12 +49,6 @@ export class ShopDashboardComponent  implements OnInit{
           console.log(error);
         }
       );
-    }
-    
-
-  saveId(serviceId: any) {
-    console.log(serviceId);
-    localStorage.setItem('serviceId', serviceId);
   }
 
   getFilledStars(rating: number): number[] {
@@ -66,32 +60,11 @@ export class ShopDashboardComponent  implements OnInit{
     return Array(5 - Math.floor(rating)).fill(0);
   }
 
-  deleteService() {
-    Swal.fire({
-      title: 'Are you sure you want to delete this Service?',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it',
-      cancelButtonText: 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.confirmDeleteService();
-      }
-    });
+
+  saveId(serviceId: any) {
+    console.log(serviceId);
+    localStorage.setItem('serviceId', serviceId);
   }
 
-  confirmDeleteService() {
-    this.removeService
-      .deleteService(localStorage.getItem('serviceId'))
-      .subscribe(
-        (data: any) => {
-          // Handle successful deletion
-          Swal.fire('Service deleted!', '', 'success');
-        },
-        (error) => {
-          // Handle error
-          Swal.fire('Error', 'Failed to delete the service', 'error');
-        }
-      );
-  }
-
+  
 }
