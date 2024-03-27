@@ -1,14 +1,9 @@
 <div class="container" *ngIf="shopData">
-  <mat-card class="header">
-    <img
-      src="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images\\${{
-        shopData.coverImage
-      }}"
-      alt="Oh"
-    />
-    <h1>{{ shopData.shopName }}</h1>
-    <p>{{ shopData.address }}</p>
-    <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
+  <mat-card class="header"  style="background-image: url(assets/images/{{shopData.coverImage}}); background-size: contain; background-repeat: no-repeat;">
+
+    <h1 style="margin-left: 20vw;">{{ shopData.shopName }}</h1>
+    <p style="margin-left: 20vw;">{{ shopData.address }}</p>
+    <p style="margin-left: 20vw;">{{ shopData.shopCity }}, {{ shopData.district }}</p>
   </mat-card>
   <mat-tab-group>
     <mat-tab label="Services">

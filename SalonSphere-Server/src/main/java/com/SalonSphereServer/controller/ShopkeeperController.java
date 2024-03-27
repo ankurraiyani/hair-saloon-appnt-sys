@@ -219,6 +219,7 @@ public class ShopkeeperController {
 	@PostMapping("/getshopbyemail")
 	public ResponseEntity<ShopInformation> getShopByEmail(@RequestBody String shopEmail) {
 		System.out.println("=======GetShopinformation by email=============>" + shopEmail);
+		@SuppressWarnings("null")
 		ShopInformation sDto = shopkeeperService.getShopDetailsByShopEmail2(shopEmail);
 		if (sDto != null) {
 			return new ResponseEntity<>(sDto, HttpStatus.OK);

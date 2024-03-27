@@ -151,6 +151,7 @@ public class ShopkeeperService {
 	// Through this method we upadte shopInformation to the database
 	public boolean updateShopInformation(ShopInformation shopInformation) {
 
+		@SuppressWarnings("null")
 		Optional<ShopInformation> existingShopOptional = shopkeeperRepository.findById(shopInformation.getShopId());
 		// Validation
 		if (existingShopOptional.isPresent() && (Validation.emailValidation(shopInformation.getShopEmail())

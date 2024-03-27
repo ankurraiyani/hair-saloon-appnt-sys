@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.entity.Feedback;
 import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.request.FilterRequest;
-import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 import com.SalonSphereServer.response.Response;
