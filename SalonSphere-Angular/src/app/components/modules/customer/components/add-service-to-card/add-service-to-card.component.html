@@ -5,14 +5,24 @@
         <h1>{{ service.serviceName }}</h1>
         <div class="price-time">
           <div class="price">
+            <img [src]="service.priceImageUrl" alt="" />
+            <p>{{ service.servicePrice }}</p>
+          </div>
+          <div class="time">
+            <div class="circle"></div>
+            <p>{{ service.serviceDuration }}</p>
+           
             <p>{{ service.servicePrice | currency : "INR" }}</p>
           </div>
           <div class="time">
-            <p>{{ service.serviceDuration | duration }}</p>
+            <p>{{ service.serviceDuration | duration}}</p>
           </div>
         </div>
       </div>
       <div class="right">
+        <div class="img">
+          <img [src]="service.imageUrl" alt="img" />
+        </div>
         <button class="add-btn" (click)="addToCart(service)">Add</button>
       </div>
     </div>
@@ -25,7 +35,10 @@
         <div class="product-details">
           <h3>{{ entry[0].serviceName }}</h3>
           <div class="price">
-            <p>{{ entry[0].servicePrice | currency : "INR" }}</p>
+            <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
+            <p>{{ entry[0].servicePrice| currency : "INR"  }}</p>
+            
+            <!-- <p>{{ entry[0].price }}</p> -->
           </div>
         </div>
         <button class="product-btn">

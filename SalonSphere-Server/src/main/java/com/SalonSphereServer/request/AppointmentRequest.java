@@ -19,5 +19,6 @@ public class AppointmentRequest {
 	private int serviceDuration;
 	private String shopId;
 	private String serviceName;
+	private String date;
 
 }

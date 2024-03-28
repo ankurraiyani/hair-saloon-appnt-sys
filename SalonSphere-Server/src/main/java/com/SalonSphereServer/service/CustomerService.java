@@ -1,5 +1,9 @@
 package com.SalonSphereServer.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +55,7 @@ public class CustomerService {
 		return cutomers;
 	}
 
-	public Map<List<String>, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime) {
+	public Map<List<String>, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime, String date) {
 
 		List<Object[]> shopEmployees = shopEmployeeRepository.findShopEmplooyesByShopId(shopId);
 
@@ -61,21 +65,21 @@ public class CustomerService {
 
 			String employeeName = (String) employeeData[1];
 			String employeeId = (String) employeeData[0];
-			
+
 			List<String> employeeInfo = new ArrayList<String>();
 			employeeInfo.add(employeeId);
 			employeeInfo.add(employeeName);
 
 			List<String> bookedSlots = slotRepository.findAllSlotTimeByEmployeeId(employeeId);
 
-			List<String> list = geeAllAbilableSlots(serviceTime, bookedSlots, shopTiming);
+			List<String> list = geeAllAbilableSlots(serviceTime, bookedSlots, shopTiming, date);
 			avilableSlots.put(employeeInfo, list);
 		}
 
 		return avilableSlots;
 	}
 
-	public List<String> geeAllAbilableSlots(int serviceTime, List<String> bookedSlots, String shopTiming) {
+	public List<String> geeAllAbilableSlots(int serviceTime, List<String> bookedSlots, String shopTiming, String date) {
 
 		List<String> avilableSlots = new ArrayList<String>();
 
@@ -87,6 +91,30 @@ public class CustomerService {
 		// Set the closing time
 		int closingTime = Integer.parseInt("" + shopTiming.charAt(6) + shopTiming.charAt(7));
 
+		LocalDate today = LocalDate.now();
+		String todayDate = today.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		
+		System.out.println("Come inside this method------------------------------------------------------ aaya hai");
+		
+		//if the date is todays date then give the slot which greater then then current time
+		if(todayDate.equals(date)) {
+			
+			System.out.println("Come inside this method------------------------------------------------------");
+		
+			// Set the time zone to Indian Standard Time (IST)
+	        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
+
+	        // Add 5 minutes to the current time
+	        LocalDateTime futureTime = now.plusMinutes(5);
+
+	        // Format the future time
+	        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
+	        String currentTime = dtf.format(futureTime);
+	        openingTime = Integer.parseInt("" + currentTime.charAt(0) + currentTime.charAt(1));
+			startMinute = Integer.parseInt("" + currentTime.charAt(3) + currentTime.charAt(4)); 
+		}
+		
+		
 		// Convert opening time to total minutes
 		int totalMinutes = openingTime * 60 + startMinute;
 
@@ -123,6 +151,8 @@ public class CustomerService {
 
 	// Helper method to check if two time slots overlap
 	public static boolean isOverlap(String slot1, String slot2) {
+		
+		System.out.println(slot1 +"-------------------------------------"+ slot2);
 		String[] parts1 = slot1.split("-");
 		String[] parts2 = slot2.split("-");
 
@@ -164,7 +194,7 @@ public class CustomerService {
 
 	// ===========================================================================================================
 
-	// Throuhg this method we filter on city
+	// Through this method we filter on city
 	public List<FilterResponseByCity> filterByCity(String city) {
 
 		System.out.println("+++++++Inside Customer Service FilterByCity++++++++++" + city);

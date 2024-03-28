@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.SalonSphereServer.entity.Feedback;
 import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.request.FilterRequest;
+import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 import com.SalonSphereServer.response.Response;
@@ -37,12 +38,15 @@ public class CustomerController {
 
 	// ========================================CODE FOR
 	// FILLTER===========================================
+
 	// Filter shops by given city
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/filter-by-city/{city}")
 	public ResponseEntity<List<FilterResponseByCity>> filterByCity(@PathVariable String city) {
 
-		System.out.println("====Inside the customer Controller in filterByCity===\n" + city);
+		System.out.println(
+				"====Inside the customer Controller in filterByCity===++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+						+ city);
 
 		// wriet code for fiter according to city
 		List<FilterResponseByCity> filterResponse = customerService.filterByCity(city);
@@ -53,7 +57,7 @@ public class CustomerController {
 			return new ResponseEntity<>(filterResponse, HttpStatus.NOT_FOUND);
 	}
 
-	// Filtering based on servicename, serviceprice and distance
+	// Filtering based on service name, service price and distance
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/filter-shop")
 	public ResponseEntity<List<FilterResponse>> filterShop(@RequestBody FilterRequest request) {
@@ -66,10 +70,9 @@ public class CustomerController {
 		return ResponseEntity.ok().body(filterRespons);
 
 	}
-	// ========================================END OF
-	// FILLTER===========================================
+	// ==========END OF FILLTER===========================================
 
-	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
+	// =============CODE FOR FEEDBACK/REVIEW/RATING========================
 	// Through this method the user can give feedback to the provider
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/add-feedback")
@@ -135,16 +138,18 @@ public class CustomerController {
 	}
 
 	// ================END FOR FEEDBACK/REVIEW/RATING===========================
+	
 	// here we check filterResponse is empty or not
 
 	// =================================================================================================================
+	@CrossOrigin(origins = "http://localhost:4200")
+@PostMapping("/book-slot")
+public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest
+slotBookingRequest){
+
+return new ResponseEntity<>(true, HttpStatus.OK);
+
+}
 }
 
-// @CrossOrigin(origins = "http://localhost:4200")
-// @PostMapping("/book-slot")
-// public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest
-// slotBookingRequest){
-//
-// return new ResponseEntity<>(true, HttpStatus.OK);
-//
-// }
+

@@ -4,6 +4,7 @@ import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchsh
 import Swal from 'sweetalert2';
 import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 import { FetchReviewsService } from '../../../../services/viewReviews/fetch-reviews.service';
+import { LikeService } from '../../../../services/like/like.service';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -15,7 +16,8 @@ export class ShopDashboardComponent implements OnInit {
     private fetchshopInfo: FetchshopInfoService,
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
-    private reviewService: FetchReviewsService
+    private reviewService: FetchReviewsService,
+    private likeService:LikeService,
   ) {}
 
   data: any[] = [];
@@ -52,13 +54,36 @@ export class ShopDashboardComponent implements OnInit {
   }
   // Inside your component class
   toggleLike(review: any): void {
-    if (review.liked) {
-      review.likes--;
-    } else {
-      review.likes++;
-    }
+    // Update UI instantly
     review.liked = !review.liked;
+    review.likes += review.liked ? 1 : -1;
+  
+    // Call API to update likes in the database
+    if (review.liked) {
+      this.likeService.like(review.likes, review.reviewId).subscribe(
+        (response: any) => {
+          // Handle success if needed
+          console.log('Liked successfully:', response);
+        },
+        (error: any) => {
+          // Handle error if needed
+          console.error('Error liking review:', error);
+        }
+      );
+    } else {
+      this.likeService.unlike(review.likes, review.reviewId).subscribe(
+        (response: any) => {
+          // Handle success if needed
+          console.log('Unliked successfully:', response);
+        },
+        (error: any) => {
+          // Handle error if needed
+          console.error('Error unliking review:', error);
+        }
+      );
+    }
   }
+  
 
   saveId(serviceId: any) {
     console.log(serviceId);

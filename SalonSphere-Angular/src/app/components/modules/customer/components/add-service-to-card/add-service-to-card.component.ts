@@ -14,12 +14,24 @@ interface Service {
   imageUrl: string;
 }
 
+interface ImageMap {
+  [imageName: string]: string;
+}
+
 @Component({
   selector: 'app-add-service-to-card',
   templateUrl: './add-service-to-card.component.html',
   styleUrl: './add-service-to-card.component.css',
 })
 export class AddServiceToCardComponent implements OnInit {
+
+  public imagePaths: ImageMap= {
+    "Hair Coloring": "../../../../../../assets/images/haircoloring.jpg",
+    "Haircut": "../../../../../../assets/images/haircut.jpg",
+    "Facial Cleansing": "../../../../../../assets/images/fecialcleanup.jpg",
+    "Hair Wash": "../../../../../../assets/images/hairwash.jpg",
+    "Massage": "../../../../../../assets/images/massage.jpg"
+};
   // Define the services array using the Service interface
   services: Service[] = [];
 

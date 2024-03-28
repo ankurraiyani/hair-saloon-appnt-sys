@@ -15,27 +15,36 @@ export class ViewSlotsComponent {
   shopName: string | null = localStorage.getItem('shop_name');
   shopAddress: string | null = localStorage.getItem('location');
 
-  public info = {
-    shopId: localStorage.getItem('shopId'),
-    shopTiming: localStorage.getItem('shopTiming'),
-    serviceDuration: Number(localStorage.getItem('serviceTime'))
-  };
+  
   
 
   selectedDate: string;
   minDate: string = '';
   maxDate: string = '';
 
+  public info = {
+    shopId: localStorage.getItem('shopId'),
+    shopTiming: localStorage.getItem('shopTiming'),
+    serviceDuration: Number(localStorage.getItem('serviceTime')),
+    date: ''
+  };
+
 
   availableSlots: Map<string, string[]> = new Map<string, string[]>();
 
   constructor(private calendar: NgbCalendar, private slotService: SlotService, private slotBooking:BookSlotService) {
     this.selectedDate = this.minDate = this.getTodayDate();
+    console.log(this.selectedDate);
     this.maxDate = this.getMaxDate();
+    this.info.date = this.dateFormate(this.selectedDate);
     console.log(this.info);
+    this.getSlots();
 
-    // call the service which will give all the available slots 
-    this.slotService.getAllAvilableSlots(this.info).subscribe((response:any)=>{
+  }
+
+  getSlots(){
+     // call the service which will give all the available slots 
+     this.slotService.getAllAvilableSlots(this.info).subscribe((response:any)=>{
       console.log("success");
         console.log(response);
         Object.keys(response).forEach(key => {
@@ -45,7 +54,6 @@ export class ViewSlotsComponent {
     error=>{
       console.log("error occured"+error.message());
     })
-
   }
 
   getTodayDate(): string {
@@ -106,11 +114,22 @@ bookSlot(slotTime: any, empId: any) {
         title: 'Success!',
         text: 'Your slot has been booked.'
       });
+      this.getSlots();
     },
     error => {
       alert("error occurred");
     }
   );
+}
+
+dateFormate(dateString:string) {
+  const parts = dateString.split('-');
+  if (parts.length === 3) {
+    const [year, month, day] = parts;
+    return `${day}-${month}-${year}`;
+  } else {
+    return 'Invalid date format';
+  }
 }
   
 }
