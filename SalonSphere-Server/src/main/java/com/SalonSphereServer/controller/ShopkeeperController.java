@@ -262,8 +262,8 @@ public class ShopkeeperController {
 	@Secured("shopkeeper")
 	public ResponseEntity<Response> addEmp(@RequestBody ShopEmployees shopEmployees) {
 
-		// Call service method to add shop
-		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDSHOP METHOD=======" + shopEmployees);
+		// Call service method to add employee
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER  ADDEmployee METHOD=======" + shopEmployees);
 		boolean isAdd = shopEmployeeService.addEmp(shopEmployees);
 		if (isAdd)
 			return ResponseEntity.status(HttpStatus.OK).body(new Response("Employee added Successfully"));

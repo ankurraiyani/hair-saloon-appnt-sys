@@ -20,4 +20,5 @@ public class FilterResponseByCity {
     private String shopId;
     private String shopTiming;
     private double rating;
+    private String shopEmail;
 }

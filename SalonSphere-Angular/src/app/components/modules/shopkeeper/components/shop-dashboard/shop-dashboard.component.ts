@@ -11,7 +11,7 @@ import { FetchEmployeeInfoService} from '../../../../services/fetchShopEmployee/
   templateUrl: './shop-dashboard.component.html',
   styleUrl: './shop-dashboard.component.css',
 })
-export class ShopDashboardComponent  implements OnInit{
+export class ShopDashboardComponent implements OnInit {
   constructor(
     private fetchshopInfo: FetchshopInfoService,
     private getShopServices: GetServiceInfoService,
@@ -25,7 +25,7 @@ export class ShopDashboardComponent  implements OnInit{
   empData: any[]= [];
 
   shopData: any;
-    amount:any;
+  amount: any;
   ngOnInit(): void {
     this.fetchshopInfo
       .fetchshopInfo(localStorage.getItem('shopEmail'))
@@ -40,27 +40,37 @@ export class ShopDashboardComponent  implements OnInit{
         this.data = data;
         this.amount = data.servicePrice;
 
-        console.log("Hello This is get Shop By email",data);
+        console.log('Hello This is get Shop By email', data);
       });
-
-      this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
-        (data: any) => {
-          this.reviews = data;
-          console.log(data)
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
-
-        // this.fetchShopEmployees
-        // .fetchAllEmployee(localStorage.getItem('shopId'))
-        // .subscribe((empData:any)=>{
-        //   this.empData = empData;
-        //   console.log("Hello this is Shop Employees by shopId ",empData);
-        // })
-
+    this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
+      (data: any) => {
+        this.reviews = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+  // Inside your component class
+  toggleLike(review: any): void {
+    if (review.liked) {
+      review.likes--;
+    } else {
+      review.likes++;
     }
+    review.liked = !review.liked;
+  }
+
+  // getAllEmployee(){
+  //   this.fetchShopEmployees
+  //   .fetchAllEmployee(localStorage.getItem('shopId'))
+  //   .subscribe((empData:any)=>{
+  //     this.empData = empData;
+  //     console.log("Hello this is Shop Employees by shopId ",empData);
+  //   })
+  // }
+    
   
   saveId(serviceId: any) {
     console.log(serviceId);
@@ -108,5 +118,4 @@ export class ShopDashboardComponent  implements OnInit{
         }
       );
   }
-
 }

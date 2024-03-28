@@ -47,7 +47,7 @@ public class CustomerController {
 
 		// wriet code for fiter according to city
 		List<FilterResponseByCity> filterResponse = customerService.filterByCity(city);
-		System.out.println("This is filter Response"+filterResponse);
+		System.out.println("This is filter Response" + filterResponse);
 		if (filterResponse != null)
 			return ResponseEntity.ok().body(filterResponse);
 		else
@@ -67,7 +67,8 @@ public class CustomerController {
 		return ResponseEntity.ok().body(filterRespons);
 
 	}
-	// ===================END OF FILLTER=========================================
+	// ========================================END OF
+	// FILLTER===========================================
 
 	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
 	// Through this method the user can give feedback to the provider
@@ -107,7 +108,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by 1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/like-by-ince")
+	@PostMapping("/like/{reviewId}/{like}")
 	public ResponseEntity<Response> incrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);
@@ -117,7 +118,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by -1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/like-by-desc")
+	@PostMapping("/unlike/{reviewId}/{like}")
 	public ResponseEntity<Response> decrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);
@@ -135,16 +136,16 @@ public class CustomerController {
 	}
 
 	// ================END FOR FEEDBACK/REVIEW/RATING===========================
-		// here we check filterResponse is empty or not
-		
-		// =================================================================================================================
-	}
-	
-//	@CrossOrigin(origins = "http://localhost:4200")
-//	@PostMapping("/book-slot")
-//	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest){
-//		
-//		return new ResponseEntity<>(true, HttpStatus.OK);
-//		 
-//	}
+	// here we check filterResponse is empty or not
 
+	// =================================================================================================================
+}
+
+// @CrossOrigin(origins = "http://localhost:4200")
+// @PostMapping("/book-slot")
+// public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest
+// slotBookingRequest){
+//
+// return new ResponseEntity<>(true, HttpStatus.OK);
+//
+// }

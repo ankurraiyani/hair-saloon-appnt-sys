@@ -44,16 +44,29 @@
             </h3>
             <div class="rating">
               <!-- Display filled stars based on review.rating -->
-              <mat-icon class="star" *ngFor="let star of getFilledStars(review.rating)">star</mat-icon>
+              <mat-icon
+                class="star"
+                *ngFor="let star of getFilledStars(review.rating)"
+                >star</mat-icon
+              >
               <!-- Display empty stars for remaining rating -->
-              <mat-icon class="star_border" *ngFor="let star of getEmptyStars(review.rating)">star_border</mat-icon>
+              <mat-icon
+                class="star_border"
+                *ngFor="let star of getEmptyStars(review.rating)"
+                >star_border</mat-icon
+              >
             </div>
           </div>
           <h3 class="review-message">
             <i>{{ review.reviewMessage }}</i>
           </h3>
-          
-          
+
+           <div class="likes">
+            <button mat-icon-button (click)="toggleLike(review)" >
+              <mat-icon >{{ review.liked ? 'thumb_up' : 'thumb_up_off_alt' }}</mat-icon>
+            </button>
+            <span>{{ review.likes }}</span>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-tab>

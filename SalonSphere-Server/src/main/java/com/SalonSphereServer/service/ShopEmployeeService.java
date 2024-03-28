@@ -31,18 +31,25 @@ public class ShopEmployeeService {
         // Validation Employe
         if (exists && Validation.firstNameValidation(emp.getEmployeeName())) {
 
+            // Setting random UUid to employee
             String empId = UUID.randomUUID().toString();
-            emp.setEmployeeId(empId);
-            List<EmployeeService> empService = emp.getServices();
-            ShopEmployees isAdd = shopEmployeeRepository.save(emp);
-            empService = employeeServiceRepository.saveAll(empService);
-            if (isAdd != null && empService != null) {
-                return true;
-            } else {
-                // Rollback if either employee or services saving fails
-                shopEmployeeRepository.delete(emp); // Rollback employee addition
-                empService.forEach(service -> employeeServiceRepository.delete(service)); // Rollback service addition
+
+            // Getting all the services in the list
+            List<EmployeeService> empList = emp.getServices();
+
+            // iterating to add employeeId
+            for (EmployeeService empservice : empList) {
+                empservice.setEmployeeId(empId);
+                empservice.setEmpSerId(UUID.randomUUID().toString());
             }
+            // setting employeeId to the ShopEmployees object
+            emp.setEmployeeId(empId);
+
+            // setting updated service list that contains employeeId
+            emp.setServices(empList);
+            ShopEmployees isAdd = shopEmployeeRepository.save(emp);
+            if (isAdd != null)
+                return true;
         }
         return false;
     }

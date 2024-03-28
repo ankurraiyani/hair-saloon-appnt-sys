@@ -15,6 +15,7 @@ interface shop {
   rating:any;
   shopId:any;
   shopTiming:string;
+  shopEmail:string;
 }
 @Component({
   selector: 'app-view-shops',
@@ -39,10 +40,11 @@ export class ViewShopsComponent implements OnInit {
     this.showShopByCity(this.city);
   }
 
-  getShopId(shopId:any,shopName:any,shopTiming:any){
+  getShopId(shopId:any,shopName:any,shopTiming:any,shopEmail:any){
     localStorage.setItem('shopId',shopId);
     localStorage.setItem('shopName',shopName);
     localStorage.setItem('shopTiming',shopTiming);
+    localStorage.setItem('shopEmail',shopEmail);
 
   }
 
