@@ -53,12 +53,12 @@ export class ShopDashboardComponent  implements OnInit{
         }
       );
 
-        this.fetchShopEmployees
-        .fetchAllEmployee(localStorage.getItem('shopId'))
-        .subscribe((empData:any)=>{
-          this.empData = empData;
-          console.log("Hello this is Shop Employees by shopId ",empData);
-        })
+        // this.fetchShopEmployees
+        // .fetchAllEmployee(localStorage.getItem('shopId'))
+        // .subscribe((empData:any)=>{
+        //   this.empData = empData;
+        //   console.log("Hello this is Shop Employees by shopId ",empData);
+        // })
 
     }
   

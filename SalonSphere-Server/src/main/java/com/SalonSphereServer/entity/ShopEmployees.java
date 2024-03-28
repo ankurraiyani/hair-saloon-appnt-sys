@@ -33,6 +33,21 @@ public class ShopEmployees {
 	
 	@Column(name = "employee_name", nullable = false)
 	private String employeeName;
+
+	@Column(name = "employee_email", nullable = false, unique = true)
+	private String empEmail;
+
+	@Column(name = "employee_contactNo", nullable = false, unique = true)
+	private String contactNo;
+
+	@Column(name = "employee_gender", nullable = false)
+	private String gender;
+
+	@Column(name = "employee_address", nullable = false)
+	private String address;
+	
+	@Column(name = "employee_salary", nullable = false)
+	private double salary;
 	
 	@Column(name = "shop_id", nullable = false)
 	private String shopId;

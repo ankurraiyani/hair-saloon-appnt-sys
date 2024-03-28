@@ -13,13 +13,13 @@ export class FetchEmployeeInfoService {
     
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
   
-    return this.http.get(`http://localhost:8081/shopkeeper/show-all-emp/${shopId}`,{headers});
+    return this.http.post(`http://localhost:8081/shopkeeper/show-all-emp/${shopId}`,{headers});
   }
 
   fetchEmplyeebyId(employeeId:any){
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
 
-    return this.http.get(`http://localhost:8081/shopkeeper/show-emp/${employeeId}`,{headers});
+    return this.http.post(`http://localhost:8081/shopkeeper/show-emp/${employeeId}`,{headers});
   }
 
 }

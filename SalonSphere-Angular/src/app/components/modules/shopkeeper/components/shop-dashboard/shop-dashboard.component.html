@@ -131,7 +131,7 @@
       =================================================================================
     -->
 
-    <mat-tab label="Employees"> 
+    <mat-tab label="Employees" > 
 
       <div class="cards">
         <table class="table" *ngIf="empData && empData.length">
@@ -149,15 +149,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let shop of data">
-              <td scope="row">{{ shop.serviceName }}</td>
-              <td>{{ shop.servicePrice | currency : "INR" }}</td>
-              <td>{{ shop.serviceDuration | shopkeeperDuration }}</td>
+            <tr *ngFor="let Emp of empData">
+              <td scope="row">{{ Emp.employeeName }}</td>
+              <td scope="row">{{ Emp.employeeEmail}}</td>
+              <td scope="row">{{ Emp.employeeContactNo }}</td>
+              <td scope="row">{{ Emp.employeeSalary }}</td>
+              <td scope="row">{{ Emp.employeeGender }}</td>
+              <td scope="row">{{ Emp.employeeServices }}</td>
+              <td scope="row">{{ Emp.employeeAddress }}</td>
+              <!-- <td>{{ shop.servicePrice | currency : "INR" }}</td>
+              <td>{{ shop.serviceDuration | shopkeeperDuration }}</td> -->
               <td>
                 <a
                   mat-button
                   color="primary"
-                  (click)="saveId(shop.serviceId)"
+                  (click)="saveEmpId(Emp.employeeId)"
                   routerLink="/shopkeeper/updateService"
                   ><mat-icon>edit</mat-icon></a
                 >
