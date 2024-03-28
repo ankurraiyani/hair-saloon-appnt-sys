@@ -263,4 +263,11 @@ public class ShopkeeperService {
 		return;
 	}
 
+	// Deleting shop after 30 days automatically Don't remove this method 
+	// @Scheduled(fixedRate = 24 * 60 * 60 * 1000) // Scheduled to run every 24 hours
+    // public void deleteMarkedRows() {
+    //     Date month = new Date(System.currentTimeMillis() - (30 * 24 * 60 * 60 * 1000));
+    //     shopkeeperRepository.deleteByIsDeleteAndCreateDateBefore(true, month);
+    // }
+
 }

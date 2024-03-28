@@ -1,6 +1,7 @@
 package com.SalonSphereServer.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,19 @@ public class ShopEmployeeService {
             }
         }
         return false;
+    }
+    
+    // Through this method we find all employee in particular shop by shopId
+    public  List<ShopEmployees> showAllEmpByShopId(String shopId) {        
+        List<ShopEmployees> listOfEmps=shopEmployeeRepository.findShopEmployeesByShopId(shopId);
+        return listOfEmps;
+    }
+
+    // This method give  us the details of a specific employee by employeeId
+    @SuppressWarnings("null")
+    public ShopEmployees showEmpByEmpId(String empId){
+       Optional<ShopEmployees> optional= shopEmployeeRepository.findById(empId);
+       ShopEmployees emps=optional.get() ;
+       return  emps;
     }
 }
