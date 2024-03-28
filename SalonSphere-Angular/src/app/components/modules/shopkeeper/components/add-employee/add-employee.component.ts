@@ -58,13 +58,6 @@ export class AddEmployeeComponent {
 
     })
 
-    this.dropdownList = [
-      { serviceId: 1, serviceName: 'Item1' },
-      { serviceId: 2, serviceName: 'Item2' },
-      { serviceId: 3, serviceName: 'Item3' },
-      { serviceId: 4, serviceName: 'Item4' },
-      { serviceId: 5, serviceName: 'Item5' },
-    ];
     this.dropdownSettings = {
       idField: 'serviceId',
       textField: 'serviceName',

@@ -4,7 +4,7 @@ import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchsh
 import Swal from 'sweetalert2';
 import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 import { FetchReviewsService } from '../../../../services/viewReviews/fetch-reviews.service';
-import { FetchEmployeeInfoService} from '../../../../services/fetchShopEmployee/fetch-employee-info.service';
+import { Console, error } from 'console';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -17,12 +17,10 @@ export class ShopDashboardComponent implements OnInit {
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
     private reviewService: FetchReviewsService,
-    private fetchShopEmployees: FetchEmployeeInfoService
   ) {}
 
   data: any[] = [];
   reviews: any[] = [];
-  empData: any[]= [];
 
   shopData: any;
   amount: any;
@@ -31,7 +29,7 @@ export class ShopDashboardComponent implements OnInit {
       .fetchshopInfo(localStorage.getItem('shopEmail'))
       .subscribe((data: any) => {
         this.shopData = data;
-        console.log(this.shopData.coverImage);
+        // console.log(this.shopData.coverImage);
       });
 
     this.getShopServices
@@ -40,17 +38,18 @@ export class ShopDashboardComponent implements OnInit {
         this.data = data;
         this.amount = data.servicePrice;
 
-        console.log('Hello This is get Shop By email', data);
+        // console.log('Hello This is get Shop By email', data);
       });
     this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
       (data: any) => {
         this.reviews = data;
-        console.log(data);
+        // console.log(data);
       },
       (error: any) => {
         console.log(error);
       }
     );
+  
   }
   // Inside your component class
   toggleLike(review: any): void {

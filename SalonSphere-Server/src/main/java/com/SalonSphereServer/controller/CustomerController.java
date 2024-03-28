@@ -92,10 +92,8 @@ public class CustomerController {
 
 		System.out.println("=====INSIDE THE COUSTOMERCONTROLLER getAllFeedbackByShopId======\n" + shopId);
 		List<Feedback> fList = feedbackRepository.findByShopIdOrderByReviewDateDesc(shopId);
-		if (!fList.isEmpty())
-			return ResponseEntity.ok().body(fList);
-		else
-			return ResponseEntity.badRequest().body(fList);
+		return ResponseEntity.ok().body(fList);
+
 	}
 
 	// This API's is used for getting values of likes by review_id

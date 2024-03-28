@@ -35,10 +35,10 @@ public class ShopEmployees {
 	private String employeeName;
 
 	@Column(name = "employee_email", nullable = false, unique = true)
-	private String empEmail;
+	private String email;
 
 	@Column(name = "employee_contactNo", nullable = false, unique = true)
-	private String contactNo;
+	private String contactNumber;
 
 	@Column(name = "employee_gender", nullable = false)
 	private String gender;
