@@ -94,10 +94,7 @@ public class CustomerController {
 
 		System.out.println("=====INSIDE THE COUSTOMERCONTROLLER getAllFeedbackByShopId======\n" + shopId);
 		List<Feedback> fList = feedbackRepository.findByShopIdOrderByReviewDateDesc(shopId);
-		if (!fList.isEmpty())
-			return ResponseEntity.ok().body(fList);
-		else
-			return ResponseEntity.badRequest().body(fList);
+		return ResponseEntity.ok().body(fList);
 	}
 
 	// This API's is used for getting values of likes by review_id
@@ -138,18 +135,15 @@ public class CustomerController {
 	}
 
 	// ================END FOR FEEDBACK/REVIEW/RATING===========================
-	
+
 	// here we check filterResponse is empty or not
 
 	// =================================================================================================================
 	@CrossOrigin(origins = "http://localhost:4200")
-@PostMapping("/book-slot")
-public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest
-slotBookingRequest){
+	@PostMapping("/book-slot")
+	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest) {
 
-return new ResponseEntity<>(true, HttpStatus.OK);
+		return new ResponseEntity<>(true, HttpStatus.OK);
 
+	}
 }
-}
-
-

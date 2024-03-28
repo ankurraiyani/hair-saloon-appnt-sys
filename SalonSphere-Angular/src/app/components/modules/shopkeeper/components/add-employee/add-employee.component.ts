@@ -57,14 +57,6 @@ export class AddEmployeeComponent {
       }));
 
     })
-
-    this.dropdownList = [
-      { serviceId: 1, serviceName: 'Item1' },
-      { serviceId: 2, serviceName: 'Item2' },
-      { serviceId: 3, serviceName: 'Item3' },
-      { serviceId: 4, serviceName: 'Item4' },
-      { serviceId: 5, serviceName: 'Item5' },
-    ];
     this.dropdownSettings = {
       idField: 'serviceId',
       textField: 'serviceName',
@@ -144,6 +136,11 @@ export class AddEmployeeComponent {
           title: 'Done',
           text: 'Employee Added Successfully',
           icon: 'success',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Navigate to the desired page
+            this.router.navigate(['/shopkeeper/view-shop']);
+          }
         });
 
       }),
