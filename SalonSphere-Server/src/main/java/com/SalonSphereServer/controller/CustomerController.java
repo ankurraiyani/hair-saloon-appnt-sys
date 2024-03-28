@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+// import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,8 @@ public class CustomerController {
 	@Autowired
 	private FeedbackRepository feedbackRepository;
 
-	// ========================================CODE FOR FILLTER===========================================
+	// ========================================CODE FOR
+	// FILLTER===========================================
 	// Filter shops by given city
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/filter-by-city/{city}")
@@ -65,7 +67,7 @@ public class CustomerController {
 		return ResponseEntity.ok().body(filterRespons);
 
 	}
-	// ========================================END OF FILLTER===========================================
+	// ===================END OF FILLTER=========================================
 
 	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
 	// Through this method the user can give feedback to the provider

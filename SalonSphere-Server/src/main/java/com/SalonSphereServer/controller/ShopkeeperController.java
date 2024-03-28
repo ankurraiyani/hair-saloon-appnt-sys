@@ -46,7 +46,7 @@ public class ShopkeeperController {
 	private ShopkeeperService shopkeeperService;
 	@Autowired
 	private ShopServices shopServices;
-	
+
 	@Autowired
 	private ShopEmployeeService shopEmployeeService;
 
@@ -290,4 +290,32 @@ public class ShopkeeperController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 					.body(new Response("Error while sending requestAgain requst"));
 	}
+	// Showing all employee in a perticular shop and find all employee by shopId
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/show-all-emp/{shopId}")
+	@Secured("shopkeeper")
+	public ResponseEntity<List<ShopEmployees>> showAllEmpByShopId(@PathVariable String shopId) {
+
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER showAllEmpByShopId METHOD=======" + shopId);
+		List<ShopEmployees> listOfEmps = shopEmployeeService.showAllEmpByShopId(shopId);
+		if (!listOfEmps.isEmpty())
+			return ResponseEntity.status(HttpStatus.OK).body(listOfEmps);
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(listOfEmps);
+	}
+
+	// Showing all employee in a perticular shop and find all employee by shopId
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/show-emp/{empId}")
+	@Secured("shopkeeper")
+	public ResponseEntity<ShopEmployees> showEmpByEmpId(@PathVariable String empId) {
+
+		System.out.println("======THIS IS SHOPKEEPER CONTROLLER showEmpByEmpId METHOD=======" + empId);
+		ShopEmployees emp = shopEmployeeService.showEmpByEmpId(empId);
+		if (emp != null)
+			return ResponseEntity.status(HttpStatus.OK).body(emp);
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(emp);
+	}
+
 }
