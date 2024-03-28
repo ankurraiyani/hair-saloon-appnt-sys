@@ -6,22 +6,22 @@ import { Cookie } from 'ng2-cookies/cookie';
   providedIn: 'root',
 })
 export class LikeService {
-  private baseURL: String = 'http://localhost:8081/customer/';
+  private baseURL: String = 'http://localhost:8081/customer';
   constructor(private http: HttpClient) {}
 
-  like(likes: any) {
+  like(likes: any,reviewId:any) {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + Cookie.get('token')
     );
-    return this.http.post(`${this.baseURL}/like/${likes}`, null, { headers });
+    return this.http.post(`${this.baseURL}/like/${reviewId}/${likes}`, null, { headers });
   }
 
-  unlike(likes: any) {
+  unlike(likes: any,reviewId:any) {
     const headers = new HttpHeaders().set(
       'Authorization',
       'Bearer ' + Cookie.get('token')
     );
-    return this.http.post(`${this.baseURL}/unlike/${likes}`, null, { headers });
+    return this.http.post(`${this.baseURL}/unlike/${reviewId}/${likes}`, null, { headers });
   }
 }

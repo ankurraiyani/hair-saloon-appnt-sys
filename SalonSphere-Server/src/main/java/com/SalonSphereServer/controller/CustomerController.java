@@ -107,7 +107,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by 1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/like")
+	@PostMapping("/like/{reviewId}/{like}")
 	public ResponseEntity<Response> incrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);
@@ -117,7 +117,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by -1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/unlike")
+	@PostMapping("/unlike/{reviewId}/{like}")
 	public ResponseEntity<Response> decrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);

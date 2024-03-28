@@ -4,8 +4,7 @@
     style="background-image: url(assets/images/{{shopData.coverImage}}); 
     background-size: contain;
     background-repeat: no-repeat;
-    margin-right: 20px;
-    height: 150px;"
+    margin-right: 20px;"
   >
     <div class="shopInfo">
       <h1>
@@ -70,6 +69,13 @@
           <h3 class="review-message">
             <i>{{ review.reviewMessage }}</i>
           </h3>
+
+           <div class="likes">
+            <button mat-icon-button (click)="toggleLike(review)" >
+              <mat-icon >{{ review.liked ? 'thumb_up' : 'thumb_up_off_alt' }}</mat-icon>
+            </button>
+            <span>{{ review.likes }}</span>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-tab>

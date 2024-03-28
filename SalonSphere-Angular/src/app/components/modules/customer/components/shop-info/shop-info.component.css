@@ -3,12 +3,11 @@
   margin-top: 6%;
   margin-left: 7%;
 }
-.shopInfo{
-
+.shopInfo {
   margin-left: 15%;
   display: flex;
   flex-direction: column;
-  margin-top:25px;
+  margin-top: 25px;
 }
 .reviews {
   background-color: rgba(66, 99, 116, 0.599);
@@ -19,33 +18,33 @@
   padding-left: 10px;
   padding-right: 10px;
 }
-.header{
+.header {
   display: flex;
   flex-direction: column;
-  min-height: 120px;
 }
-.star{
+.star {
   color: gold;
 }
 
-.customer-name{
+.customer-name {
   display: flex;
   align-items: center;
   /* justify-content: center; */
   margin-top: 20px;
 }
 
-.review-date, .rating{
+.review-date,
+.rating {
   display: flex;
   position: absolute;
   justify-content: end;
   align-self: flex-end;
 }
 
-.review-message{
+.review-message {
   margin-left: 30px;
 }
 
-.rating{
+.rating {
   margin-top: 20px;
 }

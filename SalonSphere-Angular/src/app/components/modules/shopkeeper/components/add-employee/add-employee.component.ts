@@ -140,9 +140,20 @@ export class AddEmployeeComponent {
       .addEmployee(this.EmpRegister.value)
       .subscribe((data: any) => {
         console.log(data);
+        Swal.fire({
+          title: 'Done',
+          text: 'Employee Added Successfully',
+          icon: 'success',
+        });
+
       }),
       (error: any) => {
         console.log(error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error While Adding Employee',
+          icon: 'error',
+        });
       };
   }
 
@@ -159,14 +170,6 @@ export class AddEmployeeComponent {
     // Check if the first and last names contain at least two characters
     if (Name.length < 2) {
       message = 'Name must contain at least two characters each.';
-      return message;
-    }
-
-    // Check if the first and last names contain only alphabets
-    const nameRegex = /^[A-Za-z]+$/;
-
-    if (!nameRegex.test(Name)) {
-      message = 'Name must contain only alphabets.';
       return message;
     }
 

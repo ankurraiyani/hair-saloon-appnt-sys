@@ -40,6 +40,8 @@ public class ShopEmployees {
 	@Column(name = "is_leave")
 	private boolean isLeave;	
 
+	
+
 	@OneToMany(mappedBy = "employeeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmployeeService> services;
 	
