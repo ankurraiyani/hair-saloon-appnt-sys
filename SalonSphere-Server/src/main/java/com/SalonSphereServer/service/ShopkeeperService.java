@@ -97,9 +97,14 @@ public class ShopkeeperService {
 			shopInformation.setCreateDate(sqlDate);
 			shopInformation.setModifyDate(sqlDate);
 
+			shopInformation.setCoverImage(shopInformation.getCoverImage());
+			shopInformation.setLicenseDocument(shopInformation.getLicenseDocument());
+
 			// This line tell shop is create and its status is pending admin approval
 			// pending means not approved yet
-			shopInformation.setStatus("Pending");	
+			shopInformation.setStatus("Pending");
+			// for tempory setting time.
+			shopInformation.setShopTiming("10:00-7:00");
 			ShopInformation shopInformation2 = shopkeeperRepository.save(shopInformation);
 
 			// not null then shop added successfully
@@ -161,7 +166,7 @@ public class ShopkeeperService {
 			existingShop.setShopStatus(shopInformation.isShopStatus());
 			existingShop.setShopEmail(shopInformation.getShopEmail());
 			existingShop.setShopContactNo(shopInformation.getShopContactNo());
-			existingShop.setShopCity(shopInformation.getShopCity());
+			existingShop.setShopCity(shopInformation.getShopCity().trim());
 
 			// Create a java.util.Date object
 			java.util.Date utilDate = new java.util.Date();
@@ -232,37 +237,30 @@ public class ShopkeeperService {
 		return images;
 	}
 
+	// this method for filter the shops according searchbar keyword
+	public List<ShowShopDto> searchShops(String userId, String keyword) {
 
-	//this method for filter the shops according searchbar keyword 
-	public List<ShowShopDto> searchShops(String userId, String keyword){
-
-		List<ShowShopDto> list= new ArrayList<>();
-		List<ShopInformation> sList=shopkeeperRepository.search(keyword,userId);
-		for(ShopInformation s:sList){
-			ShowShopDto tem=new ShowShopDto();
+		List<ShowShopDto> list = new ArrayList<>();
+		List<ShopInformation> sList = shopkeeperRepository.search(keyword, userId);
+		for (ShopInformation s : sList) {
+			ShowShopDto tem = new ShowShopDto();
 			tem.setShopName(s.getShopName());
 			tem.setShopAddress(s.getAddress());
 			tem.setShopEmail(s.getShopEmail());
 			tem.setShopContactNo(s.getShopContactNo());
 			tem.setShopCity(s.getShopCity());
 			tem.setStatus(s.getStatus());
-			
+
 			list.add(tem);
 		}
-
 		return list;
 	}
 
-
-	// Through this method we can update status  
+	// Through this method we can update status
 	@Transactional
 	public void updateStatus(String shopEmail, String status) {
-
 		shopkeeperRepository.updateStatusByShopEmail(shopEmail, status);
 		return;
 	}
-
-	
-
 
 }

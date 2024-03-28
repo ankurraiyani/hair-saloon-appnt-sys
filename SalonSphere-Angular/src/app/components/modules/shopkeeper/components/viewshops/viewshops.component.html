@@ -16,18 +16,21 @@
          <th scope="col">Email</th>
          <th scope="col">Contact No</th>
          <th scope="col">Status</th>
+         <th scope="col">Details</th>
          
        </tr>
      </thead>
      <tbody>
-       <tr *ngFor="let shop of data" (click)="showinfo(shop.shopEmail, shop.shopId)"
-       routerLink="/shopkeeper/shopDashboard">
+       <tr *ngFor="let shop of data" >
          <td scope="row"><b>{{ shop.shopName }}</b></td>
          <td>{{ shop.shopAddress }}</td>
          <td>{{ shop.shopCity }}</td>
          <td>{{ shop.shopEmail }}</td>
          <td>{{ shop.shopContactNo | phoneNumber}}</td>
          <td>{{ shop.status }}</td>
+         <td><a mat-button color="primary" (click)="showinfo(shop.shopEmail, shop.shopId)"
+          routerLink="/shopkeeper/shopDashboard"><mat-icon>visibility</mat-icon></a>
+         </td>
        </tr>
        
      </tbody>

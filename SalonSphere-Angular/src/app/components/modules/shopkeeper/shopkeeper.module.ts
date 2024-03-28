@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppComponent } from '../../../app.component';
+
 // import { FormGroup,FormControl } from '@angular/forms';
 
 import { ShopkeeperRoutingModule } from './shopkeeper-routing.module';
@@ -41,13 +43,17 @@ import { UpdateServiceComponent } from './components/update-service/update-servi
 import { NavbarComponent } from './navbar/navbar.component';
 import { ViewShopServicesComponent } from './components/view-shop-services/view-shop-services.component';
 import { ShopDashboardComponent } from './components/shop-dashboard/shop-dashboard.component';
-import { DurationPipe } from './pipe/duration.pipe';
+// import { DurationPipe } from './pipe/duration.pipe';
 import { PhoneNumberPipe } from './pipe/phone-number.pipe';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { DurationPipe } from './pipe/duration.pipe';
+import { ShopkeeperDurationPipe } from './pipe/shopkeeper-duration.pipe';
 
 
 
 @NgModule({
   declarations: [
+    AppComponent,
     ShopkeeperDashboardComponent,
     ViewshopsComponent,
     UpdateShopComponent,
@@ -58,8 +64,11 @@ import { PhoneNumberPipe } from './pipe/phone-number.pipe';
     UpdateServiceComponent,
     ViewShopServicesComponent,
     ShopDashboardComponent,
-    DurationPipe,
-    PhoneNumberPipe
+    PhoneNumberPipe,
+    AddEmployeeComponent,
+    ShopkeeperDurationPipe,
+    ShopkeeperDurationPipe
+
   ],
   imports: [
     CommonModule,
@@ -87,6 +96,7 @@ import { PhoneNumberPipe } from './pipe/phone-number.pipe';
     MatOption,
     MatSelectModule, 
     MatTabsModule,
+    
     
   ]
 })

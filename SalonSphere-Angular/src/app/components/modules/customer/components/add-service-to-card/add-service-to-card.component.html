@@ -6,7 +6,6 @@
         <h3>{{ service.type }}</h3>
         <div class="price-time">
           <div class="price">
-            <img [src]="service.priceImageUrl" alt="" />
             <p>{{ service.servicePrice }}</p>
           </div>
           <div class="time">
@@ -18,7 +17,7 @@
       </div>
       <div class="right">
         <div class="img">
-          <img [src]="service.imageUrl" alt="img" />
+          <img [src]="imagePaths[service.serviceName]" alt="img" />
         </div>
         <button class="add-btn" (click)="addToCart(service)">Add</button>
       </div>
@@ -31,37 +30,13 @@
     <p>Address - {{shopAddress}}</p>
 
     
-    <!-- <div class="products" *ngIf="cart.length">
-      <div class="product" *ngFor="let product of cart">
-        <div class="product-details">
-          <h3>{{ product.title }}</h3>
-          <div class="price">
-            <img
-              src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg"
-              alt=""
-            />
-            <p>{{ product.price }}</p>
-          </div>
-        </div>
-        <button class="product-btn"><span (click)="removeItem(product)">-</span>{{getFrequency(product)}}<span (click)="addItem(product)">+</span></button>
-      </div>
-    </div>
-    <button class="total" *ngIf="cart.length">
-      <div class="price">
-        <img
-          src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg"
-          alt=""
-        />
-        <p style="color: black">{{ totalAmount }}</p>
-      </div>
-      <p style="color: black">View Cart</p>
-    </button> -->
+    
     <div class="products" *ngIf="serviceCountMap.size">
       <div class="product" *ngFor="let entry of serviceCountMap.entries()">
         <div class="product-details">
           <h3>{{ entry[0].serviceName }}</h3>
           <div class="price">
-            <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
+            <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="x" />
             <p>{{ entry[0].servicePrice }}</p>
           </div>
         </div>
@@ -73,8 +48,8 @@
     
     <button (click)="navigateLogin()" class="total" *ngIf="serviceCountMap.size">
       <div class="price">
-        <img src="https://t3.ftcdn.net/jpg/03/32/58/10/360_F_332581030_Mfbe3YYwexIWUZQ3qNrSt0XFP35q6fxI.jpg" alt="" />
-        <p style="color: black">{{ totalAmount }}</p>
+        
+        <p style="color: black">{{ totalAmount |currency : "INR" }}</p>
       </div>
       <p style="color: black">View Cart</p>
     </button>

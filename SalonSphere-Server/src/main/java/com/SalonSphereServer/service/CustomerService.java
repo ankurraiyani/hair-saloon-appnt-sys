@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.SalonSphereServer.dto.CustomerDTO;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
+import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.repository.ShopEmployeeRepository;
 import com.SalonSphereServer.repository.SlotRepository;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
@@ -28,15 +29,14 @@ public class CustomerService {
 
 	@Autowired
 	private UserRepository userRepository;
-
 	@Autowired
 	private ShopEmployeeRepository shopEmployeeRepository;
-
 	@Autowired
 	private SlotRepository slotRepository;
-
 	@Autowired
 	private ShopkeeperRepository shopKeeperRepository;
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	// call the userRepository method and fetch all the customer data from database
 	public List<CustomerDTO> getAllCustomers() {
@@ -95,8 +95,8 @@ public class CustomerService {
 		String todayDate = today.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 		
 		System.out.println("Come inside this method------------------------------------------------------ aaya hai");
-		//if the date is todays date then give the slot which greater then then current time
 		
+		//if the date is todays date then give the slot which greater then then current time
 		if(todayDate.equals(date)) {
 			
 			System.out.println("Come inside this method------------------------------------------------------");
@@ -208,6 +208,8 @@ public class CustomerService {
 				fResponse.setShopName(s.getShopName());
 				fResponse.setLocation(s.getAddress() + " " + s.getLandmark() + " " + s.getState());
 				fResponse.setCoverImage(s.getCoverImage());
+				fResponse.setShopId(s.getShopId());
+				fResponse.setShopTiming(s.getShopTiming());
 				filterResponse.add(fResponse);
 			}
 			return filterResponse;
@@ -220,6 +222,7 @@ public class CustomerService {
 	// distanceRange (5-10).Distance always in meter
 	public List<FilterResponse> filterByCityAndServiceNameAndServicePriceAndDistance(FilterRequest request) {
 
+		System.out.println("*********inside customerservice filter shop**********");
 		int minPrice, maxPrice;
 		int minDistance, maxDistance;
 		if (request.getServiceName() == null) {
@@ -251,14 +254,21 @@ public class CustomerService {
 		for (Object[] obj : shops) {
 			FilterResponse filterResponse = new FilterResponse();
 			filterResponse.setShopName((String) obj[0]);
-			filterResponse.setServiceName((String) obj[1]);
-			double price1 = (double) obj[2];
+			filterResponse.setShopId((String) obj[1]);
+			filterResponse.setShopTiming((String) obj[2]);
+			filterResponse.setLocation((String) obj[3] + ", " + (String) obj[4] + ", " + (String) obj[5]); // Set shop city, district and state
+			filterResponse.setCoverImage((String) obj[6]);
+			filterResponse.setServiceName((String) obj[7]);
+			double price1 = (double) obj[8];
 			// Explicit type casting double to int
 			int roundedPrice = (int) price1;
 			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[3]);
+			filterResponse.setServiceDuration((int) obj[9]);
+			// calculate rating  by adding all the ratings and dividing it with total number of reviews
+			filterResponse.setRating(feedbackRepository.getAverageRatingByShopId(filterResponse.getShopId()));
 			responseList.add(filterResponse);
-		}
+
+		}		
 		return responseList;
 	}
 }

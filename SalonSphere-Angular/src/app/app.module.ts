@@ -31,6 +31,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import {MatRippleModule} from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
+
 
 
 
@@ -42,9 +44,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
 import { ShopregisterComponent } from './components/modules/shopkeeper/components/shopregister/shopregister.component';
 
+
 @NgModule({
   declarations: [
-    AppComponent,
     LoginComponent,
     HomeComponent,
     NavbarComponent,
@@ -53,6 +55,7 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     AboutComponent,
     RegisterComponent,
     ShopregisterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatSelectModule,
     MatRippleModule,
     MatTabsModule,
+    MatSliderModule
   ],
   providers: [
     provideClientHydration(),

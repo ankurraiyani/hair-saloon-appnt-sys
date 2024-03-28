@@ -1,73 +1,102 @@
-<div class="container">
-  <mat-card class="header">
-    <h1 >{{ shopData.shopName }}</h1>
-    <p>{{ shopData.address }}</p>
-    <p>{{ shopData.shopCity }}, {{shopData.district}}</p>
-  </mat-card>
-  <mat-tab-group>
-    <mat-tab label="Services">
-      <div class="cards">
-        <!-- <ng-container *ngIf="data && data.length">
-          <mat-card class="shopCard" *ngFor="let shop of data">
-            <div class="edit">
-              <mat-icon
-                (click)="saveId(shop.serviceId)"
-                routerLink="/shopkeeper/updateService"
-                >edit</mat-icon
-              >
-            </div>
-            <h3><b>Service Name:</b> {{ shop.serviceName }}</h3>
-            <h3><b>Price:</b> {{ shop.servicePrice | currency:'INR' }}</h3>
-            <h3><b>Duration:</b> {{ shop.serviceDuration }} Minutes⏳</h3>
-          </mat-card>
-        </ng-container> -->
-  
-        <table class="table" *ngIf="data && data.length">
-          <thead>
-            <tr>
-              <th scope="col">Service Name</th>
-              <th scope="col">Price</th>
-              <th scope="col">Duration</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let shop of data" (click)="saveId(shop.serviceId)"
-            routerLink="/shopkeeper/updateService">
-              <td scope="row">{{ shop.serviceName }}</td>
-              <td>{{ shop.servicePrice | currency:'INR'}}</td>
-              <td>{{ shop.serviceDuration }}</td>
-            </tr>
-            
-          </tbody>
-        </table>
-
-
-        <ng-template #noShops>
-          <div class="noshopCard">
-            <h2>No Services Added</h2>
-            <br />
-            <button class="button" routerLink="/shopkeeper/addservice">
-              <span class="button-content">Add Service</span>
-            </button>
-          </div>
-        </ng-template>
+<section class="container">
+  <header>Add Employee</header>
+  <form
+    [formGroup]="EmpRegister"
+    (ngSubmit)="doSubmit()"
+    method="post"
+    class="form"
+  >
+    <div class="input-box">
+      <label>Name</label>
+      <input
+        type="text"
+        placeholder="Enter Name"
+        formControlName="Name"
+        required
+      />
+    </div>
+    
+    <div class="input-box">
+      <label>Email Address</label>
+      <input
+        type="text"
+        placeholder="Enter email address"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="column">
+      <div class="input-box">
+        <label>Phone Number</label>
+        <input
+          type="number"
+          placeholder="Enter phone number"
+          formControlName="contactNumber"
+          required
+        />
       </div>
-  
-      <div class="add-shop">
-        <h2 *ngIf="!data || !data.length">No Shops Added</h2>
-        <button
-          mat-raised-button
-          class="button"
-          routerLink="/shopkeeper/addservice"
-        >
-          <span>Add Service</span>
-        </button>
+    </div>
+    <div class="input-box">
+      <label>Salary</label>
+      <input
+        type="number"
+        placeholder="Enter Salary of Emp"
+        formControlName="salary"
+        required
+      />
+    </div>
+    <div class="gender-box">
+      <h3>Gender</h3>
+      <div class="gender-option">
+        <div class="gender">
+          <input
+            type="radio"
+            id="check-male"
+            name="gender"
+            value="male"
+            checked
+            formControlName="gender"
+          />
+          <label for="check-male">male</label>
+        </div>
+        <div class="gender">
+          <input
+            type="radio"
+            id="check-female"
+            name="gender"
+            value="female"
+            formControlName="gender"
+          />
+          <label for="check-female">Female</label>
+        </div>
       </div>
-    </mat-tab>
-  
-    <mat-tab label="Stats"> </mat-tab>
-  
-    <!-- Add more mat-tabs if needed -->
-  </mat-tab-group>
-  </div>
+    </div>
+    <div class="input-box">
+      <select style="height: 50px;" class="input-box" (change)="onServiceSelected($event)">
+        <option value="">Select a service</option>
+        <option *ngFor="let service of services" [value]="service">{{ service }}</option>
+      </select>
+    </div>
+    
+    <div class="input-box">
+      <label *ngFor="let selectedService of selectedServices" style="margin-left: 5px;">
+        
+          <a style=" background-color: beige; margin: 5px;" mat-raised-button> {{ selectedService }}  <a (click)="removeService(selectedService)"><mat-icon style="padding-top: 5px;">close</mat-icon></a></a>
+      </label>
+    </div>
+
+    <div class="column">
+      <div class="input-box">
+        <label>Address</label>
+        <input
+          type="text"
+          placeholder="Enter Address"
+          formControlName="address"
+          required
+        />
+      </div>
+      
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</section>
