@@ -180,6 +180,7 @@ public class CustomerService {
 				fResponse.setCoverImage(s.getCoverImage());
 				fResponse.setShopId(s.getShopId());
 				fResponse.setShopTiming(s.getShopTiming());
+				fResponse.setShopEmail(s.getShopEmail());
 				Double rating=feedbackRepository.getAverageRatingByShopId(s.getShopId());
 				if(rating!=null)	fResponse.setRating(rating);
 				else	fResponse.setRating(0);

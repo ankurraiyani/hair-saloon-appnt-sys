@@ -1,7 +1,10 @@
 <div class="container" *ngIf="shopData">
-  <mat-card class="header" style="background-image: url(assets/images/{{shopData.coverImage}}); background-size: contain; background-repeat: no-repeat;">
-
-    <!-- <img src="assets/images/{{shopData.coverImage}} " alt="Oh" class="coverImage"> -->
+  <mat-card class="header" 
+    style="background-image: url(assets/images/{{shopData.coverImage}}); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 20px;"
+   >
 
     <div class="btnclass">
       <button
@@ -107,11 +110,18 @@
           <h3 class="review-message">
             <i>{{ review.reviewMessage }}</i>
           </h3>
+
+          <div class="likes">
+            <button mat-icon-button (click)="toggleLike(review)" >
+              <mat-icon >{{ review.liked ? 'thumb_up' : 'thumb_up_off_alt' }}</mat-icon>
+            </button>
+            <span>{{ review.likes }}</span>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-tab>
-    <mat-tab label="Employees"> </mat-tab>
-    <mat-tab label="Stats"> </mat-tab>
+    <mat-tab label="Employees"></mat-tab>
+    <mat-tab label="Stats"></mat-tab>
 
     <!-- Add more mat-tabs if needed -->
   </mat-tab-group>

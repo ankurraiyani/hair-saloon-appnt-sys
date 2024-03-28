@@ -234,7 +234,7 @@
     <div class="cards" routerLink="/customer/view-shop">
       <ng-container *ngIf="shops && shops.length">
         <div class="card" *ngFor="let shop of shops">
-          <div class="viewShop" (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming)">
+          <div class="viewShop" (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming,shop.shopEmail)">
           <h2>{{ shop.shopName }}</h2>
 
           <div class="content">
@@ -259,7 +259,7 @@
               <button
                 routerLink="/customer/add-service-to-card"
                 class="book-btn"
-                (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming)"
+                (click)="getShopId(shop.shopId,shop.shopName,shop.shopTiming,shop.shopEmail)"
               >
                 Book Now
               </button>
@@ -267,7 +267,7 @@
 
             <div class="right">
               <div class="img-div">
-                <img
+                <img 
                   id="img"
                   [src]="'../../../../../../assets/images/' + shop.coverImage"
                   alt="img"

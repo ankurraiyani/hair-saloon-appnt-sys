@@ -1,150 +1,62 @@
-<div class="main-container">
-  <div class="navcontainer">
-    <nav class="nav">
-      <div class="nav-upper-options">
-        <!-- 1st -->
-
-        <mat-form-field>
-          <mat-label>Select Services</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let service of services" [value]="service">
-              {{ service }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- 2st -->
-        <div class="priceRange">
-
-          <label for=""><h3>Enter Range:</h3></label>
-          <input type="number" style="background-color: rgb(236, 236, 236)" />
-          <p>--</p>
-          <input type="number" style="background-color: rgb(236, 236, 236)" />
-        </div>
-        <!-- 3rd -->
-
-
-
-        <div class="priceRange">
-
-          <label for=""><h3>Distance:</h3></label>
-          <input type="number" style="background-color: rgb(236, 236, 236)" />
-          <p>KM</p>
-          <input type="number" style="background-color: rgb(236, 236, 236)" />
-          <p>KM</p>
-        </div>
-
-        <div class="select-box" (click)="showDistenceDropdown()">
-          <div class="options-container distence active">
-            <div class="option distence-option">
-              <input
-                type="radio"
-                class="radio"
-                id="100m-500m"
-                name="category"
-              />
-              <label for="100m-500m">100m - 500m</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="500m-1km" name="category" />
-              <label for="500m-1km">500m - 1 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="1km-2km" name="category" />
-              <label for="1km-2km">1 Km - 2 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input
-                type="radio"
-                class="radio"
-                id="2k3km-4km"
-                name="category"
-              />
-              <label for="2km-3km">2 Km - 3 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="3km-4km" name="category" />
-              <label for="3km-4km">3 Km - 4 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="4km-5km" name="category" />
-              <label for="4km-5km">4 Km - 5 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="5km-6km" name="category" />
-              <label for="5km-6km">5 Km - 6 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="6km-7km" name="category" />
-              <label for="6km-7km">6 Km - 7 Km</label>
-            </div>
-
-            <div class="option distence-option">
-              <input type="radio" class="radio" id="7km-8km" name="category" />
-              <label for="7km-8km">7 Km - 8 Km</label>
-            </div>
-          </div>
-
-          <div class="selected distence-selected">Distance</div>
+<div class="container">
+  <button mat-button (click)="goBack()">
+    <mat-icon>keyboard_backspace</mat-icon> Back
+  </button>
+  <h1 style="font-weight: bold">Add Services</h1>
+  <form [formGroup]="addServiceForm" (ngSubmit)="getFormData()" class="form">
+    <div formArrayName="serviceList">
+      <div *ngFor="let student of serviceListArray().controls; let i = index">
+        <div [formGroupName]="i" class="input">
+          <mat-form-field>
+            <br />
+            <mat-select
+              formControlName="serviceName"
+              (click)="addService()"
+              required
+            >
+              <mat-option value="">Select a service</mat-option>
+              <mat-option value="Haircut">Haircut</mat-option>
+              <mat-option value="Hair Coloring">Hair Coloring</mat-option>
+              <mat-option value="Manicure">Manicure</mat-option>
+              <mat-option value="Pedicure">Pedicure</mat-option>
+              <mat-option value="Facial">Facial</mat-option>
+              <mat-option value="Massage">Massage</mat-option>
+              <mat-option value="Waxing">Waxing</mat-option>
+              <mat-option value="Threading">Threading</mat-option>
+              <mat-option value="Makeup">Makeup</mat-option>
+              <mat-option value="Hair Styling">Hair Styling</mat-option>
+              <mat-option value="Eyebrow Shaping">Eyebrow Shaping</mat-option>
+              <mat-option value="Eyelash Extensions"
+                >Eyelash Extensions</mat-option
+              >
+              <mat-option value="Nail Extensions">Nail Extensions</mat-option>
+              <mat-option value="Hair Extensions">Hair Extensions</mat-option>
+              <mat-option value="Body Waxing">Body Waxing</mat-option>
+              <mat-option value="Bridal Makeup">Bridal Makeup</mat-option>
+              <mat-option value="Facial Cleansing">Facial Cleansing</mat-option>
+              <mat-option value="Permanent Makeup">Permanent Makeup</mat-option>
+              <mat-option value="Henna Tattoo">Henna Tattoo</mat-option>
+              <mat-option value="Hot Stone Massage"
+                >Hot Stone Massage</mat-option
+              >
+              <mat-option value="Deep Tissue Massage"
+                >Deep Tissue Massage</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-icon
+            class="delete_icon"
+            *ngIf="serviceListArray().length > 1"
+            (click)="removeService(i)"
+            >delete</mat-icon
+          >
         </div>
       </div>
-    </nav>
-  </div>
-
-  <div class="main">
-    <div class="cards">
-      <ng-container *ngIf="shops && shops.length">
-        <div class="card" *ngFor="let shop of shops">
-          <h2>{{ shop.shopName }}</h2>
-
-          <div class="content">
-            <div class="left">
-              <div class="pera">
-                <p class="location">location : {{ shop.location }}</p>
-                <p *ngIf="shop.price != 0" class="price">
-                  Price : {{ shop.price }} Rs
-                </p>
-                <p *ngIf="shop.timeDuration != ''" class="time">
-                  Time-Duration: {{ shop.timeDuration }}
-                </p>
-              </div>
-
-              <div class="offers">
-                <strong>Special Offers:</strong>
-                <div class="offer">
-                  <p>- 20% off on first visit</p>
-                  <p>- Free nail art with every pedicure</p>
-                </div>
-              </div>
-              <button
-                routerLink="/customer/add-service-to-card"
-                class="book-btn"
-              >
-                Book Now
-              </button>
-            </div>
-
-            <div class="right">
-              <div class="img-div">
-                <img id="img" src="{{ shop.coverImage }}" alt="img" />
-              </div>
-              <strong class="rating">Review/Ratings: <span>4.5/5</span></strong>
-              <a href="#" class="btn btn-reviews">Read Reviews</a>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <ng-template #noShopsFound>
-        <div class="no-shops" *ngIf="!shops || !shops.length">
-          <h1>Helloooooooooooooooooooooo</h1>
-        </div>
-      </ng-template>
     </div>
-  </div>
+    <div class="buttons">
+      <button mat-raised-button type="submit" class="submit_button">
+        Submit
+      </button>
+    </div>
+  </form>
 </div>

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from '../../../app.component';
+import { IDropdownSettings, NgMultiSelectDropDownModule, } from 'ng-multiselect-dropdown';
+
 
 // import { FormGroup,FormControl } from '@angular/forms';
 
@@ -101,6 +103,7 @@ import { RequestAgainComponent } from './components/request-again/request-again.
     MatOption,
     MatSelectModule, 
     MatTabsModule,
+    NgMultiSelectDropDownModule
     
     
   ]

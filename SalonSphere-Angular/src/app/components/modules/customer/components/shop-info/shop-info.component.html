@@ -1,14 +1,19 @@
 <div class="container" *ngIf="shopData">
-  <mat-card class="header">
-    <img
-      src="D:\\SalonSphere\\hair-saloon-appnt-sys\\SalonSphere-Angular\\src\\assets\\images\\${{
-        shopData.coverImage
-      }}"
-      alt="Oh"
-    />
-    <h1>{{ shopData.shopName }}</h1>
-    <p>{{ shopData.address }}</p>
-    <p>{{ shopData.shopCity }}, {{ shopData.district }}</p>
+  <mat-card
+    class="header"
+    style="background-image: url(assets/images/{{shopData.coverImage}}); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 20px;
+    height: 150px;"
+  >
+    <div class="shopInfo">
+      <h1>
+        <strong>{{ shopData.shopName }}</strong>
+      </h1>
+      <p>{{ shopData.address }}</p>
+      <p>{{ shopData.district }}</p>
+    </div>
   </mat-card>
   <mat-tab-group>
     <mat-tab label="Services">
@@ -49,16 +54,22 @@
             </h3>
             <div class="rating">
               <!-- Display filled stars based on review.rating -->
-              <mat-icon class="star" *ngFor="let star of getFilledStars(review.rating)">star</mat-icon>
+              <mat-icon
+                class="star"
+                *ngFor="let star of getFilledStars(review.rating)"
+                >star</mat-icon
+              >
               <!-- Display empty stars for remaining rating -->
-              <mat-icon class="star_border" *ngFor="let star of getEmptyStars(review.rating)">star_border</mat-icon>
+              <mat-icon
+                class="star_border"
+                *ngFor="let star of getEmptyStars(review.rating)"
+                >star_border</mat-icon
+              >
             </div>
           </div>
           <h3 class="review-message">
             <i>{{ review.reviewMessage }}</i>
           </h3>
-          
-          
         </mat-card-content>
       </mat-card>
     </mat-tab>

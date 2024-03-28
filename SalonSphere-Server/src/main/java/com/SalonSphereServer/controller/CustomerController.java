@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SalonSphereServer.entity.Feedback;
 import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.request.FilterRequest;
-import com.SalonSphereServer.request.SlotBookingRequest;
 import com.SalonSphereServer.response.FilterResponse;
 import com.SalonSphereServer.response.FilterResponseByCity;
 import com.SalonSphereServer.response.Response;
@@ -37,7 +35,8 @@ public class CustomerController {
 	@Autowired
 	private FeedbackRepository feedbackRepository;
 
-	// ========================================CODE FOR FILLTER===========================================
+	// ========================================CODE FOR
+	// FILLTER===========================================
 	// Filter shops by given city
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/filter-by-city/{city}")
@@ -47,7 +46,7 @@ public class CustomerController {
 
 		// wriet code for fiter according to city
 		List<FilterResponseByCity> filterResponse = customerService.filterByCity(city);
-		System.out.println("This is filter Response"+filterResponse);
+		System.out.println("This is filter Response" + filterResponse);
 		if (filterResponse != null)
 			return ResponseEntity.ok().body(filterResponse);
 		else
@@ -67,7 +66,8 @@ public class CustomerController {
 		return ResponseEntity.ok().body(filterRespons);
 
 	}
-	// ========================================END OF FILLTER===========================================
+	// ========================================END OF
+	// FILLTER===========================================
 
 	// ================CODE FOR FEEDBACK/REVIEW/RATING===========================
 	// Through this method the user can give feedback to the provider
@@ -107,7 +107,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by 1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/like-by-ince")
+	@PostMapping("/like")
 	public ResponseEntity<Response> incrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);
@@ -117,7 +117,7 @@ public class CustomerController {
 
 	// This API's is used for updating likes value by -1 with the help of review_id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/like-by-desc")
+	@PostMapping("/unlike")
 	public ResponseEntity<Response> decrementLikeByReviewId(@PathVariable int reviewId, @PathVariable int like) {
 		System.out.println(
 				"=====INSIDE THE COUSTOMERCONTROLLER  incrementLikeByReviewId======\n" + reviewId + "," + like);
@@ -135,16 +135,16 @@ public class CustomerController {
 	}
 
 	// ================END FOR FEEDBACK/REVIEW/RATING===========================
-		// here we check filterResponse is empty or not
-		
-		// =================================================================================================================
-	}
-	
-//	@CrossOrigin(origins = "http://localhost:4200")
-//	@PostMapping("/book-slot")
-//	public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest slotBookingRequest){
-//		
-//		return new ResponseEntity<>(true, HttpStatus.OK);
-//		 
-//	}
+	// here we check filterResponse is empty or not
 
+	// =================================================================================================================
+}
+
+// @CrossOrigin(origins = "http://localhost:4200")
+// @PostMapping("/book-slot")
+// public ResponseEntity<Boolean> bookSlot(@RequestBody SlotBookingRequest
+// slotBookingRequest){
+//
+// return new ResponseEntity<>(true, HttpStatus.OK);
+//
+// }

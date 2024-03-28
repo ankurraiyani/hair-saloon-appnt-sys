@@ -10,19 +10,19 @@ import { FetchReviewsService } from '../../../../services/viewReviews/fetch-revi
   templateUrl: './shop-dashboard.component.html',
   styleUrl: './shop-dashboard.component.css',
 })
-export class ShopDashboardComponent  implements OnInit{
+export class ShopDashboardComponent implements OnInit {
   constructor(
     private fetchshopInfo: FetchshopInfoService,
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
-    private reviewService: FetchReviewsService,
+    private reviewService: FetchReviewsService
   ) {}
 
   data: any[] = [];
   reviews: any[] = [];
 
   shopData: any;
-    amount:any;
+  amount: any;
   ngOnInit(): void {
     this.fetchshopInfo
       .fetchshopInfo(localStorage.getItem('shopEmail'))
@@ -37,20 +37,28 @@ export class ShopDashboardComponent  implements OnInit{
         this.data = data;
         this.amount = data.servicePrice;
 
-        console.log("Hello This is get Shop By email",data);
+        console.log('Hello This is get Shop By email', data);
       });
 
-      this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
-        (data: any) => {
-          this.reviews = data;
-          console.log(data)
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
+    this.reviewService.getReviews(localStorage.getItem('shopId')).subscribe(
+      (data: any) => {
+        this.reviews = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+  // Inside your component class
+  toggleLike(review: any): void {
+    if (review.liked) {
+      review.likes--;
+    } else {
+      review.likes++;
     }
-    
+    review.liked = !review.liked;
+  }
 
   saveId(serviceId: any) {
     console.log(serviceId);
@@ -93,5 +101,4 @@ export class ShopDashboardComponent  implements OnInit{
         }
       );
   }
-
 }

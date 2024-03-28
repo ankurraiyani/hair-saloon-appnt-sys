@@ -43,6 +43,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './components/services/login/login.service';
 import { ShopregisterComponent } from './components/modules/shopkeeper/components/shopregister/shopregister.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ShopregisterComponent } from './components/modules/shopkeeper/component
     MatSelectModule,
     MatRippleModule,
     MatTabsModule,
-    MatSliderModule
+    MatSliderModule,
+    NgMultiSelectDropDownModule
   ],
   providers: [
     provideClientHydration(),

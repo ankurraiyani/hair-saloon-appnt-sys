@@ -3,7 +3,13 @@
   margin-top: 6%;
   margin-left: 7%;
 }
+.shopInfo{
 
+  margin-left: 15%;
+  display: flex;
+  flex-direction: column;
+  margin-top:25px;
+}
 .reviews {
   background-color: rgba(66, 99, 116, 0.599);
   margin: 10%;
@@ -16,6 +22,7 @@
 .header{
   display: flex;
   flex-direction: column;
+  min-height: 120px;
 }
 .star{
   color: gold;

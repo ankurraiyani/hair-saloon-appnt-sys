@@ -15,21 +15,18 @@ export class ViewshopsComponent {
   ngOnInit(): void {
     this.getshop.getshop(Cookie.get('userId')).subscribe((data: any) => {
       this.data = data;
-      
     });
   }
 
-  requestAgain(email: string,shopId:any){
+  requestAgain(email: string, shopId: any) {
     console.log('This Shop is ' + shopId);
     localStorage.setItem('shopEmail', email);
     localStorage.setItem('shopId', shopId);
   }
 
-  showinfo(email: string,shopId:any) {
+  showinfo(email: string, shopId: any) {
     console.log('This Shop is ' + shopId);
     localStorage.setItem('shopEmail', email);
     localStorage.setItem('shopId', shopId);
-    
   }
 }
-
