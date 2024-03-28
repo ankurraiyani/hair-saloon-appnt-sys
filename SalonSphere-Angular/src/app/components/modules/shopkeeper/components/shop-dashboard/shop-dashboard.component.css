@@ -173,5 +173,12 @@ tr{
 
 .rating{
   margin-top: 20px;
+@media screen and (max-width:850px) {
+  .container{
+    width: 100%;
+    right: 2%;
+    left: 2%;
+  }
 }
 
+}

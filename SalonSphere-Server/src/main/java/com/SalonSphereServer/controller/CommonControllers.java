@@ -99,11 +99,11 @@ public class CommonControllers {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/view-slots")
-	public ResponseEntity<Map<String, List<String>>>getAllAvilableSlots(@RequestBody AppointmentRequest appointmentRequest) {
+	public ResponseEntity<Map<List<String>, List<String>>> getAllAvilableSlots(@RequestBody AppointmentRequest appointmentRequest) {
 		
 		System.out.println("============================================"+appointmentRequest);
 		
-		Map<String, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration());
+		Map<List<String>, List<String>> avilableSlots = customerService.getAllSlots(appointmentRequest.getShopId(),appointmentRequest.getShopTiming(),appointmentRequest.getServiceDuration(), appointmentRequest.getDate());
 		
 		return new ResponseEntity<>(avilableSlots, HttpStatus.OK);
 		

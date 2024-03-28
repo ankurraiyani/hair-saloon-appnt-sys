@@ -57,7 +57,6 @@ export class AddEmployeeComponent {
       }));
 
     })
-
     this.dropdownSettings = {
       idField: 'serviceId',
       textField: 'serviceName',
@@ -137,6 +136,11 @@ export class AddEmployeeComponent {
           title: 'Done',
           text: 'Employee Added Successfully',
           icon: 'success',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Navigate to the desired page
+            this.router.navigate(['/shopkeeper/view-shop']);
+          }
         });
 
       }),
