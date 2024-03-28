@@ -6,19 +6,22 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SalonSphereServer.dto.CustomerDTO;
+import com.SalonSphereServer.entity.ShopEmployees;
 import com.SalonSphereServer.entity.ShopInformation;
 import com.SalonSphereServer.entity.Users;
 import com.SalonSphereServer.repository.FeedbackRepository;
 import com.SalonSphereServer.repository.ShopEmployeeRepository;
-import com.SalonSphereServer.repository.SlotRepository;
 import com.SalonSphereServer.repository.ShopkeeperRepository;
+import com.SalonSphereServer.repository.SlotRepository;
 import com.SalonSphereServer.repository.UserRepository;
 import com.SalonSphereServer.request.FilterRequest;
 import com.SalonSphereServer.response.FilterResponse;
@@ -55,16 +58,16 @@ public class CustomerService {
 		return cutomers;
 	}
 
-	public Map<List<String>, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime, String date) {
 
-		List<Object[]> shopEmployees = shopEmployeeRepository.findShopEmplooyesByShopId(shopId);
+	public Map<List<String>, List<String>> getAllSlots(String shopId, String shopTiming, int serviceTime,String date) {
 
+		List<ShopEmployees> shopEmployees = shopEmployeeRepository.findShopEmployeesByShopId(shopId);
 		Map<List<String>, List<String>> avilableSlots = new HashMap<List<String>, List<String>>();
 
-		for (Object[] employeeData : shopEmployees) {
+		for (ShopEmployees employeeData : shopEmployees) {
 
-			String employeeName = (String) employeeData[1];
-			String employeeId = (String) employeeData[0];
+			String employeeName =  employeeData.getEmployeeName() ;
+			String employeeId = employeeData.getEmployeeId() ;
 
 			List<String> employeeInfo = new ArrayList<String>();
 			employeeInfo.add(employeeId);
@@ -72,17 +75,15 @@ public class CustomerService {
 
 			List<String> bookedSlots = slotRepository.findAllSlotTimeByEmployeeId(employeeId);
 
-			List<String> list = geeAllAbilableSlots(serviceTime, bookedSlots, shopTiming, date);
+			List<String> list = getAvailableSlots(serviceTime, bookedSlots, shopTiming, date);
 			avilableSlots.put(employeeInfo, list);
 		}
-
 		return avilableSlots;
 	}
 
-	public List<String> geeAllAbilableSlots(int serviceTime, List<String> bookedSlots, String shopTiming, String date) {
+	public List<String> getAvailableSlots(int serviceTime, List<String> bookedSlots, String shopTiming, String date) {
 
 		List<String> avilableSlots = new ArrayList<String>();
-
 		// Set the opening time
 
 		int openingTime = Integer.parseInt("" + shopTiming.charAt(0) + shopTiming.charAt(1));
@@ -228,16 +229,17 @@ public class CustomerService {
 	public List<FilterResponse> filterByCityAndServiceNameAndServicePriceAndDistance(FilterRequest request) {
 
 		System.out.println("*********inside customerservice filter shop**********");
+		// Initialize variables for price and distance ranges
 		int minPrice, maxPrice;
 		int minDistance, maxDistance;
-		if (request.getServiceName() == null) {
-		}
+		
 		if (request.getPrice() == null) {
 
 			minPrice = 0;
-			maxPrice = 100000;
+			maxPrice = 100000;// Maximum price range
 		} else {
 
+			// Split and parse price range from request
 			String priceRange[] = request.getPrice().split("-");
 			minPrice = Integer.parseInt(priceRange[0].trim());
 			maxPrice = Integer.parseInt(priceRange[1].trim());
@@ -245,35 +247,52 @@ public class CustomerService {
 		}
 		if (request.getDistance() == null) {
 			minDistance = 0;
-			maxDistance = 10000000;
+			maxDistance = 10000000;// // Maximum distance range (10,000,000 meters)	        
 		} else {
+			// Split and parse distance range from request
 			String distanceRange[] = request.getDistance().split("-");
 			minDistance = Integer.parseInt(distanceRange[0].trim());
 			maxDistance = Integer.parseInt(distanceRange[1].trim());
 		}
 
+		// Fetch shops based on filters
 		List<Object[]> shops = shopKeeperRepository.findShopByCityAndServiceNameAndServicePriceAndDistance(
 				request.getCity(), request.getServiceName(), minPrice, maxPrice, minDistance, maxDistance);
 
+		// Set to store unique shop IDs
+		Set<String> uniqueShopIds = new HashSet<>();
+		// List to hold the final response
 		List<FilterResponse> responseList = new ArrayList<>();
-		for (Object[] obj : shops) {
-			FilterResponse filterResponse = new FilterResponse();
-			filterResponse.setShopName((String) obj[0]);
-			filterResponse.setShopId((String) obj[1]);
-			filterResponse.setShopTiming((String) obj[2]);
-			filterResponse.setLocation((String) obj[3] + ", " + (String) obj[4] + ", " + (String) obj[5]); // Set shop city, district and state
-			filterResponse.setCoverImage((String) obj[6]);
-			filterResponse.setServiceName((String) obj[7]);
-			double price1 = (double) obj[8];
-			// Explicit type casting double to int
-			int roundedPrice = (int) price1;
-			filterResponse.setServicePrice(roundedPrice);
-			filterResponse.setServiceDuration((int) obj[9]);
-			// calculate rating  by adding all the ratings and dividing it with total number of reviews
-			filterResponse.setRating(feedbackRepository.getAverageRatingByShopId(filterResponse.getShopId()));
-			responseList.add(filterResponse);
 
-		}		
+		// Iterate through the fetched shops
+		for (Object[] obj : shops) {
+			String shopId = (String) obj[1]; // Extract shop ID from the fetched data
+			if (!uniqueShopIds.contains(shopId)) { // Check if the shop ID is unique
+				uniqueShopIds.add(shopId); // Add the shop ID to the set of unique IDs
+
+				// Create a new FilterResponse object and populate its fields
+				FilterResponse filterResponse = new FilterResponse();
+				filterResponse.setShopName((String) obj[0]);
+				filterResponse.setShopId(shopId);
+				filterResponse.setShopTiming((String) obj[2]);
+				filterResponse.setLocation((String) obj[3] + ", " + (String) obj[4] + ", " + (String) obj[5]);
+				filterResponse.setCoverImage((String) obj[6]);
+				filterResponse.setServiceName((String) obj[7]);
+				double price1 = (double) obj[8];
+				int roundedPrice = (int) price1;
+				filterResponse.setServicePrice(roundedPrice);
+				filterResponse.setServiceDuration((int) obj[9]);
+
+				// Get the average rating for the shop ID from the feedback repository
+				filterResponse.setRating(feedbackRepository.getAverageRatingByShopId(shopId));
+
+				// Add the FilterResponse to the responseList
+				responseList.add(filterResponse);
+			}
+		}
+
+		// Return the list of unique FilterResponse objects
 		return responseList;
+
 	}
 }

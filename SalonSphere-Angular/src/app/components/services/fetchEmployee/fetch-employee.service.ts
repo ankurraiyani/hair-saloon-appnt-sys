@@ -14,6 +14,6 @@ export class FetchEmployeeService {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + Cookie.get('token'));
 
 
-    return this.http.get(`${this.baseURL}`+`${shopId}`,{headers});
+    return this.http.post(`${this.baseURL}`+`${shopId}`,null,{headers});
   }
 }

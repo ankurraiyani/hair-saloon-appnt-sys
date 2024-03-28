@@ -4,13 +4,7 @@
       <div class="left">
         <h1>{{ service.serviceName }}</h1>
         <div class="price-time">
-          <div class="price">
-            <img [src]="service.priceImageUrl" alt="" />
-            <p>{{ service.servicePrice }}</p>
-          </div>
           <div class="time">
-            <div class="circle"></div>
-            <p>{{ service.serviceDuration }}</p>
            
             <p>{{ service.servicePrice | currency : "INR" }}</p>
           </div>
@@ -20,9 +14,6 @@
         </div>
       </div>
       <div class="right">
-        <div class="img">
-          <img [src]="service.imageUrl" alt="img" />
-        </div>
         <button class="add-btn" (click)="addToCart(service)">Add</button>
       </div>
     </div>

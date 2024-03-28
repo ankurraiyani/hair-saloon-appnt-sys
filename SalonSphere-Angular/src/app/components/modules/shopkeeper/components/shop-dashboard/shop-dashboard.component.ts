@@ -5,7 +5,18 @@ import Swal from 'sweetalert2';
 import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 import { FetchReviewsService } from '../../../../services/viewReviews/fetch-reviews.service';
 import { LikeService } from '../../../../services/like/like.service';
-
+import { FetchEmployeeService } from '../../../../services/fetchEmployee/fetch-employee.service';
+import { error } from 'console';
+interface employee {
+  employeeName: any;
+  email: any;
+  contactNumber: any;
+  salary: any;
+  gender: any;
+  services: any;
+  address: any;
+  employeeId:any;
+}
 @Component({
   selector: 'app-shop-dashboard',
   templateUrl: './shop-dashboard.component.html',
@@ -17,11 +28,13 @@ export class ShopDashboardComponent implements OnInit {
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
     private reviewService: FetchReviewsService,
-    private likeService:LikeService,
+    private likeService: LikeService,
+    private fetchEmployeeService: FetchEmployeeService
   ) {}
 
   data: any[] = [];
   reviews: any[] = [];
+  employeeInfo: employee[] = [];
 
   shopData: any;
   amount: any;
@@ -51,13 +64,25 @@ export class ShopDashboardComponent implements OnInit {
         console.log(error);
       }
     );
+
+    this.fetchEmployeeService
+      .fetchEmployee(localStorage.getItem('shopId'))
+      .subscribe(
+        (data: any) => {
+          this.employeeInfo = data;
+          console.log("This is emp",data);
+        },
+        (error: any) => {
+          console.log('This is error message', error);
+        }
+      );
   }
   // Inside your component class
   toggleLike(review: any): void {
     // Update UI instantly
     review.liked = !review.liked;
     review.likes += review.liked ? 1 : -1;
-  
+
     // Call API to update likes in the database
     if (review.liked) {
       this.likeService.like(review.likes, review.reviewId).subscribe(
@@ -83,7 +108,10 @@ export class ShopDashboardComponent implements OnInit {
       );
     }
   }
-  
+
+  saveEmpId(employeeId: any) {
+    localStorage.setItem('employeeId', employeeId);
+  }
 
   saveId(serviceId: any) {
     console.log(serviceId);

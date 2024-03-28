@@ -27,22 +27,37 @@ import lombok.ToString;
 @Table(name = "shop_employees")
 public class ShopEmployees {
 
-	@Id
-	@Column(name = "employee_id")
-	private String employeeId;
-	
-	@Column(name = "employee_name", nullable = false)
-	private String employeeName;
-	
-	@Column(name = "shop_id", nullable = false)
-	private String shopId;
-	
-	@Column(name = "is_leave")
-	private boolean isLeave;	
+    @Id
+    @Column(name = "employee_id")
+    private String employeeId;
+    
+    @Column(name = "employee_name", nullable = false)
+    private String employeeName;
 
-	
+    @Column(name = "employee_email", nullable = false, unique = true)
+    private String email;
 
-	@OneToMany(mappedBy = "employeeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "employee_contactNo", nullable = false, unique = true)
+    private String contactNumber;
+
+    @Column(name = "employee_gender", nullable = false)
+    private String gender;
+
+    @Column(name = "employee_address", nullable = false)
+    private String address;
+    
+    @Column(name = "employee_salary", nullable = false)
+    private double salary;
+    
+    @Column(name = "shop_id", nullable = false)
+    private String shopId;
+    
+    @Column(name = "is_leave")
+    private boolean isLeave;    
+
+    
+
+    @OneToMany(mappedBy = "employeeId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmployeeService> services;
-	
+    
 }
