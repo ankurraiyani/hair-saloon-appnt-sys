@@ -4,6 +4,7 @@ import { FetchshopInfoService } from '../../../../services/fetchshopInfo/fetchsh
 import Swal from 'sweetalert2';
 import { DeleteServiceService } from '../../../../services/deleteService/delete-service.service';
 import { FetchReviewsService } from '../../../../services/viewReviews/fetch-reviews.service';
+import { FetchEmployeeInfoService} from '../../../../services/fetchShopEmployee/fetch-employee-info.service';
 
 @Component({
   selector: 'app-shop-dashboard',
@@ -16,10 +17,12 @@ export class ShopDashboardComponent  implements OnInit{
     private getShopServices: GetServiceInfoService,
     private removeService: DeleteServiceService,
     private reviewService: FetchReviewsService,
+    private fetchShopEmployees: FetchEmployeeInfoService
   ) {}
 
   data: any[] = [];
   reviews: any[] = [];
+  empData: any[]= [];
 
   shopData: any;
     amount:any;
@@ -49,12 +52,24 @@ export class ShopDashboardComponent  implements OnInit{
           console.log(error);
         }
       );
-    }
-    
 
+        this.fetchShopEmployees
+        .fetchAllEmployee(localStorage.getItem('shopId'))
+        .subscribe((empData:any)=>{
+          this.empData = empData;
+          console.log("Hello this is Shop Employees by shopId ",empData);
+        })
+
+    }
+  
   saveId(serviceId: any) {
     console.log(serviceId);
     localStorage.setItem('serviceId', serviceId);
+  }
+
+  saveEmpId(employeeId: any) {
+    console.log(employeeId);
+    localStorage.setItem('employeeId', employeeId);
   }
 
   getFilledStars(rating: number): number[] {

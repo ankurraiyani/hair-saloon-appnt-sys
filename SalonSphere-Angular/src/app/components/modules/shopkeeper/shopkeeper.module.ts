@@ -52,6 +52,7 @@ import { TimeSincePipe } from '../shopkeeper/pipe/time-since.pipe';
 
 
 import { RequestAgainComponent } from './components/request-again/request-again.component';
+import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 
 
 
@@ -72,7 +73,8 @@ import { RequestAgainComponent } from './components/request-again/request-again.
     AddEmployeeComponent,
     ShopkeeperDurationPipe,
     TimeSincePipe,
-    RequestAgainComponent
+    RequestAgainComponent,
+    UpdateEmployeeComponent
 
   ],
   imports: [
